@@ -1,20 +1,22 @@
+
 .title-sub{
     font-size: 1.1rem;
-    line-height: 2.25rem;
-    font-weight: 100;
-    color: #94a3b8
+    line-height: 1.25rem;
+    font-weight: 200;
+    color:#15228abf;
 }
+
 .first-holder{
     position: relative;
 }
 .background-img{
     z-index: 4;
-    height: 280px;
+    height: 250px;
 }
 .dotted-circle {
     width: 200px;
     height: 200px;
-    border: 4px dashed rgb(231, 231, 97);
+    border: 4px dashed #eee;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -38,27 +40,18 @@
     height: 2.5rem;
     font-size: 2.3rem !important;
     /* color: #ffb850 !important; */
+    color: #eee !important;
 }
 
 .welcome{
-    font-size: 1.9rem;
+    font-size: 1.2rem;
     line-height: 2.25rem;
-    font-weight: 600;
+    font-weight: 800;
+    color: #eee;
 }
 .end-text{
-    color: #94a3b8;
+    color:#15228abf;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .sec-sub{
     font-size: .875rem;
@@ -70,7 +63,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 20px 0; 
+    margin: 10px 0; 
 }
 .or-line {
     flex-grow: 1;
@@ -91,7 +84,9 @@
     border: none;
     outline: none;
     border-bottom: 2px solid #000; 
-    padding-left: 20px ;
+    padding-left: 20px !important ;
+    padding: 10px;
+    background: transparent;
     
 }
 .user-input:focus{
@@ -104,19 +99,30 @@
 }
 .person-icon{
     position: absolute;
-    top: 0px;
+    top: 8px;
 }
 .eye-icon{
     position: absolute;
     right: 10px;
+    top: 8px;
 }
+
 .sign-btn{
     background-color: #000;
+    color: white;
+}
+.sign-in-parent{
+    background-color: #093869;
     color: white;
 }
 .parent-btn{
     border-color: #15228abf;
     color: #15228abf;
+    background: transparent;
+}
+.centre-btn{
+    border-color: black;
+    color: black;
     background: transparent;
 }
 .Staff-btn{
@@ -160,6 +166,15 @@
     .background-side{
         display: none;
     }
+     .login-side {
+    display: block;
+    width: 100%;
+    background-color: none !important;
+     height: calc(100vh - 40px)
+  }
+   .holder-main {
+    height: auto; /* or you can set a specific height, e.g., 90vh, if needed */
+  }
     .crec{
         position: relative;
         line-height: 4.5rem !important;
@@ -171,14 +186,68 @@
         text-align: center;
        
     }
- .login-side{
-    padding-top: 20px;
-  /* position: relative; */
- }
- /* .log{
-    position: absolute;
-    left: 20%;
-
-    text-align: center;
- } */
+    .shadow-add::before {
+        background-color: none !important;
+    }
+ 
+ 
 }
+
+.holder-main {
+  height: 100vh;
+  overflow: hidden;
+  /* background-color: #15228abf; */
+  /* background-color: #ffb850; */
+}
+
+.shadow-add {
+  height: calc(100vh - 50px); /* subtract the height of the navbar */
+  margin: 30px !important;
+  position: relative;
+  top: -20px; 
+  border-radius: 10px;
+}
+
+/* Create the pseudo-element for the gradient effect */
+.shadow-add::before {
+  content: '';
+  position: absolute;
+  top: -10px; /* Adjust as needed */
+  left: -10px; /* Adjust as needed */
+  right: -10px; /* Adjust as needed */
+  bottom: -10px; /* Adjust as needed */
+  background: linear-gradient(to right, #d9d5d5, #fccb90);
+  border-radius: inherit; /* Match the border radius of the parent */
+  z-index: -1; /* Ensure it is behind the content */
+  filter: blur(10px); 
+  opacity: 0.7; 
+}
+
+.background-side{
+    background-color: #fccb90;
+     height: calc(100vh - 50px)
+}
+.login-side{
+    background-color: #eee;
+     height: calc(100vh - 50px)
+}
+.login-text{
+    color: #f6af45;
+}
+.component-container {
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .component-container.animate {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
