@@ -5,6 +5,7 @@ import { ResetPassword} from './profile/resetPassword'
 import { useState , useEffect} from 'react'
 import {  ResetStaff } from './profile/resetstaff'
 import { ResetParent } from './profile/resetparent'
+import { LandingPage } from './landing/landing'
 
 
 const Loader = () => (
@@ -46,7 +47,8 @@ function App() {
       <Router>
         
         <Routes>
-          <Route path='/' element={<LoginForm />} />
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/login' element={<LoginForm />} />
           <Route path='/reset' element={<ResetPassword  />} />
           <Route path='/resetstaff' element={<ResetStaff  />} />
           <Route path='/resetpar' element={<ResetParent  />} />

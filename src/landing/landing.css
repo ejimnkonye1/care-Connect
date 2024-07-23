@@ -1,0 +1,142 @@
+/* styles.css */
+.hero {
+    background-image: linear-gradient(to bottom, #f7f7f7, #e7e7e7);
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .features {
+    padding: 2rem;
+  }
+  
+  .features .row {
+    justify-content: center;
+  }
+  
+  .features .col-md-4 {
+    margin: 2rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+  }
+  
+  .features i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonials {
+    padding: 2rem;
+  }
+  
+  .testimonials blockquote {
+    margin-bottom: 2rem;
+  }
+  
+  .pricing {
+    padding: 2rem;
+  }
+  
+  .pricing .row {
+    justify-content: center;
+  }
+  
+  .pricing .col-md-4 {
+    margin: 2rem;
+    padding: 1rem
+  }
+  .coming-soon-badge {
+    position: absolute;
+    top: 60px;
+    left: 4px;
+    background-color: #ff69b4;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    transform-origin: top left;
+  }
+  .tick-list {
+    list-style: none;
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 10px;
+   
+  }
+  
+  .tick-list li:before {
+    content: '√';
+    margin-right: 10px;
+    color: #2ecc71; /* green color for the tick */
+  }
+
+  .cancel-list li:last-child::before {
+    content: 'X';
+    color: red;
+  }
+ .book-demo-btn{
+    border-radius: 10px;
+    background-color:#94a3b8 ;
+    color: white;
+    border-color: #94a3b8;
+    padding-left: 30px;
+    width: 50%;
+ }
+ .book-demo-btn-second{
+    border-radius: 10px;
+    background-color:#ffb850 ;
+    color: white;
+    border-color: #ffb850;
+    padding-left: 30px;
+    width: 50%;
+ }
+ .book-demo-sign{
+    border-radius: 10px;
+    background-color:#007bff ;
+    color: white;
+    border-color: #007bff;
+    padding-left: 30px;
+    width: 50%;
+ }
+ .card-height{
+    border-radius: 10px;
+    
+ }
+ .feat-border{
+    border: 1px solid #007bff;
+    color: rgb(84, 56, 56);
+    
+ }
+  .active{
+    color: white;
+    background-color: #007bff !important;
+    
+ }
+ .clicked{
+    color: white;
+    background-color: #007bff !important;
+    
+ }
+ .get-started{
+    height: 300px;
+ }
+ .book-demo-get{
+    border-radius: 10px;
+    background-color:#007bff ;
+    color: white;
+    border-color: #007bff;
+    padding-left: 30px;
+    width: 30%;
+    height: 50px;
+ }
+ .feat-img{
+    padding: 20px;
+    height: 200px;
+ }
