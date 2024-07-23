@@ -4,10 +4,23 @@ import { CiLock } from "react-icons/ci";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 // eslint-disable-next-line react/prop-types
-export const Staff = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff }) => {
+export const Staff = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate }) => {
     const handleCentre = () => {
         setShowParent(false);
         setShowStaff(false);
+        setAnimate(true); // trigger animation
+        setTimeout(() => {
+            setAnimate(false); // reset animate state after animation is complete
+          }, 500);
+      };
+      const handleParent = () => {
+        setShowStaff(false);
+        setShowParent(true);
+    
+        setAnimate(true); // trigger animation
+        setTimeout(() => {
+            setAnimate(false); // reset animate state after animation is complete
+          }, 500);
       };
 return(
     <div className='d-flex flex-column log py-4  '>
@@ -52,10 +65,10 @@ return(
         </div>
       </div>
       <div className='text-end'>
-        <a href='#' className='forget'>Forgotten Password?</a>
+        <a href='/resetstaff' className='forget'>Forgotten Password?</a>
       </div>
       <div className='mt-3'>
-        <button className='w-100 sign-in-parent btns'>Sign In</button>
+        <button className='w-100 sign-in-staff btns'>Sign In</button>
       </div>
       <div className='text-center mt-3'>
         <p> Dont have Account? <a href='#' className='acct'>Create account</a></p>
@@ -74,8 +87,8 @@ return(
         </div>
         <div className='Staff'>
             <button 
-            onClick={() => setShowParent(true)}
-            className='Staff-btn btns'> Parent Login</button>
+            onClick={handleParent}
+            className='parent-btn btns'> Parent Login</button>
    
         </div>
       </div>

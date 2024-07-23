@@ -4,13 +4,20 @@ import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 // eslint-disable-next-line react/prop-types
 export const Centre = ({setShowParent, setShowStaff, PasswordVisible, togglePasswordvisible,  setAnimate}) => {
-    const handleAnimate = () => {
+    const handleParent = () => {
         setShowParent(true); // or setShowStaff(true) depending on the button
         setAnimate(true); // trigger animation
         setTimeout(() => {
             setAnimate(false); // reset animate state after animation is complete
           }, 500);
     }
+    const handleStaff = () => {
+      setShowStaff(true); // or setShowStaff(true) depending on the button
+      setAnimate(true); // trigger animation
+      setTimeout(() => {
+          setAnimate(false); // reset animate state after animation is complete
+        }, 500);
+  }
     return(
         <div className='d-flex flex-column log py-4 '>
         <div>
@@ -54,7 +61,7 @@ export const Centre = ({setShowParent, setShowStaff, PasswordVisible, togglePass
             </div>
           </div>
           <div className='text-end'>
-            <a href='#' className='forget'>Forgotten Password?</a>
+            <a href='/reset' className='forget'>Forgotten Password?</a>
           </div>
           <div className='mt-3'>
             <button className='w-100 sign-btn btns'>Sign In</button>
@@ -70,13 +77,13 @@ export const Centre = ({setShowParent, setShowStaff, PasswordVisible, togglePass
           <div className='two-button-container d-flex justify-content-evenly' >
             <div className='parent'>
                 <button className='parent-btn btns'
-                   onClick={handleAnimate}
+                   onClick={handleParent}
                 >Parent Login</button>
     
             </div>
             <div className='Staff'>
                 <button className='Staff-btn btns'
-                onClick={() => setShowStaff(true)}
+                onClick={handleStaff}
                 > Staff Login</button>
     
             </div>

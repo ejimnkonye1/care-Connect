@@ -3,16 +3,24 @@ import { CiLock } from "react-icons/ci";
 
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
+
 // eslint-disable-next-line react/prop-types
-export const Parent = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff }) => {
+export const Parent = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate }) => {
   const handleCentre = () => {
     setShowParent(false);
     setShowStaff(false);
-   
+    setAnimate(true); // trigger animation
+    setTimeout(() => {
+        setAnimate(false); // reset animate state after animation is complete
+      }, 500);
   };
   const handleStaff = () => {
     setShowParent(false);
     setShowStaff(true);
+    setAnimate(true); // trigger animation
+    setTimeout(() => {
+        setAnimate(false); // reset animate state after animation is complete
+      }, 500);
    
   };
 return(
@@ -58,7 +66,9 @@ return(
         </div>
       </div>
       <div className='text-end'>
-        <a href='#' className='forget'>Forgotten Password?</a>
+       
+        <a  href="/resetpar" className='forget'>Forgotten Password?</a>
+        
       </div>
       <div className='mt-3'>
         <button className='w-100 sign-in-parent btns'>Sign In</button>

@@ -111,9 +111,15 @@
     background-color: #000;
     color: white;
 }
-.sign-in-parent{
-    background-color: #093869;
+.sign-in-staff{
+    background-color: #f6af45;
     color: white;
+    border-color: #f6af45;
+}
+.sign-in-parent{
+    background-color: #15228abf;
+    color: white;
+    border-color: #15228abf;
 }
 .parent-btn{
     border-color: #15228abf;
@@ -249,5 +255,88 @@
     to {
       opacity: 1;
     }
+  } 
+  
+  .component-first {
+    transition: opacity 0.5s ease-in;
   }
   
+  .component-first.animate {
+   
+    animation:  fadeOut 0.5s ease-in;
+
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 2;
+    }
+  } 
+
+
+
+
+
+  /*reset centre password*/
+  
+  .reset-header{
+    height: 2.5rem;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+   
+  }
+.center-header{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 800;
+}
+.reset-space{
+ width: 350px;
+ padding-top: 50px;
+
+}
+.reset-sub{
+    font-size: .96rem;
+    line-height: 1rem;
+    color: #64748b;
+}
+.back-to-login, .back-to-login a {
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #64748b;
+    
+}
+.back-to-login a{
+    margin-left: 5px;
+}
+.back-to-login .left{
+    margin-bottom: 1px;
+}
+.reset-shadow {
+height: auto;
+width: 400px;
+border-radius: 10px;
+background-color: #eee;
+position: relative;
+left: 34%;
+top: 20px;
+  }
+  
+  /* Create the pseudo-element for the gradient effect */
+  .reset-shadow::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Adjust as needed */
+    left: -10px; /* Adjust as needed */
+    right: -10px; /* Adjust as needed */
+    bottom: -10px; /* Adjust as needed */
+    background: linear-gradient(to right, #d9d5d5, #fccb90);
+    border-radius: inherit; /* Match the border radius of the parent */
+    z-index: -1; /* Ensure it is behind the content */
+    filter: blur(10px); 
+    opacity: 0.7; 
+  }
