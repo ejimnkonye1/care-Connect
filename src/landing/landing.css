@@ -116,11 +116,11 @@ height: 100vh;
     color: rgb(84, 56, 56);
     
  }
-  .active{
+  /* .active{
     color: white;
     background-color: #007bff !important;
     
- }
+ } */
  .clicked{
     color: white;
     background-color: #007bff !important;
