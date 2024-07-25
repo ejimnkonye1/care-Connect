@@ -36,7 +36,7 @@
         transform: rotate(360deg);
     }
 }
-.navbar-brand{
+.crec .navbar-brand{
     height: 2.5rem;
     font-size: 2.3rem !important;
     /* color: #ffb850 !important; */

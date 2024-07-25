@@ -23,16 +23,16 @@ export const LandingPage = () => {
   setActive(index)
     }
     return (
-        <div className="container">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-bra" href="#">CareConnect</a>
+        <div className='container-fluid'>
+                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <a className="navbar-brand" href="#">CareConnect</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
                 <div className="collapse navbar-collapse d flex justify-content-end" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
+                        <li className="nav-item ">
                             <a className="nav-link" href="#">Home</a>
                         </li>
                         <li className="nav-item">
@@ -44,19 +44,39 @@ export const LandingPage = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="#pricing">Pricing</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#contact">Contact</a>
+                        <li className="nav-item ">
+                       <button className='btns sign-in-nav'>Sign In</button>
+                        </li>
+                        <li className="nav-item mx-4">
+                       <button className='btns  sign-up-nav'>Sign Up Free</button>
                         </li>
                     </ul>
                 </div>
             </nav>
-
-
-            <div className="hero">
-                <h1>CareConnect</h1>
+            <div className="hero container-fluid">
+<div className='row'>
+    <div className='col-md-6 py-5 align-items-center flex-column'>
+<div className=''>
+<h1>CareConnect</h1>
                 <p>Connecting Caregivers and Families</p>
+                <p>The KinderPass platform simplifies day-to-day operations for childcare centers,<br /> 
+                so you can focus on what matters: providing an ideal learning environment that sparks growth,<br/> creativity and happiness in children.
+
+</p>
                 <button className="btn btn-primary">Get Started</button>
+</div>
+    </div>
+    <div className='col-md-6'>
+<img src={Get}  height={'280px'} />
+    </div>
+
+</div>
             </div>
+  <div className="container">
+        
+
+
+          
 
 <section className='py-5 mb-3'>
 <h5 className='text-center mb-3'>Careconnect is packed with all the features you need</h5>
@@ -169,23 +189,7 @@ export const LandingPage = () => {
 
              </div>
        
-                {/* <div className="row">
-                    <div className="col-md-4">
-                        <i className="fas fa-mobile-alt"></i>
-                        <h3>Real-time Updates</h3>
-                        <p>Stay connected with caregivers and receive real-time updates about your childs activities.</p>
-                    </div>
-                    <div className="col-md-4">
-                        <i className="fas fa-lock"></i>
-                        <h3>Secure Messaging</h3>
-                        <p>Communicate securely with caregivers and other parents through our encrypted messaging system.</p>
-                    </div>
-                    <div className="col-md-4">
-                        <i className="fas fa-chart-bar"></i>
-                        <h3>Personalized Insights</h3>
-                        <p>Gain valuable insights into your child development and receive personalized recommendations from our experts.</p>
-                    </div>
-                </div> */}
+           
             </section>
 
 
@@ -285,11 +289,13 @@ connects everyone so you can spend less time on
             </div>
         </section>
 <footer className="footer">
-  <div className="container">
-    <p>&copy; 2023 CareConnect. All rights reserved.</p>
+  <div className="container text-center">
+    <p>&copy; 2024 CareConnect. All rights reserved.</p>
   </div>
 </footer>    
         </div>
+        </div>
+      
     );
 }
     

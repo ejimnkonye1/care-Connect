@@ -1,8 +1,10 @@
 /* styles.css */
 .hero {
-    background-image: linear-gradient(to bottom, #f7f7f7, #e7e7e7);
+height: 100vh;
     padding: 2rem;
     text-align: center;
+    background-color: #ff69b4;
+    width: 100%;
   }
   
   .hero h1 {
@@ -139,4 +141,14 @@
  .feat-img{
     padding: 20px;
     height: 200px;
+ }
+ .sign-up-nav{
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+ }
+ .sign-in-nav{
+background-color: #ffb850;
+color: white;
+border-color: #ffb850;
  }
