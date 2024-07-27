@@ -40,3 +40,31 @@
 .read-the-docs {
   color: #888;
 } */
+.fees-list {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.fees-list th, .fees-list td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.fees-list .pay-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fees-list .pay-button:hover {
+  background-color: #3e8e41;
+}
+
+.fees-list .pay-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

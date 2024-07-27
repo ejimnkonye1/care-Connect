@@ -25,33 +25,19 @@ const togglePasswordvisible = () => {
   </div>
 </nav>
 <div
-   className={`component-first ${animate ? 'animate' : ''}`}
->
-
-
+   className={`component-first ${animate ? 'animate' : ''}`}>
 {showParent? (
-
-<Parent1 
-   
-   showParent={showParent}
-/>
+<Parent1  />
 ): showStaff ?(
-  <Staff1 />
-
+ <Staff1 />
 ): (
-
 <Centre1 />
-
-
 )}
 </div>
             </div>
 
 <div className="col-12 col-md-4 login-side">
-<div
-        className={`component-container ${animate ? 'animate' : ''}`}
-       
-      >
+<div className={`component-container ${animate ? 'animate' : ''}`}>
     {showParent ? (
       <Parent
         PasswordVisible={PasswordVisible}
