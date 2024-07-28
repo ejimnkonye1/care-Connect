@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 
 const MessagingSystem = () => {
@@ -12,19 +12,26 @@ const MessagingSystem = () => {
   };
 
   return (
-    <div>
-      <h1>Messaging System</h1>
+    <div className=''>
+        <div className='card chat-card'>
+
+       
+      <h6>Chat a Staff</h6>
+      <ul className='"message-list'>
+        {messages.map((message, index) => (
+          <li key={index}>{message}</li>
+        ))}
+      </ul>
+
+      <div className="message-input">
       <TextField
         label="Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
       <Button onClick={handleSendMessage}>Send</Button>
-      <ul>
-        {messages.map((message, index) => (
-          <li key={index}>{message}</li>
-        ))}
-      </ul>
+     </div>
+     </div>
     </div>
   );
 };

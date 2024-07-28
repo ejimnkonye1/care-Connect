@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 const FeesList = () => {
   const [fees, setFees] = useState([
@@ -16,33 +16,36 @@ const FeesList = () => {
   };
 
   return (
-    <table className="fees-list">
+    <div className='card'>
+  <table className="fees-list">
 
-      <thead>
-        <tr>
-          <th>Fee Name</th>
-          <th>Fee Amount</th>
-          <th>Status</th>
-          <th>Pay Button</th>
-        </tr>
-      </thead>
-      <tbody>
-        {fees.map((fee, index) => (
-          <tr key={index}>
-            <td>{fee.name}</td>
-            <td>${fee.amount}</td>
-            <td>{fee.status}</td>
-            <td>
-              {fee.status === 'Unpaid' ? (
-                <button onClick={() => handlePay(index)}>Pay Now</button>
-              ) : (
-                <span>Paid</span>
-              )}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+<thead>
+  <tr>
+    <th>Fee Name</th>
+    <th>Fee Amount</th>
+    <th>Status</th>
+    <th>Pay Button</th>
+  </tr>
+</thead>
+<tbody>
+  {fees.map((fee, index) => (
+    <tr key={index}>
+      <td>{fee.name}</td>
+      <td>${fee.amount}</td>
+      <td>{fee.status}</td>
+      <td>
+        {fee.status === 'Unpaid' ? (
+          <button onClick={() => handlePay(index)}>Pay Now</button>
+        ) : (
+          <span>Paid</span>
+        )}
+      </td>
+    </tr>
+  ))}
+</tbody>
+</table>
+    </div>
+  
   );
 };
 

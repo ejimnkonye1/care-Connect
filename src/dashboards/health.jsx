@@ -1,5 +1,5 @@
 // HealthAndSafetyForm.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const HealthAndSafetyForm = () => {
   const [childInfo, setChildInfo] = useState({

@@ -7,11 +7,15 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { Dash } from './dash';
 import { Profilenn } from './profile';
 import NotificationSystem from './noti';
+import FeesList from './fee';
+import MealUpdates from './meals';
+import EventCalendar from './eventcal';
+import { Medical } from './medical';
 
 export const Dashboard = () => {
   const [currenpage, setcurrentpage] = useState('dashboard')
 
-  const hanlechange = (page) => {
+  const handlechange = (page) => {
     setcurrentpage(page)
   }
     return(
@@ -25,50 +29,50 @@ export const Dashboard = () => {
   </div>
   <ul className="nav flex-column">
     <li className="nav-item active">
-    <span onClick={() => hanlechange('dashboard')}>
+    <span  className='nav-link' onClick={() => handlechange('dashboard')}>
             <AiOutlineDashboard className='icon' />
             <span>Dashboard</span>
           </span>
     </li>
     <li className="nav-item">
-    <span onClick={() => hanlechange('user')}>
+    <span  className='nav-link' onClick={() => handlechange('user')}>
             <HiOutlineUserCircle className='icon' />
             <span>User Profile</span>
           </span>
     </li>
     <li className="nav-item">
-    <span onClick={() => hanlechange('notification')}>
+    <span  className='nav-link' onClick={() => handlechange('report')}>
         <AiOutlineDashboard className='icon' />
         <span>Table List</span>
         </span>
       
     </li>
     <li className="nav-item">
-      <a className="nav-link" href="typography.html">
+    <span className='nav-link' onClick={() => handlechange('event')}>
         <AiOutlineDashboard className='icon' />
-        <span>Typography</span>
-      </a>
+        <span>Events</span>
+        </span>
     </li>
     <li className="nav-item">
-      <a className="nav-link" href="icons.html">
+    <span className='nav-link' onClick={() => handlechange('meal')}>
         <AiOutlineDashboard className='icon' />
-        <span>Iconsssssss</span>
-      </a>
+        <span>Meals Updates</span>
+        </span>
     </li>
     <li className="nav-item">
-      <a className="nav-link" href="maps.html">
+    <span className='nav-link' onClick={() => handlechange('fees')}>
         <AiOutlineDashboard className='icon' />
-        <span>Maps</span>
-      </a>
+        <span>Fees</span>
+        </span>
     </li>
     <li className="nav-item">
-      <a className="nav-link" href="notifications.html">
+    <span className='nav-link' onClick={() => handlechange('notification')}>
         <AiOutlineDashboard className='icon' />
         <span>Notifications</span>
-      </a>
+        </span>
     </li>
     <li className="nav-item active-pro">
-      <a className="nav-link" href="upgrade.html">
+      <a className="nav-link" {...() => onclick(alert('coming soon'))}>
         <AiOutlineDashboard className='icon' />
         <span>Upgrade to PRO</span>
       </a>
@@ -150,7 +154,7 @@ export const Dashboard = () => {
     <li className="nav-item">
       <a className="nav-link" href="maps.html">
         <AiOutlineDashboard className='icon' />
-        <span>Maps</span>
+        <span>Fees</span>
       </a>
     </li>
     <li className="nav-item">
@@ -224,7 +228,11 @@ export const Dashboard = () => {
     <div className="content">
       {currenpage === 'dashboard' && <Dash />}
       {currenpage === 'user' && <Profilenn />}
+      {currenpage === 'report' && <Medical />}
       {currenpage === 'notification' && <NotificationSystem />}
+      {currenpage === 'fees' && <FeesList />}
+      {currenpage === 'meal' && <MealUpdates />}
+      {currenpage === 'event' && <EventCalendar />}
         </div>
 
 
