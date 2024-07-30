@@ -7,6 +7,7 @@ import {  ResetStaff } from './profile/resetstaff'
 import { ResetParent } from './profile/resetparent'
 import { LandingPage } from './landing/landing'
 import { Dashboard } from './dashboards/parentdashboard'
+import { StaffDashboard } from './dashboards/Stasffdashboard'
 
 
 const Loader = () => (
@@ -54,6 +55,7 @@ function App() {
           <Route path='/resetstaff' element={<ResetStaff  />} />
           <Route path='/resetpar' element={<ResetParent  />} />
           <Route path='/dash' element={<Dashboard  />} />
+          <Route path='/staff' element={<StaffDashboard />} />
         </Routes>
       </Router>
       </Layout>

@@ -1,5 +1,14 @@
+import { AttendanceStatus } from "./status";
+import  { Attendance} from "./test";
+import { useState } from "react";
 
-export const Dash = () => {
+export const Dash = ({}) => {
+  const [attendance, setAttendance] = useState({
+    Mike: '',
+    Michel: '',
+    John: '',
+    Jane: '',
+  });
   return (
     <div className="container-fluid">
       <div className="row">
@@ -15,6 +24,7 @@ export const Dash = () => {
                 <div className="legend">
                   <i className="fa fa-circle text-info"></i> Present
                   <i className="fa fa-circle text-danger"></i> Absent
+             
                 </div>
                 <hr />
                 <div className="stats">
@@ -34,8 +44,8 @@ export const Dash = () => {
             <div className="content">
               <ul className="notification-list">
             
-                <li className="notification-item">Reminder: Staff meeting at 2 PM</li>
-                <li className="notification-item">New parent-teacher conference scheduled</li>
+                <li className="notification-item  btn-success">Reminder: Staff meeting at 2 PM</li>
+                <li className="notification-item btn-warning">New parent-teacher conference scheduled</li>
               </ul>
               <div className="footer">
                 <hr />
@@ -58,8 +68,8 @@ export const Dash = () => {
             <div className="content">
               <ul className="activity-list">
              
-                <li className="activity-item">Had lunch at 12:30 PM</li>
-                <li className="activity-item">Nap time at 1:00 PM</li>
+                <li className="activity-item btn-danger">Had lunch at 12:30 PM</li>
+                <li className="activity-item btn-warning">Nap time at 1:00 PM</li>
               </ul>
               <div className="footer">
                 <hr />
@@ -80,8 +90,8 @@ export const Dash = () => {
             <div className="content">
               <ul className="communication-list">
               
-                <li className="communication-item">Message from John Doe: Please check Sarah  medication.</li>
-                <li className="communication-item">Message from Jane Smith: Come and pick up Jack at 3 PM.</li>
+                <li className="communication-item btn-info">Message from John Doe: Please check Sarah  medication.</li>
+                <li className="communication-item btn-info">Message from Jane Smith: Come and pick up Jack at 3 PM.</li>
               </ul>
               <div className="footer">
                 <hr />

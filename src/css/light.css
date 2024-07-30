@@ -250,11 +250,13 @@ button.close {
         display: block !important;
         background-size: cover;
         background-position: center center;
-        background-color: purple;
-        background-image: linear-gradient(to bottom, purple, rgba(244, 31, 244, 0.8)), url('../images/sidebar-5.jpg');
+        background: #787878;
+        background-image: linear-gradient(to bottom, #787878, #787878), url('../images/sidebar-5.jpg');
         background-blend-mode: multiply;
         color: white !important;
-        width: 50% !important;
+        width: 70% !important;
+        height: auto;
+        overflow-y: auto;
       }
   }
 
@@ -347,4 +349,97 @@ button.close {
     background-size: 150% 150%;
     z-index: 3;
     opacity: 1;
+}
+
+
+/*off canvas*/
+.offcanvas  .nav {
+    margin-top: 20px;
+    float: none;
+}
+
+.offcanvas  .nav .open > .nav-link,
+.offcanvas  .nav li.dropdown .dropdown-menu li:hover > .nav-link,
+.offcanvas  .nav li:hover > .nav-link {
+    background-color: rgba(255, 255, 255, 0.13);
+    opacity: 1;
+}
+
+.offcanvas  .nav li > .nav-link {
+    color: #FFFFFF;
+    margin: 5px 15px;
+    opacity: .86;
+    border-radius: 4px;
+    display: block;
+}
+
+.offcanvas  .nav li.active > .nav-link{
+    color: #FFFFFF;
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.23);
+}
+.offcanvas  .nav li.separator {
+    margin: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.offcanvas  .nav li.separator + li {
+    margin-top: 31px;
+}
+
+.offcanvas  .nav p {
+    margin: 0;
+    line-height: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 45px;
+}
+
+.offcanvas  .nav .icon {
+    font-size: 28px;
+    float: left;
+    margin-right: 15px;
+    line-height: 30px;
+    width: 30px;
+    text-align: center;
+}
+
+.offcanvas  .nav .caret {
+    margin-top: 13px;
+    position: absolute;
+    right: 30px;
+}
+.offcanvas .top{
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    
+}
+
+.offcanvas-title{
+ 
+    position: relative;
+    left: 40%;
+}
+/* btns */
+.btn-success {
+    border-color: #87CB16;
+    color: #fff;
+    background-color: #87CB16 !important;
+}
+
+.btn-warning {
+    border-color: #FF9500;
+    color: #Fff;
+    background-color: #FF9500;
+}
+.btn-info {
+    border-color: #1DC7EA;
+    color: #fff;
+    background-color: #1DC7EA;
+}
+.btn-danger {
+    border-color: #FF4A55;
+    color: #FFF;
+    background-color: #FF4A55;
 }

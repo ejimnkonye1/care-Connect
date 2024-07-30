@@ -11,8 +11,10 @@ import FeesList from './fee';
 import MealUpdates from './meals';
 import EventCalendar from './eventcal';
 import { Medical } from './medical';
+import{ Attendance} from './test';
+import { AttendanceStatus } from './status';
 
-export const Dashboard = () => {
+export const StaffDashboard = ({attendance}) => {
   const [currenpage, setcurrentpage] = useState('dashboard')
 
   const handlechange = (page) => {
@@ -89,7 +91,7 @@ export const Dashboard = () => {
 <div className="main-panel ">
 <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
   <div className="container-fluid">
-    <a className="navbar-brand " href="#">Dashboard</a>
+    <a className="navbar-brand " href="#">Staff</a>
     <button className="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
     <span className="navbar-toggler-icon"></span>
   </button>
@@ -245,9 +247,9 @@ export const Dashboard = () => {
   </div>
 </nav>
     <div className="content">
-      {currenpage === 'dashboard' && <Dash />}
+      {currenpage === 'dashboard' &&     <Dash/>}
       {currenpage === 'user' && <Profilenn />}
-      {currenpage === 'report' && <Medical />}
+      {currenpage === 'report' && <Attendance />}
       {currenpage === 'notification' && <NotificationSystem />}
       {currenpage === 'fees' && <FeesList />}
       {currenpage === 'meal' && <MealUpdates />}
