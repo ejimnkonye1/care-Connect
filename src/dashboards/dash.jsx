@@ -1,14 +1,32 @@
 import { AttendanceStatus } from "./status";
 import  { Attendance} from "./test";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { auth, firestore } from '../firebase'
 
-export const Dash = ({}) => {
+export const Dash = () => {
   const [attendance, setAttendance] = useState({
     Mike: '',
     Michel: '',
     John: '',
     Jane: '',
   });
+  const [userData, setUserData] = useState(null);
+
+   useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDoc = await getDoc(doc(firestore, 'users', user.uid));
+        if (userDoc.exists()) {
+          setUserData(userDoc.data());
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [auth, firestore]);
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -34,7 +52,19 @@ export const Dash = ({}) => {
             </div>
           </div>
         </div>
-
+<div>
+<div>
+      <h1>Parent Dashboard</h1>
+      {userData ? (
+        <div>
+          <p>Email: {userData.email}</p>
+          <p>Child Name: {userData.children[0].name}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+</div>
         <div className="col-md-8">
           <div className="card">
             <div className="header">

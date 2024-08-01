@@ -10,6 +10,7 @@ import feat4 from '../images/f-icon-8.svg'
 import feat5 from '../images/f-icon-9.svg'
 import feat6 from '../images/f-icon-2.svg'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 export const LandingPage = () => {
     const [active, setActive] = useState(null)
     const features = [
@@ -21,6 +22,10 @@ export const LandingPage = () => {
       ];
     const handlefeatures = (index) => {
   setActive(index)
+    }
+    const navigate = useNavigate()
+    const HandleSignUp = () => {
+        navigate ('/signup')
     }
     return (
         <div className='container-fluid'>
@@ -48,7 +53,9 @@ export const LandingPage = () => {
                        <button className='btns sign-in-nav'>Sign In</button>
                         </li>
                         <li className="nav-item mx-4">
-                       <button className='btns  sign-up-nav'>Sign Up Free</button>
+                       <button
+                       onClick={HandleSignUp}
+                       className='btns  sign-up-nav'>Sign Up Free</button>
                         </li>
                     </ul>
                 </div>

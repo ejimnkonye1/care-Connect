@@ -1,7 +1,24 @@
-
+import { useState, useEffect } from "react";
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { auth, firestore } from '../firebase'
 import img from '../images/face-3.jpg'
+
 export const Profilenn = () => {
- 
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+   const fetchUserData = async () => {
+     const user = auth.currentUser;
+     if (user) {
+       const userDoc = await getDoc(doc(firestore, 'users', user.uid));
+       if (userDoc.exists()) {
+         setUserData(userDoc.data());
+       }
+     }
+   };
+
+   fetchUserData();
+ }, [auth, firestore]);
     return(
     
             <div className="container-fluid">
@@ -23,13 +40,14 @@ export const Profilenn = () => {
                           <div className="col-md-3">
                             <div className="form-group">
                               <label>Child Name</label>
-                              <input type="text" className="form-control" placeholder="Child's Name" value="michael23" />
+                              <input type="text" className="form-control" placeholder="Child's Name"  value={userData?.children[0].name ?? ''} />
                             </div>
                           </div>
                           <div className="col-md-4">
                             <div className="form-group">
                               <label htmlFor="exampleInputEmail1">Parent Email address</label>
-                              <input type="email" className="form-control" placeholder="Email" />
+                              
+                              <input type="email" className="form-control" placeholder="Email" value={userData?.email ?? ''}/>
                             </div>
                           </div>
                         </div>
@@ -116,7 +134,8 @@ export const Profilenn = () => {
                       <div className="author">
                        
                           <img className="avatar border-gray" src={img} alt="..." />
-                          <h4 className="title">michael24
+                          <h4 className="title">{userData?.children[0].name ?? ''}
+
                             
                           </h4>
                         
@@ -128,7 +147,7 @@ export const Profilenn = () => {
                         <p>
                             Gender:Male
                         </p>
-                        <p>Parent name:luke
+                        <p>Parent name:Mike
                         </p>
                      </div>
                     </div>

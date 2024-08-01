@@ -8,6 +8,7 @@ import { ResetParent } from './profile/resetparent'
 import { LandingPage } from './landing/landing'
 import { Dashboard } from './dashboards/parentdashboard'
 import { StaffDashboard } from './dashboards/Stasffdashboard'
+import {  SignUp } from './profile/SignUp'
 
 
 const Loader = () => (
@@ -54,6 +55,7 @@ function App() {
           <Route path='/reset' element={<ResetPassword  />} />
           <Route path='/resetstaff' element={<ResetStaff  />} />
           <Route path='/resetpar' element={<ResetParent  />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route path='/dash' element={<Dashboard  />} />
           <Route path='/staff' element={<StaffDashboard />} />
         </Routes>
