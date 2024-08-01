@@ -7,7 +7,7 @@ import {  ResetStaff } from './profile/resetstaff'
 import { ResetParent } from './profile/resetparent'
 import { LandingPage } from './landing/landing'
 import { Dashboard } from './dashboards/parentdashboard'
-import { StaffDashboard } from './dashboards/Stasffdashboard'
+import { StaffDashboard } from './dashboardstaff/Stasffdashboard'
 import {  SignUp } from './profile/SignUp'
 
 

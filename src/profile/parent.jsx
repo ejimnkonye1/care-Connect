@@ -3,7 +3,10 @@ import { CiLock } from "react-icons/ci";
 
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-
+import { auth  } from "../firebase"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {  signInWithEmailAndPassword } from 'firebase/auth';
 // eslint-disable-next-line react/prop-types
 export const Parent = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate }) => {
   const handleCentre = () => {
@@ -23,6 +26,24 @@ export const Parent = ({ PasswordVisible , togglePasswordvisible, setShowParent,
       }, 500);
    
   };
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+const navigate = useNavigate()
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log("User logged in: ", userCredential.user);
+      // Redirect to Parent Dashboard
+     navigate('/dash')
+    } catch (error) {
+      console.error("Error logging in: ", error);
+      setError("Invalid email or password.");
+    }
+  };
+
 return(
     <div className='d-flex flex-column log py-4  '>
     <div>
@@ -34,7 +55,7 @@ return(
         </p>
     </div>
     <div className='input-container p-2 py-3'>
-      <form  className='py-2'>
+      <form  className='py-2 ' onSubmit={handleLogin}>
       <div className='mb-3 first-container'>
         <div className='input-group'>
         <div className="person-icon">
@@ -42,8 +63,12 @@ return(
         <IoPersonOutline />
       
     </div>
-   
-        <input type='text'   aria-describedby="basic-addon1" placeholder='Username' className='user-input w-100' />
+
+
+        <input   type="email"aria-describedby="basic-addon1"  placeholder="Email"
+         value={email}
+         onChange={(e) => setEmail(e.target.value)}
+        className='user-input w-100' required />
         </div>
    
       </div>
@@ -62,7 +87,10 @@ return(
    
         <input type={PasswordVisible ? 'text': 'password'}
         
-        aria-describedby="basic-addon1" placeholder='Password' className='user-input w-100' />
+        aria-describedby="basic-addon1" placeholder='Password'
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className='user-input w-100' required />
         </div>
       </div>
       <div className='text-end'>
@@ -79,7 +107,7 @@ return(
       {/* <div className='line-container'>
        <span className='or-line'></span> OR<span className='or-line'></span>
       </div> */}
-     
+        {error && <p>{error}</p>}
       </form>
       <div className='two-button-container d-flex justify-content-evenly' >
         <div className='parent'>

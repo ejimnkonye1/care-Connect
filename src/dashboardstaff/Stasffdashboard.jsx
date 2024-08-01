@@ -4,17 +4,11 @@ import 'animate.css';
 import { useState } from 'react';
 import { AiOutlineDashboard } from "react-icons/ai";
 import { HiOutlineUserCircle } from "react-icons/hi2";
-import { Dash } from './dash';
-import { Profilenn } from './profile';
-import NotificationSystem from './noti';
-import FeesList from './fee';
-import MealUpdates from './meals';
-import EventCalendar from './eventcal';
-import { Medical } from './medical';
-import{ Attendance} from './test';
-import { AttendanceStatus } from './status';
 
-export const StaffDashboard = ({attendance}) => {
+import { Staffdash } from './staffdash';
+import { Staffpro } from './staffpro';
+
+export const StaffDashboard = () => {
   const [currenpage, setcurrentpage] = useState('dashboard')
 
   const handlechange = (page) => {
@@ -247,13 +241,13 @@ export const StaffDashboard = ({attendance}) => {
   </div>
 </nav>
     <div className="content">
-      {currenpage === 'dashboard' &&     <Dash/>}
-      {currenpage === 'user' && <Profilenn />}
-      {currenpage === 'report' && <Attendance />}
+      {currenpage === 'dashboard' &&     <Staffdash/>}
+      {currenpage === 'user' && <Staffpro />}
+      {/* {currenpage === 'report' && <Attendance />}
       {currenpage === 'notification' && <NotificationSystem />}
       {currenpage === 'fees' && <FeesList />}
       {currenpage === 'meal' && <MealUpdates />}
-      {currenpage === 'event' && <EventCalendar />}
+      {currenpage === 'event' && <EventCalendar />} */}
         </div>
 
 
