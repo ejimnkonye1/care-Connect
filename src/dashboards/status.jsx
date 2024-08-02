@@ -1,38 +1,56 @@
-// attendance-status.js
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import React, { useState, useEffect } from 'react';
 
-export const AttendanceStatus = ({ attendance }) => {
-    return (
-      <div className="container">
-        <h2 className="text-center">Attendance Status</h2>
-        <ul className="list-group">
-          {attendance?.keys()?.map((student) => (
-            <li key={student} className="list-group-item">
-              {student}: {attendance[student] === 'present' ? (
-                <i className="fas fa-check text-success" />
-              ) : attendance[student] === 'absent' ? (
-                <i className="fas fa-times text-danger" />
-              ) : (
-                <i className="fas fa-question text-secondary" />
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
-// import React from 'react';
+// import { getFirestore, collection, getDocs, doc, getDoc, onSnapshot } from 'firebase/firestore';
+// import { auth, firestore } from '../firebase';
 
-// export const AttendanceStatus = ({ attendance }) => {
-//   const percentage = attendance * 100
+// export const AttendanceStat = () => {
+//   const [user, setUser] = useState(null); // Store user data
+//   const [attendance, setAttendance] = useState({}); // Store attendance data
+
+//   useEffect(() => {
+//     const fetchUserData = async () => {
+//       const user = auth.currentUser;
+//       if (user) {
+//         const userDoc = await getDoc(doc(firestore, 'users', user.uid));
+//         if (userDoc.exists()) {
+//           setUser(userDoc.data());
+//         }
+//       }
+//     };
+
+//     fetchUserData();
+//   }, [auth, firestore]);
+
+//   useEffect(() => {
+//     if (user) {
+//       const attendanceRef = collection(firestore, 'attendance');
+//       const unsubscribe = onSnapshot(attendanceRef, (snapshot) => {
+//         const attendanceData = snapshot.docs.map((doc) => doc.data());
+//         const userChildren = user.children;
+//         const userAttendance = attendanceData.filter((attendance) => {
+//           return userChildren.some((child) => child.name === attendance.childName);
+//         });
+//         setAttendance(userAttendance);
+//       });
+
+//       return unsubscribe;
+//     }
+//   }, [user, firestore]);
 
 //   return (
 //     <div>
-//       <h2>Attendance Status</h2>
-//       <p>Percentage: {percentage}%</p>
-//       <p>Status: {percentage >= 80 ? 'Good' : 'Bad'}</p>
+//       <h1>Parent Dashboard</h1>
+//       {Object.keys(attendance).length > 0? (
+//         Object.values(attendance).map((attendance, index) => (
+//           <div key={index}>
+//             <p>Child: {attendance.childName}</p>
+//             <p>Status: {attendance.status}</p>
+            
+//           </div>
+//         ))
+//       ) : (
+//         <p>No attendance data available.</p>
+//       )}
 //     </div>
 //   );
 // };
-

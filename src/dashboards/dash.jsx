@@ -1,25 +1,19 @@
-import { AttendanceStatus } from "./status";
-import  { Attendance} from "./test";
-import { useState, useEffect } from "react";
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import { auth, firestore } from '../firebase'
-
+import  { useState, useEffect } from 'react';
+import {  collection,  doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { auth, firestore } from '../firebase';
+import LastUpdated from '../lastupdate';
 export const Dash = () => {
-  const [attendance, setAttendance] = useState({
-    Mike: '',
-    Michel: '',
-    John: '',
-    Jane: '',
-  });
-  const [userData, setUserData] = useState(null);
+  const [user, setUser] = useState(null); // Store user data
+  const [attendance, setAttendance] = useState({}); // Store attendance data
+  const [triggerUpdate, setTriggerUpdate] = useState(false);
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchUserData = async () => {
       const user = auth.currentUser;
       if (user) {
         const userDoc = await getDoc(doc(firestore, 'users', user.uid));
         if (userDoc.exists()) {
-          setUserData(userDoc.data());
+          setUser(userDoc.data());
         }
       }
     };
@@ -27,6 +21,28 @@ export const Dash = () => {
     fetchUserData();
   }, [auth, firestore]);
 
+  useEffect(() => {
+    if (user) {
+      const attendanceRef = collection(firestore, 'attendance');
+      const unsubscribe = onSnapshot(attendanceRef, (snapshot) => {
+        const attendanceData = snapshot.docs.map((doc) => doc.data());
+        const userChildren = user.children;
+        const userAttendance = attendanceData.filter((attendance) => {
+          return userChildren.some((child) => child.name === attendance.childName);
+        });
+        setAttendance(userAttendance);
+      });
+
+      return unsubscribe;
+    }
+  }, [user, firestore]);
+
+
+  useEffect(() => {
+    if (Object.keys(attendance).length > 0) {
+      setTriggerUpdate(true);
+    }
+  }, [attendance]);
   return (
     <div className="container-fluid">
       <div className="row">
@@ -40,31 +56,42 @@ export const Dash = () => {
               <div id="chartAttendance" className="ct-chart ct-perfect-fourth"></div>
               <div className="footer">
                 <div className="legend">
-                  <i className="fa fa-circle text-info"></i> Present
-                  <i className="fa fa-circle text-danger"></i> Absent
-             
+                <div>
+  {Object.keys(attendance).length > 0 ? (
+    Object.values(attendance).map((attendance, index) => (
+      <div key={index}>
+        <p>Child: {attendance.childName}</p>
+        <p>Date: {attendance.date}</p>
+        <p>Status: 
+          {attendance.status === 'present' ? (
+            <span>
+              <i className="fa fa-circle text-info"></i> Present
+            </span>
+          ) : attendance.status === 'absent' ? (
+            <span>
+              <i className="fa fa-circle text-danger"></i> Absent
+            </span>
+          ) : (
+            <span>No attendance data available.</span>
+          )}
+        </p>
+      </div>
+    ))
+  ) : (
+    <p>No attendance data available.</p>
+  )}
+</div>
+               
                 </div>
                 <hr />
                 <div className="stats">
-                  <i className="fa fa-clock-o"></i> Updated just now
+                <LastUpdated triggerUpdate={triggerUpdate} />
                 </div>
               </div>
             </div>
           </div>
         </div>
-<div>
-<div>
-      <h1>Parent Dashboard</h1>
-      {userData ? (
-        <div>
-          <p>Email: {userData.email}</p>
-          <p>Child Name: {userData.children[0].name}</p>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
-</div>
+
         <div className="col-md-8">
           <div className="card">
             <div className="header">

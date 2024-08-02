@@ -27,6 +27,9 @@ export const LandingPage = () => {
     const HandleSignUp = () => {
         navigate ('/signup')
     }
+    const HandleLogin = () => {
+        navigate ('/login')
+    }
     return (
         <div className='container-fluid'>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,7 +53,9 @@ export const LandingPage = () => {
                             <a className="nav-link" href="#pricing">Pricing</a>
                         </li>
                         <li className="nav-item ">
-                       <button className='btns sign-in-nav'>Sign In</button>
+                       <button 
+                       onClick={HandleLogin}
+                       className='btns sign-in-nav'>Sign In</button>
                         </li>
                         <li className="nav-item mx-4">
                        <button

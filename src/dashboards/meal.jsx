@@ -1,20 +1,34 @@
 import {useState, useEffect} from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material'
+// eslint-disable-next-line no-unused-vars
+import { collection, addDoc, getDocs, doc,getDoc, query, where } from 'firebase/firestore';
+// eslint-disable-next-line no-unused-vars
+import { auth, firestore } from '../firebase';
 // eslint-disable-next-line react/prop-types
 const MealUpdatesTable = () => {
     const [mealUpdates, setMealUpdates] = useState([]);
-
+    const [user, setUser] = useState(null); // Store user data
+    const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
-      // Call API to fetch meal updates
-      const mealUpdatesData = [
-        { date: '2023-02-01', mealType: 'Breakfast', food: 'Oatmeal', quantity: '1 cup' },
-        { date: '2023-02-01', mealType: 'Lunch', food: 'Chicken', quantity: '4 oz' },
-        { date: '2023-02-01', mealType: 'Dinner', food: 'Rice', quantity: '1 cup' },
-      ];
-      setMealUpdates(mealUpdatesData);
-    }, []);
+      const fetchMealUpdates = async () => {
+        const userId = auth.currentUser.uid; // Get the current user's ID
+        const userRef = doc(firestore, 'users', userId);
+        const userSnapshot = await getDoc(userRef);
+        const userData = userSnapshot.data();
+        const childId = userData.children[0].id; // Assuming the user has only one child
+    
+        const mealUpdatesRef = collection(firestore, 'mealUpdates');
+        const mealUpdatesSnapshot = await getDocs(mealUpdatesRef, where('childId', '==', childId));
+        const mealUpdatesData = mealUpdatesSnapshot.docs.map((doc) => doc.data());
+        setMealUpdates(mealUpdatesData);
+        console.log(mealUpdates)
+      };
+    
+      fetchMealUpdates();
+    }, [firestore, auth]);
   return (
     <Table>
+         <h2>Meal Updates for {currentUser.childId}</h2>
       <TableHead>
         <TableRow>
           <TableCell>Date</TableCell>
@@ -24,7 +38,7 @@ const MealUpdatesTable = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {mealUpdates.map((update, index) => (
+      {mealUpdates.filter((update) => update.childId === currentUser.childId).map((update, index) => (
           <TableRow key={index}>
             <TableCell>{update.date}</TableCell>
             <TableCell>{update.mealType}</TableCell>

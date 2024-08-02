@@ -7,6 +7,8 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 
 import { Staffdash } from './staffdash';
 import { Staffpro } from './staffpro';
+import { MarkAttendance } from './attendance';
+import { StaffMealUpdatesTable } from './Meal';
 
 export const StaffDashboard = () => {
   const [currenpage, setcurrentpage] = useState('dashboard')
@@ -41,7 +43,7 @@ export const StaffDashboard = () => {
 
     <span  className='nav-link' onClick={() => handlechange('report')}>
         <AiOutlineDashboard className='icon' />
-        <span>Table List</span>
+        <span>Attendance</span>
         </span>
       
     </li>
@@ -243,11 +245,12 @@ export const StaffDashboard = () => {
     <div className="content">
       {currenpage === 'dashboard' &&     <Staffdash/>}
       {currenpage === 'user' && <Staffpro />}
+      {currenpage === 'report' && <MarkAttendance />}
       {/* {currenpage === 'report' && <Attendance />}
       {currenpage === 'notification' && <NotificationSystem />}
-      {currenpage === 'fees' && <FeesList />}
-      {currenpage === 'meal' && <MealUpdates />}
-      {currenpage === 'event' && <EventCalendar />} */}
+      {currenpage === 'fees' && <FeesList />} */}
+      {currenpage === 'meal' && <StaffMealUpdatesTable/>}
+      {/* {currenpage === 'event' && <EventCalendar />} */}
         </div>
 
 
