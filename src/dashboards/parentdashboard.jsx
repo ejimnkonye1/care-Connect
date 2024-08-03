@@ -8,9 +8,10 @@ import { Dash } from './dash';
 import { Profilenn } from './profile';
 import NotificationSystem from './noti';
 import FeesList from './fee';
-import MealUpdates from './meals';
+
 import EventCalendar from './eventcal';
 import { Medical } from './medical';
+import MealUpdatesTable from './meal';
 
 
 export const Dashboard = () => {
@@ -251,7 +252,7 @@ export const Dashboard = () => {
       {currenpage === 'report' && <Medical />}
       {currenpage === 'notification' && <NotificationSystem />}
       {currenpage === 'fees' && <FeesList />}
-      {currenpage === 'meal' && <MealUpdates />}
+      {currenpage === 'meal' && <MealUpdatesTable />}
       {currenpage === 'event' && <EventCalendar/>}
         </div>
 

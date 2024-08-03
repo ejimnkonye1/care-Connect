@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 
-import HealthAndSafetyForm from "./health";
+import { ParentActivityUpdates } from "./activitypar";
 
-
-import MedicalAlertSystem from "./med";
 import { IncidentReporting } from "./report";
 
 export const Medical = () => {
@@ -11,13 +9,17 @@ export const Medical = () => {
      
      
     return(
-        <div>
+        <div className="row">
+            <div className="col-md-6">
+            <ParentActivityUpdates />
+            </div>
             
+           <div className="col-md-6">
+                   
+         <IncidentReporting />
+            </div>
           
-           {/* <HealthAndSafetyForm /> */}
-          
-           <IncidentReporting />
-           {/* <MedicalAlertSystem /> */}
+        
         </div>
     )
 }

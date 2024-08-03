@@ -21,8 +21,7 @@ fetchIncidentReports()
   }, [user])
 
   return (
-  <div className="row">
-    <div className='col-6'>
+  
       <div className='card'>
         <div className='header'>
         <h4 className='title'>Incident History</h4>
@@ -53,10 +52,7 @@ fetchIncidentReports()
         </TableContainer>
         </div>
       </div>
-    </div>
-        
-     
-      </div>
+ 
   ); 
 }
 

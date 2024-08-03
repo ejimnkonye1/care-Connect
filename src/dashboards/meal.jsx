@@ -28,9 +28,15 @@ const MealUpdatesTable = () => {
   }, [user]);
 
   return (
-    <div>
-      <h2>Meal Updates for {user?  childNames.join(', ') :  ''}</h2>
-      <Table>
+    <div className='row'>
+      <div className='col-md-8'>
+        <div className='card'>
+          <div className='header'>
+            <h4 className='title'>Meal Updates for {user?  childNames.join(', ') :  ''} </h4>
+            <p className='category'>Meals today</p>
+          </div>
+           <div className='content mb-3'>
+           <Table>
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
@@ -58,6 +64,10 @@ const MealUpdatesTable = () => {
           )}
         </TableBody>
       </Table>
+           </div>
+        </div>
+      </div>
+      
     </div>
   );
 };
