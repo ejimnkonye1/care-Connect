@@ -1,53 +1,64 @@
-import {useState, useEffect} from 'react';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material'
-// eslint-disable-next-line no-unused-vars
-import { collection, addDoc, getDocs, doc,getDoc, query, where } from 'firebase/firestore';
-// eslint-disable-next-line no-unused-vars
+import { useState, useEffect } from 'react';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
-// eslint-disable-next-line react/prop-types
+
 const MealUpdatesTable = () => {
-    const [mealUpdates, setMealUpdates] = useState([]);
-    const [user, setUser] = useState(null); // Store user data
-    const [currentUser, setCurrentUser] = useState({});
-    useEffect(() => {
-      const fetchMealUpdates = async () => {
-        const userId = auth.currentUser.uid; // Get the current user's ID
-        const userRef = doc(firestore, 'users', userId);
-        const userSnapshot = await getDoc(userRef);
-        const userData = userSnapshot.data();
-        const childId = userData.children[0].id; // Assuming the user has only one child
-    
+  const [mealUpdates, setMealUpdates] = useState([]);
+  const [childNames, setChildNames] = useState([]);
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    const fetchMealUpdates = async () => {
+      if (user) {
         const mealUpdatesRef = collection(firestore, 'mealUpdates');
-        const mealUpdatesSnapshot = await getDocs(mealUpdatesRef, where('childId', '==', childId));
+        const q = query(mealUpdatesRef, where('userId', '==', user.uid));
+        const mealUpdatesSnapshot = await getDocs(q);
         const mealUpdatesData = mealUpdatesSnapshot.docs.map((doc) => doc.data());
         setMealUpdates(mealUpdatesData);
-        console.log(mealUpdates)
-      };
-    
-      fetchMealUpdates();
-    }, [firestore, auth]);
+
+        const uniqueChildNames = [...new Set(mealUpdatesData.map(update => update.childName))];
+        setChildNames(uniqueChildNames);
+      }
+
+
+    };
+
+    fetchMealUpdates();
+  }, [user]);
+
   return (
-    <Table>
-         <h2>Meal Updates for {currentUser.childId}</h2>
-      <TableHead>
-        <TableRow>
-          <TableCell>Date</TableCell>
-          <TableCell>Meal Type</TableCell>
-          <TableCell>Food</TableCell>
-          <TableCell>Quantity</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-      {mealUpdates.filter((update) => update.childId === currentUser.childId).map((update, index) => (
-          <TableRow key={index}>
-            <TableCell>{update.date}</TableCell>
-            <TableCell>{update.mealType}</TableCell>
-            <TableCell>{update.food}</TableCell>
-            <TableCell>{update.quantity}</TableCell>
+    <div>
+      <h2>Meal Updates for {user?  childNames.join(', ') :  ''}</h2>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Date</TableCell>
+            <TableCell>Meal Type</TableCell>
+            <TableCell>Food</TableCell>
+            <TableCell>Quantity</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+        <TableBody>
+          {mealUpdates.length > 0 ? (
+            mealUpdates.map((update, index) => (
+              <TableRow key={index}>
+                <TableCell>{update.date}</TableCell>
+                <TableCell>{update.mealType}</TableCell>
+                <TableCell>{update.food}</TableCell>
+                <TableCell>{update.quantity}</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={4} style={{ textAlign: 'center' }}>
+                No meal updates available.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 

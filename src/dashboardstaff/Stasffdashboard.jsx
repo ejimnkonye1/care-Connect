@@ -9,6 +9,8 @@ import { Staffdash } from './staffdash';
 import { Staffpro } from './staffpro';
 import { MarkAttendance } from './attendance';
 import { StaffMealUpdatesTable } from './Meal';
+import { StaffReport } from './report';
+
 
 export const StaffDashboard = () => {
   const [currenpage, setcurrentpage] = useState('dashboard')
@@ -250,11 +252,11 @@ export const StaffDashboard = () => {
       {currenpage === 'notification' && <NotificationSystem />}
       {currenpage === 'fees' && <FeesList />} */}
       {currenpage === 'meal' && <StaffMealUpdatesTable/>}
-      {/* {currenpage === 'event' && <EventCalendar />} */}
+      {currenpage === 'event' && <StaffReport />}
         </div>
 
 
-        <footer className="footer">
+        <footer className="footer last-footer">
             <div className="container-fluid ">
                 <p className=" text-center">
                     &copy; <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web

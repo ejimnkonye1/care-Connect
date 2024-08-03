@@ -12,6 +12,7 @@ import MealUpdates from './meals';
 import EventCalendar from './eventcal';
 import { Medical } from './medical';
 
+
 export const Dashboard = () => {
   const [currenpage, setcurrentpage] = useState('dashboard')
 
@@ -251,14 +252,14 @@ export const Dashboard = () => {
       {currenpage === 'notification' && <NotificationSystem />}
       {currenpage === 'fees' && <FeesList />}
       {currenpage === 'meal' && <MealUpdates />}
-      {currenpage === 'event' && <EventCalendar />}
+      {currenpage === 'event' && <EventCalendar/>}
         </div>
 
 
         <footer className="footer">
             <div className="container-fluid ">
                 <p className=" text-center">
-                    &copy; <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                    &copy; <a href="http://www.creative-tim.com">Careconnect</a>, made with love for a better web
                 </p>
             </div>
         </footer>

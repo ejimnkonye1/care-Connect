@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
@@ -5,75 +6,81 @@ import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Se
 
 export const StaffMealUpdatesTable = () => {
     const [mealUpdates, setMealUpdates] = useState([]);
-     
-    const [children, setChildren] = useState([]); // Store the list of children
-    const [selectedChildId, setSelectedChildId] = useState(''); // Store the selected child ID
+  const [users, setUsers] = useState([]); // Store all users
+  const [selectedChildName, setSelectedChildName] = useState(''); // Store the selected child name
+  const [selectedUserId, setSelectedUserId] = useState(''); // Store the selected user's ID
 
-
-    const [newMealUpdate, setNewMealUpdate] = useState({
-      date: '',
-      mealType: '',
-      food: '',
-      quantity: '',
-      childId: '', // Add a childId field to associate with the meal update
-      Userid:children
-    });
- 
-
-    useEffect(() => {
-      const fetchUsers = async () => {
-        const usersRef = collection(firestore, 'users');
-        const usersSnapshot = await getDocs(usersRef);
-        const usersData = usersSnapshot.docs.map((doc) => doc.data());
-        setChildren(usersData);
-      };
-  
-      fetchUsers();
-    }, [firestore]);
-  
-    useEffect(() => {
-      const fetchMealUpdates = async () => {
-        const mealUpdatesRef = collection(firestore, 'mealUpdates');
-        const mealUpdatesSnapshot = await getDocs(mealUpdatesRef);
-        const mealUpdatesData = mealUpdatesSnapshot.docs.map((doc) => doc.data());
-        setMealUpdates(mealUpdatesData);
-      };
-  
-      fetchMealUpdates();
-    }, [firestore]);
-  
-    const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      setNewMealUpdate((prevUpdate) => ({...prevUpdate, [name]: value }));
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const usersRef = collection(firestore, 'users');
+      const usersSnapshot = await getDocs(usersRef);
+      const usersData = usersSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setUsers(usersData);
     };
-  
-    const handleChildChange = (event) => {
-        const childId = event.target.value;
-        setNewMealUpdate((prevUpdate) => ({ ...prevUpdate, childId }));
-        setSelectedChildId(childId);
-      };
-    const handleSendUpdate = async () => {
-      if (!newMealUpdate.date || !newMealUpdate.mealType || !newMealUpdate.food || !newMealUpdate.quantity || !newMealUpdate.childId) {
-        alert('Please fill in all required fields');
-        return;
-      }
-  
-      try {
-        const mealUpdatesRef = collection(firestore, 'mealUpdates');
-        await addDoc(mealUpdatesRef, newMealUpdate);
-        setMealUpdates((prevUpdates) => [...prevUpdates, newMealUpdate]);
-        setNewMealUpdate({
-          date: '',
-          mealType: '',
-          food: '',
-          quantity: '',
-          childId: children,
-          Userid: children
-        });
-      } catch (error) {
-        console.error('Error sending meal update:', error);
-      }
+
+    fetchUsers();
+  }, []);
+
+  const [newMealUpdate, setNewMealUpdate] = useState({
+    date: '',
+    mealType: '',
+    food: '',
+    quantity: '',
+    childName: '',
+    userId: ''
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewMealUpdate((prevUpdate) => ({ ...prevUpdate, [name]: value }));
+  };
+
+  const handleSendUpdate = async () => {
+    if (!newMealUpdate.date || !newMealUpdate.mealType || !newMealUpdate.food || !newMealUpdate.quantity || !newMealUpdate.childName || !newMealUpdate.userId) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    try {
+      const mealUpdatesRef = collection(firestore, 'mealUpdates');
+      await addDoc(mealUpdatesRef, newMealUpdate);
+      setMealUpdates((prevUpdates) => [...prevUpdates, newMealUpdate]);
+      setNewMealUpdate({
+        date: '',
+        mealType: '',
+        food: '',
+        quantity: '',
+        childName: '',
+        userId: ''
+      });
+    } catch (error) {
+      console.error('Error sending meal update:', error);
+    }
+  };
+
+  const handleChildChange = (e) => {
+    const childName = e.target.value;
+    const user = users.find(user => user.children.some(child => child.name === childName));
+    if (user) {
+      setSelectedChildName(childName);
+      setSelectedUserId(user.id);
+      setNewMealUpdate((prevUpdate) => ({
+        ...prevUpdate,
+        childName,
+        userId: user.id
+      }));
+    }
+  };
+  useEffect(() => {
+    const fetchMealUpdates = async () => {
+      const mealUpdatesRef = collection(firestore, 'mealUpdates');
+      const mealUpdatesSnapshot = await getDocs(mealUpdatesRef);
+      const mealUpdatesData = mealUpdatesSnapshot.docs.map((doc) => doc.data());
+      setMealUpdates(mealUpdatesData);
     };
+
+    fetchMealUpdates();
+  }, [firestore]);
   return (
     <div>
     <h2>Meal Updates</h2>
@@ -91,17 +98,17 @@ export const StaffMealUpdatesTable = () => {
                 <TableCell>Meal Type</TableCell>
                 <TableCell>Food</TableCell>
                 <TableCell>Quantity</TableCell>
-                <TableCell>Child</TableCell>
+                
               </TableRow>
             </TableHead>
             <TableBody>
-            {mealUpdates.filter((mealUpdate) => mealUpdate.childId === selectedChildId).map((mealUpdate, index) => (
+            {mealUpdates.filter((mealUpdate) => mealUpdate.childName === selectedChildName).map((mealUpdate, index) => (
                   <TableRow key={index}>
                     <TableCell>{mealUpdate.date}</TableCell>
                     <TableCell>{mealUpdate.mealType}</TableCell>
                     <TableCell>{mealUpdate.food}</TableCell>
                     <TableCell>{mealUpdate.quantity}</TableCell>
-                    <TableCell>{mealUpdate.childId}</TableCell>
+                    
                   </TableRow>
                 ))}
             </TableBody>
@@ -119,7 +126,7 @@ export const StaffMealUpdatesTable = () => {
         onChange={handleChildChange}
         className='mb-4 mt-1 p-3 m-2'
       >
-        {children.map((user, index) => (
+        {users.map((user, index) => (
           user.children ? (
             user.children.map((child, childIndex) => (
               <option key={`${index}-${childIndex}`} value={child.id}>
