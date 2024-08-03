@@ -4,6 +4,7 @@ import  { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 
 import { auth, firestore } from '../firebase'
+import { StaffActivityUpdates } from './activity';
 export const Staffdash = () => {
   const [staffData, setStaffData] = useState(null);
   
@@ -20,7 +21,7 @@ export const Staffdash = () => {
     };
 
     fetchStaffData();
-  }, [auth, firestore]);
+  }, []);
 
   return (
     <div>
@@ -33,6 +34,8 @@ export const Staffdash = () => {
       ) : (
         <p>Loading...</p>
       )}
+
+      <StaffActivityUpdates />
     </div>
   );
 };

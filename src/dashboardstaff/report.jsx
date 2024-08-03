@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { addDoc, collection,  getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "../firebase";
@@ -54,7 +55,7 @@ fetchUsers();
         userId:''
       });
     } catch (error){
-        console.error("Erro sending incident Report", error)
+        console.error("Error sending incident Report", error)
     }
   
   };
