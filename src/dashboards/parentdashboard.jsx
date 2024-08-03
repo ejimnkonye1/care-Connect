@@ -46,7 +46,7 @@ export const Dashboard = () => {
 
     <span  className='nav-link' onClick={() => handlechange('report')}>
         <AiOutlineDashboard className='icon' />
-        <span>Table List</span>
+        <span>Reports</span>
         </span>
       
     </li>

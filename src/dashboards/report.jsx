@@ -1,69 +1,67 @@
-// IncidentReporting.js
-import { useState } from 'react';
 
-const incidentReports = [
-  {
-    date: '2023-02-20',
-    time: '10:00 AM',
-    location: 'Playground',
-    description: 'Child fell and scraped knee',
-  },
-  {
-    date: '2023-02-19',
-    time: '3:00 PM',
-    location: 'Classroom',
-    description: 'Child had a seizure',
-  },
-];
+import { useEffect, useState } from 'react';
+import { auth, firestore } from '../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+export const IncidentReporting = () => {
+  const [incidentReports, setincidentReports] = useState([])
+  const user = auth.currentUser
 
-const IncidentReporting = () => {
-  const [newIncidentReport, setNewIncidentReport] = useState({
-    date: '',
-    time: '',
-    location: '',
-    description: '',
-  });
-
-  const handleAddIncidentReport = () => {
-    incidentReports.push(newIncidentReport);
-    setNewIncidentReport({
-      date: '',
-      time: '',
-      location: '',
-      description: '',
-    });
-  };
+  useEffect(() => {
+const fetchIncidentReports = async () => {
+  if (user) {
+    const incidentReportRef = collection(firestore, 'incidentReport')
+    const q = query(incidentReportRef, where('userId', '==', user.uid))
+    const incidentReportSnapshot = await getDocs(q)
+    const incidentReportsData = incidentReportSnapshot.docs.map((doc) => doc.data())
+    setincidentReports(incidentReportsData)
+  }
+}
+fetchIncidentReports()
+  }, [user])
 
   return (
-    <div>
-      <h1>Incident Reporting</h1>
-      <form>
-        <label>Date:</label>
-        <input type="date" value={newIncidentReport.date} onChange={(e) => setNewIncidentReport({ ...newIncidentReport, date: e.target.value })} />
-        <br />
-        <label>Time:</label>
-        <input type="time" value={newIncidentReport.time} onChange={(e) => setNewIncidentReport({ ...newIncidentReport, time: e.target.value })} />
-        <br />
-        <label>Location:</label>
-        <input type="text" value={newIncidentReport.location} onChange={(e) => setNewIncidentReport({ ...newIncidentReport, location: e.target.value })} />
-        <br />
-        <label>Description:</label>
-        <textarea value={newIncidentReport.description} onChange={(e) => setNewIncidentReport({ ...newIncidentReport, description: e.target.value })} />
-        <br />
-        <button onClick={handleAddIncidentReport}>Add Incident Report</button>
-      </form>
-      <ul>
-        {incidentReports.map((incidentReport, index) => (
-          <li key={index}>
-            <p>Date: {incidentReport.date}</p>
-            <p>Time: {incidentReport.time}</p>
-            <p>Location: {incidentReport.location}</p>
-            <p>Description: {incidentReport.description}</p>
-          </li>
-        ))}
-      </ul>
+  <div className="row">
+    <div className='col-6'>
+      <div className='card'>
+        <div className='header'>
+        <h4 className='title'>Incident History</h4>
+        <p className="category">Incidents today</p>
+        </div>
+        <div className='content'>
+        <TableContainer >
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell>Time</TableCell>
+                <TableCell>Location</TableCell>
+                <TableCell>Description</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {incidentReports.map((report, index) => (
+                <TableRow key={index}>
+                  <TableCell>{report.date}</TableCell>
+                  <TableCell>{report.time}</TableCell>
+                  <TableCell>{report.location}</TableCell>
+                  <TableCell>{report.description}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        </div>
+      </div>
     </div>
-  );
-};
+        
+     
+      </div>
+  ); 
+}
 
-export default IncidentReporting;
+
+
+
+
+
