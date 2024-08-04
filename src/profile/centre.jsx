@@ -67,7 +67,7 @@ export const Centre = ({setShowParent, setShowStaff, PasswordVisible, togglePass
             <button className='w-100 sign-btn btns'>Sign In</button>
           </div>
           <div className='text-center mt-3'>
-            <p> Dont have Account? <a href='#' className='acct'>Create account</a></p>
+            <p> Dont have Account? <a href='/signup' className='acct'>Create account</a></p>
           </div>
           <div className='line-container'>
            <span className='or-line'></span> OR<span className='or-line'></span>

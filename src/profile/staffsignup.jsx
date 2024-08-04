@@ -32,6 +32,7 @@ export const StaffSign = () => {
 
     return(
         <form id="staff-signup-form" onSubmit={handleRegister}>
+          <h2 className="text-center">Staff Sign Up</h2>
         <div className="row">
           <div className="col-md-12">
             <div className="form-group">
@@ -76,8 +77,10 @@ export const StaffSign = () => {
             </div>
           </div>
         </div>
+<div className='d-flex justify-content-end'>
+<button type="submit" className="btns btn-primary up-btn btn-block mt-2">Sign Up</button>
+</div>
 
-        <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
         {error && <p>{error}</p>}
       </form>
     )

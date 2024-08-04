@@ -81,8 +81,10 @@ export const ParentSign = () => {
               </div>
             </div>
           </div>
-  
-          <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+  <div className="d-flex justify-content-end">
+  <button type="submit" className="btns up-btn btn-primary btn-block mt-2  mb-3">Sign Up</button>
+  </div>
+
         </form>
         </div>
     )

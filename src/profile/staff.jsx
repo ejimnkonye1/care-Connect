@@ -99,9 +99,11 @@ return(
         <button className='w-100 sign-in-staff btns'>Sign In</button>
       </div>
       <div className='text-center mt-3'>
-        <p> Dont have Account? <a href='#' className='acct'>Create account</a></p>
+        <p> Dont have Account? <a href='/signup' className='acct'>Create account</a></p>
       </div>
-     
+      <div className='line-container'>
+       <span className='or-line'></span> OR<span className='or-line'></span>
+      </div>
         {error && <p>{error}</p>}
       </form>
       <div className='two-button-container d-flex justify-content-evenly' >
