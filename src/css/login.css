@@ -168,36 +168,7 @@
     color: #94a3b8;
     text-decoration: none;
 }
-@media (max-width:768px) {
-    .background-side{
-        display: none;
-    }
-     .login-side {
-    display: block;
-    width: 100%;
-    background-color: none !important;
-     height: calc(100vh - 40px)
-  }
-   .holder-main {
-    height: auto; /* or you can set a specific height, e.g., 90vh, if needed */
-  }
-    .crec{
-        position: relative;
-        line-height: 4.5rem !important;
-    }
-    .navbar-brand{
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%); /* Centers the brand horizontally */
-        text-align: center;
-       
-    }
-    .shadow-add::before {
-        background-color: none !important;
-    }
- 
- 
-}
+
 
 .holder-main {
   height: 100vh;
@@ -284,9 +255,11 @@
   
   .reset-header{
     height: 2.5rem;
-    margin-top: 2rem;
+    margin-top: 6rem;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    top: 30px;
    
   }
 .center-header{
@@ -330,13 +303,82 @@ top: 20px;
   .reset-shadow::before {
     content: '';
     position: absolute;
-    top: -10px; /* Adjust as needed */
-    left: -10px; /* Adjust as needed */
-    right: -10px; /* Adjust as needed */
-    bottom: -10px; /* Adjust as needed */
+    top: -10px; 
+    left: -10px; 
+    right: -10px; 
+    bottom: -10px; 
     background: linear-gradient(to right, #d9d5d5, #fccb90);
-    border-radius: inherit; /* Match the border radius of the parent */
-    z-index: -1; /* Ensure it is behind the content */
+    border-radius: inherit; 
+    z-index: -1; 
     filter: blur(10px); 
     opacity: 0.7; 
+  }
+  .sm-creach{
+    display: none !important;
+  }
+  @media (max-width: 992px) {
+    .background-side{
+        display: none;
+    }
+    .holder-main{
+        height: 100vh !important;
+        overflow: hidden;
+        overflow-y:hidden !important;
+    }
+    .sm-creach{
+        display: block !important;
+        color: #f6af45 !important;
+    }
+    .sm-creach .navbar-brand{
+        display: block !important;
+        color: #f6af45 !important;
+    }
+    
+    .navbar-brand{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%); /* Centers the brand horizontally */
+        text-align: center;
+       
+    }
+    .shadow-add::before {
+        background-color: none !important;
+        background: linear-gradient(to right,  #878484, #878484);
+    }
+ 
+    .login-side{
+        width: 100%;
+        height: 500px;
+        
+        
+    }
+    .shadow-add {
+        width: 100%;
+        margin: 0px !important;
+        position: relative;
+        top: 5%; 
+        border-radius: 10px;
+        height: 500px;
+        background-color: none !important;
+    }
+    .reset-shadow {
+       
+        width: 100%;
+        border-radius: 10px;
+        background-color: #eee;
+        position: relative;
+        left: 0;
+        top: 20px;
+          }
+          .reset-space{
+            width: 100%;
+          }
+
+          .reset-shadow::before {
+          
+            background: linear-gradient(to right,  #878484, #878484);
+         
+            background-color: none !important;
+          }
+       
   }

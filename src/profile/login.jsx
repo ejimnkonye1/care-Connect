@@ -17,7 +17,13 @@ const togglePasswordvisible = () => {
 }
     return(
             <div className="container-fluid holder-main">
+                       <nav className="navbar crec mt-3 sm-creach">
+  <div className="container-fluid crec">
+    <span className="navbar-brand mb-0 h5">ℭ𝔯𝔢𝔠𝔥𝔢ℭ𝔬𝔫𝔫𝔢𝔠𝔱</span>
+  </div>
+</nav>
         <div className={`row shadow-add ${showParent? 'transition-container ease-in duration-300' : ''}`}>
+          
             <div className="col-6 col-md-8 background-side ">
             <nav className="navbar crec">
   <div className="container-fluid crec">

@@ -3,14 +3,17 @@ import { FaArrowLeft } from "react-icons/fa";
 import '../css/login.css'
 export const ResetPassword = () => {
     return(
-      <div className="container">
+      <div className="container reset-side">
+        
       <div className=" reset-shadow">
             
-    
-            <h3 className="mb-0  text-center  reset-header">ℭ𝔯𝔢𝔠𝔥𝔢ℭ𝔬𝔫𝔫𝔢𝔠𝔱</h3>
+    <div className="mt-5">
+    <h3 className="mb-0  text-center  reset-header">ℭ𝔯𝔢𝔠𝔥𝔢ℭ𝔬𝔫𝔫𝔢𝔠𝔱</h3>
           
+    </div>
+         
        
-              <div className="d-flex flex-column justify-content-center align-items-center py-5 ">
+              <div className="d-flex flex-column justify-content-center align-items-center py-5  ">
        
         <form>
           <div className="mb-1  reset-space">
@@ -26,7 +29,7 @@ export const ResetPassword = () => {
             </div>
           </div>
           <div className="mb-3">
-            <button className="sign-btn btns">Reset Password</button>
+            <button className="sign-btn reset-p btns">Reset Password</button>
           </div>
           <div className="mb-3 text-center back-to-login">
           <FaArrowLeft className="left" />    <a href="/" className="text-decoration-none">Back to login</a>    

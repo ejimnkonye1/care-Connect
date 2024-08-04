@@ -38,6 +38,28 @@ export const LandingPage = () => {
       <span className="navbar-toggler-icon"></span>
     </button>
     <a className="navbar-brand p-2 " href="#">CareConnect</a>
+    <div className="nav lg-nav">
+        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li className="nav-item ">
+            <a className="nav-link land-link" href="#">Home</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link land-link" href="#features">Features</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link land-link" href="#testimonials">Testimonials</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link land-link" href="#pricing">Pricing</a>
+          </li>
+          <li className="nav-item">
+            <button onClick={HandleLogin} className='btns sign-in-nav'>Sign In</button>
+          </li>
+          <li className="nav-item mx-lg-4 mx-sm-0">
+            <button onClick={HandleSignUp} className='btns sign-up-nav'>Sign Up Free</button>
+          </li>
+        </ul>
+      </div>
     <div className="offcanvas offcanvas-start" tabIndex={'-1'} id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title care-5" id="offcanvasNavbarLabel">CareConnect</h5>
