@@ -152,3 +152,39 @@ background-color: #ffb850;
 color: white;
 border-color: #ffb850;
  }
+ @media (max-width: 992px) {
+  .sign-in-nav{
+    margin-bottom: 10px;
+    width: 60%;
+  }
+  .sign-up-nav{
+    width: 60%;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+  }
+  .book-demo-get{
+    text-wrap: nowrap;
+    width: 40%;
+  }
+  .get-started{
+    width: 100%;
+  }
+  .get{
+    width: 100%;
+  }
+  .book-demo-btn{
+    text-wrap: nowrap;
+  }
+  .book-demo-btn-second{
+    text-wrap: nowrap;
+  }
+  .care-5{
+    color: red;
+    position: absolute;
+    left: 20% !important;
+    
+  }
+  .land-link{
+    color: white !important ;
+  }
+ }

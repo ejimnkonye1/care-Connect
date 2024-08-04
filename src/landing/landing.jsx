@@ -31,47 +31,50 @@ export const LandingPage = () => {
         navigate ('/login')
     }
     return (
-        <div className='container-fluid'>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="#">CareConnect</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <div className=''>
+             <nav className="navbar navbar-expand-lg navbar-light bg-light">
+  <div className="container-fluid">
+    <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span className="navbar-toggler-icon"></span>
     </button>
-
-                <div className="collapse navbar-collapse d flex justify-content-end" id="navbarNavDropdown">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item ">
-                            <a className="nav-link" href="#">Home</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#features">Features</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#testimonials">Testimonials</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#pricing">Pricing</a>
-                        </li>
-                        <li className="nav-item ">
-                       <button 
-                       onClick={HandleLogin}
-                       className='btns sign-in-nav'>Sign In</button>
-                        </li>
-                        <li className="nav-item mx-4">
-                       <button
-                       onClick={HandleSignUp}
-                       className='btns  sign-up-nav'>Sign Up Free</button>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    <a className="navbar-brand p-2 " href="#">CareConnect</a>
+    <div className="offcanvas offcanvas-start" tabIndex={'-1'} id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div className="offcanvas-header">
+        <h5 className="offcanvas-title care-5" id="offcanvasNavbarLabel">CareConnect</h5>
+        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div className="offcanvas-body">
+        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li className="nav-item ">
+            <a className="nav-link land-link" href="#">Home</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link land-link" href="#features">Features</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link land-link" href="#testimonials">Testimonials</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link land-link" href="#pricing">Pricing</a>
+          </li>
+          <li className="nav-item">
+            <button onClick={HandleLogin} className='btns sign-in-nav'>Sign In</button>
+          </li>
+          <li className="nav-item mx-lg-4 mx-sm-0">
+            <button onClick={HandleSignUp} className='btns sign-up-nav'>Sign Up Free</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
             <div className="hero container-fluid">
 <div className='row'>
     <div className='col-md-6 py-5 align-items-center flex-column'>
 <div className=''>
 <h1>CareConnect</h1>
                 <p>Connecting Caregivers and Families</p>
-                <p>The KinderPass platform simplifies day-to-day operations for childcare centers,<br /> 
+                <p>The Careconnect platform simplifies day-to-day operations for childcare centers,<br /> 
                 so you can focus on what matters: providing an ideal learning environment that sparks growth,<br/> creativity and happiness in children.
 
 </p>
@@ -79,7 +82,7 @@ export const LandingPage = () => {
 </div>
     </div>
     <div className='col-md-6'>
-<img src={Get}  height={'280px'} />
+<img src={Get}  height={'280px'} className='get' />
     </div>
 
 </div>
@@ -95,7 +98,7 @@ export const LandingPage = () => {
              
 <div className='row'>
       {features.map((feature, index) => (
-        <div className='col-md-4 mb-4' key={index}>
+        <div className=' col-md-4 mb-4' key={index}>
           <div
             className={`feat-border ${active === index? 'clicked' : ''}`}
             onClick={() => handlefeatures(index)}
@@ -111,7 +114,7 @@ export const LandingPage = () => {
             <section id="testimonials" className='mb-4 py-3'>
                 <h2 className='text-center mb-3'>Testimonials</h2>
                 <div className='row'>
-                    <div className='col-md-4'>
+                    <div className=' col-md-4'>
                         <div className='card'>
                             <img src={img1} alt='stories1' />
                             <div className='card-body'>
@@ -125,7 +128,7 @@ export const LandingPage = () => {
                         </div>
                   
                     </div>
-                    <div className='col-md-4'>
+                    <div className='  col-md-4'>
                         <div className='card'>
                             <img src={img2} alt='stories2' />
                         <div className='card-body'>
@@ -162,37 +165,37 @@ export const LandingPage = () => {
             <section id="features" className='mb-4 py-3'>
                 <h5 className='text-center mb-3'>Top features</h5>
              <div className='row'>
-                <div className='col-md-2'>
+                <div className=' col-6 col-md-2'>
                     <div className='card feat-card'>
                         <img src={feat1} className='feat-img' />
                     </div>
                     <p>Childcare admissions and attendance</p>
                 </div>
-                <div className='col-md-2'>
+                <div className=' col-6 col-md-2'>
                     <div className='card  feat-card'>
                         <img src={feat2} className='feat-img' />
                     </div>
                     <p>Parent engagement / communication</p>
                 </div>
-                <div className='col-md-2'>
+                <div className='col-6 col-md-2'>
                     <div className='card  feat-card'>
                         <img src={feat3} className='feat-img'/>
                     </div>
                     <p>Classroom views and live ratios</p>
                 </div>
-                <div className='col-md-2'>
+                <div className='col-6 col-md-2'>
                     <div className='card  feat-card'>
                         <img src={feat4} className='feat-img'/>
                     </div>
                     <p>Analytics and reports</p>
                 </div>
-                <div className='col-md-2'>
+                <div className='col-6 col-md-2'>
                     <div className='card  feat-card'>
                         <img src={feat5} className='feat-img' />
                     </div>
                     <p>Communication filters</p>
                 </div>
-                <div className='col-md-2'>
+                <div className='col-6 col-md-2'>
                     <div className='card  feat-card'>
                         <img src={feat6} className='feat-img'/>
                     </div>
@@ -277,10 +280,10 @@ export const LandingPage = () => {
                 </div>
             </section>
 
-        <section className='mb-3 py-3'>
+        <section className='mb-3 py-lg-3 '>
             <div className='row'>
 
-<div className='col-md-6 py-5 align-items-center flex-column'>
+<div className='col-md-6 py-lg-5 align-items-center flex-column'>
 <h3>Get started with CareConnect</h3>
 <div>
 <p>
