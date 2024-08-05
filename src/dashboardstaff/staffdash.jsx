@@ -1,4 +1,4 @@
-// StaffDashboard.js
+/* eslint-disable no-unused-vars */
 import  { useState, useEffect } from 'react';
 
 import { doc, getDoc } from 'firebase/firestore';
@@ -25,7 +25,7 @@ export const Staffdash = () => {
 
   return (
     <div>
-      <h1>Staff Dashboard</h1>
+      {/* <h1>Staff Dashboard</h1>
       {staffData ? (
         <div>
           <p>Name: {staffData.name}</p>
@@ -33,7 +33,7 @@ export const Staffdash = () => {
         </div>
       ) : (
         <p>Loading...</p>
-      )}
+      )} */}
 
       <StaffActivityUpdates />
     </div>

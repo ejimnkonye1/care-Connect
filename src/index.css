@@ -91,3 +91,6 @@ button.close {
     font-family: "Roboto","Helvetica Neue",Arial,sans-serif !important;
     font-weight: 400;
 }
+.chart{
+  overflow-x: auto;
+}

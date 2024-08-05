@@ -1,23 +1,27 @@
 
 import { useEffect, useState } from 'react';
 import { auth, firestore } from '../firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection,  onSnapshot, query, where } from 'firebase/firestore';
 import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 export const IncidentReporting = () => {
   const [incidentReports, setincidentReports] = useState([])
   const user = auth.currentUser
 
   useEffect(() => {
-const fetchIncidentReports = async () => {
+
   if (user) {
     const incidentReportRef = collection(firestore, 'incidentReport')
     const q = query(incidentReportRef, where('userId', '==', user.uid))
-    const incidentReportSnapshot = await getDocs(q)
-    const incidentReportsData = incidentReportSnapshot.docs.map((doc) => doc.data())
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const incidentReportsData = snapshot.docs.map((doc) => doc.data())
     setincidentReports(incidentReportsData)
+    })
+  
+  return unsubscribe;
   }
-}
-fetchIncidentReports()
+
+
   }, [user])
 
   return (

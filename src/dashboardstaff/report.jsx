@@ -2,6 +2,7 @@
 import { addDoc, collection,  getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "../firebase";
+import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem } from '@mui/material';
 
 
 export const StaffReport = () => {
@@ -73,10 +74,27 @@ fetchUsers();
         }))
     }
   }
+  useEffect(() => {
+    const fetchUpdates = async () => {
+      const incidentReportRef = collection(firestore, 'incidentReport');
+      const indcidentReportSnapshot = await getDocs(incidentReportRef);
+      const incidentReportData = indcidentReportSnapshot.docs.map((doc) => doc.data());
+      setIncidentReports(incidentReportData);
+    };
+
+    fetchUpdates();
+  }, []);
   return (
     <div className="container mt-4">
-      <h1 className="mb-4">Incident Reporting</h1>
-      <form>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="card">
+            <div className="header">
+            <h4 className="title">Incident Reporting</h4>
+                <p className="category"></p>
+              
+              <div className="content">
+              <form>
         <div className="mb-3">
           <label htmlFor="date" className="form-label">Date:</label>
           <input
@@ -124,45 +142,74 @@ fetchUsers();
           Add Incident Report
         </button>
       </form>
-
-<div>
-    <select
-    name="childId"
-    value={newIncidentReport.childId}
-    onChange={handleChildChange}
-    className="mt-4">
-{users.map((user, index) => (
-user.children ?(
-    user.children.map((child, childIndex) => (
-        <option key={`${index}-${childIndex}`} value={child.id}>
-            {child.name}
-        </option>
-
-))
-) :(
-    <option key={index} value='' disabled>
-            No children data available
-        </option>
-)
-))}
-        
-    </select>
-
-</div>
-      <div className="mt-4">
-        <h2>Incident History</h2>
-        <div className="list-group">
-          {incidentReports.map((report, index) => (
-            <div key={index} className="list-group-item">
-              <h5 className="mb-1">Date: {report.date}</h5>
-              <p className="mb-1">Time: {report.time}</p>
-              <p className="mb-1">Location: {report.location}</p>
-              <p className="mb-1">Description: {report.description}</p>
-              <p className="mb-1">Type: {report.type}</p>
+              </div>
             </div>
-          ))}
+          </div>
+        </div>
+        <div className='col-md-6'>
+        <div className='card'>
+          <div className='header'>
+            <h4 className='title'>Select Child</h4>
+          </div>
+          <select
+        name="childId"
+        value={newIncidentReport.childId}
+        onChange={handleChildChange}
+        className='mb-4 mt-1 p-3 m-2'
+      >
+        {users.map((user, index) => (
+          user.children ? (
+            user.children.map((child, childIndex) => (
+              <option key={`${index}-${childIndex}`} value={child.id}>
+                {child.name}
+              </option>
+            ))
+          ) : (
+            <option key={index} value="" disabled>
+              No children data available.
+            </option>
+          )
+        ))}
+      </select>
+
+        </div>
+        <div className='card'>
+          <div className='header'>
+            <h4 className='title'>incident Update History</h4>
+            <p className="category">Today report</p>
+          </div>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell>Time</TableCell>
+                <TableCell>Location</TableCell>
+                <TableCell>Description</TableCell>
+                
+              </TableRow>
+            </TableHead>
+            <TableBody>
+            {incidentReports.filter((incidentReport) => incidentReport.childName === selectedChildName).map((report, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{report.date}</TableCell>
+                    <TableCell>{report.time}</TableCell>
+                    <TableCell>{report.location}</TableCell>
+                    <TableCell>{report.description}</TableCell>
+                    
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
         </div>
       </div>
+      </div>
+      
+  
+
+
+     
+
+      
     </div>
   );
 };

@@ -1,24 +1,26 @@
 
 import { useEffect, useState } from 'react';
 import { auth, firestore } from '../firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection,  query, where, onSnapshot } from 'firebase/firestore';
 import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 export const ParentActivityUpdates = () => {
     const [activityUpdates, setActivityUpdates] = useState([]);
   const user = auth.currentUser
 
   useEffect(() => {
-const fetchActivityUpdates = async () => {
-  if (user) {
-    const activityRef = collection(firestore, 'activities')
-    const q = query(activityRef, where('userId', '==', user.uid))
-    const activitySnapshot = await getDocs(q)
-    const activityData = activitySnapshot.docs.map((doc) => doc.data())
-    setActivityUpdates(activityData)
-  }
-}
-fetchActivityUpdates()
-  }, [user])
+    if (user) {
+      const activityRef = collection(firestore, 'activities');
+      const q = query(activityRef, where('userId', '==', user.uid));
+
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const activityData = snapshot.docs.map((doc) => doc.data());
+        setActivityUpdates(activityData);
+      });
+
+      // Cleanup the subscription on unmount
+      return  unsubscribe;
+    }
+  }, [user]);
 
   return (
   

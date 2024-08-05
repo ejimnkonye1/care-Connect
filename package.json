@@ -15,6 +15,7 @@
     "@mui/material": "^5.16.5",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.3",
     "date-fns": "^3.6.0",
     "firebase": "^10.12.4",
     "framer-motion": "^11.3.8",

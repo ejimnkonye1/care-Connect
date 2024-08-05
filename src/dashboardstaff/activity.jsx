@@ -12,7 +12,7 @@ import {
   TextField,
   
 } from "@mui/material";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase";
 
 export const StaffActivityUpdates = () => {
@@ -78,37 +78,93 @@ export const StaffActivityUpdates = () => {
         }))
     }
   }
-  
+  useEffect(() => {
+    const activityRef = collection(firestore, 'activities');
+    const unsubscribe = onSnapshot(activityRef, (snapshot) => {
+      const activityData = snapshot.docs.map((doc) => doc.data());
+      setActivityUpdates(activityData);
+    });
+
+    // Cleanup the subscription on unmount
+    return unsubscribe;
+  }, []);
   return (
     <div className="container mt-4">
-      <h1 className="mb-4">Staff Activity Updates</h1>
+      
+      
       <form onSubmit={handleActivitySubmit}>
-
-
+<div className="row">
+  <div className="col-md-6">
+  <div className='card'>
+          <div className='header'>
+            <h4 className='title'>Select Child</h4>
+          </div>
           <select
-    name="childId"
-    value={newactivityUpdates.childId}
-    onChange={handleChildChange}
-    className="mt-4">
-{users.map((user, index) => (
-user.children ?(
-    user.children.map((child, childIndex) => (
-        <option key={`${index}-${childIndex}`} value={child.id}>
-            {child.name}
-        </option>
+        name="childId"
+        value={newactivityUpdates.childId}
+        onChange={handleChildChange}
+        className='mb-4 mt-1 p-3 m-2'
+      >
+        {users.map((user, index) => (
+          user.children ? (
+            user.children.map((child, childIndex) => (
+              <option key={`${index}-${childIndex}`} value={child.id}>
+                {child.name}
+              </option>
+            ))
+          ) : (
+            <option key={index} value="" disabled>
+              No children data available.
+            </option>
+          )
+        ))}
+      </select>
 
-))
-) :(
-    <option key={index} value='' disabled>
-            No children data available
-        </option>
-)
-))}
+        </div>
+        <div className="card">
+          <div className="header">
+            <h4 className="title">Activity Updates</h4>
+            <p className="category">up</p>
+          </div>
+          <div className="content">
+ 
+          <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Child Name</TableCell>
+                <TableCell>Activity</TableCell>
+                <TableCell>Time</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {activityUpdates.filter((activityUpdates) => activityUpdates.childName === selectedChildName).map((update, index) => 
+               
+                
+                (
+                  <TableRow key={index}>
+                    <TableCell>{update.childName}</TableCell>
+                    <TableCell>{update.activity}</TableCell>
+                    <TableCell>{update.time}</TableCell>
+                  </TableRow>
+                )
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+          </div>
+        </div>
+  </div>
+
+  <div className="col-md-6">
+    <div className="card">
+      <div className="header">
+        <h4 className="title">Send New Activity Update</h4>
+          <p className="title">Activity</p>
         
-    </select>
-      
-      
-        <TextField
+      </div>
+      <div className="content">
+      <TextField
           label="Time"
           type="time"
           fullWidth
@@ -142,35 +198,18 @@ user.children ?(
         >
           Submit
         </Button>
+      </div>
+    </div>
+  </div>
+</div>
+
+       
+      
+      
+      
       </form>
 
-      <div className="mt-4">
-        <h2>Activity Updates</h2>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Child Name</TableCell>
-                <TableCell>Activity</TableCell>
-                <TableCell>Time</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {activityUpdates.map((update, index) => 
-               
-                
-                (
-                  <TableRow key={index}>
-                    <TableCell></TableCell>
-                    <TableCell>{update.activity}</TableCell>
-                    <TableCell>{update.time}</TableCell>
-                  </TableRow>
-                )
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
+     
     </div>
   );
 };

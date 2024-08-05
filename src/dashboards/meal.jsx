@@ -1,31 +1,32 @@
 import { useState, useEffect } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 
 const MealUpdatesTable = () => {
   const [mealUpdates, setMealUpdates] = useState([]);
   const [childNames, setChildNames] = useState([]);
-  const user = auth.currentUser;
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchMealUpdates = async () => {
-      if (user) {
-        const mealUpdatesRef = collection(firestore, 'mealUpdates');
-        const q = query(mealUpdatesRef, where('userId', '==', user.uid));
-        const mealUpdatesSnapshot = await getDocs(q);
-        const mealUpdatesData = mealUpdatesSnapshot.docs.map((doc) => doc.data());
-        setMealUpdates(mealUpdatesData);
+    setUser(auth.currentUser);
+  }, [auth]);
 
+  useEffect(() => {
+    if (user) {
+      const mealUpdatesRef = collection(firestore, 'mealUpdates');
+      const q = query(mealUpdatesRef, where('userId', '==', user.uid));
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const mealUpdatesData = snapshot.docs.map((doc) => doc.data());
+        setMealUpdates(mealUpdatesData);
         const uniqueChildNames = [...new Set(mealUpdatesData.map(update => update.childName))];
         setChildNames(uniqueChildNames);
-      }
+      });
 
+      return () => unsubscribe();
+    }
+  }, [user, firestore]);
 
-    };
-
-    fetchMealUpdates();
-  }, [user]);
 
   return (
     <div className='row'>
