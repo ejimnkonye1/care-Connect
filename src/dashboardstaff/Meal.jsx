@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem } from '@mui/material';
+import ColorAlerts from '../alert';
 
 export const StaffMealUpdatesTable = () => {
+  const [showToast, setShowToast] = useState(false);
     const [mealUpdates, setMealUpdates] = useState([]);
   const [users, setUsers] = useState([]); // Store all users
   const [selectedChildName, setSelectedChildName] = useState(''); // Store the selected child name
@@ -45,6 +47,12 @@ export const StaffMealUpdatesTable = () => {
       const mealUpdatesRef = collection(firestore, 'mealUpdates');
       await addDoc(mealUpdatesRef, newMealUpdate);
       setMealUpdates((prevUpdates) => [...prevUpdates, newMealUpdate]);
+      setShowToast(true);
+
+      // Hide the toast after a delay (adjust as needed)
+      setTimeout(() => {
+        setShowToast(false);
+      }, 2000);
       setNewMealUpdate({
         date: '',
         mealType: '',
@@ -83,6 +91,12 @@ export const StaffMealUpdatesTable = () => {
   }, [firestore]);
   return (
     <div>
+        {showToast && (
+     <div className="custom-toast">
+      <ColorAlerts />
+
+   </div>
+  )} 
     <h2>Meal Updates</h2>
     <div className='row'>
       <div className='col-md-6'>

@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 
 import {  collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import {  firestore } from '../firebase';
+import ColorAlerts from '../alert';
 
 export const MarkAttendance = () => {
   const [users, setUsers] = useState([]); // Store all users data
   // eslint-disable-next-line no-unused-vars
   const [attendance, setAttendance] = useState({}); // Store attendance data
-
+  const [showToast, setShowToast] = useState(false);
   useEffect(() => {
     const fetchUsers = async () => {
       const usersRef = collection(firestore, 'users');
@@ -29,6 +30,12 @@ export const MarkAttendance = () => {
     });
     console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
     setAttendance((prev) => ({ ...prev, [childName]: status }));
+    setShowToast(true);
+
+    // Hide the toast after a delay (adjust as needed)
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
   };
   return (
 
@@ -36,6 +43,12 @@ export const MarkAttendance = () => {
   
  
 <div className="container mt-4">
+{showToast && (
+     <div className="custom-toast">
+      <ColorAlerts />
+
+   </div>
+  )} 
   <div className='row'>
     <div className='col-md-12'>
       <div className='card'>

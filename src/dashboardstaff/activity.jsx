@@ -14,8 +14,10 @@ import {
 } from "@mui/material";
 import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase";
+import ColorAlerts from "../alert";
 
 export const StaffActivityUpdates = () => {
+  const [showToast, setShowToast] = useState(false);
     const [users, setUser] = useState([])
     const [selectedChildName, setSelectedChildName] = useState('')
     const [selectedUserId, setSelectedUserId] = useState(''); 
@@ -52,13 +54,23 @@ export const StaffActivityUpdates = () => {
     const activityRef = collection(firestore, 'activities')
     await addDoc(activityRef, newactivityUpdates)
     setActivityUpdates((prevUpdates) => [...prevUpdates, newactivityUpdates])
+    setShowToast(true);
+
+    // Hide the toast after a delay (adjust as needed)
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
     setNewActivityUpdates({
         date:'',
         time:'',
         activity:'',
         childName:'',
         userId:'',
+        
     })
+  
+
+    
  } catch (error) {
     console.error("Error sending activity updates", error)
  }
@@ -91,7 +103,12 @@ export const StaffActivityUpdates = () => {
   return (
     <div className="container mt-4">
       
-      
+      {showToast && (
+     <div className="custom-toast">
+      <ColorAlerts />
+
+   </div>
+  )} 
       <form onSubmit={handleActivitySubmit}>
 <div className="row">
   <div className="col-md-6">

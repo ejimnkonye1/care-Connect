@@ -39,7 +39,9 @@ export const Dash = () => {
               <div id="chartAttendance" className="ct-chart ct-perfect-fourth"></div>
               <div className="footer">
                 <div className="legend">
-                <ChildAttendance  setTriggerUpdate={setTriggerUpdate}
+                <ChildAttendance
+                
+                setTriggerUpdate={setTriggerUpdate}
                 
                 />
                 

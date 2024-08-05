@@ -3,9 +3,11 @@ import { addDoc, collection,  getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem } from '@mui/material';
+import ColorAlerts from "../alert";
 
 
 export const StaffReport = () => {
+  const [showToast, setShowToast] = useState(false);
     const [users, setUser] = useState([])
     const [selectedChildName, setSelectedChildName] = useState('')
     const [selectedUserId, setSelectedUserId] = useState(''); 
@@ -47,6 +49,12 @@ fetchUsers();
         const incidentReportRef = collection(firestore, 'incidentReport')
         await addDoc(incidentReportRef, newIncidentReport)
         setIncidentReports((prevUpdates) => [...prevUpdates, newIncidentReport])    
+        setShowToast(true);
+
+        // Hide the toast after a delay (adjust as needed)
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000);
         setNewIncidentReport({
         date: '',
         time: '',
@@ -86,6 +94,12 @@ fetchUsers();
   }, []);
   return (
     <div className="container mt-4">
+         {showToast && (
+     <div className="custom-toast">
+      <ColorAlerts />
+
+   </div>
+  )} 
       <div className="row">
         <div className="col-md-6">
           <div className="card">
