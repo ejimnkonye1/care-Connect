@@ -113,7 +113,8 @@ const EventCalendar = () => {
   return (
     <div>
       <Calendar onChange={setDate} value={date} />
-      <p>Selected date: {date.toDateString()}</p>
+      <p>Selected dates: {date.toDateString()}</p>
+   
     </div>
   );
 };

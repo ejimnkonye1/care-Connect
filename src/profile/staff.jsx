@@ -8,7 +8,7 @@ import {  signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
-export const Staff = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate }) => {
+export const Staff = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate, btnloading, setbtnloading }) => {
     const handleCentre = () => {
         setShowParent(false);
         setShowStaff(false);
@@ -36,12 +36,27 @@ export const Staff = ({ PasswordVisible , togglePasswordvisible, setShowParent, 
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("Staff logged in: ", userCredential.user);
       // Redirect to Staff Dashboard
-      navigate('/staff')
+      setbtnloading(true)
+      setTimeout(() => {
+        setbtnloading(false)
+        navigate('/staff')
+      }, 9000);
+  
     } catch (error) {
-      console.error("Error logging in: ", error);
-      setError("Invalid email or password.");
+      setbtnloading(true)
+      setTimeout(() => {
+        setbtnloading(false)
+        setError("Invalid email or password.")
+        setTimeout(() => {
+          setError(false)
+        }, 5000)
+      }, 2000)
+      console.error("Error logging in: ", error)
+    
     }
   };
+
+  
 return(
     <div className='d-flex flex-column log py-4  '>
     <div>
@@ -51,7 +66,13 @@ return(
         <p className='sec-sub text-center'>
         Please sign in to continue
         </p>
+        {error && (
+    <div className="error-container" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>
+      <span className="text-center text-danger" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>{error}</span>
     </div>
+  )}
+    </div>
+  
     <div className='input-container p-2 py-3'>
       <form  className='py-2' onSubmit={handleLogin}>
       <div className='mb-3 first-container'>
@@ -95,16 +116,28 @@ return(
       <div className='text-end'>
         <a href='/resetstaff' className='forget'>Forgotten Password?</a>
       </div>
-      <div className='mt-3'>
-        <button className='w-100 sign-in-staff btns'>Sign In</button>
+      <div className='mt-2'>
+        <button className='w-100 sign-in-staff btns'>
+          {btnloading ? (
+             <div>
+                 
+             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="false"></span>
+             <span className="pl-3"> Sign In</span>
+          </div>
+          ):(
+            '  Sign In'
+          )}
+        
+          
+          </button>
       </div>
-      <div className='text-center mt-3'>
+      <div className='text-center mt-2'>
         <p> Dont have Account? <a href='/signup' className='acct'>Create account</a></p>
       </div>
       <div className='line-container'>
        <span className='or-line'></span> OR<span className='or-line'></span>
       </div>
-        {error && <p>{error}</p>}
+     
       </form>
       <div className='two-button-container d-flex justify-content-evenly' >
         <div className='parent'>

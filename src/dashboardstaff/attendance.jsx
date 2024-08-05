@@ -88,6 +88,7 @@ export const MarkAttendance = () => {
           ))}
         </tbody>
       </table>
+      
     </div>
   ) : (
     <p>No users data available.</p>

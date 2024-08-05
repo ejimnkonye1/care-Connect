@@ -12,9 +12,19 @@ export const LoginForm = () => {
     const [showParent, setShowParent] = useState()
     const [showStaff, setShowStaff] = useState()
     const [animate, setAnimate] = useState(false)
+    const [btnloading, setbtnLoading] = useState(false);
 const togglePasswordvisible = () => {
     setPasswordVisible(!PasswordVisible)
 }
+  const handlebtnClick = () => {
+    setbtnLoading(true);
+    
+    // Simulate an async operation 
+    setTimeout(() => {
+      setbtnLoading(false);
+      // Add your sign-in logic here
+    }, 9000);
+  };
     return(
             <div className="container-fluid holder-main">
                        <nav className="navbar crec mt-3 sm-creach">
@@ -51,6 +61,8 @@ const togglePasswordvisible = () => {
         setShowParent={setShowParent}
         setShowStaff={setShowStaff}
         setAnimate={setAnimate}
+        btnloading={btnloading}
+        setbtnloading={setbtnLoading}
       />
     ) : showStaff ? (
       <Staff
@@ -59,6 +71,8 @@ const togglePasswordvisible = () => {
         setShowParent={setShowParent}
         setAnimate={setAnimate}
         setShowStaff={setShowStaff}
+        btnloading={btnloading}
+        setbtnloading={setbtnLoading}
       />
     ) : (
       <Centre
@@ -67,6 +81,8 @@ const togglePasswordvisible = () => {
         setShowParent={setShowParent}
         setShowStaff={setShowStaff}
         setAnimate={setAnimate}
+        handlebtnClick={handlebtnClick}
+        btnloading={btnloading}
       />
     )}
   </div>

@@ -42,6 +42,7 @@ export const Dash = () => {
                 <ChildAttendance  setTriggerUpdate={setTriggerUpdate}
                 
                 />
+                
                
                 </div>
                 <hr />
@@ -77,6 +78,7 @@ export const Dash = () => {
             </div>
           </div>
         </div>
+        
         {/* <div className="col-md-8">
           <div className="card">
             <div className="header">

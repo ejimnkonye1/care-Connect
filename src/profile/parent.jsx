@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {  signInWithEmailAndPassword } from 'firebase/auth';
 // eslint-disable-next-line react/prop-types
-export const Parent = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate }) => {
+export const Parent = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate, btnloading ,setbtnloading }) => {
   const handleCentre = () => {
     setShowParent(false);
     setShowStaff(false);
@@ -37,24 +37,41 @@ const navigate = useNavigate()
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User logged in: ", userCredential.user);
       // Redirect to Parent Dashboard
-     navigate('/dash')
+      setbtnloading(true)
+      setTimeout(() => {
+        setbtnloading(false)
+        navigate('/dash')
+      }, 9000);
+    
     } catch (error) {
-      console.error("Error logging in: ", error);
-      setError("Invalid email or password.");
+      setbtnloading(true)
+      setTimeout(() => {
+        setbtnloading(false)
+        setError("Invalid email or password.")
+        setTimeout(() => {
+          setError(false)
+        }, 5000)
+      }, 2000)
+      console.error("Error logging in: ", error)
+    
     }
   };
 
 return(
     <div className='d-flex flex-column log py-4  '>
     <div>
-        <h4 className='text-center login-text'> Parent Login</h4>
+        <h4 className='text-center login-text-par'> Parent Login</h4>
     </div>
     <div>
         <p className='sec-sub text-center'>
         Please sign in to continue
         </p>
     </div>
-    <div className='input-container p-2 py-3'>
+    {error && <div className="">
+      <p className="text-center text-danger">{error}</p>
+      </div>
+      }
+    <div className='input-container p-2 py-3 mb-5'>
       <form  className='py-2 ' onSubmit={handleLogin}>
       <div className='mb-3 first-container'>
         <div className='input-group'>
@@ -98,18 +115,31 @@ return(
         <a  href="/resetpar" className='forget'>Forgotten Password?</a>
         
       </div>
-      <div className='mt-3'>
-        <button className='w-100 sign-in-parent btns'>Sign In</button>
+      <div className='mt-2'>
+        <button className='w-100 sign-in-parent btns'>
+          
+        {btnloading ? (
+             <div>
+                 
+             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="false"></span>
+             <span className="pl-3"> Sign In</span>
+          </div>
+          ):(
+            '  Sign In'
+          )}
+        
+        
+        </button>
       </div>
-      <div className='text-center mt-3'>
+      <div className='text-center mt-2'>
         <p> Dont have Account? <a href='/signup' className='acct'>Create account</a></p>
       </div>
       <div className='line-container'>
        <span className='or-line'></span> OR<span className='or-line'></span>
       </div>
-        {error && <p>{error}</p>}
+      
       </form>
-      <div className='two-button-container d-flex justify-content-evenly' >
+      <div className='two-button-container d-flex justify-content-evenly mb-5' >
         <div className='parent'>
             <button 
             onClick={handleCentre}

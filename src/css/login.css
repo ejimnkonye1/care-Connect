@@ -202,14 +202,19 @@
 
 .background-side{
     background-color: #fccb90;
-     height: calc(100vh - 50px)
+     height: calc(100vh - 50px);
+     border-radius: 10px;
 }
 .login-side{
     background-color: #eee;
-     height: calc(100vh - 50px)
+     height: calc(100vh - 50px);
+     border-radius: 10px;
 }
 .login-text{
     color: #f6af45;
+}
+.login-text-par{
+    color: #15228abf;
 }
 .component-container {
     transition: opacity 0.5s ease-in-out;
