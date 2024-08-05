@@ -40,7 +40,7 @@ const Loader = () => (
     return isLoading ? <Loader /> : children;
   };
 function App() {
-  
+  const [showToast, setShowToast] = useState(false);
 
   return (
     <>
@@ -56,8 +56,8 @@ function App() {
           <Route path='/resetstaff' element={<ResetStaff  />} />
           <Route path='/resetpar' element={<ResetParent  />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/dash' element={<Dashboard  />} />
-          <Route path='/staff' element={<StaffDashboard />} />
+          <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
+          <Route path='/staff' element={<StaffDashboard showToast={showToast} setShowToast={setShowToast} />} />
         </Routes>
       </Router>
       </Layout>

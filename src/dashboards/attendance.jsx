@@ -2,11 +2,12 @@
 import { useState, useEffect } from 'react';
 import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
+import ColorAlerts from '../alert';
 
-export const ChildAttendance = ({ setTriggerUpdate }) => {
+export const ChildAttendance = ({ setTriggerUpdate, }) => {
   const [user, setUser] = useState(null); // Store user data
   const [attendance, setAttendance] = useState([]); // Store attendance data
-
+  const [showToast, setShowToast] = useState(false);
   // Helper function to get today's date in the desired format
   const getTodayDate = () => {
     const today = new Date();
@@ -44,6 +45,12 @@ export const ChildAttendance = ({ setTriggerUpdate }) => {
           );
         });
         setAttendance(userAttendance);
+        setShowToast(true);
+
+        // Hide the toast after a delay (adjust as needed)
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000);
       });
 
       return unsubscribe;
@@ -58,6 +65,12 @@ export const ChildAttendance = ({ setTriggerUpdate }) => {
 
   return (
     <div>
+      {showToast && (
+     <div className="custom-toast">
+      <ColorAlerts />
+
+   </div>
+  )} 
       {attendance.length > 0 ? (
         attendance.map((attendance, index) => (
           <div key={index}>

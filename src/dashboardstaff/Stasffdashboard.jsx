@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import '../css/light.css'
 import 'animate.css';
@@ -12,7 +13,7 @@ import { StaffMealUpdatesTable } from './Meal';
 import { StaffReport } from './report';
 
 
-export const StaffDashboard = () => {
+export const StaffDashboard = ({showToast, setShowToast}) => {
   const [currenpage, setcurrentpage] = useState('dashboard')
 
   const handlechange = (page) => {
@@ -247,7 +248,7 @@ export const StaffDashboard = () => {
     <div className="content">
       {currenpage === 'dashboard' &&     <Staffdash/>}
       {currenpage === 'user' && <Staffpro />}
-      {currenpage === 'report' && <MarkAttendance />}
+      {currenpage === 'report' && <MarkAttendance showToast={showToast} setShowToast={setShowToast} />}
       {/* {currenpage === 'report' && <Attendance />}
       {currenpage === 'notification' && <NotificationSystem />}
       {currenpage === 'fees' && <FeesList />} */}

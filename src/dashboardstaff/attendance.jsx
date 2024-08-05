@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 
 import {  collection, getDocs, setDoc, doc } from 'firebase/firestore';
@@ -46,6 +47,7 @@ export const MarkAttendance = () => {
 {showToast && (
      <div className="custom-toast">
       <ColorAlerts />
+      f
 
    </div>
   )} 

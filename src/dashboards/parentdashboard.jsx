@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import '../css/light.css'
 import 'animate.css';
@@ -14,7 +15,7 @@ import { Medical } from './medical';
 import MealUpdatesTable from './meal';
 
 
-export const Dashboard = () => {
+export const Dashboard = ({showToast, setShowToast}) => {
   const [currenpage, setcurrentpage] = useState('dashboard')
 
   const handlechange = (page) => {
@@ -247,7 +248,7 @@ export const Dashboard = () => {
   </div>
 </nav>
     <div className="content">
-      {currenpage === 'dashboard' && <Dash />}
+      {currenpage === 'dashboard' && <Dash showToast={showToast} setShowToast={setShowToast} />}
       {currenpage === 'user' && <Profilenn />}
       {currenpage === 'report' && <Medical />}
       {currenpage === 'notification' && <NotificationSystem />}
