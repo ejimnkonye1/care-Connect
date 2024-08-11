@@ -257,13 +257,13 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
         </div>
 
 
-        <footer className="footer last-footer">
+        {/* <footer className="footer last-footer">
             <div className="container-fluid ">
                 <p className=" text-center">
                     &copy; <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                 </p>
             </div>
-        </footer>
+        </footer> */}
 </div>
   
 </div>

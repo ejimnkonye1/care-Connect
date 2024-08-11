@@ -1,5 +1,6 @@
 import  { useState } from 'react';
 
+
 const FeesList = () => {
   const [fees, setFees] = useState([
     { name: 'Enrollment Fee', amount: 100, status: 'Unpaid' },
@@ -8,7 +9,7 @@ const FeesList = () => {
     { name: 'Activity Fee (Jan)', amount: 200, status: 'Unpaid' },
     { name: 'Late Pick-up Fee (Jan 10)', amount: 20, status: 'Unpaid' },
   ]);
-
+ 
   const handlePay = (index) => {
     const newFees = [...fees];
     newFees[index].status = 'Paid';
@@ -16,8 +17,11 @@ const FeesList = () => {
   };
 
   return (
+    
     <div className='card'>
-  <table className="fees-list">
+
+         
+         <table className="fees-list">
 
 <thead>
   <tr>
@@ -44,6 +48,9 @@ const FeesList = () => {
   ))}
 </tbody>
 </table>
+   
+      
+
     </div>
   
   );

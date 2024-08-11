@@ -1,13 +1,17 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import ColorAlerts from '../alert';
-
+import { useSelector } from 'react-redux';
+import { dark } from '@mui/material/styles/createPalette';
 export const ChildAttendance = ({ setTriggerUpdate, }) => {
   const [user, setUser] = useState(null); // Store user data
   const [attendance, setAttendance] = useState([]); // Store attendance data
   const [showToast, setShowToast] = useState(false);
+
+  const darkmode = useSelector((state)=> state.darkMode)
   // Helper function to get today's date in the desired format
   const getTodayDate = () => {
     const today = new Date();
@@ -62,10 +66,11 @@ export const ChildAttendance = ({ setTriggerUpdate, }) => {
       setTriggerUpdate(true);
     }
   }, [attendance]);
+  const btntrue = useSelector((state) => state.btnclick)
 
   return (
     <div>
-      {showToast && (
+      {btntrue && (
      <div className="custom-toast">
       <ColorAlerts />
 
@@ -86,13 +91,13 @@ export const ChildAttendance = ({ setTriggerUpdate, }) => {
                   <i className="fa fa-circle text-danger"></i> Absent
                 </span>
               ) : (
-                <span>No attendance data available.</span>
+                <span className={darkmode? 'card-color':''}>No attendance data available.</span>
               )}
             </p>
           </div>
         ))
       ) : (
-        <p>No attendance data available.</p>
+        <p className={darkmode? 'card-color':''}>No attendance data available.</p>
       )}
     </div>
   );

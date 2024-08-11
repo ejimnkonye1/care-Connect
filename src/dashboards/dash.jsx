@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import  { useState,  } from 'react';
 import LastUpdated from '../lastupdate';
 import { ChildAttendance } from './attendance';
@@ -5,8 +6,10 @@ import { useEffect,} from 'react';
 import { auth, firestore } from '../firebase';
 import { collection,  query, where, onSnapshot } from 'firebase/firestore';
 import { Attendancechart } from './charts';
+import { useSelector } from 'react-redux';
+import ColorAlerts from '../alert';
 
-export const Dash = () => {
+export const Dash = ({showToast,setShowToast}) => {
   const [triggerUpdate,setTriggerUpdate ] = useState(false);
 
   const [activityUpdates, setActivityUpdates] = useState([]);
@@ -26,13 +29,25 @@ export const Dash = () => {
       return  unsubscribe;
     }
   }, [user]);
+  const btn = useSelector((state) => state.btnclick)
+  const darkmode = useSelector((state)=> state.darkMode)
+ 
+
+
+
   return (
     <div className="container-fluid">
+      {btn && (
+         <div className="custom-toast">
+         <ColorAlerts />
+   
+      </div>
+      )}
       <div className="row">
         <div className="col-md-4">
-          <div className="card">
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
             <div className="header">
-              <h4 className="title">Child Attendance</h4>
+              <h4 className={`title ${darkmode? 'card-color':''}`}>Child Attendance</h4>
               <p className="category">Today s Attendance</p>
             </div>
             <div className="content">
@@ -40,14 +55,14 @@ export const Dash = () => {
               <div className="footer">
                 <div className="legend">
                 <ChildAttendance
-                
+                showToast={showToast} setShowToast={setShowToast}
                 setTriggerUpdate={setTriggerUpdate}
                 
                 />
                 
                
                 </div>
-                <hr />
+                <hr className='hr' />
                 <div className="stats">
                 <LastUpdated triggerUpdate={triggerUpdate} />
                 </div>
@@ -56,9 +71,9 @@ export const Dash = () => {
           </div>
         </div>
         <div className="col-md-8">
-          <div className="card">
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
             <div className="header">
-              <h4 className="title">Attendance Chart</h4>
+              <h4 className={`title ${darkmode? "card-color":''}`}>Attendance Chart</h4>
               <p className="category">Weekly Attendance</p>
             </div>
             <div className="content ">
@@ -71,7 +86,7 @@ export const Dash = () => {
                 </div>
                 </div>
                 </div>
-                <hr />
+                <hr className='hr' />
                 <div className="stats">
                 <LastUpdated triggerUpdate={triggerUpdate} />
                 </div>
@@ -107,9 +122,9 @@ export const Dash = () => {
 
       <div className="row">
         <div className="col-md-6">
-          <div className="card">
+          <div className={`card ${darkmode ? 'card-mode':''}`}>
             <div className="header">
-              <h4 className="title">Daily Activities</h4>
+              <h4 className={`title ${darkmode? 'card-color':''}`}>Daily Activities</h4>
               <p className="category">Events and Activities</p>
             </div>
             <div className="content">
@@ -121,7 +136,7 @@ export const Dash = () => {
               </ul>
                   ))}
               <div className="footer">
-                <hr />
+                <hr className='hr' />
                 <div className="stats">
                   <i className="fa fa-clock-o"></i> Updated just now
                 </div>
@@ -131,9 +146,9 @@ export const Dash = () => {
         </div>
 
         <div className="col-md-6">
-          <div className="card">
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
             <div className="header">
-              <h4 className="title">Staff Communication</h4>
+              <h4 className={`title ${darkmode? 'card-color':''}`}>Staff Communication</h4>
               <p className="category">Messages from Staff</p>
             </div>
             <div className="content">
@@ -143,7 +158,7 @@ export const Dash = () => {
                 <li className="communication-item btn-info">Message from Jane Smith: Come and pick up Jack at 3 PM.</li>
               </ul>
               <div className="footer">
-                <hr />
+                <hr className='hr' />
                 <div className="stats">
                   <i className="fa fa-history"></i> Updated just now
                 </div>

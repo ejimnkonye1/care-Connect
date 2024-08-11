@@ -9,6 +9,8 @@ import { LandingPage } from './landing/landing'
 import { Dashboard } from './dashboards/parentdashboard'
 import { StaffDashboard } from './dashboardstaff/Stasffdashboard'
 import {  SignUp } from './profile/SignUp'
+import { Provider } from 'react-redux'
+import store from './store'
 
 
 const Loader = () => (
@@ -44,6 +46,9 @@ function App() {
 
   return (
     <>
+    <Provider store={store} >
+
+ 
      <Layout>
 
    
@@ -61,6 +66,7 @@ function App() {
         </Routes>
       </Router>
       </Layout>
+      </Provider>
     </>
   )
 }

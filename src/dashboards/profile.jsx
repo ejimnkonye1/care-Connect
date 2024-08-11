@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import {  doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, firestore } from '../firebase'
@@ -5,7 +6,7 @@ import img from '../images/face-3.jpg'
 import { IoCalendarNumber } from "react-icons/io5";
 import { LiaGenderlessSolid } from "react-icons/lia";
 import { FaUserAstronaut } from "react-icons/fa";
-
+import img1 from '../assets/child2.jpeg'
 export const Profilenn = () => {
   const [userData, setUserData] = useState(null);
 
@@ -232,34 +233,35 @@ export const Profilenn = () => {
   <div className="card card-user">
     <div className="image">
       <img
-        src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+        src={img1}
         alt="Profile background"
         className="img-fluid"
       />
     </div>
     <div className="content">
       <div className="author">
-        <img className="avatar border-gray img-fluid rounded-circle" src={img} alt="User Avatar" />
-        <h4 className="title mt-3">{userData?.children[0].name ?? ''}</h4>
+        <img className="avatar border-gray img-fluid rounded-circle" src={img1} alt="User Avatar" />
+        {/* <h4 className="title mt-3">{userData?.children[0].name ?? ''}</h4> */}
       </div>
-      <div className="mt-4">
-        <p className="text-muted mb-2">
-        <IoCalendarNumber />
-          AGE: <strong>{userData?.age}</strong>
-        </p>
-        <p className="text-muted mb-2">
-        <LiaGenderlessSolid />
-          Gender: <strong>{userData?.gender}</strong>
-        </p>
-        <p className="text-muted">
-        <FaUserAstronaut />
-
-          Parent Name: <strong>{userData?.lastName}</strong>
-        </p>
-      </div>
+      <div className="mt-4 namess">
+      <p className="text-muted">
+        <FaUserAstronaut style={{ fontSize: 18, marginRight: 10 }} />
+        Child Name: <strong>{userData?.children[0].name ?? ''}</strong>
+      </p>
+      <p className="text-muted mb-2">
+        <IoCalendarNumber style={{ fontSize: 18, marginRight: 10 }} />
+        AGE: <strong>{userData?.age}</strong>
+      </p>
+      <p className="text-muted mb-2">
+        <LiaGenderlessSolid style={{ fontSize: 18, marginRight: 10 }} />
+        Gender: <strong>{userData?.gender}</strong>
+      </p>
+   
     </div>
-    <hr />
-    <div className="text-center">
+
+    </div>
+    {/* <hr /> */}
+    {/* <div className="text-center">
       <button className="btn btn-simple btn-facebook me-2">
         <i className="fa fa-facebook-square"></i>
       </button>
@@ -269,7 +271,7 @@ export const Profilenn = () => {
       <button className="btn btn-simple btn-google">
         <i className="fa fa-google-plus-square"></i>
       </button>
-    </div>
+    </div> */}
   </div>
 </div>
 

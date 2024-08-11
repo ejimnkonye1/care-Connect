@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react';
 import {  collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import {  firestore } from '../firebase';
 import ColorAlerts from '../alert';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setBtn, setMark } from '../action';
 export const MarkAttendance = () => {
   const [users, setUsers] = useState([]); // Store all users data
   // eslint-disable-next-line no-unused-vars
   const [attendance, setAttendance] = useState({}); // Store attendance data
   const [showToast, setShowToast] = useState(false);
+  
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchUsers = async () => {
       const usersRef = collection(firestore, 'users');
@@ -29,22 +32,42 @@ export const MarkAttendance = () => {
       date,
       userId: users // pass users here
     });
+   dispatch(setMark(!true))
     console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
     setAttendance((prev) => ({ ...prev, [childName]: status }));
     setShowToast(true);
-
+    
     // Hide the toast after a delay (adjust as needed)
     setTimeout(() => {
       setShowToast(false);
     }, 2000);
+
+    
+   
   };
+  const handlebtn = () => {
+    dispatch(setMark(true), () => {
+      console.log('Action dispatched successfully!');
+    });
+    alert('done')
+  }
+  const btntrue = useSelector((state) => state.btnclick)
+  const handleButtonClick = () => {
+    dispatch(setMark(true));
+};
+
   return (
 
 
   
  
 <div className="container mt-4">
-{showToast && (
+<div>
+            <h1>Staff Dashboard</h1>
+            <button onClick={handleButtonClick}>Set Mark</button>
+        </div>
+
+{btntrue && (
      <div className="custom-toast">
       <ColorAlerts />
       f
@@ -92,6 +115,7 @@ export const MarkAttendance = () => {
                     >
                       Mark Absent
                     </button>
+                  <button onClick={handlebtn}>Cick</button>
                   </td>
                 </tr>
               ))
@@ -110,6 +134,7 @@ export const MarkAttendance = () => {
   )}
         </div>
       </div>
+      
     </div>
 
   </div>
