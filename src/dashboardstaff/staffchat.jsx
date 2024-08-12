@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { collection, addDoc, Timestamp, onSnapshot, query, where, getDocs } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
-
+import aud from '../audio/mixkit.wav';
 const StaffChat = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -12,7 +12,7 @@ const StaffChat = () => {
   const [lastMessageTimestamp, setLastMessageTimestamp] = useState(null);
 
   const staffId = auth.currentUser?.uid;
-  const audioRef = useRef(new Audio('/path/to/notification.mp3')); // Adjust path to your audio file
+  const audioRef = useRef(new Audio(aud)); // Adjust path to your audio file
 
   // Fetch parents from Firestore
   useEffect(() => {
