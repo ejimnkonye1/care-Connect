@@ -7,7 +7,8 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { Dash } from './dash';
 import { Profilenn } from './profile';
-import NotificationSystem from './noti';
+
+import MessagingSystem from './mes';
 import FeesList from './fee';
 
 import EventCalendar from './eventcal';
@@ -122,10 +123,22 @@ export const Dashboard = ({showToast, setShowToast}) => {
 <div className="main-panel  ">
 <nav className={`navbar navbar-expand-lg navbar-light  border-bottom ${darkmode? 'dark-mode':'bg-white'}`}>
   <div className="container-fluid">
-    <a className={`navbar-brand  ${darkmode? "color-mode": ''}`} href="#" >Dashboard</a>
-    <button className="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-    <span className="navbar-toggler-icon"></span>
-  </button>
+  <div className={`navbar-toggler ${darkmode? 'navbar-toggler-color':''}`} type="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span className="navbar-toggler-icon "></span>
+    </div>
+    <a className={`navbar-brand  ${darkmode? "color-mode": ''}`} href="#" >CareConnect</a>
+  
+    <div className='switch ms-auto d-lg-none'>
+  <ul className='nav navbar-nav me-auto mb-2 mb-lg-0'>
+    <li className="nav-item">
+      <a className={`nav-link ${darkmode ? 'color-mode' : ''}`} href="#" onClick={toggledark}>
+        <span className="icon-circle">
+          {darkmode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>
 <div className="offcanvas offcanvas-end"  tabIndex={'-1'} id="offcanvasNavbar"
  aria-labelledby="offcanvasNavbarLabel" data-bs-scroll="true">
     <div className="offcanvas-header text-center border-bottom">
@@ -135,35 +148,73 @@ export const Dashboard = ({showToast, setShowToast}) => {
       {/* <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> */}
     </div>
     <div className="offcanvas-body">
-  <ul className="nav flex-column">
-  <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
+    <ul className="nav flex-column">
+    <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
     <span  className='nav-link' onClick={() => handlechange('dashboard')}>
             <AiOutlineDashboard className='icon' />
             <span>Dashboard</span>
           </span>
     </li>
-    <li className="nav-item dropdown hidden-lgp hidden-md" >
-      <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i className="fa fa-globe hidden-lgp hidden-md icon"></i> Notification
-      </a>
-      <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a className="dropdown-item" href="#">Notification 1</a></li>
-        <li><a className="dropdown-item" href="#">Notification 2</a></li>
-        <li><a className="dropdown-item" href="#">Notification 3</a></li>
-        <li><a className="dropdown-item" href="#">Notification 4</a></li>
-        <li><a className="dropdown-item" href="#">Another notification</a></li>
-      </ul>
+       <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
+
+    <span  className='nav-link' onClick={() => handlechange('user')}>
+            <HiOutlineUserCircle className='icon' />
+            <span>User Profile</span>
+          </span>
     </li>
-    {/* <li className="nav-item">
-      <a className="nav-link" href="#">
-        <i className="fa fa-search"></i>
+    <li className={`nav-item ${currenpage === 'report' && 'active'}`}>
+
+    <span  className='nav-link' onClick={() => handlechange('report')}>
+       
+        <LuActivitySquare className='icon' />
+        <span>Reports</span>
+        </span>
+      
+    </li>
+    <li className={`nav-item ${currenpage === 'event' && 'active'}`}>
+
+    <span className='nav-link' onClick={() => handlechange('event')}>
+       
+        <TbTimelineEventMinus className='icon' />
+        <span>Events</span>
+        </span>
+    </li>
+    <li className={`nav-item ${currenpage === 'meal' && 'active'}`}>
+
+    <span className='nav-link' onClick={() => handlechange('meal')}>
+     
+        <MdNoMeals  className='icon'/>
+
+        <span>Meals Updates</span>
+        </span>
+    </li>
+    <li className={`nav-item ${currenpage === 'fees' && 'active'}`}>
+
+    <span className='nav-link' onClick={() => handlechange('fees')}>
+        
+        <FaMoneyCheckAlt className='icon' />
+        <span>Fees</span>
+        </span>
+    </li>
+    <li className={`nav-item ${currenpage === 'nofiication' && 'active'}`}>
+
+    <span className='nav-link' onClick={() => handlechange('notification')}>
+       
+        <IoChatbubbles className='icon'/>
+        <span>Notifications</span>
+        </span>
+    </li>
+    <li className="nav-item active-pro mt-5">
+      <a className="nav-link" {...() => onclick(alert('coming soon'))}>
+        <AiOutlineDashboard className='icon' />
+        <span>Upgrade to PRO</span>
       </a>
-    </li> */}
+    </li>
   </ul>
   <div className='top'>
 
   </div>
-  <div className="sm-sidebar ">
+  {/* <div className="sm-sidebar ">
     <div className="sm-sidebar-wrapper ">
     <ul className="nav flex-column">
     <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
@@ -223,7 +274,7 @@ export const Dashboard = ({showToast, setShowToast}) => {
     </li>
   </ul>
     </div>
-  </div>
+  </div> */}
 </div>
   </div>
 
@@ -231,7 +282,9 @@ export const Dashboard = ({showToast, setShowToast}) => {
       <ul className='nav navbar-nav me-auto mb-2 mb-lg-0 '>
       <li className="nav-item">
   <a className={`nav-link ${darkmode ? 'color-mode': ''}`} href="#" onClick={toggledark}>
-    {darkmode ?  <MdOutlineLightMode /> : <MdOutlineDarkMode /> }
+  <span className="icon-circle">
+          {darkmode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
+        </span>
   </a>
 </li>
       </ul>
@@ -252,7 +305,7 @@ export const Dashboard = ({showToast, setShowToast}) => {
       {currenpage === 'dashboard' && <Dash showToast={showToast} setShowToast={setShowToast} />}
       {currenpage === 'user' && <Profilenn />}
       {currenpage === 'report' && <Medical />}
-      {currenpage === 'notification' && <NotificationSystem />}
+      {currenpage === 'notification' && <MessagingSystem />}
       {currenpage === 'fees' && <FeesList />}
       {currenpage === 'meal' && <MealUpdatesTable />}
       {currenpage === 'event' && <EventCalendar/>}

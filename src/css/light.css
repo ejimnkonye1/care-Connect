@@ -68,8 +68,8 @@ button.close {
     font-weight: 200;
     background-size: cover;
     background-position: center center;
-    /* background-color: purple;
-    background-image: linear-gradient(to bottom, purple, rgba(244, 31, 244, 0.8)), url('../images/sidebar-5.jpg'); */
+    /* background-color: purple;*/
+    background-image: linear-gradient(to bottom, rgb(31, 30, 31), rgba(24, 24, 24, 0.8)), url('../images/sidebar-5.jpg'); 
     background-blend-mode: multiply;
     background-color: #787878;
 }
@@ -544,3 +544,23 @@ background-color: red !important;
     color: white !important;
     transition: 0.3s ease-in-out;
 }
+.navbar-toggler-color{
+    background-color: #989494 !important; 
+    transition: 0.3s ease-in-out;
+    color: white !important;
+}
+.icon-circle {
+    display: inline-block;
+    width: 34px; /* adjust the size to your liking */
+    height: 34px;
+    border-radius: 50%;
+    background-color: #a5a3a3; /* or any other background color you prefer */
+    padding: 4px; /* adjust the padding to center the icon */
+    text-align: center;
+  }
+  
+  .icon-circle svg {
+    width: 16px; /* adjust the size to your liking */
+    height: 16px;
+    fill: #333; /* or any other fill color you prefer */
+  }

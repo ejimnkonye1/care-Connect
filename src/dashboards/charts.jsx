@@ -4,11 +4,12 @@ import { auth, firestore } from '../firebase';
 import { subDays, formatISO, format } from 'date-fns';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, } from 'recharts';
 import { Box, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 export const Attendancechart = () => {
   const [user, setUser] = useState(null); // Store user data
   const [attendance, setAttendance] = useState([]); // Store attendance data
-
+  const darkmode = useSelector((state)=> state.darkMode)
   // Helper function to get the last 7 days in YYYY-MM-DD format
   const getLast7Days = () => {
     const today = new Date();
@@ -106,7 +107,7 @@ export const Attendancechart = () => {
       </BarChart>
  
   ) : (
-    <Typography>No attendance data available.</Typography>
+    <Typography  className={darkmode? 'card-color':''}>No attendance data available.</Typography>
   )}
 </Box>
   );

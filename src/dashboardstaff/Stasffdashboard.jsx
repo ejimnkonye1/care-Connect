@@ -11,6 +11,7 @@ import { Staffpro } from './staffpro';
 import { MarkAttendance } from './attendance';
 import { StaffMealUpdatesTable } from './Meal';
 import { StaffReport } from './report';
+import StaffChat from './staffchat';
 
 
 export const StaffDashboard = ({showToast, setShowToast}) => {
@@ -249,9 +250,9 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
       {currenpage === 'dashboard' &&     <Staffdash/>}
       {currenpage === 'user' && <Staffpro />}
       {currenpage === 'report' && <MarkAttendance showToast={showToast} setShowToast={setShowToast} />}
-      {/* {currenpage === 'report' && <Attendance />}
-      {currenpage === 'notification' && <NotificationSystem />}
-      {currenpage === 'fees' && <FeesList />} */}
+      
+      {currenpage === 'notification' && <StaffChat />}
+      {/* {currenpage === 'fees' && <FeesList />}  */}
       {currenpage === 'meal' && <StaffMealUpdatesTable/>}
       {currenpage === 'event' && <StaffReport />}
         </div>
