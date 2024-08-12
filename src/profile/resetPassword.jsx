@@ -7,10 +7,7 @@ export const ResetPassword = () => {
         
       <div className=" reset-shadow">
             
-    <div className="mt-5">
-    <h3 className="mb-0  text-center  reset-header">ℭ𝔯𝔢𝔠𝔥𝔢ℭ𝔬𝔫𝔫𝔢𝔠𝔱</h3>
-          
-    </div>
+  
          
        
               <div className="d-flex flex-column justify-content-center align-items-center py-5  ">

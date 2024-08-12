@@ -9,7 +9,8 @@ export const SignUp = () => {
       setRole(event.target.value); // update role state when user selects a new option
     };
     return(
-      <div className="container py-lg-5 sign">
+      <div className="container " style={{backgroundColor:'', height:'100vh'}}>
+        <div className="py-lg-5 sign">
       <div className="row justify-content-center">
         <div className="outer-container ">
           <div className="col-md-6 signup-container ">
@@ -37,6 +38,7 @@ export const SignUp = () => {
 
           </div>
         </div>
+      </div>
       </div>
     </div>
     

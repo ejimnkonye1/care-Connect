@@ -7,8 +7,6 @@ export const ResetStaff = () => {
       <div className=" reset-shadow">
             
     
-            <h3 className="mb-0  text-center  reset-header">ℭ𝔯𝔢𝔠𝔥𝔢ℭ𝔬𝔫𝔫𝔢𝔠𝔱</h3>
-          
        
               <div className="d-flex flex-column justify-content-center align-items-center py-5 ">
        

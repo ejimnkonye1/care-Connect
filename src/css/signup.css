@@ -1,53 +1,59 @@
 .outer-container {
-    width: 100%;
-    padding: 0 20px; /* Add padding to the outer container */
-    box-sizing: border-box; /* Ensure padding is included in width */
-  }
+  width: 100%;
+  padding: 0 20px; /* Add padding to the outer container */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.signup-container {
+  position: relative;
+  padding: 20px;
   
-  .signup-container {
-    position: relative;
-    padding: 20px;
-    background-color: #eee;
-    border-radius: 10px;
-    overflow: hidden; /* Ensures the gradient doesn't overflow */
-    margin: 0 auto; /* Center the container horizontally */
+  border-radius: 10px;
+  overflow: hidden; /* Ensures the gradient doesn't overflow */
+  margin: 0 auto; /* Center the container horizontally */
+  /* Add box shadow */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: #fff; 
+}
+
+.sign {
+  position: relative; /* Ensure relative positioning for pseudo-element */
+  height: 100vh;
+  overflow: hidden; /* Ensure no overflow */
+}
+
+.sign::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: none; /* Remove the linear gradient */
+  z-index: -1; /* Ensure it is behind the content */
+  filter: blur(10px);
+  opacity: 0.7;
+}
+
+.btn-primary {
+  border-color: #1DC7EA;
+  color: #fff;
+  background-color: #1DC7EA;
+}
+
+.up-btn {
+  width: 30%;
+}
+
+@media (max-width: 992px) {
+  .up-btn {
+      text-wrap: nowrap;
   }
-  
-  .sign {
-    height: auto;
-  }
-  
-  .sign::before {
-    content: '';
-    position: absolute;
-    top: -10px; /* Adjust as needed */
-    left: -10px; /* Adjust as needed */
-    right: -10px; /* Adjust as needed */
-    bottom: -10px; /* Adjust as needed */
-    background: linear-gradient(to right, #d9d5d5, #fccb90);
-    border-radius: inherit; /* Match the border radius of the parent */
-    z-index: -1; /* Ensure it is behind the content */
-    filter: blur(10px);
-    opacity: 0.7;
-  }
-  .btn-primary {
-    border-color: #1DC7EA;
-    color: #fff;
-    background-color: #1DC7EA;
-  }
-  .up-btn{
-    width: 30%;
-  }
-  
-  @media (max-width: 992px) {
-    .up-btn{
-        text-wrap: nowrap;
-    }
-    .outer-container {
+  .outer-container {
       padding: 0 10px; /* Adjust padding for small screens */
-    }
-  
-    .signup-container {
+  }
+
+  .signup-container {
       padding: 20px !important;
       width: 100%;
       margin: 10px auto; /* Center the container */
@@ -56,21 +62,16 @@
       top: 40px;
       margin-bottom: 10px !important;
       border-radius: 10px; /* Ensure border radius is applied */
-    }
-  
-    .sign {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      background: #fff; 
+  }
+
+  .sign {
       overflow-y: auto !important; /* Ensures vertical scrolling */
-      max-height: 99vh; /* Limits the maximum height to the viewport height */
-    }
-  
-    .sign::before {
-      top: -20px; /* Increase the offset */
-      left: -20px; /* Increase the offset */
-      right: -20px; /* Increase the offset */
-      bottom: -20px; /* Increase the offset */
+      max-height: 100vh; /* Limits the maximum height to the viewport height */
+  }
+
+  .sign::before {
       filter: blur(15px); /* Increase the blur if needed */
-      height: 900px; /* Adjust the height */
-      background: linear-gradient(to right, #d9d5d5, #fccb90);
-    }
-   
+  }
 }

@@ -1,15 +1,106 @@
-/* styles.css */
 .hero {
-height: 100vh;
-    padding: 2rem;
-    text-align: center;
-    background-color: #ff69b4;
-    width: 100%;
-  }
-  
+  height: 100vh;
+  padding: 2rem;
+  text-align: center;
+  background-image: url('../assets/kid.webp');
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center; /* Centers the image */
+  width: 100%;
+  background-repeat: no-repeat; /* Prevents image repetition */
+  color: #fff; /* Ensures text is readable against the background */
+}
+
+.hero h1 {
+  font-size: 3rem; /* Adjust size as needed */
+  margin-bottom: 1rem; /* Space below the heading */
+}
+
+.hero p {
+  font-size: 1.25rem; /* Adjust size as needed */
+  margin-bottom: 1.5rem; /* Space below paragraphs */
+}
+
+.hero .btn {
+  background-color: #1DC7EA; /* Button color */
+  border: none; /* Remove border */
+  color: #fff; /* Text color */
+  padding: 0.75rem 1.5rem; /* Adjust padding for button */
+  font-size: 1rem; /* Adjust font size */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth color transition on hover */
+}
+
+.hero .btn:hover {
+  background-color: #17a2b8; /* Darker color on hover */
+}
+
+/*   
   .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+  } */
+  .child{
+    background-color: #f9f9f9; 
+  }
+  /* a .care{
+    color:  #fff;
+  } */
+  .care {
+    color:#ffb850
+  }
+  
+  .connect {
+    color: #17a2b8;
+  }
+  .nav-bg{
+    background: #8a7a7a;
+    color: #fff;
+
+  }
+  .land-link{
+    color: #fff !important;
+  }
+  .feat {
+    /* Light background color for the section */
+    padding: 3rem 1rem; /* Adjust padding for top and bottom */
+  }
+  
+  .feat h5 {
+    font-size: 1.75rem; /* Adjust font size for heading */
+    color: #333; /* Darker color for better readability */
+  }
+  
+  .feature-card {
+    background-color: #ffffff; /* White background for cards */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    padding: 1.5rem; /* Padding inside the card */
+    text-align: center; /* Center text inside the card */
+    cursor: pointer; /* Pointer cursor for interactive elements */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition effects */
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  }
+  
+  .feature-card.active {
+    border: 2px solid #1DC7EA; /* Highlight border for active card */
+  }
+  
+  .feature-icon {
+    margin-bottom: 1rem; /* Space between icon and text */
+  }
+  
+  .icon-img {
+    width: 50px; /* Adjust icon size */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .feature-description {
+    color: #666; /* Lighter color for description */
+    font-size: 0.9rem; /* Slightly smaller font size for description */
   }
   
   .features {
@@ -32,6 +123,52 @@ height: 100vh;
     margin-bottom: 1rem;
   }
   
+  #testimonials {
+    background-color: #f9f9f9; /* Light background for the section */
+    padding: 3rem 0; /* Adjust padding for top and bottom */
+  }
+  
+  #testimonials h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem; /* Space below heading */
+  }
+  
+  .testimonial-card {
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Ensures content does not overflow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for card */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .testimonial-card:hover {
+    transform: translateY(-10px); /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  }
+  
+  .testimonial-card img {
+    width: 100%; /* Ensures the image covers the card width */
+    height: auto; /* Maintains aspect ratio */
+  }
+  
+  .testimonial-body {
+    padding: 1.5rem; /* Padding inside the card body */
+  }
+  
+  blockquote {
+    font-style: italic; /* Italicize the blockquote text */
+    border-left: 4px solid #1DC7EA; /* Add a border on the left */
+    padding-left: 1rem; /* Padding for the blockquote */
+    margin: 0; /* Remove default margins */
+  }
+  
+  cite {
+    display: block; /* Block display for the citation */
+    text-align: right; /* Right-align the citation text */
+    color: #555; /* Slightly darker color for the citation */
+    font-weight: bold; /* Bold text for the citation */
+  }
+  
   .testimonials {
     padding: 2rem;
   }
@@ -48,10 +185,49 @@ height: 100vh;
     justify-content: center;
   }
   
-  .pricing .col-md-4 {
+  .pricing-card {
+    position: relative;
     margin: 2rem;
-    padding: 1rem
+    padding: 1rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+  
+  .pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .pricing-header {
+    padding: 1.5rem 1rem;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .pricing-top-features {
+    padding: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .tick-list {
+    list-style: none;
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .tick-list li:before {
+    content: '√';
+    margin-right: 10px;
+    color: #2ecc71;
+    font-weight: bold;
+  }
+  
+  .cancel-list li:last-child::before {
+    content: 'X';
+    color: red;
+  }
+  
   .coming-soon-badge {
     position: absolute;
     top: 60px;
@@ -65,24 +241,7 @@ height: 100vh;
     transform: rotate(-45deg);
     transform-origin: top left;
   }
-  .tick-list {
-    list-style: none;
-    padding: 0;
-    margin-left: 20px;
-    margin-top: 10px;
-   
-  }
   
-  .tick-list li:before {
-    content: '√';
-    margin-right: 10px;
-    color: #2ecc71; /* green color for the tick */
-  }
-
-  .cancel-list li:last-child::before {
-    content: 'X';
-    color: red;
-  }
  .book-demo-btn{
     border-radius: 10px;
     background-color:#94a3b8 ;
@@ -90,6 +249,7 @@ height: 100vh;
     border-color: #94a3b8;
     padding-left: 30px;
     width: 50%;
+    font-size: small;
  }
  .book-demo-btn-second{
     border-radius: 10px;
@@ -98,6 +258,7 @@ height: 100vh;
     border-color: #ffb850;
     padding-left: 30px;
     width: 50%;
+    font-size: small;
  }
  .book-demo-sign{
     border-radius: 10px;
@@ -106,16 +267,13 @@ height: 100vh;
     border-color: #007bff;
     padding-left: 30px;
     width: 50%;
+    font-size: small;
  }
  .card-height{
     border-radius: 10px;
     
  }
- .feat-border{
-    border: 1px solid #007bff;
-    color: rgb(84, 56, 56);
-    
- }
+ 
   /* .active{
     color: white;
     background-color: #007bff !important;
@@ -138,10 +296,7 @@ height: 100vh;
     width: 30%;
     height: 50px;
  }
- .feat-img{
-    padding: 20px;
-    height: 200px;
- }
+
  .sign-up-nav{
   background-color: #007bff;
   color: white;
@@ -191,3 +346,72 @@ border-color: #ffb850;
     display: none !important;
   }
  }
+ #features {
+  background-color: #f8f9fa; /* Light background color */
+  padding: 2rem 0;
+}
+
+#features h5 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #343a40;
+  margin-bottom: 2rem;
+}
+
+.feat-card {
+  border: none;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.feat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.feat-img {
+  max-width: 80px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.feat-text {
+  font-size: 0.9rem;
+  color: #495057;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .feat-card {
+    padding: 1.5rem;
+  }
+
+  .feat-img {
+    max-width: 100px;
+  }
+
+  .feat-text {
+    font-size: 1rem;
+  }
+}
+
+#testimonials h2 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #343a40;
+  margin-bottom: 2rem;
+}
+.feat h5 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #343a40;
+  margin-bottom: 2rem;
+}
+#pricing h2 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #343a40;
+  margin-bottom: 2rem;
+}

@@ -258,15 +258,7 @@
 
   /*reset centre password*/
   
-  .reset-header{
-    height: 2.5rem;
-    margin-top: 6rem;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    top: 30px;
-   
-  }
+ 
 .center-header{
     font-size: 1.5rem;
     line-height: 2rem;
@@ -301,7 +293,7 @@ border-radius: 10px;
 background-color: #eee;
 position: relative;
 left: 34%;
-top: 20px;
+top: 50px;
   }
   
   /* Create the pseudo-element for the gradient effect */
@@ -387,3 +379,51 @@ top: 20px;
           }
        
   }
+   /* login.css  new*/
+
+/* General Styles for .component-container */
+.component-container {
+    background: #fff; /* Background color for the login card */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: shadow for the card */
+    max-width: 500px; /* Set a max-width for the login card */
+    width: 100%;
+    padding: 20px;
+    min-height: 70vh; /* Ensures the container has enough height */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Flexbox to Center .component-container Vertically and Horizontally */
+.holder-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    padding: 20px; /* Padding around the container */
+}
+
+/* Wrapper to Ensure Component Container is Centered */
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto; /* Adjust height based on content */
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 992px) {
+    .component-container {
+        min-height: 80vh; /* Adjust the min-height for smaller screens */
+        width: 100%;
+    }
+    
+    .holder-main {
+        height: auto; /* Adjust height for smaller screens if needed */
+    }
+}
+
+/* Optional: Additional Styling for Component Container */
+.component-container.animate {
+    animation: fadeIn 0.5s ease-in-out;
+}

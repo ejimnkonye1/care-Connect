@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import {  collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import {  firestore } from '../firebase';
 import ColorAlerts from '../alert';
-import { useDispatch, useSelector } from 'react-redux';
-import { setBtn, setMark } from '../action';
+import { useDispatch} from 'react-redux';
+import {  setMark } from '../action';
 export const MarkAttendance = () => {
   const [users, setUsers] = useState([]); // Store all users data
   // eslint-disable-next-line no-unused-vars
@@ -45,16 +45,6 @@ export const MarkAttendance = () => {
     
    
   };
-  const handlebtn = () => {
-    dispatch(setMark(true), () => {
-      console.log('Action dispatched successfully!');
-    });
-    alert('done')
-  }
-  const btntrue = useSelector((state) => state.btnclick)
-  const handleButtonClick = () => {
-    dispatch(setMark(true));
-};
 
   return (
 
@@ -64,10 +54,10 @@ export const MarkAttendance = () => {
 <div className="container mt-4">
 <div>
             <h1>Staff Dashboard</h1>
-            <button onClick={handleButtonClick}>Set Mark</button>
+
         </div>
 
-{btntrue && (
+{showToast && (
      <div className="custom-toast">
       <ColorAlerts />
       f
@@ -115,7 +105,7 @@ export const MarkAttendance = () => {
                     >
                       Mark Absent
                     </button>
-                  <button onClick={handlebtn}>Cick</button>
+                 
                   </td>
                 </tr>
               ))

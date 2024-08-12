@@ -67,11 +67,12 @@ return(
         Please sign in to continue
         </p>
     </div>
-    {error && <div className="">
-      <p className="text-center text-danger">{error}</p>
-      </div>
-      }
-    <div className='input-container p-2 py-3 mb-5'>
+    {error && (
+    <div className="error-container" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>
+      <span className="text-center text-danger" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>{error}</span>
+    </div>
+  )}
+    <div className='input-container p-2 py-3 '>
       <form  className='py-2 ' onSubmit={handleLogin}>
       <div className='mb-3 first-container'>
         <div className='input-group'>
@@ -139,7 +140,7 @@ return(
       </div>
       
       </form>
-      <div className='two-button-container d-flex justify-content-evenly mb-5' >
+      <div className='two-button-container d-flex justify-content-evenly ' >
         <div className='parent'>
             <button 
             onClick={handleCentre}
