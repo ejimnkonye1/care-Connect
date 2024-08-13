@@ -1,3 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+.to-color{
+  background-color: white !important;
+  border-color: white !important;
+}
+button .to-color{
+  background: white !important;
+}
 .hero {
   height: 100vh;
   padding: 2rem;
@@ -8,6 +22,7 @@
   width: 100%;
   background-repeat: no-repeat; /* Prevents image repetition */
   color: #fff; /* Ensures text is readable against the background */
+  margin-top: 50px !important;
 }
 
 .hero h1 {
@@ -21,26 +36,35 @@
 }
 
 .hero .btn {
-  background-color: #1DC7EA; /* Button color */
+  background-image: linear-gradient(to bottom,  #ffb850,  #17a2b8);
   border: none; /* Remove border */
   color: #fff; /* Text color */
   padding: 0.75rem 1.5rem; /* Adjust padding for button */
   font-size: 1rem; /* Adjust font size */
   border-radius: 5px; /* Rounded corners */
   transition: background-color 0.3s; /* Smooth color transition on hover */
+  
 }
 
 .hero .btn:hover {
   background-color: #17a2b8; /* Darker color on hover */
 }
+.navbar {
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 
+}
 /*   
   .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
   } */
   .child{
-    background-color: #f9f9f9; 
+    /* background-color: #f9f9f9;  */
+    background-color: rgb(10 25 47);
+    overflow: hidden;
   }
   /* a .care{
     color:  #fff;
@@ -53,7 +77,8 @@
     color: #17a2b8;
   }
   .nav-bg{
-    background: #8a7a7a;
+    /* background: #8a7a7a; */
+    background-color: rgb(10 25 47);
     color: #fff;
 
   }
@@ -71,9 +96,10 @@
   }
   
   .feature-card {
-    background-color: #ffffff; /* White background for cards */
+    
     border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+ 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     padding: 1.5rem; /* Padding inside the card */
     text-align: center; /* Center text inside the card */
     cursor: pointer; /* Pointer cursor for interactive elements */
@@ -84,7 +110,9 @@
     transform: translateY(-5px); /* Lift effect on hover */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
   }
-  
+  #features p{
+    color:  white;
+  }
   .feature-card.active {
     border: 2px solid #1DC7EA; /* Highlight border for active card */
   }
@@ -124,7 +152,7 @@
   }
   
   #testimonials {
-    background-color: #f9f9f9; /* Light background for the section */
+    
     padding: 3rem 0; /* Adjust padding for top and bottom */
   }
   
@@ -189,7 +217,8 @@
     position: relative;
     margin: 2rem;
     padding: 1rem;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
@@ -203,12 +232,14 @@
     padding: 1.5rem 1rem;
     border-radius: 10px 10px 0 0;
   }
-  
+  .pricing-card ul li{
+    color: white;
+  }
   .pricing-top-features {
     padding: 0.5rem;
     font-weight: bold;
   }
-  
+
   .tick-list {
     list-style: none;
     padding: 0;
@@ -232,7 +263,8 @@
     position: absolute;
     top: 60px;
     left: 4px;
-    background-color: #ff69b4;
+    /* background-color: #ff69b4; */
+    background-color: #1DC7EA;
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;
@@ -274,6 +306,14 @@
     
  }
  
+ .land-link {
+  transition: color 0.3s ease-in-out !important;
+}
+
+.land-link:hover {
+  color: #007bff !important; /* change the color to your desired hover color */
+  text-decoration: none;
+}
   /* .active{
     color: white;
     background-color: #007bff !important;
@@ -334,7 +374,7 @@ border-color: #ffb850;
     text-wrap: nowrap;
   }
   .care-5{
-    color: red;
+    color: white;
     position: absolute;
     left: 20% !important;
     
@@ -347,7 +387,7 @@ border-color: #ffb850;
   }
  }
  #features {
-  background-color: #f8f9fa; /* Light background color */
+ 
   padding: 2rem 0;
 }
 
@@ -360,7 +400,8 @@ border-color: #ffb850;
 
 .feat-card {
   border: none;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(4, 12, 22, 0.1), 0 1px 2px rgba(4, 12, 22, 0.06);
+  /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 1rem;
   border-radius: 10px;

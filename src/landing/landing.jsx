@@ -39,7 +39,7 @@ export const LandingPage = () => {
         <div className='child'>
              <nav className="navbar navbar-expand-lg navbar-light  nav-bg">
   <div className="container-fluid">
-    <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+    <button className="navbar-toggler to-color" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span className="navbar-toggler-icon"></span>
     </button>
     <a className="navbar-brand p-2" href="#">
@@ -123,7 +123,7 @@ export const LandingPage = () => {
           
 
   <section className='py-5 mb-3 feat'>
-  <h5 className='text-center mb-4'>CareConnect is packed with all the features you need</h5>
+  <h5 className='text-center mb-4 text-white'>CareConnect is packed with all the features you need</h5>
   <div className='row'>
     {features.map((feature, index) => (
       <div className='col-md-4 mb-4' key={index}>
@@ -134,8 +134,8 @@ export const LandingPage = () => {
           <div className='feature-icon'>
    
           </div>
-          <p className='text-center mt-3'>{feature.name}</p>
-          <p className='text-center mt-1 feature-description'>{feature.description}</p>
+          <p className='text-center mt-3 text-white'>{feature.name}</p>
+          <p className='text-center mt-1 feature-description text-white'>{feature.description}</p>
         </div>
       </div>
     ))}
@@ -145,7 +145,7 @@ export const LandingPage = () => {
 
 
 <section id="testimonials" className='mb-4 py-3'>
-    <h2 className='text-center mb-3'>Testimonials</h2>
+    <h2 className='text-center mb-3 text-white'>Testimonials</h2>
     <div className='row'>
         <div className='col-md-4'>
             <div className='testimonial-card card'>
@@ -187,7 +187,7 @@ export const LandingPage = () => {
 
 
             <section id="features" className='mb-4 py-3'>
-                <h5 className='text-center mb-3'>Top features</h5>
+                <h5 className='text-center mb-3 text-white'>Top features</h5>
              <div className='row'>
                 <div className=' col-6 col-md-2'>
                     <div className='card feat-card'>
@@ -233,7 +233,7 @@ export const LandingPage = () => {
 
 
             <section id="pricing" className="mb-3 py-3">
-  <h2 className="text-center mb-3">Pricing</h2>
+  <h2 className="text-center mb-3 text-white">Pricing</h2>
   <div className="row">
     <div className="col-md-4 mb-3">
       <div className="pricing-card card-height">
@@ -324,7 +324,7 @@ connects everyone so you can spend less time on
             </div>
         </section> */}
 <footer className="footer">
-  <div className="container text-center">
+  <div className="container text-center text-white">
     <p>&copy; 2024 CareConnect. All rights reserved.</p>
   </div>
 </footer>    
