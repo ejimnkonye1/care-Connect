@@ -49,7 +49,7 @@ button .to-color{
 .hero .btn:hover {
   background-color: #17a2b8; /* Darker color on hover */
 }
-.navbar {
+.nav-bg {
   position: fixed !important;
   top: 0;
   width: 100%;

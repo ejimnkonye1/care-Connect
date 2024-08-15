@@ -7,6 +7,7 @@ import { IoCalendarNumber } from "react-icons/io5";
 import { LiaGenderlessSolid } from "react-icons/lia";
 import { FaUserAstronaut } from "react-icons/fa";
 import img1 from '../assets/child2.jpeg'
+import { useSelector } from "react-redux";
 export const Profilenn = () => {
   const [userData, setUserData] = useState(null);
 
@@ -84,14 +85,15 @@ export const Profilenn = () => {
 
    fetchUserData();
  }, [auth, firestore]);
+ const darkmode = useSelector((state)=> state.darkMode)
     return(
     
             <div className="container-fluid">
               <div className="row">
               <div className="col-md-8">
-      <div className="card">
+      <div className={`card ${darkmode ? 'card-mode': ''}`}>
         <div className="header">
-          <h4 className="title">Edit Profile</h4>
+          <h4 className={`title ${darkmode? 'card-color':''}`}>Edit Profile</h4>
         </div>
         <div className="content">
           <form onSubmit={handleSubmit}>
@@ -221,7 +223,7 @@ export const Profilenn = () => {
                 </div>
               </div>
             </div>
-            <button type="submit" className="btn mt-3 btn-info btn-fill pull-right">
+            <button type="submit" className="btn mt-3 btn-dark btn-fill pull-right">
               Update Profile
             </button>
             <div className="clearfix"></div>
@@ -230,7 +232,7 @@ export const Profilenn = () => {
       </div>
     </div>
     <div className="col-md-4">
-  <div className="card card-user">
+  <div className={`card card-user ${darkmode? 'card-mode':''}`}>
     <div className="image">
       <img
         src={img1}
@@ -245,16 +247,17 @@ export const Profilenn = () => {
       </div>
       <div className="mt-4 namess">
       <p className="text-muted">
-        <FaUserAstronaut style={{ fontSize: 18, marginRight: 10 }} />
-        Child Name: <strong>{userData?.children[0].name ?? ''}</strong>
+        <FaUserAstronaut className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />
+        <label>Child Name: </label> <strong className={`${darkmode ? 'card-color':''}`}>{userData?.children[0].name ?? ''}</strong>
       </p>
       <p className="text-muted mb-2">
-        <IoCalendarNumber style={{ fontSize: 18, marginRight: 10 }} />
-        AGE: <strong>{userData?.age}</strong>
+        <IoCalendarNumber className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />
+      <label>AGE: </label><strong className={`${darkmode ? 'card-color':''}`}>{userData?.age}</strong>
       </p>
       <p className="text-muted mb-2">
-        <LiaGenderlessSolid style={{ fontSize: 18, marginRight: 10 }} />
-        Gender: <strong>{userData?.gender}</strong>
+        <LiaGenderlessSolid className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />
+        <label>Gender:</label>  <strong className={`${darkmode ? 'card-color':''}`}>{userData?.gender}</strong>
+        
       </p>
    
     </div>

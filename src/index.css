@@ -81,3 +81,34 @@ small {
   background-color: #fff;
   border-top: 1px solid #ddd;
 }
+.wrapper, .billie {
+  min-height: 100vh;
+
+  
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.wrapper, .billie {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  overflow-x: hidden;
+}
+.wrapper{
+  
+}
+.content{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main-panel{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

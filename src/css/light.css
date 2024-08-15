@@ -23,8 +23,8 @@ button.close {
 .wrapper {
     position: relative;
     top: 0;
-   /* min-height:  100vh; */
-   height: 100vh;
+   min-height:  100vh;
+   /* height: 100vh; */
    overflow-y: none;
    overflow: hidden;
 }
@@ -461,11 +461,23 @@ button.close {
     z-index: 1;
  
 }
-
+.wrapper {
+    margin: 0;
+    padding: 0;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  .main-panel{
+    margin: 0;
+    padding: 0;
+  }
   .wrapper .main-panel .billie{
     /* height: 100vh !important; */
-     height: 85vh ;
+     /* height: 85vh ; */
+     height: auto;
     overflow-y: auto;
+    overflow: hidden  !important;
   }
   .wrapper{
  
@@ -564,3 +576,4 @@ background-color: red !important;
     height: 16px;
     fill: #333; /* or any other fill color you prefer */
   }
+  

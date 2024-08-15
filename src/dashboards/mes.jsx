@@ -3,6 +3,7 @@ import { TextField, Button, MenuItem, Select, InputLabel, FormControl } from '@m
 import { collection, addDoc, Timestamp, onSnapshot, query, where, getDocs } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import aud from '../audio/mixkit.wav';
+import { useSelector } from 'react-redux';
 
 const MessagingSystem = () => {
   const [message, setMessage] = useState('');
@@ -85,7 +86,7 @@ const MessagingSystem = () => {
   };
 
   let lastDate = null;
-
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
     <div className='row'>
       <div className='col-md-2'>
@@ -97,7 +98,9 @@ const MessagingSystem = () => {
             label="Select Staff"
           >
             {staffList.map((staff) => (
-              <MenuItem key={staff.id} value={staff.id}>
+              <MenuItem key={staff.id} value={staff.id}
+               className={`${darkmode ? 'card-color':''}`}
+              >
                 {staff.name} ({staff.email})
               </MenuItem>
             ))}
@@ -105,7 +108,7 @@ const MessagingSystem = () => {
         </FormControl>
       </div>
       <div className='col-md-10'>
-        <div className='chat-container'>
+        <div className={`chat-container ${darkmode ? 'card-mode':''}`}>
           <div className='chat-header'>
             <h6>Chat with Staff</h6>
           </div>
@@ -117,7 +120,7 @@ const MessagingSystem = () => {
                 lastDate = messageDate;
                 return (
                   <div key={index}>
-                    {showDate && <div className='date-divider'>{messageDate}</div>}
+                    {showDate && <div className={`date-divider ${darkmode? 'card-color':''}`}>{messageDate}</div>}
                     <li
                       className={`message-item ${
                         msg.senderId === parentId ? 'sent' : 'received'
@@ -131,9 +134,10 @@ const MessagingSystem = () => {
               })}
             </ul>
           </div>
-          <div className='chat-input'>
+          <div className={`chat-input ${darkmode ? 'card-mode':''}`}>
             <TextField
               label='Type your message...'
+              className={`${darkmode? 'card-color':''}`}
               fullWidth
               value={message}
               onChange={(e) => setMessage(e.target.value)}

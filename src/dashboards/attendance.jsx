@@ -10,7 +10,7 @@ export const ChildAttendance = ({ setTriggerUpdate, }) => {
   const [user, setUser] = useState(null); // Store user data
   const [attendance, setAttendance] = useState([]); // Store attendance data
   const [showToast, setShowToast] = useState(false);
-
+  const alertmode = useSelector((state) => state.alertMode)
   const darkmode = useSelector((state)=> state.darkMode)
   // Helper function to get today's date in the desired format
   const getTodayDate = () => {
@@ -67,10 +67,10 @@ export const ChildAttendance = ({ setTriggerUpdate, }) => {
     }
   }, [attendance]);
   const btntrue = useSelector((state) => state.btnclick)
-
+console.log(alertmode, "alert")
   return (
     <div>
-      {btntrue && (
+      {alertmode && (
      <div className="custom-toast">
       <ColorAlerts />
 
@@ -79,9 +79,9 @@ export const ChildAttendance = ({ setTriggerUpdate, }) => {
       {attendance.length > 0 ? (
         attendance.map((attendance, index) => (
           <div key={index}>
-            <p>Child: {attendance.childName}</p>
-            <p>Date: {attendance.date}</p>
-            <p>Status: 
+            <p className={`${darkmode?'card-color':''}`}>Child: {attendance.childName}</p>
+            <p className={`${darkmode?'card-color':''}`} >Date: {attendance.date}</p>
+            <p className={`${darkmode?'card-color':''}`}>Status: 
               {attendance.status === 'present' ? (
                 <span>
                   <i className="fa fa-circle text-info"></i> Present

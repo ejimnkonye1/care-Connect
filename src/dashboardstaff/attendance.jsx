@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import {  collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import {  firestore } from '../firebase';
 import ColorAlerts from '../alert';
-import { useDispatch} from 'react-redux';
-import {  setMark } from '../action';
+import { useDispatch, useSelector} from 'react-redux';
+import {  setAlert, setMark } from '../action';
 export const MarkAttendance = () => {
   const [users, setUsers] = useState([]); // Store all users data
   // eslint-disable-next-line no-unused-vars
@@ -13,6 +13,7 @@ export const MarkAttendance = () => {
   const [showToast, setShowToast] = useState(false);
   
   const dispatch = useDispatch();
+  const alertmode = useSelector((state) => state.alertMode)
   useEffect(() => {
     const fetchUsers = async () => {
       const usersRef = collection(firestore, 'users');
@@ -33,6 +34,7 @@ export const MarkAttendance = () => {
       userId: users // pass users here
     });
    dispatch(setMark(!true))
+   dispatch(setAlert(!alertmode))
     console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
     setAttendance((prev) => ({ ...prev, [childName]: status }));
     setShowToast(true);

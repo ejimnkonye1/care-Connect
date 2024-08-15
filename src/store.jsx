@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 const initialState =  {
     darkMode: false,
+    alertMode : false,
     
 }
 const reducer = ( state = initialState, action) => {
@@ -9,6 +10,11 @@ switch (action.type) {
               return {
             ...state,
             darkMode: action.payload
+        }
+        case "SET_ALERT":
+            return {
+            ...state,
+            alertMode: action.payload
         }
     default:
         return state;
