@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { collection, addDoc, Timestamp, onSnapshot, query, where, getDocs } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
+import { useSelector } from 'react-redux';
 
 const StaffChat = () => {
   const [message, setMessage] = useState('');
@@ -93,9 +94,9 @@ const StaffChat = () => {
   };
 
   let lastDate = null;
-
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
-    <div className='chat-container'>
+    <div className={`chat-container ${darkmode ? 'card-mode':''}`}>
       <div className='chat-header'>
         <h6>Staff Dashboard - Chat with Parents</h6>
         <FormControl fullWidth>
@@ -122,7 +123,7 @@ const StaffChat = () => {
             lastDate = messageDate;
             return (
               <div key={index}>
-                {showDate && <div className='date-divider'>{messageDate}</div>}
+                    {showDate && <div className={`date-divider ${darkmode? 'card-color':''}`}>{messageDate}</div>}
                 <li
                   className={`message-item ${
                     msg.senderId === staffId ? 'sent' : 'received'
@@ -136,9 +137,10 @@ const StaffChat = () => {
           })}
         </ul>
       </div>
-      <div className='chat-input'>
+      <div className={`chat-input ${darkmode ? 'card-mode card-color':''}`}>
         <TextField
           label='Type your message...'
+          className={`${darkmode? 'card-color':''}`}
           fullWidth
           value={message}
           onChange={(e) => setMessage(e.target.value)}

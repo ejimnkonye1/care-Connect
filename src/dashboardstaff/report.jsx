@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem } from '@mui/material';
 import ColorAlerts from "../alert";
+import { useSelector } from "react-redux";
 
 
 export const StaffReport = () => {
@@ -92,6 +93,7 @@ fetchUsers();
 
     fetchUpdates();
   }, []);
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
     <div className="container mt-4">
          {showToast && (
@@ -102,9 +104,9 @@ fetchUsers();
   )} 
       <div className="row">
         <div className="col-md-6">
-          <div className="card">
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
             <div className="header">
-            <h4 className="title">Incident Reporting</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`}  >Incident Reporting</h4>
                 <p className="category"></p>
               
               <div className="content">
@@ -114,7 +116,7 @@ fetchUsers();
           <input
             type="date"
             id="date"
-            className="form-control"
+            className={`form-control ${darkmode? 'card-mode card-color':''}`}
             value={newIncidentReport.date}
             onChange={(e) => setNewIncidentReport({ ...newIncidentReport, date: e.target.value })}
           />
@@ -124,7 +126,7 @@ fetchUsers();
           <input
             type="time"
             id="time"
-            className="form-control"
+            className={`form-control ${darkmode? 'card-mode card-color':''}`}
             value={newIncidentReport.time}
             onChange={(e) => setNewIncidentReport({ ...newIncidentReport, time: e.target.value })}
           />
@@ -134,7 +136,7 @@ fetchUsers();
           <input
             type="text"
             id="location"
-            className="form-control"
+            className={`form-control ${darkmode? 'card-mode card-color':''}`}
             value={newIncidentReport.location}
             onChange={(e) => setNewIncidentReport({ ...newIncidentReport, location: e.target.value })}
           />
@@ -143,17 +145,17 @@ fetchUsers();
           <label htmlFor="description" className="form-label">Description:</label>
           <textarea
             id="description"
-            className="form-control"
+            className={`form-control ${darkmode? 'card-mode card-color':''}`}
             rows="4"
             value={newIncidentReport.description}
             onChange={(e) => setNewIncidentReport({ ...newIncidentReport, description: e.target.value })}
           />
         </div>
         <button
-          className="btn btn-primary"
+          className="btn btn-dark"
           onClick={handleAddIncidentReport}
         >
-          Add Incident Report
+          Add Report
         </button>
       </form>
               </div>
@@ -161,15 +163,15 @@ fetchUsers();
           </div>
         </div>
         <div className='col-md-6'>
-        <div className='card'>
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className='header'>
-            <h4 className='title'>Select Child</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`} >Select Child</h4>
           </div>
           <select
         name="childId"
         value={newIncidentReport.childId}
         onChange={handleChildChange}
-        className='mb-4 mt-1 p-3 m-2'
+        className={`mb-4 mt-1 p-3 m-2 ${darkmode? 'card-mode':''}`}
       >
         {users.map((user, index) => (
           user.children ? (
@@ -187,28 +189,28 @@ fetchUsers();
       </select>
 
         </div>
-        <div className='card'>
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className='header'>
-            <h4 className='title'>incident Update History</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`} >incident Update History</h4>
             <p className="category">Today report</p>
           </div>
-          <Table>
+          <Table className="mb-4">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Time</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Description</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Date</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Time</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Location</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Description</TableCell>
                 
               </TableRow>
             </TableHead>
             <TableBody>
             {incidentReports.filter((incidentReport) => incidentReport.childName === selectedChildName).map((report, index) => (
                   <TableRow key={index}>
-                    <TableCell>{report.date}</TableCell>
-                    <TableCell>{report.time}</TableCell>
-                    <TableCell>{report.location}</TableCell>
-                    <TableCell>{report.description}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{report.date}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{report.time}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{report.location}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{report.description}</TableCell>
                     
                   </TableRow>
                 ))}

@@ -15,6 +15,7 @@ import {
 import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase";
 import ColorAlerts from "../alert";
+import { useSelector } from "react-redux";
 
 export const StaffActivityUpdates = () => {
   const [showToast, setShowToast] = useState(false);
@@ -100,6 +101,8 @@ export const StaffActivityUpdates = () => {
     // Cleanup the subscription on unmount
     return unsubscribe;
   }, []);
+
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
     <div className="container mt-4">
       
@@ -112,15 +115,15 @@ export const StaffActivityUpdates = () => {
       <form onSubmit={handleActivitySubmit}>
 <div className="row">
   <div className="col-md-6">
-  <div className='card'>
+  <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className='header'>
-            <h4 className='title'>Select Child</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`}>Select Child</h4>
           </div>
           <select
         name="childId"
         value={newactivityUpdates.childId}
         onChange={handleChildChange}
-        className='mb-4 mt-1 p-3 m-2'
+        className={`mb-4 mt-1 p-3 m-2 ${darkmode ? 'card-mode':''}`}
       >
         {users.map((user, index) => (
           user.children ? (
@@ -138,20 +141,20 @@ export const StaffActivityUpdates = () => {
       </select>
 
         </div>
-        <div className="card">
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className="header">
-            <h4 className="title">Activity Updates</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`}>Activity Updates</h4>
             <p className="category">up</p>
           </div>
           <div className="content">
  
-          <TableContainer component={Paper}>
+          <TableContainer className={`${darkmode? 'card-mode':''}`} component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Child Name</TableCell>
-                <TableCell>Activity</TableCell>
-                <TableCell>Time</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Child Name</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Activity</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Time</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -174,10 +177,10 @@ export const StaffActivityUpdates = () => {
   </div>
 
   <div className="col-md-6">
-    <div className="card">
+  <div className={`card ${darkmode ? 'card-mode':''}`}>
       <div className="header">
-        <h4 className="title">Send New Activity Update</h4>
-          <p className="title">Activity</p>
+        <h4 className= {`title ${darkmode? 'card-color':''}`}>Send New Activity Update</h4>
+          <p className={`title ${darkmode? 'card-color':''}`} >Activity</p>
         
       </div>
       <div className="content">

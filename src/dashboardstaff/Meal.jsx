@@ -4,6 +4,7 @@ import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem } from '@mui/material';
 import ColorAlerts from '../alert';
+import { useSelector } from 'react-redux';
 
 export const StaffMealUpdatesTable = () => {
   const [showToast, setShowToast] = useState(false);
@@ -89,6 +90,8 @@ export const StaffMealUpdatesTable = () => {
 
     fetchMealUpdates();
   }, [firestore]);
+  const darkmode = useSelector((state)=> state.darkMode)
+ 
   return (
     <div>
         {showToast && (
@@ -100,28 +103,28 @@ export const StaffMealUpdatesTable = () => {
     <h2>Meal Updates</h2>
     <div className='row'>
       <div className='col-md-6'>
-        <div className='card'>
+      <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className='header'>
-            <h4 className='title'>Meal Update History</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`}>Meal Update History</h4>
             <p className="category">Today meal</p>
           </div>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Meal Type</TableCell>
-                <TableCell>Food</TableCell>
-                <TableCell>Quantity</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Date</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Meal Type</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Food</TableCell>
+                <TableCell className={`${darkmode ? 'card-color':''}`}>Quantity</TableCell>
                 
               </TableRow>
             </TableHead>
             <TableBody>
             {mealUpdates.filter((mealUpdate) => mealUpdate.childName === selectedChildName).map((mealUpdate, index) => (
                   <TableRow key={index}>
-                    <TableCell>{mealUpdate.date}</TableCell>
-                    <TableCell>{mealUpdate.mealType}</TableCell>
-                    <TableCell>{mealUpdate.food}</TableCell>
-                    <TableCell>{mealUpdate.quantity}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{mealUpdate.date}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{mealUpdate.mealType}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{mealUpdate.food}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{mealUpdate.quantity}</TableCell>
                     
                   </TableRow>
                 ))}
@@ -130,15 +133,15 @@ export const StaffMealUpdatesTable = () => {
         </div>
       </div>
       <div className='col-md-6'>
-        <div className='card'>
+      <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className='header'>
-            <h4 className='title'>Select Child</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`}>Select Child</h4>
           </div>
           <select
         name="childId"
         value={newMealUpdate.childId}
         onChange={handleChildChange}
-        className='mb-4 mt-1 p-3 m-2'
+        className={`mb-4 mt-1 p-3 m-2 ${darkmode? 'card-mode':''}`}
       >
         {users.map((user, index) => (
           user.children ? (
@@ -160,9 +163,9 @@ export const StaffMealUpdatesTable = () => {
     </div>
     <div className='row'>
       <div className='col-md-12'>
-        <div className='card'>
+      <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className='header'>
-            <h4 className='title'>Send New Meal Update</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`}>Send New Meal Update</h4>
             <p className="category">Meals</p>
           </div>
       
@@ -205,7 +208,7 @@ export const StaffMealUpdatesTable = () => {
            
          <div >
          <Button
-         className=''
+         className='mt-3 btn-dark'
          onClick={handleSendUpdate}>Send Update</Button>
          </div>
         

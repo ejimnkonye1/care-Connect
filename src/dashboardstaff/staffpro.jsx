@@ -5,6 +5,10 @@ import  { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 
 import { auth, firestore } from '../firebase'
+import { useSelector } from 'react-redux';
+import { IoCalendarNumber } from "react-icons/io5";
+import { LiaGenderlessSolid } from "react-icons/lia";
+import { FaUserAstronaut } from "react-icons/fa";
 export const Staffpro = () => {
     const [staffData, setStaffData] = useState(null);
   
@@ -22,15 +26,15 @@ export const Staffpro = () => {
   
       fetchStaffData();
     }, []);
-  
+    const darkmode = useSelector((state)=> state.darkMode)
     return(
     
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-8">
-                  <div className="card">
+                <div className={`card ${darkmode ? 'card-mode': ''}`}>
                     <div className="header">
-                      <h4 className="title">Edit Profile</h4>
+                    <h4 className={`title ${darkmode? 'card-color':''}`}>Edit Profile</h4>
                     </div>
                     <div className="content">
                       <form>
@@ -111,44 +115,50 @@ export const Staffpro = () => {
                 
                 </div>
         
-                        <button type="submit" className="btn mt-3 btn-info btn-fill pull-right">Update Profile</button>
+                        <button type="submit" className="btn mt-3 btn-dark btn-fill pull-right">Update Profile</button>
                         <div className="clearfix"></div>
                       </form>
                     </div>
                   </div>
                 </div>
                 <div className="col-md-4">
-                  <div className="card card-user">
+                <div className={`card card-user ${darkmode? 'card-mode':''}`}>
                     <div className="image">
                       <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..." />
                     </div>
                     <div className="content">
                       <div className="author">
                        
-                          <img className="avatar border-gray" src={img} alt="..." />
+                          <img className="avatar border-gray img-fluid rounded-circle" src={img} alt="..." />
                           <h4 className="title">staff
 
                             
                           </h4>
                         
                       </div>
-                     <div>
-                        <p>
-                            AGE :5 years
-                        </p>
-                        <p>
-                            Gender:Male
-                        </p>
-                        <p>Parent name:Mike
-                        </p>
-                     </div>
+                      <div className="mt-4 namess">
+      <p className="text-muted">
+        <FaUserAstronaut className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />
+        <label>Child Name: </label> <strong className={`${darkmode ? 'card-color':''}`}>{staffData?.name ?? ''}</strong>
+      </p>
+      <p className="text-muted mb-2">
+        <IoCalendarNumber className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />
+      <label>AGE: </label><strong className={`${darkmode ? 'card-color':''}`}>{staffData?.age}</strong>
+      </p>
+      <p className="text-muted mb-2">
+        <LiaGenderlessSolid className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />
+        <label>Gender:</label>  <strong className={`${darkmode ? 'card-color':''}`}>{staffData?.gender}</strong>
+        
+      </p>
+   
+    </div>
                     </div>
-                    <hr />
+                    {/* <hr />
                     <div className="text-center">
                       <button href="#" className="btn btn-simple"><i className="fa fa-facebook-square"></i></button>
                       <button href="#" className="btn btn-simple"><i className="fa fa-twitter"></i></button>
                       <button href="#" className="btn btn-simple"><i className="fa fa-google-plus-square"></i></button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

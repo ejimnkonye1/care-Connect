@@ -47,7 +47,7 @@ export const MarkAttendance = () => {
     
    
   };
-
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
 
 
@@ -55,22 +55,22 @@ export const MarkAttendance = () => {
  
 <div className="container mt-4">
 <div>
-            <h1>Staff Dashboard</h1>
+          
 
         </div>
 
 {showToast && (
      <div className="custom-toast">
       <ColorAlerts />
-      f
+      
 
    </div>
   )} 
   <div className='row'>
     <div className='col-md-12'>
-      <div className='card'>
+    <div className={`card ${darkmode ? 'card-mode':''}`}>
         <div className='header'>
-          <h4 className='title'>Attendance</h4>
+          <h4 className={`title ${darkmode? 'card-color':''}`} >Attendance</h4>
           <p className='category'>Mark attendance for today</p>
         </div>
         <div className='content'>
@@ -80,9 +80,9 @@ export const MarkAttendance = () => {
         <thead>
           <tr>
            
-            <th>Child Name</th>
-            <th>Mark Present</th>
-            <th>Mark Absent</th>
+            <th  className={`${darkmode?'card-color':''}`}>Child Name</th>
+            <th  className={`${darkmode?'card-color':''}`}>Mark Present</th>
+            <th  className={`${darkmode?'card-color':''}`}>Mark Absent</th>
           </tr>
         </thead>
         <tbody>
@@ -113,7 +113,7 @@ export const MarkAttendance = () => {
               ))
             ) : (
               <tr key={index}>
-                <td colSpan="4">No children data available.</td>
+                <td colSpan="4" className={darkmode? 'card-color':''}>No children data available.</td>
               </tr>
             )
           ))}
@@ -122,7 +122,7 @@ export const MarkAttendance = () => {
       
     </div>
   ) : (
-    <p>No users data available.</p>
+    <p className={darkmode? 'card-color':''}>No users data available.</p>
   )}
         </div>
       </div>

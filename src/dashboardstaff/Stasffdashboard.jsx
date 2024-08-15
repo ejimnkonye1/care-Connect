@@ -38,8 +38,9 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
  
   
     return(
-        <div className="wrapper">
-   <div className="sidebar " >
+      <div className={`wrapper ${darkmode ? 'dark-mode border-bottom': ''}`}  >
+
+<div className={`sidebar ${darkmode ? 'dark-mode' :''}`} >
    <div className="sidebar-wrapper  border-right">
   <div className="logo p-3 d-flex justify-content-center">
     <a href="#" className="simple-text">
@@ -107,12 +108,12 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
 </div>
     </div>
 <div className="main-panel ">
-<nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+<nav className={`navbar navbar-expand-lg navbar-light  border-bottom ${darkmode? 'dark-mode':'bg-white'}`}>
   <div className="container-fluid">
   <div className={`navbar-toggler ${darkmode? 'navbar-toggler-color':''}`} type="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span className="navbar-toggler-icon "></span>
     </div>
-    <a className="navbar-brand " href="#">CareConnect</a>
+    <a className={`navbar-brand  ${darkmode? "color-mode": ''}`} href="#" >CareConnect</a>
    
   <div className='switch ms-auto d-lg-none'>
   <ul className='nav navbar-nav me-auto mb-2 mb-lg-0'>
@@ -134,26 +135,6 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
       {/* <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> */}
     </div>
     <div className="offcanvas-body">
-  <ul className="nav flex-column">
-  <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
-    <span  className='nav-link' onClick={() => handlechange('dashboard')}>
-            <AiOutlineDashboard className='icon' />
-            <span>Dashboard</span>
-          </span>
-    </li>
-    <li className="nav-item dropdown hidden-lgp hidden-md" >
-      <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i className="fa fa-globe hidden-lgp hidden-md icon"></i> Notification
-      </a>
-     
-    </li>
-
-  </ul>
-  <div className='top'>
-
-  </div>
-  <div className="sm-sidebar ">
-    <div className="sm-sidebar-wrapper ">
     <ul className="nav flex-column">
     <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
     <span  className='nav-link' onClick={() => handlechange('dashboard')}>
@@ -211,8 +192,10 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
       </a>
     </li>
   </ul>
-    </div>
+  <div className='top'>
+
   </div>
+
 </div>
   </div>
 
@@ -229,12 +212,13 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
       
       </ul>
       <ul className="nav navbar-nav ms-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <a className="nav-link" href="#">Account</a>
+        <li className='nav-item'  style={{cursor:'pointer'}}>
+          <a className={`nav-link ${darkmode? 'color-mode': ''}`} 
+          
+          onClick={() => handlechange('user')} >Account</a>
         </li>
-       
         <li className="nav-item">
-          <a className="nav-link" href="#">Log out</a>
+          <a className={`nav-link ${darkmode? 'color-mode': ''}`} href="#">Log out</a>
         </li>
       </ul>
     </div>
