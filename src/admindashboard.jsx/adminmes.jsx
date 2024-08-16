@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { collection, getDocs, addDoc, query, orderBy } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
+import { useSelector } from 'react-redux';
 
 const AdminChat = () => {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]); // Store sent messages
+  const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [broadcastTo, setBroadcastTo] = useState(''); // Initialize to empty string
-  const [parents, setParents] = useState(null); // Initialize to null
-  const [staffList, setStaffList] = useState(null); // Initialize to null
-
+  const [broadcastTo, setBroadcastTo] = useState('');
+  const [parents, setParents] = useState(null);
+  const [staffList, setStaffList] = useState(null);
   const AdminId = auth.currentUser?.uid;
+
+  const darkmode = useSelector((state) => state.darkMode);
 
   useEffect(() => {
     const fetchRecipients = async () => {
@@ -29,10 +32,28 @@ const AdminChat = () => {
       }
     };
 
-    if (broadcastTo) {
-      fetchRecipients();
-    }
-  }, [broadcastTo]);
+    const fetchMessages = async () => {
+      if (!broadcastTo) return;
+
+      let recipients = broadcastTo === 'users' ? parents : staffList;
+      if (!recipients) return;
+
+      let fetchedMessages = [];
+      await Promise.all(
+        recipients.map(async (recipient) => {
+          const messageRef = collection(firestore, `${broadcastTo}/${recipient.id}/messages`);
+          const messageQuery = query(messageRef, orderBy('timestamp', 'asc'));
+          const messageSnapshot = await getDocs(messageQuery);
+          const recipientMessages = messageSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          fetchedMessages = [...fetchedMessages, ...recipientMessages];
+        })
+      );
+      setMessages(fetchedMessages);
+    };
+
+    fetchRecipients();
+    fetchMessages();
+  }, [broadcastTo, parents, staffList]);
 
   const sendMessage = async () => {
     if (message.trim() === '') {
@@ -63,12 +84,12 @@ const AdminChat = () => {
 
       await Promise.all(
         recipients.map(async (recipient) => {
-          const messageRef = collection(firestore, `${broadcastTo === 'users' ? 'users' : 'staff'}/${recipient.id}/messages`);
-          const docRef = await addDoc(messageRef, messageData);
-          const messageId = docRef.id;
-          setMessages((prevMessages) => [...prevMessages, { id: messageId, message: messageData.message }]); // Add sent message to state
+          const messageRef = collection(firestore, `${broadcastTo}/${recipient.id}/messages`);
+          await addDoc(messageRef, messageData);
         })
       );
+
+      setMessages((prevMessages) => [...prevMessages, { id: new Date().getTime(), message: messageData.message }]);
 
       setMessage('');
       alert('Message sent successfully!');
@@ -81,27 +102,44 @@ const AdminChat = () => {
   };
 
   return (
-    <div>
-      <h1>Admin Chat</h1>
-      <select value={broadcastTo} onChange={(e) => setBroadcastTo(e.target.value)}>
-        <option value="">Select recipients</option>
-        <option value="users">All Parents</option>
-        <option value="staff">All Staff</option>
-      </select>
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Type a message..."
-      />
-      <button onClick={sendMessage} disabled={loading}>
-        {loading ? 'Sending...' : 'Send'}
-      </button>
-      <ul>
-        {messages.map((message) => (
-          <li key={message.id}>{message.message}</li>
-        ))}
-      </ul>
+    <div className={`chat-container ${darkmode ? 'card-mode' : ''}`}>
+      <div className='chat-header'>
+        <h6>Admin Dashboard - Broadcast Message</h6>
+        <FormControl fullWidth>
+          <InputLabel>Select Recipients</InputLabel>
+          <Select
+            value={broadcastTo}
+            onChange={(e) => setBroadcastTo(e.target.value)}
+            label="Select Recipients"
+          >
+            <MenuItem value='' disabled>Select Recipients</MenuItem>
+            <MenuItem value="users">All Parents</MenuItem>
+            <MenuItem value="staff">All Staff</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+      <div className='chat-messages'>
+        <ul className='message-list'>
+          {messages.map((msg, index) => (
+            <li key={index} className={`message-item ${darkmode ? 'card-color' : ''}`}>
+              <span>{msg.message}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className={`chat-input ${darkmode ? 'card-mode card-color' : ''}`}>
+        <TextField
+          label='Type your message...'
+          className={`${darkmode ? 'card-color' : ''}`}
+          fullWidth
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+        />
+        <Button onClick={sendMessage} disabled={loading}>
+          {loading ? 'Sending...' : 'Send'}
+        </Button>
+      </div>
     </div>
   );
 };

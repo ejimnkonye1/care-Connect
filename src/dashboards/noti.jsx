@@ -28,19 +28,28 @@ const BroadChat= () => {
   }, [parentId]);
 
   return (
-    <div>
-      <h1>Parent Dashboard</h1>
-      <h2>Messages</h2>
-      <ul>
-        {messages.map((message) => (
-          <li key={message.id}>
-            <p>{message.message}</p>
-            <small>{new Date(message.timestamp).toLocaleString()}</small>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    <div className='conatiner-fluid'>
+    <div className='row'>
+        <div className='col-md-6'>
+        <div className="card notification-card">
+  <ul className="notification-list">
+    {messages.map((message, index) => (
+      <li key={index} className="notification-item">
+        {message.message}
+        <small>{new Date(message.timestamp).toLocaleString()}</small>
+      </li>
+      
+    ))}
+  </ul>
+</div>
+        </div>
+
+
+
+
+</div>
+ 
+</div>  );
 };
 
 export default BroadChat;
