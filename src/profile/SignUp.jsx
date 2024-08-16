@@ -2,6 +2,7 @@ import { useState } from "react"
 import { StaffSign } from "./staffsignup";
 import { ParentSign } from "./parentsignup";
 import '../css/signup.css'
+import { AdminSign } from "./adminsignup";
 export const SignUp = () => {
     const [role, setRole] = useState(''); // initialize role state to an empty string
 
@@ -27,11 +28,12 @@ export const SignUp = () => {
                   >
                     <option value="parent">Parent</option>
                     <option value="staff">Staff</option>
+                    <option value="admin">Admin</option>
                   </select>
                 </div>
               </div>
             </div>
-            {role === 'staff' ? <StaffSign /> : <ParentSign />}
+            { role === 'admin' ? <AdminSign /> :   role === 'staff' ? <StaffSign /> : <ParentSign /> }
             <div className="mb-3 mt-2">
             <p className="text-center mb-3">Already have an account? <a href="/login">Login here</a></p>
             </div>

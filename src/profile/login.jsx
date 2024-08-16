@@ -164,6 +164,7 @@ export const LoginForm = () => {
                             setAnimate={setAnimate}
                             handlebtnClick={handlebtnClick}
                             btnloading={btnloading}
+                            setbtnloading={setbtnLoading}
                         />
                     )}
                 </div>

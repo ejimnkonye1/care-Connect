@@ -1,17 +1,14 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-mixed-spaces-and-tabs */
+
 import '../css/light.css'
 import 'animate.css';
 import { useState } from 'react';
 import { AiOutlineDashboard } from "react-icons/ai";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
-import { Staffdash } from './staffdash';
-import { Staffpro } from './staffpro';
-import { MarkAttendance } from './attendance';
-import { StaffMealUpdatesTable } from './Meal';
-import { StaffReport } from './report';
-import StaffChat from './staffchat';
+
 import { LuActivitySquare } from "react-icons/lu";
 import { TbTimelineEventMinus } from "react-icons/tb";
 import { MdNoMeals } from "react-icons/md";
@@ -21,8 +18,12 @@ import { MdOutlineDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { setMode } from '../action';
+import { Admindash } from './admindash';
+import { FeesAdding } from './fees';
+import EventUpdates from './eventsup';
+import AdminChat from './adminmes';
 
-export const StaffDashboard = ({showToast, setShowToast}) => {
+export const AdminDashboard = ({showToast, setShowToast}) => {
   const [currenpage, setcurrentpage] = useState('dashboard')
   const dispatch = useDispatch();
   const darkmode = useSelector((state)=> state.darkMode)
@@ -225,14 +226,17 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
   </div>
 </nav>
 <div className={`content billie mb-1 ${darkmode ? "dark-mode" : ""}`}>
-      {currenpage === 'dashboard' &&     <Staffdash/>}
-      {currenpage === 'user' && <Staffpro />}
+      {currenpage === 'dashboard' &&     <Admindash/>}
+      {currenpage === 'fees' && <FeesAdding />}
+      {currenpage === 'event' && <EventUpdates />} 
+      {currenpage === 'notification' && <AdminChat />}
+      {/* {currenpage === 'user' && <Staffpro />}
       {currenpage === 'report' && <MarkAttendance showToast={showToast} setShowToast={setShowToast} />}
       
-      {currenpage === 'notification' && <StaffChat />}
-      {/* {currenpage === 'fees' && <FeesList />}  */}
+     
+    
       {currenpage === 'meal' && <StaffMealUpdatesTable/>}
-      {currenpage === 'event' && <StaffReport />}
+      {currenpage === 'event' && <StaffReport />} */}
         </div>
 
 

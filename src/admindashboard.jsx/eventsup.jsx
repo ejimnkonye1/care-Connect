@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import {  Grid, Typography, List, ListItem, ListItemText, Badge, styled } from "@mui/material";
-import { collection,  getDocs } from "firebase/firestore";
+import { Button, Grid, Typography, List, ListItem, ListItemText, Badge, styled } from "@mui/material";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase"; // Import firestore instance
-import BroadChat from "./noti";
 
 const StyledCalendar = styled(Calendar)(({ theme }) => ({
   width: '100%',
-  maxWidth: '700px',
+  maxWidth: '500px',
   '& .react-calendar__tile': {
     position: 'relative',
   },
@@ -23,7 +22,6 @@ const StyledCalendar = styled(Calendar)(({ theme }) => ({
 }));
 
 const EventsContainer = styled(Grid)(({ theme }) => ({
-  
   padding: theme.spacing(2),
   backgroundColor: theme.palette.background.paper,
   borderRadius: theme.shape.borderRadius,
@@ -31,7 +29,7 @@ const EventsContainer = styled(Grid)(({ theme }) => ({
   marginTop: theme.spacing(3),
 }));
 
-const  EventCalendar = () => {
+const EventUpdates = () => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState({});
 
@@ -58,7 +56,35 @@ const  EventCalendar = () => {
     fetchEvents();
   }, []);
 
- 
+  const addEvent = (date, event) => {
+    const formattedDate = date.toDateString();
+    setEvents((prevEvents) => {
+      const newEvents = { ...prevEvents };
+      if (newEvents[formattedDate]) {
+        newEvents[formattedDate].push(event);
+      } else {
+        newEvents[formattedDate] = [event];
+      }
+      return newEvents;
+    });
+  };
+
+  const handleAddEvent = async () => {
+    const event = prompt("Enter event details:");
+    if (event) {
+      try {
+        const schoolEventsRef = collection(firestore, 'schoolEvents');
+        await addDoc(schoolEventsRef, {
+          date: date.toDateString(),
+          event: event
+        });
+        addEvent(date, event);
+        console.log('Event added to Firestore');
+      } catch (error) {
+        console.error('Error adding event:', error);
+      }
+    }
+  };
 
   const tileContent = ({ date }) => {
     const formattedDate = date.toDateString();
@@ -75,11 +101,13 @@ const  EventCalendar = () => {
   return (
     <div style={{ padding: "20px" }}>
       <div className="row">
-        <div className="col-md-8">
+        <div className="col-md-6">
           <StyledCalendar onChange={setDate} value={date} tileContent={tileContent} />
-         
+          <Button variant="contained" color="primary" onClick={handleAddEvent} style={{ marginTop: "10px" }}>
+            Add Event
+          </Button>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-6">
           <Grid container spacing={2}>
             <EventsContainer item xs={12} md={6}>
               <Typography variant="h6" gutterBottom>
@@ -100,14 +128,8 @@ const  EventCalendar = () => {
           </Grid>
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-8">
-          <BroadChat />
-        </div>
-      </div>
     </div>
   );
 };
 
-export default  EventCalendar;
-
+export default EventUpdates;

@@ -5,8 +5,9 @@ import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { useState } from 'react';
 import {  signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from "../firebase"
+import { auth,firestore } from "../firebase"
 import { useNavigate } from "react-router-dom";
+import { doc, getDoc,  } from 'firebase/firestore';
 // eslint-disable-next-line react/prop-types
 export const Staff = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate, btnloading, setbtnloading }) => {
     const handleCentre = () => {
@@ -34,13 +35,23 @@ export const Staff = ({ PasswordVisible , togglePasswordvisible, setShowParent, 
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("Staff logged in: ", userCredential.user);
+      const user = userCredential.user
+      const staffdoc = await getDoc(doc(firestore, 'staff', user.uid))
+      // console.log("Staff logged in: ", userCredential.user);
       // Redirect to Staff Dashboard
-      setbtnloading(true)
-      setTimeout(() => {
-        setbtnloading(false)
-        navigate('/staff')
-      }, 9000);
+      if (staffdoc.exists()) {
+        setbtnloading(true)
+        setTimeout(() => {
+          setbtnloading(false)
+          navigate('/staff')
+        }, 9000);
+      }else{
+        setError("You are not an authorized Staff.");
+        setTimeout(() => {
+          setError(false);
+        }, 5000);
+      }
+   
   
     } catch (error) {
       setbtnloading(true)

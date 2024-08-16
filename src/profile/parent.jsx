@@ -3,10 +3,11 @@ import { CiLock } from "react-icons/ci";
 
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-import { auth  } from "../firebase"
+import { auth , firestore } from "../firebase"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {  signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc,  } from 'firebase/firestore';
 // eslint-disable-next-line react/prop-types
 export const Parent = ({ PasswordVisible , togglePasswordvisible, setShowParent, setShowStaff,setAnimate, btnloading ,setbtnloading }) => {
   const handleCentre = () => {
@@ -35,13 +36,26 @@ const navigate = useNavigate()
     e.preventDefault();
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("User logged in: ", userCredential.user);
+
+      const user = userCredential.user
+      const parentdoc = await getDoc(doc(firestore, 'users', user.uid))
+      // console.log("User logged in: ", userCredential.user);
       // Redirect to Parent Dashboard
-      setbtnloading(true)
-      setTimeout(() => {
-        setbtnloading(false)
-        navigate('/dash')
-      }, 9000);
+
+      if (parentdoc.exists()) {
+        setbtnloading(true)
+        setTimeout(() => {
+          setbtnloading(false)
+          navigate('/dash')
+        }, 9000);
+      }else {
+  
+  setError("You are not an authorized to parent.");
+  setTimeout(() => {
+    setError(false);
+  }, 5000);
+      }
+   
     
     } catch (error) {
       setbtnloading(true)

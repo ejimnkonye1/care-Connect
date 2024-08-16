@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 
-const BroadChat= () => {
+const BroadCast= () => {
   const [messages, setMessages] = useState([]);
 
-  const parentId = auth.currentUser?.uid; // Get the current parent's UID
+  const StaffId = auth.currentUser?.uid; // Get the current parent's UID
 
   useEffect(() => {
-    if (parentId) {
-      const messagesRef = collection(firestore, `users/${parentId}/messages`);
+    if (StaffId) {
+      const messagesRef = collection(firestore, `staff/${StaffId}/messages`);
       const q = query(messagesRef, orderBy('timestamp', 'asc'));
 
       // Set up a real-time listener
@@ -25,11 +25,11 @@ const BroadChat= () => {
       // Clean up the listener on unmount
       return () => unsubscribe();
     }
-  }, [parentId]);
+  }, [StaffId]);
 
   return (
     <div>
-      <h1>Parent Dashboard</h1>
+      
       <h2>Messages</h2>
       <ul>
         {messages.map((message) => (
@@ -43,4 +43,4 @@ const BroadChat= () => {
   );
 };
 
-export default BroadChat;
+export default BroadCast;

@@ -66,7 +66,7 @@ export const ChildAttendance = ({ setTriggerUpdate, }) => {
       setTriggerUpdate(true);
     }
   }, [attendance]);
-  const btntrue = useSelector((state) => state.btnclick)
+ 
 console.log(alertmode, "alert")
   return (
     <div>

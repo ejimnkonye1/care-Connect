@@ -6,10 +6,6 @@ export const ResetPassword = () => {
       <div className="container reset-side">
         
       <div className=" reset-shadow">
-            
-  
-         
-       
               <div className="d-flex flex-column justify-content-center align-items-center py-5  ">
        
         <form>

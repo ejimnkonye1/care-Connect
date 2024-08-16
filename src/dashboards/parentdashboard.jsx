@@ -108,7 +108,7 @@ export const Dashboard = ({showToast, setShowToast}) => {
     <span className='nav-link' onClick={() => handlechange('notification')}>
        
         <IoChatbubbles className='icon'/>
-        <span>Notifications</span>
+        <span>Messaging</span>
         </span>
     </li>
     <li className="nav-item active-pro mt-5">
@@ -201,7 +201,7 @@ export const Dashboard = ({showToast, setShowToast}) => {
     <span className='nav-link' onClick={() => handlechange('notification')}>
        
         <IoChatbubbles className='icon'/>
-        <span>Notifications</span>
+        <span>Messaging</span>
         </span>
     </li>
     <li className="nav-item active-pro mt-5">
@@ -214,67 +214,7 @@ export const Dashboard = ({showToast, setShowToast}) => {
   <div className='top'>
 
   </div>
-  {/* <div className="sm-sidebar ">
-    <div className="sm-sidebar-wrapper ">
-    <ul className="nav flex-column">
-    <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
-    <span  className='nav-link' onClick={() => handlechange('dashboard')}>
-            <AiOutlineDashboard className='icon' />
-            <span>Dashboard</span>
-          </span>
-    </li>
-       <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
-
-    <span  className='nav-link' onClick={() => handlechange('user')}>
-            <HiOutlineUserCircle className='icon' />
-            <span>User Profile</span>
-          </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'report' && 'active'}`}>
-
-    <span  className='nav-link' onClick={() => handlechange('report')}>
-        <AiOutlineDashboard className='icon' />
-        <span>Table List</span>
-        </span>
-      
-    </li>
-    <li className={`nav-item ${currenpage === 'event' && 'active'}`}>
-
-    <span className='nav-link' onClick={() => handlechange('event')}>
-        <AiOutlineDashboard className='icon' />
-        <span>Events</span>
-        </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'meal' && 'active'}`}>
-
-    <span className='nav-link' onClick={() => handlechange('meal')}>
-        <AiOutlineDashboard className='icon' />
-        <span>Meals Updates</span>
-        </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'fees' && 'active'}`}>
-
-    <span className='nav-link' onClick={() => handlechange('fees')}>
-        <AiOutlineDashboard className='icon' />
-        <span>Fees</span>
-        </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'nofiication' && 'active'}`}>
-
-    <span className='nav-link' onClick={() => handlechange('notification')}>
-        <AiOutlineDashboard className='icon' />
-        <span>Notifications</span>
-        </span>
-    </li>
-    <li className="nav-item active-pro mt-0">
-      <a className="nav-link" {...() => onclick(alert('coming soon'))}>
-        <AiOutlineDashboard className='icon' />
-        <span>Upgrade to PRO</span>
-      </a>
-    </li>
-  </ul>
-    </div>
-  </div> */}
+  
 </div>
   </div>
 

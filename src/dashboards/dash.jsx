@@ -47,7 +47,7 @@ export const Dash = ({showToast,setShowToast}) => {
         <div className="col-md-4">
         <div className={`card ${darkmode ? 'card-mode':''}`}>
             <div className="header">
-              <h4 className={`title ${darkmode? 'card-color':''}`}>Child Attendance</h4>
+              <h4 className={`title ${darkmode? 'card-color':''}`} >Child Attendance</h4>
               <p className="category">Today s Attendance</p>
             </div>
             <div className="content">
@@ -124,7 +124,7 @@ export const Dash = ({showToast,setShowToast}) => {
         <div className="col-md-6">
           <div className={`card ${darkmode ? 'card-mode':''}`}>
             <div className="header">
-              <h4 className={`title ${darkmode? 'card-color':''}`}>Daily Activities</h4>
+              <h4 className={`title ${darkmode? 'card-color':''}`} >Daily Activities</h4>
               <p className="category">Events and Activities</p>
             </div>
             <div className="content">

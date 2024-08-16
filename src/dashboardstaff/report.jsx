@@ -5,6 +5,7 @@ import { firestore } from "../firebase";
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem } from '@mui/material';
 import ColorAlerts from "../alert";
 import { useSelector } from "react-redux";
+import BroadCast from "./broad";
 
 
 export const StaffReport = () => {
@@ -224,7 +225,7 @@ fetchUsers();
 
 
      
-
+<BroadCast />
       
     </div>
   );
