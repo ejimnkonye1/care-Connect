@@ -529,6 +529,7 @@ background-color: red !important;
 .color-mode{
     color: white !important;
     transition: color 0.3s ease-in-out;
+    color: white !important;
 }
 .main-panel .content.dark-mode {
     background-color: var(--bs-dark) !important;

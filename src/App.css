@@ -171,3 +171,23 @@ h6 {
   padding: 5px 10px;
   border-radius: 10px;
 }
+
+
+.anouce-item{
+  max-height: 400px;
+  overflow-y: auto;
+  width: 400px !important;
+}
+.annouce-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.annouce-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: #333;
+}

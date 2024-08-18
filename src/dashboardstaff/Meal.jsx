@@ -100,7 +100,7 @@ export const StaffMealUpdatesTable = () => {
 
    </div>
   )} 
-    <h2>Meal Updates</h2>
+  
     <div className='row'>
       <div className='col-md-6'>
       <div className={`card ${darkmode ? 'card-mode':''}`}>

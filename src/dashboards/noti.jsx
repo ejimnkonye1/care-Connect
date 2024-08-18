@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
+import { useSelector } from 'react-redux';
 
 const BroadChat= () => {
   const [messages, setMessages] = useState([]);
@@ -26,15 +27,15 @@ const BroadChat= () => {
       return () => unsubscribe();
     }
   }, [parentId]);
-
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
     <div className='conatiner-fluid'>
     <div className='row'>
         <div className='col-md-6'>
-        <div className="card notification-card">
-  <ul className="notification-list">
+        <div className="anouce-item">
+  <ul className="annouce-list">
     {messages.map((message, index) => (
-      <li key={index} className="notification-item">
+      <li key={index} className={`annouce-item ${darkmode? 'card-mode card-color':''}`}>
         {message.message}
         <small>{new Date(message.timestamp).toLocaleString()}</small>
       </li>

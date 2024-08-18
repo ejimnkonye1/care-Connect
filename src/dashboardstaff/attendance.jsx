@@ -6,6 +6,7 @@ import {  firestore } from '../firebase';
 import ColorAlerts from '../alert';
 import { useDispatch, useSelector} from 'react-redux';
 import {  setAlert, setMark } from '../action';
+import { Table, TableHead, TableRow, TableCell, TableBody, Button } from '@mui/material';
 export const MarkAttendance = () => {
   const [users, setUsers] = useState([]); // Store all users data
   // eslint-disable-next-line no-unused-vars
@@ -14,6 +15,7 @@ export const MarkAttendance = () => {
   
   const dispatch = useDispatch();
   const alertmode = useSelector((state) => state.alertMode)
+  
   useEffect(() => {
     const fetchUsers = async () => {
       const usersRef = collection(firestore, 'users');
@@ -75,55 +77,55 @@ export const MarkAttendance = () => {
         </div>
         <div className='content'>
         {users.length > 0 ? (
-    <div className="table-responsive">
-      <table className="table table-bordered table-striped">
-        <thead>
-          <tr>
-           
-            <th  className={`${darkmode?'card-color':''}`}>Child Name</th>
-            <th  className={`${darkmode?'card-color':''}`}>Mark Present</th>
-            <th  className={`${darkmode?'card-color':''}`}>Mark Absent</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            user.children ? (
-              user.children.map((child, childIndex) => (
-                <tr key={`${index}-${childIndex}`}>
-               
-                  <td>{child.name}</td>
-                  <td>
-                    <button
-                      className="btn btn-success"
-                      onClick={() => handleAttendanceChange(user.uid, child.name, 'present')}
-                    >
-                      Mark Present
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => handleAttendanceChange(user.uid, child.name, 'absent')}
-                    >
-                      Mark Absent
-                    </button>
-                 
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr key={index}>
-                <td colSpan="4" className={darkmode? 'card-color':''}>No children data available.</td>
-              </tr>
-            )
-          ))}
-        </tbody>
-      </table>
-      
-    </div>
-  ) : (
-    <p className={darkmode? 'card-color':''}>No users data available.</p>
-  )}
+  <div className={`${darkmode ? ' card-mode ' : ''}`}>
+    <Table className={`${darkmode ? 'card-mode ' : ''}`}>
+      <TableHead className={`${darkmode ? 'card-mode ' : ''}`}>
+        <TableRow className={`${darkmode ? 'card-mode ' : ''}`}>
+          <TableCell className={`${darkmode ? 'card-color ' : ''}`}>Child Name</TableCell>
+          <TableCell className={`${darkmode ? 'card-color ' : ''}`}>Mark Present</TableCell>
+          <TableCell className={`${darkmode ? 'card-color ' : ''}`}>Mark Absent</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {users.map((user, index) => (
+          user.children ? (
+            user.children.map((child, childIndex) => (
+              <TableRow key={`${index}-${childIndex}`}>
+                <TableCell className={`${darkmode ? 'card-color ' : ''}`}>{child.name}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleAttendanceChange(user.uid, child.name, 'present')}
+                  >
+                    Mark Present
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleAttendanceChange(user.uid, child.name, 'absent')}
+                  >
+                    Mark Absent
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow key={index}>
+              <TableCell colSpan={4} className={darkmode ? 'card-color ' : ''}>
+                No children data available.
+              </TableCell>
+            </TableRow>
+          )
+        ))}
+      </TableBody>
+    </Table>
+  </div>
+) : (
+  <p className={darkmode ? 'card-color ' : ''}>No users data available.</p>
+)}
         </div>
       </div>
       

@@ -98,6 +98,7 @@ export const FeesAdding = () => {
           onChange={(e) => setNewFeesAdding({ ...newfeesadding, status: e.target.value })}
           fullWidth
           margin="normal"
+          style={{ color: 'red' }}
         />
         <Button
           type="submit"
@@ -141,7 +142,7 @@ export const FeesAdding = () => {
               ))
             ) : (
               <TableRow>
-                <TableCell  className={`text-center ${darkmode ? 'card-color text-white text-center':''}`} colSpan={4}>No fees available</TableCell>
+                <TableCell  className={`text-center${darkmode ? 'card-color text-white':''}`} colSpan={4}>No fees available</TableCell>
               </TableRow>
             )}
           </TableBody>

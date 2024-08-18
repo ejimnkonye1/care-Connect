@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import '../css/light.css'
@@ -21,7 +22,10 @@ import { MdOutlineDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { setMode } from '../action';
-
+import { StaffActivityUpdates } from './activity';
+import StaffEventUpdates from './staffevents';
+import { MdOutlineReportProblem } from "react-icons/md";
+import { RiPresentationFill } from "react-icons/ri";
 export const StaffDashboard = ({showToast, setShowToast}) => {
   const [currenpage, setcurrentpage] = useState('dashboard')
   const dispatch = useDispatch();
@@ -48,12 +52,7 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
     </a>
   </div>
   <ul className="nav flex-column">
-    <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
-    <span  className='nav-link' onClick={() => handlechange('dashboard')}>
-            <AiOutlineDashboard className='icon' />
-            <span>Dashboard</span>
-          </span>
-    </li>
+  
        <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
 
     <span  className='nav-link' onClick={() => handlechange('user')}>
@@ -61,10 +60,18 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
             <span>User Profile</span>
           </span>
     </li>
-    <li className={`nav-item ${currenpage === 'report' && 'active'}`}>
-
-    <span  className='nav-link' onClick={() => handlechange('report')}>
+    <li className={`nav-item ${currenpage === 'activity' && 'active'}`}>
+    <span  className='nav-link' onClick={() => handlechange('activity')}>
     <LuActivitySquare className='icon' />
+            <span>Activity</span>
+          </span>
+    </li>
+    <li className={`nav-item ${currenpage === 'attendance' && 'active'}`}>
+
+    <span  className='nav-link' onClick={() => handlechange('attendance')}>
+   
+    <RiPresentationFill className='icon' />
+
         <span>Attendance</span>
         </span>
       
@@ -84,11 +91,12 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
         <span>Meals Updates</span>
         </span>
     </li>
-    <li className={`nav-item ${currenpage === 'fees' && 'active'}`}>
+    <li className={`nav-item ${currenpage === 'report' && 'active'}`}>
 
-    <span className='nav-link' onClick={() => handlechange('fees')}>
-    <FaMoneyCheckAlt className='icon' />
-        <span>Fees</span>
+    <span className='nav-link' onClick={() => handlechange('report')}>
+    
+    <MdOutlineReportProblem className='icon' />
+        <span>Reports</span>
         </span>
     </li>
     <li className={`nav-item ${currenpage === 'nofiication' && 'active'}`}>
@@ -97,12 +105,6 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
     <IoChatbubbles className='icon'/>
         <span>Messaging</span>
         </span>
-    </li>
-    <li className="nav-item active-pro mt-5">
-      <a className="nav-link" {...() => onclick(alert('coming soon'))}>
-        <AiOutlineDashboard className='icon' />
-        <span>Upgrade to PRO</span>
-      </a>
     </li>
   </ul>
 </div>
@@ -136,65 +138,62 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
     </div>
     <div className="offcanvas-body">
     <ul className="nav flex-column">
-    <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
-    <span  className='nav-link' onClick={() => handlechange('dashboard')}>
-            <AiOutlineDashboard className='icon' />
-            <span>Dashboard</span>
-          </span>
-    </li>
-       <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
+  
+  <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
 
-    <span  className='nav-link' onClick={() => handlechange('user')}>
-            <HiOutlineUserCircle className='icon' />
-            <span>User Profile</span>
-          </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'report' && 'active'}`}>
+<span  className='nav-link' onClick={() => handlechange('user')}>
+       <HiOutlineUserCircle className='icon' />
+       <span>User Profile</span>
+     </span>
+</li>
+<li className={`nav-item ${currenpage === 'activity' && 'active'}`}>
+<span  className='nav-link' onClick={() => handlechange('activity')}>
+<LuActivitySquare className='icon' />
+       <span>Activity</span>
+     </span>
+</li>
+<li className={`nav-item ${currenpage === 'attendance' && 'active'}`}>
 
-    <span  className='nav-link' onClick={() => handlechange('report')}>
-    <LuActivitySquare className='icon' />
-    <span>Attendance</span>
-        </span>
-      
-    </li>
-    <li className={`nav-item ${currenpage === 'event' && 'active'}`}>
+<span  className='nav-link' onClick={() => handlechange('attendance')}>
 
-    <span className='nav-link' onClick={() => handlechange('event')}>
-    <TbTimelineEventMinus className='icon' />
-        <span>Events</span>
-        </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'meal' && 'active'}`}>
+<RiPresentationFill className='icon' />
 
-    <span className='nav-link' onClick={() => handlechange('meal')}>
-    <MdNoMeals  className='icon'/>
-        <span>Meals Updates</span>
-        </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'fees' && 'active'}`}>
+   <span>Attendance</span>
+   </span>
+ 
+</li>
+<li className={`nav-item ${currenpage === 'event' && 'active'}`}>
 
-    <span className='nav-link' onClick={() => handlechange('fees')}>
-    <FaMoneyCheckAlt className='icon' />
-        <span>Fees</span>
-        </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'nofiication' && 'active'}`}>
+<span className='nav-link' onClick={() => handlechange('event')}>
+<TbTimelineEventMinus className='icon' />
+   <span>Events</span>
+   </span>
+</li>
+<li className={`nav-item ${currenpage === 'meal' && 'active'}`}>
 
-    <span className='nav-link' onClick={() => handlechange('notification')}>
-    <IoChatbubbles className='icon'/>
-    <span>Messaging</span>
-        </span>
-    </li>
-    <li className="nav-item active-pro mt-0">
-      <a className="nav-link" {...() => onclick(alert('coming soon'))}>
-        <AiOutlineDashboard className='icon' />
-        <span>Upgrade to PRO</span>
-      </a>
-    </li>
-  </ul>
-  <div className='top'>
+<span className='nav-link' onClick={() => handlechange('meal')}>
+  
+<MdNoMeals  className='icon'/>
+   <span>Meals Updates</span>
+   </span>
+</li>
+<li className={`nav-item ${currenpage === 'report' && 'active'}`}>
 
-  </div>
+<span className='nav-link' onClick={() => handlechange('report')}>
+
+<MdOutlineReportProblem className='icon' />
+   <span>Reports</span>
+   </span>
+</li>
+<li className={`nav-item ${currenpage === 'nofiication' && 'active'}`}>
+
+<span className='nav-link' onClick={() => handlechange('notification')}>
+<IoChatbubbles className='icon'/>
+   <span>Messaging</span>
+   </span>
+</li>
+</ul>
+ 
 
 </div>
   </div>
@@ -225,14 +224,14 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
   </div>
 </nav>
 <div className={`content billie mb-1 ${darkmode ? "dark-mode" : ""}`}>
-      {currenpage === 'dashboard' &&     <Staffdash/>}
+      {currenpage === 'activity' &&     <StaffActivityUpdates/>}
       {currenpage === 'user' && <Staffpro />}
-      {currenpage === 'report' && <MarkAttendance showToast={showToast} setShowToast={setShowToast} />}
+      {currenpage === 'attendance' && <MarkAttendance showToast={showToast} setShowToast={setShowToast} />}
       
       {currenpage === 'notification' && <StaffChat />}
-      {/* {currenpage === 'fees' && <FeesList />}  */}
+      {currenpage === 'report' && <StaffReport />} 
       {currenpage === 'meal' && <StaffMealUpdatesTable/>}
-      {currenpage === 'event' && <StaffReport />}
+      {currenpage === 'event' && <StaffEventUpdates />}
         </div>
 
 

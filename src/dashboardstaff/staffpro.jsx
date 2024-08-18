@@ -2,7 +2,7 @@
 import img from '../images/face-3.jpg'
 import  { useState, useEffect } from 'react';
 
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 import { auth, firestore } from '../firebase'
 import { useSelector } from 'react-redux';
@@ -12,6 +12,55 @@ import { FaUserAstronaut } from "react-icons/fa";
 export const Staffpro = () => {
     const [staffData, setStaffData] = useState(null);
   
+    const [formData, setFormData] = useState({
+      address: '',
+      phone: '',
+      gender: '',
+      age: '',
+    });
+  
+    const user = auth.currentUser
+    useEffect(() => {
+      const fetchUserData = async () => {
+        if (user) {
+          const userDocRef = doc(firestore, 'staff', user.uid);
+          const userDoc = await getDoc(userDocRef);
+          if (userDoc.exists()) {
+            setStaffData(userDoc.data());
+            setFormData({
+              address: userDoc.data().address ?? '',
+              phone: userDoc.data().phone ?? '',
+              gender: userDoc.data().gender ?? '',
+              age: userDoc.data().age ?? '',
+            });
+          }
+        }
+      };
+  
+      fetchUserData();
+    }, [user]);
+  
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    };
+  
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      if (user) {
+        const userDocRef = doc(firestore, 'staff', user.uid);
+        try {
+          await updateDoc(userDocRef, formData);
+          alert('Profile updated successfully');
+        } catch (error) {
+          console.error('Error updating profile:', error);
+          alert('Error updating profile');
+        }
+      }
+    };
 
     useEffect(() => {
       const fetchStaffData = async () => {
@@ -37,7 +86,7 @@ export const Staffpro = () => {
                     <h4 className={`title ${darkmode? 'card-color':''}`}>Edit Profile</h4>
                     </div>
                     <div className="content">
-                      <form>
+                      <form onSubmit={handleSubmit}>
                         <div className="row">
                           <div className="col-md-">
                             <div className="form-group">
@@ -52,7 +101,7 @@ export const Staffpro = () => {
                             <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Staff Email </label>
                               
-                              <input type="email" className="form-control" placeholder="Email" value={staffData?.email ?? ''} />
+                              <input type="email" className="form-control" disabled placeholder="Email" value={staffData?.email ?? ''} />
                             </div>
                           </div>
                           <div className="col-md-6">
@@ -64,40 +113,43 @@ export const Staffpro = () => {
                         </div>
         
                         <div className="row">
-                          <div className="col-md-12">
-                            <div className="form-group">
-                              <label>Address</label>
-                              <input type="text" className="form-control" placeholder="Home Address" value="No 5 Ubaka Street, Enugu state" />
-                            </div>
+                          <div className="col-md-6">
+                          <div className="form-group">
+                  <label>Address</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="address"
+                    placeholder="Home Address"
+                    value={formData.address}
+                    onChange={handleChange}
+                  />
+                </div>
                           </div>
-                        </div>
-        
-                        <div className="row">
-                          <div className="col-md-4">
-                            <div className="form-group">
-                              <label>City</label>
-                              <input type="text" className="form-control" placeholder="City" value="Mike" />
-                            </div>
-                          </div>
-                          <div className="col-md-4">
-                            <div className="form-group">
-                              <label>Country</label>
-                              <input type="text" className="form-control" placeholder="Country" value="Andrew" />
-                            </div>
-                          </div>
-                          <div className="col-md-4">
-                            <div className="form-group">
-                              <label>Postal Code</label>
-                              <input type="number" className="form-control" placeholder="ZIP Code" />
-                            </div>
-                          </div>
+                          <div className="col-md-6">
+                <div className="form-group">
+                  <label>Phone</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="phone"
+                    placeholder="Phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
                         </div>
         
                         <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
                       <label>Gender</label>
-                      <select className="form-control">
+                      <select 
+                         value={formData.gender}
+                         onChange={handleChange}
+                         name='gender'
+                      className="form-control">
                         <option value="">Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -107,10 +159,17 @@ export const Staffpro = () => {
 
                   </div>
                   <div className="col-md-6">
-                    <div className="form-group">
-                      <label>Age</label>
-                      <input type="number" className="form-control" placeholder="Age" />
-                    </div>
+                  <div className="form-group">
+                  <label>Age</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="age"
+                    placeholder="Age"
+                    value={formData.age}
+                    onChange={handleChange}
+                  />
+                </div>
                   </div>
                 
                 </div>
@@ -139,11 +198,11 @@ export const Staffpro = () => {
                       <div className="mt-4 namess">
       <p className="text-muted">
         <FaUserAstronaut className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />
-        <label>Child Name: </label> <strong className={`${darkmode ? 'card-color':''}`}>{staffData?.name ?? ''}</strong>
+        <label>Staff Name: </label> <strong className={`${darkmode ? 'card-color':''}`}>{staffData?.name ?? ''}</strong>
       </p>
       <p className="text-muted mb-2">
         <IoCalendarNumber className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />
-      <label>AGE: </label><strong className={`${darkmode ? 'card-color':''}`}>{staffData?.age}</strong>
+      <label>AGE: </label><strong className={`m-1${darkmode ? 'card-color':''}`}>{staffData?.age ?? ''} Years</strong>
       </p>
       <p className="text-muted mb-2">
         <LiaGenderlessSolid className={`${darkmode? 'card-color':''}`} style={{ fontSize: 18, marginRight: 10 }} />

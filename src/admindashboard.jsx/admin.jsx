@@ -22,13 +22,13 @@ import { Admindash } from './admindash';
 import { FeesAdding } from './fees';
 import EventUpdates from './eventsup';
 import AdminChat from './adminmes';
-
+import { auth } from '../firebase';
 export const AdminDashboard = ({showToast, setShowToast}) => {
   const [currenpage, setcurrentpage] = useState('dashboard')
   const dispatch = useDispatch();
   const darkmode = useSelector((state)=> state.darkMode)
- 
-
+  const user = auth.currentUser
+console.log(user.email)
 
   const handlechange = (page) => {
     setcurrentpage(page)
@@ -118,21 +118,8 @@ export const AdminDashboard = ({showToast, setShowToast}) => {
             <span>Dashboard</span>
           </span>
     </li>
-       <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
-
-    <span  className='nav-link' onClick={() => handlechange('user')}>
-            <HiOutlineUserCircle className='icon' />
-            <span>User Profile</span>
-          </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'report' && 'active'}`}>
-
-    <span  className='nav-link' onClick={() => handlechange('report')}>
-    <LuActivitySquare className='icon' />
-    <span>Attendance</span>
-        </span>
-      
-    </li>
+    
+ 
     <li className={`nav-item ${currenpage === 'event' && 'active'}`}>
 
     <span className='nav-link' onClick={() => handlechange('event')}>
@@ -140,13 +127,7 @@ export const AdminDashboard = ({showToast, setShowToast}) => {
         <span>Events</span>
         </span>
     </li>
-    <li className={`nav-item ${currenpage === 'meal' && 'active'}`}>
 
-    <span className='nav-link' onClick={() => handlechange('meal')}>
-    <MdNoMeals  className='icon'/>
-        <span>Meals Updates</span>
-        </span>
-    </li>
     <li className={`nav-item ${currenpage === 'fees' && 'active'}`}>
 
     <span className='nav-link' onClick={() => handlechange('fees')}>
@@ -158,19 +139,12 @@ export const AdminDashboard = ({showToast, setShowToast}) => {
 
     <span className='nav-link' onClick={() => handlechange('notification')}>
     <IoChatbubbles className='icon'/>
-    <span>Messaging</span>
+        <span>Messaging</span>
         </span>
     </li>
-    <li className="nav-item active-pro mt-0">
-      <a className="nav-link" {...() => onclick(alert('coming soon'))}>
-        <AiOutlineDashboard className='icon' />
-        <span>Upgrade to PRO</span>
-      </a>
-    </li>
+ 
   </ul>
-  <div className='top'>
-
-  </div>
+  
 
 </div>
   </div>
@@ -188,11 +162,7 @@ export const AdminDashboard = ({showToast, setShowToast}) => {
       
       </ul>
       <ul className="nav navbar-nav ms-auto mb-2 mb-lg-0">
-        <li className='nav-item'  style={{cursor:'pointer'}}>
-          <a className={`nav-link ${darkmode? 'color-mode': ''}`} 
-          
-          onClick={() => handlechange('user')} >Account</a>
-        </li>
+      
         <li className="nav-item">
           <a className={`nav-link ${darkmode? 'color-mode': ''}`} href="#">Log out</a>
         </li>

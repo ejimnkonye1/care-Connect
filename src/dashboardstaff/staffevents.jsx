@@ -5,8 +5,7 @@ import {  Badge, styled } from "@mui/material";
 import { collection,  getDocs } from "firebase/firestore";
 import { firestore } from "../firebase"; // Import firestore instance
 import { useSelector } from "react-redux";
-
-import BroadChat from "./noti";
+import BroadCast from "./broad";
 
 const StyledCalendar = styled(Calendar)(({ theme }) => ({
   width: '100%',
@@ -26,7 +25,7 @@ const StyledCalendar = styled(Calendar)(({ theme }) => ({
 
 
 
-const EventCalendar = () => {
+const StaffEventUpdates = () => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState({});
 
@@ -117,7 +116,7 @@ const EventCalendar = () => {
 
         </div>
         <div className='content'>
-        <BroadChat />
+        <BroadCast />
             
     
         </div>
@@ -129,4 +128,4 @@ const EventCalendar = () => {
   );
 };
 
-export default EventCalendar;
+export default StaffEventUpdates;
