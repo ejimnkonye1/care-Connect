@@ -38,6 +38,8 @@ const navigate = useNavigate()
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
       const user = userCredential.user
+      const uersIDD = user.uid
+      console.log('id', uersIDD)
       const parentdoc = await getDoc(doc(firestore, 'users', user.uid))
       // console.log("User logged in: ", userCredential.user);
       // Redirect to Parent Dashboard

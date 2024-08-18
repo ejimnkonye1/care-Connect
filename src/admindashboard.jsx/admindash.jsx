@@ -12,6 +12,7 @@ import {
  
     
   } from "@mui/material";
+import { useSelector } from "react-redux";
 export const Admindash = () => {
     const [user, setUsers] = useState(null); // Store user data
     const [staffdata, setStaffs] = useState(null); // Store staff data
@@ -38,24 +39,24 @@ export const Admindash = () => {
     
         fetchStaff();
       }, [firestore]);
-
+      const darkmode = useSelector((state)=> state.darkMode)
     return(
 
         <div className="container-fluid">
             <div className="row">
                         <div className="col-md-6">
-          <div className="card">
+                        <div className={`card ${darkmode ? 'card-mode':''}`} >
             <div className="header">
-              <h4 className="title">List Of Children</h4>
+              <h4 className={`title ${darkmode ? 'card-color':''}`} >List Of Children</h4>
               {/* <p className="category">Recent Notifications</p> */}
             </div>
             <div className="content">
-  <TableContainer component={Paper} className="user-table">
+  <TableContainer component={Paper} className={`card ${darkmode ? 'card-mode':''}`} >
     <Table aria-label="simple table">
       <TableHead className="table-header">
         <TableRow>
-          <TableCell className="header-cell">Parent Name</TableCell>
-          <TableCell className="header-cell">Child Name</TableCell>
+          <TableCell className={`${darkmode ? 'card-color':''}`}>Parent Name</TableCell>
+          <TableCell className={`${darkmode ? 'card-color':''}`}>Child Name</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -63,10 +64,10 @@ export const Admindash = () => {
           users.children ? (
             users.children.map((child, childIndex) => (
               <TableRow key={`${index}-${childIndex}`} className="table-row">
-                <TableCell className="parent-par-name table-cell">
+                <TableCell  className={`${darkmode ? 'card-color':''}`}>
                   {users.lastName}
                 </TableCell>
-                <TableCell className="child-chi-name table-cell">
+                <TableCell  className={`${darkmode ? 'card-color':''}`}>
                   {child.name}
                 </TableCell>
               </TableRow>
@@ -95,18 +96,18 @@ export const Admindash = () => {
           </div>
         </div>
         <div className="col-md-6">
-        <div className="card">
+        <div className={`card ${darkmode ? 'card-mode':''}`} >
             <div className="header">
-              <h4 className="title">List Of Staffs</h4>
+              <h4 className={`title ${darkmode ? 'card-color':''}`}>List Of Staffs</h4>
               {/* <p className="category">Recent Notifications</p> */}
             </div>
             <div className="content">
          
             <ul className="list-group">
                 {staffdata?.map((staff, index) => (
-                  <li key={index} className="list-group-item">
+                  <li key={index} className={`list-group-item ${darkmode ? 'card-mode':''}`}      >
                     <span className="badges badge-primary">{staff.name}</span>
-                    <span className="list-group-item-text">{staff.email}</span>
+                    <span  className={`list-group-item-text${darkmode ? 'card-color text-white':''}`} >{staff.email}</span>
                   </li>
                 ))}
               </ul>

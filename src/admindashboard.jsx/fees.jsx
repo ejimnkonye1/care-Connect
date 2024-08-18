@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
 import { TextField, Button, Box } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 
 export const FeesAdding = () => {
   const [feesadding, setFeesAdding] = useState([]); 
@@ -38,10 +41,39 @@ export const FeesAdding = () => {
       console.error("Error adding fees", error);
     }
   };
-
+  const darkmode = useSelector((state)=> state.darkMode)
+  useEffect(() => {
+    const fetchFees = async () => {
+      try {
+        const usersRef = collection(firestore, 'users');
+        const usersSnapshot = await getDocs(usersRef);
+        const fees = [];
+  
+        usersSnapshot.forEach(async (userDoc) => {
+          const userFeesRef = collection(firestore, `users/${'slG595vQe6UHqhPOuX4rdnWdXSG3'}/fees`);
+          const userFeesSnapshot = await getDocs(userFeesRef);
+          userFeesSnapshot.forEach((feeDoc) => {
+            fees.push(feeDoc.data());
+          });
+        });
+  
+        setFeesAdding(fees);
+      } catch (error) {
+        console.error('Error fetching fees:', error);
+      }
+    };
+    fetchFees();
+  }, [firestore]);
   return (
-
-      <form onSubmit={handleFeesAdder}>
+    <div className="row">
+      <div className="col-md-6">
+      <div className={`card ${darkmode ? 'card-mode':''}`}>
+    <div className='header'>
+    <h4 className={`title ${darkmode ? 'card-color':''}`} >Add School Fees</h4>
+    {/* <p className="category">Activity today</p> */}
+    </div>
+    <div className='content'>
+    <form onSubmit={handleFeesAdder}>
         <TextField
           label='Fee Name'
           required
@@ -77,6 +109,50 @@ export const FeesAdding = () => {
           Add Fee
         </Button>
       </form>
+    </div>
+  </div>
+      </div>
+      <div className="col-md-6">
+      <div className={`card ${darkmode ? 'card-mode':''}`}>
+        <div className='header'>
+        <h4 className={`title ${darkmode ? 'card-color':''}`} >Activity History</h4>
+        <p className="category">Activity today</p>
+        </div>
+        <div className='content'>
+        <TableContainer component={Paper}className={`${darkmode ? 'card-mode':''}`}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell className={`${darkmode ? 'card-color':''}`}>Fee Name</TableCell>
+              <TableCell className={`${darkmode ? 'card-color':''}`}>Amount</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {feesadding.length > 0 ? (
+              feesadding.map((fee) => (
+                <TableRow key={fee.id}>
+                  <TableCell className={`${darkmode ? 'card-color':''}`}>{fee.fee_Name}</TableCell>
+                  <TableCell className={`${darkmode ? 'card-color':''}`}>₦{fee.amount}</TableCell>
+                 
+                  <TableCell>
+               
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell  className={`text-center ${darkmode ? 'card-color text-white text-center':''}`} colSpan={4}>No fees available</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+        </div>
+      </div>
+</div>
+    </div>
+  
+    
     
   );
 };

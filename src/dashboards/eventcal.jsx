@@ -5,6 +5,7 @@ import {  Grid, Typography, List, ListItem, ListItemText, Badge, styled } from "
 import { collection,  getDocs } from "firebase/firestore";
 import { firestore } from "../firebase"; // Import firestore instance
 import BroadChat from "./noti";
+import { useSelector } from "react-redux";
 
 const StyledCalendar = styled(Calendar)(({ theme }) => ({
   width: '100%',
@@ -71,15 +72,26 @@ const  EventCalendar = () => {
     }
     return null;
   };
-
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
     <div style={{ padding: "20px" }}>
       <div className="row">
         <div className="col-md-8">
-          <StyledCalendar onChange={setDate} value={date} tileContent={tileContent} />
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
+          <div className="header">
+          <h4 className={`title ${darkmode ? 'card-color':''}`}>School Calendar</h4>
+          </div>
+          <div className='content'>
+          <StyledCalendar className={`${darkmode? 'card-mode card-color':''}`} onChange={setDate} value={date} tileContent={tileContent} />
+         
+
+          </div>
+
+          </div>
          
         </div>
         <div className="col-md-4">
+        
           <Grid container spacing={2}>
             <EventsContainer item xs={12} md={6}>
               <Typography variant="h6" gutterBottom>
@@ -102,7 +114,9 @@ const  EventCalendar = () => {
       </div>
       <div className="row">
         <div className="col-md-8">
-          <BroadChat />
+         <div className="">
+         <BroadChat />
+         </div>
         </div>
       </div>
     </div>

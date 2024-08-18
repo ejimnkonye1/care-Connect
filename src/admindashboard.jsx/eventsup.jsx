@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { Button, Grid, Typography, List, ListItem, ListItemText, Badge, styled } from "@mui/material";
+import { Button,  Badge, styled } from "@mui/material";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase"; // Import firestore instance
+import { useSelector } from "react-redux";
 
 const StyledCalendar = styled(Calendar)(({ theme }) => ({
   width: '100%',
@@ -21,13 +22,7 @@ const StyledCalendar = styled(Calendar)(({ theme }) => ({
   },
 }));
 
-const EventsContainer = styled(Grid)(({ theme }) => ({
-  padding: theme.spacing(2),
-  backgroundColor: theme.palette.background.paper,
-  borderRadius: theme.shape.borderRadius,
-  boxShadow: theme.shadows[2],
-  marginTop: theme.spacing(3),
-}));
+
 
 const EventUpdates = () => {
   const [date, setDate] = useState(new Date());
@@ -97,35 +92,54 @@ const EventUpdates = () => {
     }
     return null;
   };
-
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
     <div style={{ padding: "20px" }}>
       <div className="row">
         <div className="col-md-6">
-          <StyledCalendar onChange={setDate} value={date} tileContent={tileContent} />
+        <div className={`card ${darkmode ? 'card-mode':''}`} >
+        <div className='header'>
+        <h4 className={`title ${darkmode ? 'card-color':''}`} >School Calender</h4>
+        <p className="category">Add events</p>
+        </div>
+        <div className='content'>
+        <StyledCalendar onChange={setDate} value={date} tileContent={tileContent}
+       className= {` ${darkmode ? 'card-mode text-white':''}`} 
+        />
           <Button variant="contained" color="primary" onClick={handleAddEvent} style={{ marginTop: "10px" }}>
             Add Event
           </Button>
         </div>
+      </div>
+        
+        </div>
         <div className="col-md-6">
-          <Grid container spacing={2}>
-            <EventsContainer item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom>
-                Events on {date.toDateString()}:
-              </Typography>
-              <List>
-                {events[date.toDateString()] ? (
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
+        <div className='header'>
+        <h4 className={`title ${darkmode ? 'card-color':''}`} >School Events</h4>
+        <p className="category">  Events on {date.toDateString()}:</p>
+        </div>
+        <div className='content'>
+        <div className= {`list-group ${darkmode ? 'card-mode':''}`} >
+        {events[date.toDateString()] ? (
                   events[date.toDateString()].map((event, index) => (
-                    <ListItem key={index}>
-                      <ListItemText primary={event} />
-                    </ListItem>
-                  ))
-                ) : (
-                  <Typography variant="body1">No events for this date.</Typography>
-                )}
-              </List>
-            </EventsContainer>
-          </Grid>
+  <a href="#"  key={index} className={`list-group-item list-group-item-action disabled ${darkmode ? 'card-mode card-color':''}`} >
+{event} 
+  </a>
+          ))
+        ) : (
+          <p className={`text-center ${darkmode ? 'card-color':''}`}>
+            No events for this date.
+          </p>
+             )}
+
+
+</div>
+            
+    
+        </div>
+      </div>
+       
         </div>
       </div>
     </div>

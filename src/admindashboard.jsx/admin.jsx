@@ -55,21 +55,8 @@ export const AdminDashboard = ({showToast, setShowToast}) => {
             <span>Dashboard</span>
           </span>
     </li>
-       <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
-
-    <span  className='nav-link' onClick={() => handlechange('user')}>
-            <HiOutlineUserCircle className='icon' />
-            <span>User Profile</span>
-          </span>
-    </li>
-    <li className={`nav-item ${currenpage === 'report' && 'active'}`}>
-
-    <span  className='nav-link' onClick={() => handlechange('report')}>
-    <LuActivitySquare className='icon' />
-        <span>Attendance</span>
-        </span>
-      
-    </li>
+    
+ 
     <li className={`nav-item ${currenpage === 'event' && 'active'}`}>
 
     <span className='nav-link' onClick={() => handlechange('event')}>
@@ -77,14 +64,7 @@ export const AdminDashboard = ({showToast, setShowToast}) => {
         <span>Events</span>
         </span>
     </li>
-    <li className={`nav-item ${currenpage === 'meal' && 'active'}`}>
 
-    <span className='nav-link' onClick={() => handlechange('meal')}>
-       
-    <MdNoMeals  className='icon'/>
-        <span>Meals Updates</span>
-        </span>
-    </li>
     <li className={`nav-item ${currenpage === 'fees' && 'active'}`}>
 
     <span className='nav-link' onClick={() => handlechange('fees')}>
@@ -99,12 +79,7 @@ export const AdminDashboard = ({showToast, setShowToast}) => {
         <span>Messaging</span>
         </span>
     </li>
-    <li className="nav-item active-pro mt-5">
-      <a className="nav-link" {...() => onclick(alert('coming soon'))}>
-        <AiOutlineDashboard className='icon' />
-        <span>Upgrade to PRO</span>
-      </a>
-    </li>
+ 
   </ul>
 </div>
     </div>
