@@ -13,6 +13,7 @@ export const Staffdash = () => {
     const fetchStaffData = async () => {
       const user = auth.currentUser;
       if (user) {
+        console.log(user.uid)
         const staffDoc = await getDoc(doc(firestore, 'staff', user.uid));
         if (staffDoc.exists()) {
           setStaffData(staffDoc.data());

@@ -224,6 +224,7 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
   </div>
 </nav>
 <div className={`content billie mb-1 ${darkmode ? "dark-mode" : ""}`}>
+  
       {currenpage === 'activity' &&     <StaffActivityUpdates/>}
       {currenpage === 'user' && <Staffpro />}
       {currenpage === 'attendance' && <MarkAttendance showToast={showToast} setShowToast={setShowToast} />}

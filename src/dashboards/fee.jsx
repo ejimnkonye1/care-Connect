@@ -2,19 +2,22 @@ import { collection, getDocs, getDoc, doc, updateDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import { firestore, auth } from '../firebase';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { useSelector } from 'react-redux';
 
 const FeesList = () => {
   const [feesadding, setFeesAdding] = useState([]);
   const [user, setUser] = useState(null);
-
+ 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const currentUser = auth.currentUser;
         if (currentUser) {
           const userDoc = await getDoc(doc(firestore, 'users', currentUser.uid));
+
           if (userDoc.exists()) {
             setUser(userDoc.data());
+           
           } else {
             console.error("User document does not exist.");
           }
@@ -101,31 +104,38 @@ const FeesList = () => {
     }
   };
   
-
+  const darkmode = useSelector((state)=> state.darkMode)
   return (
-    <div className='card'>
-      <TableContainer component={Paper}>
+    <div className='row'>
+    <div className='col-md-12'>
+      <div  className={`card ${darkmode ? 'card-mode':''}`}>
+        <div className='header'>
+          <h4 className={`title ${darkmode ? 'card-color':''}`}>School Fees </h4>
+          <p className='category'>Fees to be paid for {user? user.children[0].name:''} </p>
+        </div>
+         <div className='content mb-3'>
+         <TableContainer component={Paper} className= {` ${darkmode ? 'card-mode':''}`}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Fee Name</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell className= {` ${darkmode ? 'card-color':''}`}>Fee Name</TableCell>
+              <TableCell className= {` ${darkmode ? 'card-color':''}`}>Amount</TableCell>
+              <TableCell className= {` ${darkmode ? 'card-color':''}`}>Status</TableCell>
+              <TableCell className= {` ${darkmode ? 'card-color':''}`}>Pay</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {feesadding.length > 0 ? (
               feesadding.map((fee) => (
                 <TableRow key={fee.id}>
-                  <TableCell>{fee.fee_Name}</TableCell>
-                  <TableCell>₦{fee.amount}</TableCell>
-                  <TableCell>{fee.status}</TableCell>
+                  <TableCell className= {` ${darkmode ? 'card-color':''}`}>{fee.fee_Name}</TableCell>
+                  <TableCell className= {` ${darkmode ? 'card-color':''}`}>₦{fee.amount}</TableCell>
+                  <TableCell className= {` ${darkmode ? 'card-color':''}`}>{fee.status}</TableCell>
                   <TableCell>
                     {fee.status === 'Paid' ? (
                       <span>Paid</span>
                     ) : (
-                      <button onClick={() => handlePay(fee.id, fee.amount)}>Pay</button>
+                      <button className= {`btn btn-sm btn-dark ${darkmode ? 'card-color':''}`} onClick={() => handlePay(fee.id, fee.amount)}>Pay</button>
                     )}
                   </TableCell>
                 </TableRow>
@@ -138,7 +148,12 @@ const FeesList = () => {
           </TableBody>
         </Table>
       </TableContainer>
+         </div>
+      </div>
     </div>
+    
+  </div>
+   
   );
 };
 

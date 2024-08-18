@@ -31,7 +31,7 @@ const MealUpdatesTable = () => {
   const darkmode = useSelector((state)=> state.darkMode)
   return (
     <div className='row'>
-      <div className='col-md-8'>
+      <div className='col-md-12'>
         <div  className={`card ${darkmode ? 'card-mode':''}`}>
           <div className='header'>
             <h4 className={`title ${darkmode ? 'card-color':''}`}>Meal Updates for {user?  childNames.join(', ') :  ''} </h4>

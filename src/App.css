@@ -177,6 +177,7 @@ h6 {
   max-height: 400px;
   overflow-y: auto;
   width: 400px !important;
+  scrollbar-width: none;
 }
 .annouce-list {
   list-style-type: none;
@@ -190,4 +191,17 @@ h6 {
   border: 1px solid #ddd;
   border-radius: 5px;
   color: #333;
+}
+.communication-content{
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.act-content{
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+body{
+  scrollbar-width: none !important;
 }

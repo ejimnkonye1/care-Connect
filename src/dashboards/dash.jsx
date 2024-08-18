@@ -8,6 +8,7 @@ import { collection,  query, where, onSnapshot } from 'firebase/firestore';
 import { Attendancechart } from './charts';
 import { useSelector } from 'react-redux';
 import ColorAlerts from '../alert';
+import Staffmes from './staffmes';
 
 export const Dash = ({showToast,setShowToast}) => {
   const [triggerUpdate,setTriggerUpdate ] = useState(false);
@@ -128,13 +129,16 @@ export const Dash = ({showToast,setShowToast}) => {
               <p className="category">Events and Activities</p>
             </div>
             <div className="content">
-            {activityUpdates.map((updates, index) => (
+              <div className='act-content'>
+              {activityUpdates.map((updates, index) => (
               <ul className="activity-list" key={index}>
    <li className={`activity-item ${index % 2 === 0 ? 'btn-danger' : 'btn-warning'}`}>
       {updates.activity} by {updates.time}
     </li>
               </ul>
                   ))}
+              </div>
+      
               <div className="footer">
                 <hr className='hr' />
                 <div className="stats">
@@ -154,8 +158,10 @@ export const Dash = ({showToast,setShowToast}) => {
             <div className="content">
               <ul className="communication-list">
               
-                <li className="communication-item btn-info">Message from John Doe: Please check Sarah  medication.</li>
-                <li className="communication-item btn-info">Message from Jane Smith: Come and pick up Jack at 3 PM.</li>
+                {/* <li className="communication-item btn-info">Message from John Doe: Please check Sarah  medication.</li>
+                <li className="communication-item btn-info">Message from Jane Smith: Come and pick up Jack at 3 PM.</li> */}
+                <Staffmes />
+
               </ul>
               <div className="footer">
                 <hr className='hr' />
