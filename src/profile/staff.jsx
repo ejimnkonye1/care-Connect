@@ -160,7 +160,7 @@ return(
         <div className='Staff'>
             <button 
             onClick={handleParent}
-            className='parent-btn btns'> Parent Login</button>
+            className=' btns pars-btn'> Parent Login</button>
    
         </div>
       </div>
