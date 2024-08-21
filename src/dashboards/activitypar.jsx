@@ -15,7 +15,12 @@ export const ParentActivityUpdates = () => {
 
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const activityData = snapshot.docs.map((doc) => doc.data());
-        setActivityUpdates(activityData);
+        // Sort the activity data by date
+        const sortedActivityData = activityData.sort((a, b) => {
+          // Assuming `date` is a string in 'YYYY-MM-DD' format
+          return new Date(a.date) - new Date(b.date);
+        });
+        setActivityUpdates(sortedActivityData);
       });
 
       // Cleanup the subscription on unmount
@@ -23,31 +28,38 @@ export const ParentActivityUpdates = () => {
     }
   }, [user]);
   const darkmode = useSelector((state)=> state.darkMode)
+  // Utility function to format time
+  const formatTime = (timeString) => {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Converts 0 (midnight) to 12
+    return `${formattedHours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+  };
   return (
   
       <div className={`card ${darkmode ? 'card-mode':''}`}>
         <div className='header'>
-        <h4 className={`title ${darkmode ? 'card-color':''}`}>Activity History</h4>
+        <h4 className={`title ${darkmode ? 'card-color':''}`} >Activity History</h4>
         <p className="category">Activity today</p>
         </div>
         <div className='content'>
         <TableContainer >
-          <Table>
+          <Table className='mb-2'>
             <TableHead>
               <TableRow>
                 <TableCell className={`${darkmode ? 'card-color':''}`} >Date</TableCell>
                 <TableCell className={`${darkmode ? 'card-color':''}`}>Time</TableCell>
                 <TableCell className={`${darkmode ? 'card-color':''}`}>Activity</TableCell>
-                <TableCell className={`${darkmode ? 'card-color':''}`}>Child Name</TableCell>
+                {/* <TableCell className={`${darkmode ? 'card-color':''}`}>Child Name</TableCell> */}
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className='mb-5'>
               {activityUpdates.map((updates, index) => (
                 <TableRow key={index}>
                   <TableCell className={`${darkmode ? 'card-color':''}`}>{updates.date}</TableCell>
-                  <TableCell className={`${darkmode ? 'card-color':''}`}>{updates.time}</TableCell>
+                  <TableCell className={`${darkmode ? 'card-color' : ''}`}>{formatTime(updates.time)}</TableCell>
                   <TableCell className={`${darkmode ? 'card-color':''}`}>{updates.activity}</TableCell>
-                  <TableCell className={`${darkmode ? 'card-color':''}`}>{updates.childName}</TableCell>
+                  {/* <TableCell className={`${darkmode ? 'card-color':''}`}>{updates.childName}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

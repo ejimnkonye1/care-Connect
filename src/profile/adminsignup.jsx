@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import {  createUserWithEmailAndPassword } from 'firebase/auth';
 import {  doc, setDoc } from 'firebase/firestore';
 import { auth, firestore,  } from "../firebase"
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
-export const AdminSign = () => {
+export const AdminSign = ({btnloading, setbtnloading}) => {
     const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -22,16 +24,33 @@ export const AdminSign = () => {
         role: 'admin'
       });
       console.log("admin data saved to Firestore");
-      // Redirect to staff dashboard or show success message
-      navigate('/admin')
+      setbtnloading(true)
+      setTimeout(() => {
+        setbtnloading(false)
+        navigate('/admin')
+      }, 9000);
+     
     } catch (error) {
+      setbtnloading(true)
+      setTimeout(() => {
+        setbtnloading(false)
+        setError(error.message)
+        setTimeout(() => {
+          setError(false)
+        }, 5000)
+      }, 2000)
       console.error("Error registering admin: ", error);
-      setError("Error registering admin. Please try again.");
+      // setError("Error registering admin. Please try again.");
     }
   };
 
     return(
         <form id="admin-signup-form" onSubmit={handleRegister}>
+             {error && (
+    <div className="error-container" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>
+      <span className="text-center text-danger" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>{error}</span>
+    </div>
+  )}
           <h2 className="text-center">Admin Sign Up</h2>
         <div className="row">
           <div className="col-md-12">
@@ -78,10 +97,22 @@ export const AdminSign = () => {
           </div>
         </div>
 <div className='d-flex justify-content-end'>
-<button type="submit" className="btns btn-primary up-btn btn-block mt-2">Sign Up</button>
+<button type="submit" className="btns btn-primary up-btn btn-block mt-2">
+  
+{btnloading ? (
+             <div>
+                 
+             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="false"></span>
+             <span className="pl-3"> Sign Up</span>
+          </div>
+          ):(
+            '  Sign Up'
+          )}
+    
+  </button>
 </div>
 
-        {error && <p>{error}</p>}
+       
       </form>
     )
 }

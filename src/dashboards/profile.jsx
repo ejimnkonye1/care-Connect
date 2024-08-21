@@ -6,11 +6,11 @@ import img from '../images/face-3.jpg'
 import { IoCalendarNumber } from "react-icons/io5";
 import { LiaGenderlessSolid } from "react-icons/lia";
 import { FaUserAstronaut } from "react-icons/fa";
-import img1 from '../assets/child2.jpeg'
+import img1 from '../assets/crec.jpg'
 import { useSelector } from "react-redux";
 export const Profilenn = () => {
   const [userData, setUserData] = useState(null);
-
+  const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -18,6 +18,7 @@ export const Profilenn = () => {
     phone: '',
     gender: '',
     age: '',
+    image:''
   });
 
   const user = auth.currentUser
@@ -35,6 +36,7 @@ export const Profilenn = () => {
             phone: userDoc.data().phone ?? '',
             gender: userDoc.data().gender ?? '',
             age: userDoc.data().age ?? '',
+            image: userDoc.data().image?? ''
           });
         }
       }
@@ -50,11 +52,25 @@ export const Profilenn = () => {
       [name]: value,
     }));
   };
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImage(e.target.result); // Update the image preview
+        setFormData((prevData) => ({
+          ...prevData,
+          image: e.target.result, // Store the base64 image data
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    if (!formData.firstName || !formData.lastName || !formData.age || !formData.address || !formData.gender || !formData.phone) {
+    if (!formData.firstName || !formData.lastName || !formData.age || !formData.address || !formData.gender || !formData.phone ) {
       // handle error
       alert('fill in all empty field')
       return;
@@ -95,14 +111,7 @@ export const Profilenn = () => {
    fetchUserData();
  }, [auth, firestore]);
  const darkmode = useSelector((state)=> state.darkMode)
- const getInitials = (name) => {
-  const names = name.split(' ');
-  let initials = '';
-  for (let i = 0; i < names.length; i++) {
-    initials += names[i].charAt(0).toUpperCase();
-  }
-  return initials;
-};
+ 
     return(
     
             <div className="container-fluid">
@@ -240,6 +249,18 @@ export const Profilenn = () => {
                 </div>
               </div>
             </div>
+            <div className="row">
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label>Profile Image</label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={handleImageChange}
+                      />
+                    </div>
+                  </div>
+                </div>
             <button type="submit" className="btn mt-3 btn-dark btn-fill pull-right">
               Update Profile
             </button>
@@ -258,27 +279,9 @@ export const Profilenn = () => {
       />
     </div>
     <div className="content">
-    <div className="author">
-  <div
-    className="avatar border-gray img-fluid rounded-circle"
-    style={{
-      backgroundColor: '',
-      width: 40,
-      height: 40,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: 18,
-      fontWeight: 'bold',
-      color: '#fff',
-    }}
-  >
-    {getInitials(userData?.email ?? '')}
-  </div>
-  {/* <h4 className="title mt-3">{userData?.children[0].name ?? ''}</h4> */}
-</div>
+   
       <div className="author">
-        <img className="avatar border-gray img-fluid rounded-circle" src={img1} alt="User Avatar" />
+        <img className="avatar border-gray img-fluid rounded-circle" src={  userData?.image ?? formData.image} alt="User Avatar" />
         {/* <h4 className="title mt-3">{userData?.children[0].name ?? ''}</h4> */}
       </div>
       <div className="mt-4 namess">

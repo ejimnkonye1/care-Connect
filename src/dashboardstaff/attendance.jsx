@@ -25,7 +25,7 @@ export const MarkAttendance = () => {
     };
 
     fetchUsers();
-  }, [firestore, user]);
+  }, [firestore, users]);
 
   const handleAttendanceChange = async (userId, childName, status) => {
     const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format

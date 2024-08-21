@@ -16,7 +16,12 @@ export const IncidentReporting = () => {
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const incidentReportsData = snapshot.docs.map((doc) => doc.data())
-    setincidentReports(incidentReportsData)
+        // Sort the activity data by date
+        const sortedReports = incidentReportsData.sort((a, b) => {
+          // Assuming `date` is a string in 'YYYY-MM-DD' format
+          return new Date(a.date) - new Date(b.date);
+        });
+    setincidentReports(sortedReports)
     })
     
   return unsubscribe;
@@ -25,6 +30,12 @@ export const IncidentReporting = () => {
 
   }, [user])
   const darkmode = useSelector((state)=> state.darkMode)
+  const formatTime = (timeString) => {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Converts 0 (midnight) to 12
+    return `${formattedHours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+  };
   return (
   
       <div className={`card ${darkmode ? 'card-mode':''}`}>
@@ -47,7 +58,7 @@ export const IncidentReporting = () => {
               {incidentReports.map((report, index) => (
                 <TableRow key={index}>
                   <TableCell className={`${darkmode ? 'card-color':''}`}>{report.date}</TableCell>
-                  <TableCell className={`${darkmode ? 'card-color':''}`}>{report.time}</TableCell>
+                  <TableCell className={`${darkmode ? 'card-color':''}`}>{formatTime(report.time)}</TableCell>
                   <TableCell className={`${darkmode ? 'card-color':''}`}>{report.location}</TableCell>
                   <TableCell className={`${darkmode ? 'card-color':''}`}>{report.description}</TableCell>
                 </TableRow>

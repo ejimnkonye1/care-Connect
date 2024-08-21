@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import { auth, firestore,  } from "../firebase"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {  doc, setDoc } from 'firebase/firestore';
-export const ParentSign = () => {
+import { MdAddCircleOutline } from "react-icons/md";
+export const ParentSign = ({btnloading, setbtnloading}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [childName, setChildName] = useState('');
@@ -11,9 +13,18 @@ export const ParentSign = () => {
     const [firstName, setfirstName] = useState('')
     const [lastName, setlastName] = useState('')
     const [error, setError] = useState(null)
+    const [image, setImage] = useState(null);
+
     const navigate = useNavigate()
     const handleRegister = async (e) => {
         e.preventDefault();
+        if (!image) {
+          setError("Please upload an image.");
+          setTimeout(() => {
+              setError(false);
+          }, 5000);
+          return;
+      }
         try {
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           const userId = userCredential.user.uid;
@@ -23,25 +34,51 @@ export const ParentSign = () => {
             children: [{ name: childName }],
             phone,
             firstName,
-            lastName
+            lastName,
+            image
 
           });
           console.log(userId)
           console.log("User data saved to Firestore");
-          // Redirect to parent dashboard or show success message
-          navigate('/dash')
+          setbtnloading(true)
+          setTimeout(() => {
+            setbtnloading(false)
+            navigate('/dash')
+          }, 9000);
+         
         } catch (error) {
+          setbtnloading(true)
+          setTimeout(() => {
+            setbtnloading(false)
+            setError(error.message)
+            setTimeout(() => {
+              setError(false)
+            }, 5000)
+          }, 2000)
           console.error("Error registering: ", error);
-          setError(error.message)
+          
         }
       };
-    
+      const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            setImage(e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      };
     return(
         <div className="parent-sign">
-       {error && <div className="alert alert-danger" role="alert">{error}</div>}
-
+       {error && (
+    <div className="error-container" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>
+      <span className="text-center text-danger" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>{error}</span>
+    </div>
+  )}
         <h2 className="text-center">Parent Sign Up</h2>
         <form id="parent-signup-form"  onSubmit={handleRegister}>
+        
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
@@ -85,10 +122,34 @@ export const ParentSign = () => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required  className="form-control"/>
               </div>
             </div>
-            
+            <div className="col-md-6 mt-2">
+            <div className="form-group">
+            <div className="image-upload">
+                        <label htmlFor="file-input">
+                          <div className="circular-image">
+                          {image && <img src={image} alt="Upload" id="preview" />}
+                            <MdAddCircleOutline className="add-icon" />
+                          </div>
+                        </label>
+                        <input id="file-input" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageChange} />
+                      </div>
+                      </div>
+            </div>
           </div>
   <div className="d-flex justify-content-end">
-  <button type="submit" className="btns up-btn btn-primary btn-block mt-2  mb-3">Sign Up</button>
+  <button type="submit" className="btns up-btn btn-primary btn-block mt-2  mb-3">
+    
+  {btnloading ? (
+             <div>
+                 
+             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="false"></span>
+             <span className="pl-3"> Sign Up</span>
+          </div>
+          ):(
+            '  Sign Up'
+          )}
+    
+    </button>
   </div>
 
         </form>

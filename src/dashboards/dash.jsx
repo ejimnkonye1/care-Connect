@@ -34,7 +34,12 @@ export const Dash = ({showToast,setShowToast}) => {
   const darkmode = useSelector((state)=> state.darkMode)
  
 
-
+  const formatTime = (timeString) => {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Converts 0 (midnight) to 12
+    return `${formattedHours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+  };
 
   return (
     <div className="container-fluid">
@@ -133,7 +138,7 @@ export const Dash = ({showToast,setShowToast}) => {
               {activityUpdates.map((updates, index) => (
               <ul className="activity-list" key={index}>
    <li className={`activity-item ${index % 2 === 0 ? 'btn-danger' : 'btn-warning'}`}>
-      {updates.activity} at {updates.time}
+      {updates.activity} at {formatTime(updates.time)}
     </li>
               </ul>
                   ))}

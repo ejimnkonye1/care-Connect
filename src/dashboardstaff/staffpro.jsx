@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 
 import img from '../images/face-3.jpg'
 import  { useState, useEffect } from 'react';
 
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-
+import img1 from '../assets/crec.jpg'
 import { auth, firestore } from '../firebase'
 import { useSelector } from 'react-redux';
 import { IoCalendarNumber } from "react-icons/io5";
@@ -11,12 +12,13 @@ import { LiaGenderlessSolid } from "react-icons/lia";
 import { FaUserAstronaut } from "react-icons/fa";
 export const Staffpro = () => {
     const [staffData, setStaffData] = useState(null);
-  
+    const [image, setImage] = useState(null);
     const [formData, setFormData] = useState({
       address: '',
       phone: '',
       gender: '',
       age: '',
+      image:''
     });
   
     const user = auth.currentUser
@@ -32,6 +34,7 @@ export const Staffpro = () => {
               phone: userDoc.data().phone ?? '',
               gender: userDoc.data().gender ?? '',
               age: userDoc.data().age ?? '',
+                image: userDoc.data().image?? ''
             });
           }
         }
@@ -47,10 +50,31 @@ export const Staffpro = () => {
         [name]: value,
       }));
     };
+    const handleImageChange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setImage(e.target.result); // Update the image preview
+          setFormData((prevData) => ({
+            ...prevData,
+            image: e.target.result, // Store the base64 image data
+          }));
+        };
+        reader.readAsDataURL(file);
+      }
+    };
   
     const handleSubmit = async (event) => {
+      if (!formData.age || !formData.address || !formData.gender || !formData.phone ) {
+        // handle error
+        alert('fill in all empty field')
+        return;
+      }
+      const hasChanged = Object.keys(formData).some((key) => formData[key] !== staffData[key]);
+  
       event.preventDefault();
-      if (user) {
+      if (user && hasChanged) {
         const userDocRef = doc(firestore, 'staff', user.uid);
         try {
           await updateDoc(userDocRef, formData);
@@ -173,7 +197,19 @@ export const Staffpro = () => {
                   </div>
                 
                 </div>
-        
+                
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label>Profile Image</label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={handleImageChange}
+                      />
+                    </div>
+                  </div>
+                </div>
                         <button type="submit" className="btn mt-3 btn-dark btn-fill pull-right">Update Profile</button>
                         <div className="clearfix"></div>
                       </form>
@@ -183,12 +219,12 @@ export const Staffpro = () => {
                 <div className="col-md-4">
                 <div className={`card card-user ${darkmode? 'card-mode':''}`}>
                     <div className="image">
-                      <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..." />
+                      <img src={img1} alt="..." />
                     </div>
                     <div className="content">
                       <div className="author">
                        
-                          <img className="avatar border-gray img-fluid rounded-circle" src={img} alt="..." />
+                          <img className="avatar border-gray img-fluid rounded-circle" src={staffData?.image ?? formData.image} alt="..." />
                           <h4 className="title">staff
 
                             

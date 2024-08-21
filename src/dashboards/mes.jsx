@@ -13,7 +13,7 @@ const MessagingSystem = () => {
   const [staffList, setStaffList] = useState([]); // Store the list of staff members
 
   const parentId = auth.currentUser?.uid; // Using Firebase auth UID as parentId
-
+  
   // Fetch staff members from Firestore
   useEffect(() => {
     const fetchStaff = async () => {
