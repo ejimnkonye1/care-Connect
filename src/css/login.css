@@ -398,6 +398,8 @@ top: 50px;
     /* min-height: 70vh;  */
     height: auto;
     margin: 0 auto; /* Center the container horizontally */
+    margin: 2rem;
+    padding: 1rem;
 }
 
 /* Flexbox to Center .component-container Vertically and Horizontally */
@@ -423,8 +425,12 @@ top: 50px;
     .component-container {
         /* min-height: 80vh;  */
         width: 100%;
+        /* margin: 4rem; */
+    /* padding: 1rem; */
     }
-    
+    .center-wrapper{
+       
+    }
     .holder-main {
         height: auto; /* Adjust height for smaller screens if needed */
     }

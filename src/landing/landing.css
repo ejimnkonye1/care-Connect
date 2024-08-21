@@ -16,7 +16,7 @@ button .to-color{
   height: 100vh;
   padding: 2rem;
   text-align: center;
-  background-image: url('../assets/kid.webp');
+  background-image: url('../assets/c6.jpg');
   background-size: cover; /* Ensures the image covers the entire section */
   background-position: center; /* Centers the image */
   width: 100%;
@@ -25,13 +25,14 @@ button .to-color{
   margin-top: 50px !important;
 }
 
+
 .hero h1 {
   font-size: 3rem; /* Adjust size as needed */
   margin-bottom: 1rem; /* Space below the heading */
 }
 
 .hero p {
-  font-size: 1.25rem; /* Adjust size as needed */
+  font-size: 1.45rem; /* Adjust size as needed */
   margin-bottom: 1.5rem; /* Space below paragraphs */
 }
 
@@ -78,7 +79,8 @@ button .to-color{
   }
   .nav-bg{
     /* background: #8a7a7a; */
-    background-color: rgb(10 25 47);
+    /* background-color: rgb(10 25 47); */
+    background-color: rgb(16, 42, 81);
     color: #fff;
 
   }
@@ -162,6 +164,7 @@ button .to-color{
   }
   
   .testimonial-card {
+    
     border: none; /* Remove default border */
     border-radius: 10px; /* Rounded corners */
     overflow: hidden; /* Ensures content does not overflow */
@@ -385,6 +388,14 @@ border-color: #ffb850;
   .lg-nav{
     display: none !important;
   }
+  .hero p {
+    font-size: 1.25rem !important;
+   
+  }
+  .testimonial-card{
+    margin: 2rem;
+    padding: 1rem;
+  }
  }
  #features {
  
@@ -413,8 +424,8 @@ border-color: #ffb850;
 }
 
 .feat-img {
-  max-width: 80px;
-  height: auto;
+  /* max-width: 80px; */
+  height: 100px;
   margin-bottom: 1rem;
 }
 

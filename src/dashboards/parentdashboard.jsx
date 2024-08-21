@@ -255,7 +255,7 @@ export const Dashboard = ({showToast, setShowToast}) => {
         {/* <footer className="foote fixed-foot">
             <div className="container-fluid ">
                 <p className=" text-center">
-                    &copy; <a href="http://www.creative-tim.com">Careconnect</a>, made with love for a better web
+                    &copy; <a href="">Careconnect</a>, made with love for a better web
                 </p>
             </div>
         </footer> */}

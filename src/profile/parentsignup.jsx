@@ -7,6 +7,10 @@ export const ParentSign = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [childName, setChildName] = useState('');
+    const [phone, setphone] = useState('')
+    const [firstName, setfirstName] = useState('')
+    const [lastName, setlastName] = useState('')
+    const [error, setError] = useState(null)
     const navigate = useNavigate()
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -16,7 +20,11 @@ export const ParentSign = () => {
           await setDoc(doc(firestore, 'users', userId), {
             email,
             role: 'parent',
-            children: [{ name: childName }]
+            children: [{ name: childName }],
+            phone,
+            firstName,
+            lastName
+
           });
           console.log(userId)
           console.log("User data saved to Firestore");
@@ -24,24 +32,27 @@ export const ParentSign = () => {
           navigate('/dash')
         } catch (error) {
           console.error("Error registering: ", error);
+          setError(error.message)
         }
       };
     
     return(
         <div className="parent-sign">
+       {error && <div className="alert alert-danger" role="alert">{error}</div>}
+
         <h2 className="text-center">Parent Sign Up</h2>
         <form id="parent-signup-form"  onSubmit={handleRegister}>
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
                 <label htmlFor="first-name">First Name:</label>
-                <input type="text" id="first-name" name="first-name" className="form-control" />
+                <input type="text" id="first-name" placeholder="First Name" value={firstName} onChange={(e) => setfirstName(e.target.value)} required name="first-name" className="form-control" />
               </div>
             </div>
             <div className="col-md-6">
               <div className="form-group">
                 <label htmlFor="last-name">Last Name:</label>
-                <input type="text" id="last-name" name="last-name" className="form-control" />
+                <input type="text" id="last-name" placeholder="Last Name" name="last-name" value={lastName} onChange={(e) => setlastName(e.target.value)} required className="form-control" />
               </div>
             </div>
           </div>
@@ -62,7 +73,7 @@ export const ParentSign = () => {
             <div className="col-md-4">
               <div className="form-group">
                 <label htmlFor="phone-number">Phone Number:</label>
-                <input type="text" id="phone-number" name="phone-number" className="form-control" />
+                <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setphone(e.target.value)} required id="phone-number" name="phone-number" className="form-control" />
               </div>
             </div>
           </div>
@@ -74,12 +85,7 @@ export const ParentSign = () => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required  className="form-control"/>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="form-group">
-                <label htmlFor="confirm-password">Confirm Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" className="form-control" />
-              </div>
-            </div>
+            
           </div>
   <div className="d-flex justify-content-end">
   <button type="submit" className="btns up-btn btn-primary btn-block mt-2  mb-3">Sign Up</button>

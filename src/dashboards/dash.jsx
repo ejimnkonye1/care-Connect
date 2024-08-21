@@ -133,7 +133,7 @@ export const Dash = ({showToast,setShowToast}) => {
               {activityUpdates.map((updates, index) => (
               <ul className="activity-list" key={index}>
    <li className={`activity-item ${index % 2 === 0 ? 'btn-danger' : 'btn-warning'}`}>
-      {updates.activity} by {updates.time}
+      {updates.activity} at {updates.time}
     </li>
               </ul>
                   ))}

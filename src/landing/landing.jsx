@@ -11,9 +11,11 @@ import feat3 from '../images/f-icon-6.svg'
 import feat4 from '../images/f-icon-8.svg'
 import feat5 from '../images/f-icon-9.svg'
 import feat6 from '../images/f-icon-2.svg'
+import feat7 from '../images/a1.jpeg'
 import c1 from '../assets/c1.jpg'
 import c2 from '../assets/c2.jpg'
 import c3 from '../assets/c3.jpg'
+
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 export const LandingPage = () => {
@@ -34,6 +36,9 @@ export const LandingPage = () => {
     }
     const HandleLogin = () => {
         navigate ('/login')
+    }
+    const handleDemo = () => {
+      alert('coming soon')
     }
     return (
         <div className='child'>
@@ -103,13 +108,14 @@ export const LandingPage = () => {
 <div className='row'>
     <div className='col-md-12 py-5 align-items-center flex-column'>
 <div className=''>
-<h1>CareConnect</h1>
-                <p>Connecting Caregivers and Families</p>
-                <p>The Careconnect platform simplifies day-to-day operations for childcare centers,<br /> 
+<h1 className='care'>Care <span className='connect'>Connect
+  </span></h1>
+                <p className='text-white'>Connecting Caregivers and Families</p>
+                <p className='text-white'>The Careconnect platform simplifies day-to-day operations for childcare centers,<br /> 
                 so you can focus on what matters: providing an ideal learning environment that sparks growth,<br/> creativity and happiness in children.
 
 </p>
-                <button className="btn btn-primary">Get Started</button>
+                <button className="btn btn-primary" onClick={HandleLogin}>Get Started</button>
 </div>
     </div>
     
@@ -193,19 +199,19 @@ export const LandingPage = () => {
                     <div className='card feat-card'>
                         <img src={feat1} className='feat-img' />
                     </div>
-                    <p>Childcare admissions and attendance</p>
+                    <p>Childcare attendance</p>
                 </div>
                 <div className=' col-6 col-md-2'>
                     <div className='card  feat-card'>
                         <img src={feat2} className='feat-img' />
                     </div>
-                    <p>Parent engagement / communication</p>
+                    <p>Parent communication</p>
                 </div>
                 <div className='col-6 col-md-2'>
                     <div className='card  feat-card'>
                         <img src={feat3} className='feat-img'/>
                     </div>
-                    <p>Classroom views and live ratios</p>
+                    <p>Classroom Updates</p>
                 </div>
                 <div className='col-6 col-md-2'>
                     <div className='card  feat-card'>
@@ -223,7 +229,7 @@ export const LandingPage = () => {
                     <div className='card  feat-card'>
                         <img src={feat6} className='feat-img'/>
                     </div>
-                    <p>Center management</p>
+                    <p>Admin management</p>
                 </div>
 
              </div>
@@ -250,7 +256,7 @@ export const LandingPage = () => {
           <li className="border-bottom p-2">Personalized insights</li>
         </ul>
         <div className="d-flex justify-content-center mb-3">
-          <button className="btns book-demo-sign">Sign Up</button>
+          <button className="btns book-demo-sign" onClick={HandleSignUp}>Sign Up</button>
         </div>
       </div>
     </div>
@@ -271,7 +277,7 @@ export const LandingPage = () => {
           <li className="border-bottom p-2">Personalized insights</li>
         </ul>
         <div className="d-flex justify-content-center mb-3">
-          <button className="btns book-demo-btn">Book A Demo</button>
+          <button className="btns book-demo-btn" onClick={handleDemo}>Book A Demo</button>
         </div>
       </div>
     </div>
@@ -292,7 +298,7 @@ export const LandingPage = () => {
           <li className="border-bottom p-2">Personalized insights</li>
         </ul>
         <div className="d-flex justify-content-center mb-3">
-          <button className="btns book-demo-btn-second">Book A Demo</button>
+          <button className="btns book-demo-btn-second" onClick={()=> alert('coming soon')}>Book A Demo</button>
         </div>
       </div>
     </div>

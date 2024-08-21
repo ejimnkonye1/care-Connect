@@ -53,7 +53,16 @@ export const Profilenn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (user) {
+  
+    if (!formData.firstName || !formData.lastName || !formData.age || !formData.address || !formData.gender || !formData.phone) {
+      // handle error
+      alert('fill in all empty field')
+      return;
+    }
+  
+    const hasChanged = Object.keys(formData).some((key) => formData[key] !== userData[key]);
+  
+    if (hasChanged && user) {
       const userDocRef = doc(firestore, 'users', user.uid);
       try {
         await updateDoc(userDocRef, formData);
@@ -86,6 +95,14 @@ export const Profilenn = () => {
    fetchUserData();
  }, [auth, firestore]);
  const darkmode = useSelector((state)=> state.darkMode)
+ const getInitials = (name) => {
+  const names = name.split(' ');
+  let initials = '';
+  for (let i = 0; i < names.length; i++) {
+    initials += names[i].charAt(0).toUpperCase();
+  }
+  return initials;
+};
     return(
     
             <div className="container-fluid">
@@ -241,6 +258,25 @@ export const Profilenn = () => {
       />
     </div>
     <div className="content">
+    <div className="author">
+  <div
+    className="avatar border-gray img-fluid rounded-circle"
+    style={{
+      backgroundColor: '',
+      width: 40,
+      height: 40,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: '#fff',
+    }}
+  >
+    {getInitials(userData?.email ?? '')}
+  </div>
+  {/* <h4 className="title mt-3">{userData?.children[0].name ?? ''}</h4> */}
+</div>
       <div className="author">
         <img className="avatar border-gray img-fluid rounded-circle" src={img1} alt="User Avatar" />
         {/* <h4 className="title mt-3">{userData?.children[0].name ?? ''}</h4> */}
@@ -263,18 +299,7 @@ export const Profilenn = () => {
     </div>
 
     </div>
-    {/* <hr /> */}
-    {/* <div className="text-center">
-      <button className="btn btn-simple btn-facebook me-2">
-        <i className="fa fa-facebook-square"></i>
-      </button>
-      <button className="btn btn-simple btn-twitter me-2">
-        <i className="fa fa-twitter"></i>
-      </button>
-      <button className="btn btn-simple btn-google">
-        <i className="fa fa-google-plus-square"></i>
-      </button>
-    </div> */}
+   
   </div>
 </div>
 
