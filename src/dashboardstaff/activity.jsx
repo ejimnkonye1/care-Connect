@@ -123,8 +123,9 @@ export const StaffActivityUpdates = () => {
         name="childId"
         value={newactivityUpdates.childId}
         onChange={handleChildChange}
-        className={`mb-4 mt-1 p-3 m-2 ${darkmode ? 'card-mode':''}`}
+        className={`mb-4 mt-1 p-3 m-2 ${darkmode ? 'card-mode card-color':''}`}
       >
+        <option className={`${darkmode ? 'card-color':''}`}>Select a child</option>
         {users.map((user, index) => (
           user.children ? (
             user.children.map((child, childIndex) => (
@@ -144,12 +145,12 @@ export const StaffActivityUpdates = () => {
         <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className="header">
             <h4 className={`title ${darkmode? 'card-color':''}`}>Activity Updates</h4>
-            <p className="category">up</p>
+            <p className="category">Activity</p>
           </div>
           <div className="content">
  
-          <TableContainer className={`${darkmode? 'card-mode':''}`} component={Paper}>
-          <Table>
+          <TableContainer className={`mb-3  ${darkmode? 'card-mode':''}`} component={Paper}>
+          <Table className="mb-3">
             <TableHead>
               <TableRow>
                 <TableCell className={`${darkmode ? 'card-color':''}`}>Child Name</TableCell>
@@ -163,9 +164,9 @@ export const StaffActivityUpdates = () => {
                 
                 (
                   <TableRow key={index}>
-                    <TableCell>{update.childName}</TableCell>
-                    <TableCell>{update.activity}</TableCell>
-                    <TableCell>{update.time}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`} >{update.childName}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{update.activity}</TableCell>
+                    <TableCell className={`${darkmode ? 'card-color':''}`}>{update.time}</TableCell>
                   </TableRow>
                 )
               )}
@@ -192,15 +193,18 @@ export const StaffActivityUpdates = () => {
           value={newactivityUpdates.time}
           onChange={(e) => setNewActivityUpdates({...newactivityUpdates, time: e.target.value})}
           required
+          sx={{ padding: '10px' }}
         />
          <TextField
           label="date"
           type="date"
           fullWidth
           margin="normal"
+          className={`text-white${darkmode ? 'card-color':''}`}
           value={newactivityUpdates.date}
           onChange={(e) => setNewActivityUpdates({...newactivityUpdates, date: e.target.value})}
           required
+          sx={{ padding: '10px' }}
         />
           <TextField
           label="Activity"
@@ -209,15 +213,19 @@ export const StaffActivityUpdates = () => {
           value={newactivityUpdates.activity}
           onChange={(e) => setNewActivityUpdates({...newactivityUpdates, activity: e.target.value})}
           required
+          sx={{ padding: '10px' }}
         />
+        <div className="d-flex justify-content-end">
         <Button
           type="submit"
           variant="contained"
           color="primary"
-          className="mt-3"
+          className="mt-3 "
         >
           Submit
         </Button>
+        </div>
+      
       </div>
     </div>
   </div>

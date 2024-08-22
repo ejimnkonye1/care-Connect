@@ -108,7 +108,7 @@ export const StaffMealUpdatesTable = () => {
             <h4 className={`title ${darkmode? 'card-color':''}`}>Meal Update History</h4>
             <p className="category">Today meal</p>
           </div>
-          <Table>
+          <Table className='mb-3'>
             <TableHead>
               <TableRow>
                 <TableCell className={`${darkmode ? 'card-color':''}`}>Date</TableCell>
@@ -141,8 +141,9 @@ export const StaffMealUpdatesTable = () => {
         name="childId"
         value={newMealUpdate.childId}
         onChange={handleChildChange}
-        className={`mb-4 mt-1 p-3 m-2 ${darkmode? 'card-mode':''}`}
+        className={`mb-4 mt-1 p-3 m-2 ${darkmode? 'card-mode card-color':''}`}
       >
+        <option>Select a child</option>
         {users.map((user, index) => (
           user.children ? (
             user.children.map((child, childIndex) => (
@@ -168,15 +169,24 @@ export const StaffMealUpdatesTable = () => {
             <h4 className={`title ${darkmode? 'card-color':''}`}>Send New Meal Update</h4>
             <p className="category">Meals</p>
           </div>
-      
-          <form className='mb-5 mt-3 m-3'>
+          <div className="content">
+          <form className='  '>
             <div className='row'>
                 <div className='col-md-3'>
                 <TextField
               label="Date"
               name="date"
+              type='date'
+              className={`text-white${darkmode ? 'card-color':''}`}
               value={newMealUpdate.date}
               onChange={handleInputChange}
+              fullWidth
+
+          margin="normal"
+          sx={{padding:'3px'}}
+          InputLabelProps={{
+            className: `${darkmode ? 'card-color text-white' : ''}`
+          }}
             />
                 </div>
                 <div className='col-md-3'>
@@ -185,6 +195,12 @@ export const StaffMealUpdatesTable = () => {
               name="mealType"
               value={newMealUpdate.mealType}
               onChange={handleInputChange}
+              fullWidth
+          margin="normal"
+          sx={{padding:'3px'}}
+          InputLabelProps={{
+            className: `${darkmode ? 'card-color text-white' : ''}`
+          }}
             />
 </div>
 <div className='col-md-3'>
@@ -193,6 +209,12 @@ export const StaffMealUpdatesTable = () => {
               name="food"
               value={newMealUpdate.food}
               onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              sx={{padding:'3px'}}
+              InputLabelProps={{
+                className: `${darkmode ? 'card-color text-white' : ''}`
+              }}
             />
 </div>
 <div className='col-md-3'>
@@ -202,18 +224,29 @@ export const StaffMealUpdatesTable = () => {
               name="quantity"
               value={newMealUpdate.quantity}
               onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              sx={{padding:'3px'}}
+              InputLabelProps={{
+                className: `${darkmode ? 'card-color text-white' : ''}`
+              }}
             />
 </div>
             </div>
            
          <div >
          <Button
-         className='mt-3 btn-dark'
+         color='primary'
+          variant="contained"
+         className='mt-4 '
          onClick={handleSendUpdate}>Send Update</Button>
          </div>
         
            
           </form>
+            </div>
+      
+        
         </div>
       </div>
     </div>

@@ -91,15 +91,16 @@ const MessagingSystem = () => {
     <div className='row'>
       <div className='col-md-2'>
         <FormControl fullWidth>
-          <InputLabel>Select Staff</InputLabel>
+          <InputLabel   className={`${darkmode ? 'card-color':''}`}>Select Staff</InputLabel>
           <Select
+          className={`${darkmode ? 'card-color':''}`}
             value={staffId}
             onChange={(e) => setStaffId(e.target.value)}
             label="Select Staff"
           >
             {staffList.map((staff) => (
               <MenuItem key={staff.id} value={staff.id}
-               className={`${darkmode ? 'card-color':''}`}
+               className={`${darkmode ? '':''}`}
               >
                 {staff.name} ({staff.email})
               </MenuItem>
@@ -143,6 +144,9 @@ const MessagingSystem = () => {
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
               disabled={!staffId}
+              InputLabelProps={{
+                className: `${darkmode ? 'card-color text-white' : ''}`
+              }}
             />
             <Button onClick={handleSendMessage} disabled={loading || !staffId}>
               {loading ? 'Sending...' : 'Send'}

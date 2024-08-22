@@ -100,8 +100,9 @@ const StaffChat = () => {
       <div className='chat-header'>
         <h6>Staff Dashboard - Chat with Parents</h6>
         <FormControl fullWidth>
-          <InputLabel>Select Parent</InputLabel>
+          <InputLabel  className={`${darkmode ? 'card-color':''}`}>Select Parent</InputLabel>
           <Select
+         className={`${darkmode ? 'card-color':''}`}
             value={selectedParentId}
             onChange={(e) => setSelectedParentId(e.target.value)}
             label="Select Parent"
@@ -140,11 +141,14 @@ const StaffChat = () => {
       <div className={`chat-input ${darkmode ? 'card-mode card-color':''}`}>
         <TextField
           label='Type your message...'
-          className={`${darkmode? 'card-color':''}`}
+          className={`${darkmode? 'card-color text-white':''}`}
           fullWidth
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+          InputLabelProps={{
+            className: `${darkmode ? 'card-color text-white' : ''}`
+          }}
         />
         <Button onClick={handleSendMessage} disabled={loading}>
           {loading ? 'Sending...' : 'Send'}

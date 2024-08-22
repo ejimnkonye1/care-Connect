@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
 import  { useState,  } from 'react';
 import LastUpdated from '../lastupdate';
@@ -10,13 +11,15 @@ import { useSelector } from 'react-redux';
 import ColorAlerts from '../alert';
 import Staffmes from './staffmes';
 
+
 export const Dash = ({showToast,setShowToast}) => {
   const [triggerUpdate,setTriggerUpdate ] = useState(false);
 
   const [activityUpdates, setActivityUpdates] = useState([]);
   const user = auth.currentUser
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    
     if (user) {
       const activityRef = collection(firestore, 'activities');
       const q = query(activityRef, where('userId', '==', user.uid));
@@ -24,6 +27,7 @@ export const Dash = ({showToast,setShowToast}) => {
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const activityData = snapshot.docs.map((doc) => doc.data());
         setActivityUpdates(activityData);
+      
       });
 
       // Cleanup the subscription on unmount
@@ -40,6 +44,96 @@ export const Dash = ({showToast,setShowToast}) => {
     const formattedHours = hours % 12 || 12; // Converts 0 (midnight) to 12
     return `${formattedHours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
   };
+  
+  setTimeout(()=>{
+    setLoading(false)
+  },[7000])
+
+  if (loading) {
+    return (
+      <div className="container-fluid loading-skeleton">
+        <div className="row">
+          <div className="col-md-4">
+            <div className={`card ${darkmode ? 'card-mode' : ''}`}>
+              <div className="header">
+                <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Child Attendance</h4>
+                <p className="category">Today's Attendance</p>
+              </div>
+              <div className="content">
+                <div id="chartAttendance" className="ct-chart ct-perfect-fourth"></div>
+                <div className="footer">
+                  <div className="legend"></div>
+                  <hr className='hr' />
+                  <div className="stats"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-8">
+            <div className={`card ${darkmode ? 'card-mode' : ''}`}>
+              <div className="header">
+                <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Attendance Chart</h4>
+                <p className="category">Weekly Attendance</p>
+              </div>
+              <div className="content">
+                <div id="chartAttendance" className="ct-chart ct-perfect-fourth"></div>
+                <div className="footer">
+                  <div className="legend"></div>
+                  <hr className='hr' />
+                  <div className="stats"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+        <div className="col-md-6">
+          <div className={`card ${darkmode ? 'card-mode':''}`}>
+            <div className="header">
+              <h4 className={`title ${darkmode? 'card-color':''}`} >Daily Activities</h4>
+              <p className="category">Events and Activities</p>
+            </div>
+            <div className="content">
+              <div className='act-content'>
+              
+              </div>
+      
+              <div className="footer">
+                <hr className='hr' />
+                <div className="stats">
+                  <i className="fa fa-clock-o"></i> Updated just now
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6">
+        <div className={`card ${darkmode ? 'card-mode':''}`}>
+            <div className="header">
+              <h4 className={`title ${darkmode? 'card-color':''}`}>Staff Communication</h4>
+              <p className="category">Messages from Staff</p>
+            </div>
+            <div className="content">
+              <ul className="communication-list">
+              
+          
+
+              </ul>
+              <div className="footer">
+                <hr className='hr' />
+                <div className="stats">
+                  <i className="fa fa-history"></i> Updated just now
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className="container-fluid">
@@ -101,29 +195,6 @@ export const Dash = ({showToast,setShowToast}) => {
             </div>
           </div>
         </div>
-        
-        {/* <div className="col-md-8">
-          <div className="card">
-            <div className="header">
-              <h4 className="title">Staff Notifications</h4>
-              <p className="category">Recent Notifications</p>
-            </div>
-            <div className="content">
-         
-              <ul className="notification-list">
-            
-                <li className="notification-item  btn-success">Reminder: Staff meeting at 2 PM</li>
-                <li className="notification-item btn-warning">New parent-teacher conference scheduled</li>
-              </ul>
-              <div className="footer">
-                <hr />
-                <div className="stats">
-                  <i className="fa fa-history"></i> Updated just now
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
 
       <div className="row">
@@ -165,7 +236,7 @@ export const Dash = ({showToast,setShowToast}) => {
               
                 {/* <li className="communication-item btn-info">Message from John Doe: Please check Sarah  medication.</li>
                 <li className="communication-item btn-info">Message from Jane Smith: Come and pick up Jack at 3 PM.</li> */}
-                <Staffmes />
+                <Staffmes setLoading={setLoading} />
 
               </ul>
               <div className="footer">

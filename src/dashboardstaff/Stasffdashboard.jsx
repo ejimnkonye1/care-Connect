@@ -52,14 +52,19 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
     </a>
   </div>
   <ul className="nav flex-column">
-  
-       <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
+  <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
+    <span  className='nav-link' onClick={() => handlechange('dashboard')}>
+    <HiOutlineUserCircle className='icon' />
+            <span>User Profile</span>
+          </span>
+    </li>
+       {/* <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
 
     <span  className='nav-link' onClick={() => handlechange('user')}>
             <HiOutlineUserCircle className='icon' />
             <span>User Profile</span>
           </span>
-    </li>
+    </li> */}
     <li className={`nav-item ${currenpage === 'activity' && 'active'}`}>
     <span  className='nav-link' onClick={() => handlechange('activity')}>
     <LuActivitySquare className='icon' />
@@ -138,7 +143,12 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
     </div>
     <div className="offcanvas-body">
     <ul className="nav flex-column">
-  
+    <li className={`nav-item ${currenpage === 'dashboard' && 'active'}`}>
+    <span  className='nav-link' onClick={() => handlechange('dashboard')}>
+    <HiOutlineUserCircle className='icon' />
+    <span>User Profile</span>
+          </span>
+    </li>
   <li className={`nav-item ${currenpage === 'user' && 'active'}`}>
 
 <span  className='nav-link' onClick={() => handlechange('user')}>
@@ -224,6 +234,7 @@ export const StaffDashboard = ({showToast, setShowToast}) => {
   </div>
 </nav>
 <div className={`content billie mb-1 ${darkmode ? "dark-mode" : ""}`}>
+{currenpage === 'dashboard' && <Staffpro showToast={showToast} setShowToast={setShowToast} />}
 {currenpage === 'user' && <Staffpro />}
       {currenpage === 'activity' &&     <StaffActivityUpdates/>}
      

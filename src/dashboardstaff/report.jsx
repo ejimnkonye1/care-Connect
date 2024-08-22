@@ -2,7 +2,7 @@
 import { addDoc, collection,  getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "../firebase";
-import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem } from '@mui/material';
+import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, TableContainer, Paper } from '@mui/material';
 import ColorAlerts from "../alert";
 import { useSelector } from "react-redux";
 import BroadCast from "./broad";
@@ -172,8 +172,9 @@ fetchUsers();
         name="childId"
         value={newIncidentReport.childId}
         onChange={handleChildChange}
-        className={`mb-4 mt-1 p-3 m-2 ${darkmode? 'card-mode':''}`}
+        className={`mb-4 mt-1 p-3 m-2 ${darkmode? 'card-mode card-color':''}`}
       >
+        <option>Select a child</option>
         {users.map((user, index) => (
           user.children ? (
             user.children.map((child, childIndex) => (
@@ -192,9 +193,10 @@ fetchUsers();
         </div>
         <div className={`card ${darkmode ? 'card-mode':''}`}>
           <div className='header'>
-            <h4 className={`title ${darkmode? 'card-color':''}`} >incident Update History</h4>
+            <h4 className={`title ${darkmode? 'card-color':''}`} >Incident Update History</h4>
             <p className="category">Today report</p>
           </div>
+          <TableContainer className={`mb-3  ${darkmode? 'card-mode':''}`} component={Paper}>
           <Table className="mb-4">
             <TableHead>
               <TableRow>
@@ -217,6 +219,7 @@ fetchUsers();
                 ))}
             </TableBody>
           </Table>
+          </TableContainer>
         </div>
       </div>
       </div>

@@ -23,6 +23,7 @@ import { MdOutlineDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import {setMode} from '../action'
+import { MdOutlineWifiProtectedSetup } from "react-icons/md";
 export const Dashboard = ({showToast, setShowToast}) => {
   const [currenpage, setcurrentpage] = useState('dashboard')
  
@@ -112,11 +113,13 @@ export const Dashboard = ({showToast, setShowToast}) => {
         </span>
     </li>
     <li className="nav-item active-pro mt-5">
-      <a className="nav-link" {...() => onclick(alert('coming soon'))}>
-        <AiOutlineDashboard className='icon' />
-        <span>Upgrade to PRO</span>
-      </a>
-    </li>
+  <a className="nav-link" onClick={() => alert('Coming Soon')} style={{ cursor: 'pointer' }}>
+    
+    <MdOutlineWifiProtectedSetup className='icon' />
+
+    <span>Upgrade to PRO</span>
+  </a>
+</li>
   </ul>
 </div>
     </div>
@@ -211,9 +214,7 @@ export const Dashboard = ({showToast, setShowToast}) => {
       </a>
     </li>
   </ul>
-  <div className='top'>
-
-  </div>
+  
   
 </div>
   </div>
@@ -248,7 +249,7 @@ export const Dashboard = ({showToast, setShowToast}) => {
       {currenpage === 'notification' && <MessagingSystem />}
       {currenpage === 'fees' && <FeesList />}
       {currenpage === 'meal' && <MealUpdatesTable />}
-      {currenpage === 'event' && <EventCalendar/>}
+      {currenpage === 'event' && <EventCalendar /> }
         </div>
 
 
