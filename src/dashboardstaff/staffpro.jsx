@@ -19,7 +19,7 @@ export const Staffpro = () => {
         age: '',
         image: ''
     });
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(null);
 
     const user = auth.currentUser;
     const darkmode = useSelector((state) => state.darkMode);
@@ -89,140 +89,140 @@ export const Staffpro = () => {
         }
     };
 
-    if (loading) {
-        return (
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-md-8">
-                        <div className={`card ${darkmode ? 'card-mode' : ''} loading-skeleton`}>
-                            <div className="header">
-                                <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Edit Profile</h4>
-                            </div>
-                            <div className="content">
-                                {/* Form skeleton */}
-                                <form onSubmit={handleSubmit}>
-                        <div className="row">
-                          <div className="col-md-">
-                            <div className="form-group">
-                              <label>Company (disabled)</label>
-                              <input type="text" className="form-control" disabled placeholder="Company" value="Crech Connect." />
-                            </div>
-                          </div>
-                        </div>
+    // if (loading) {
+    //     return (
+    //         <div className="container-fluid">
+    //             <div className="row">
+    //                 <div className="col-md-8">
+    //                     <div className={`card ${darkmode ? 'card-mode' : ''} loading-skeleton`}>
+    //                         <div className="header">
+    //                             <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Edit Profile</h4>
+    //                         </div>
+    //                         <div className="content">
+    //                             {/* Form skeleton */}
+    //                             <form onSubmit={handleSubmit}>
+    //                     <div className="row">
+    //                       <div className="col-md-">
+    //                         <div className="form-group">
+    //                           <label>Company (disabled)</label>
+    //                           <input type="text" className="form-control" disabled placeholder="Company" value="Crech Connect." />
+    //                         </div>
+    //                       </div>
+    //                     </div>
         
-                        <div className="row">
-                          <div className="col-md-6">
-                            <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Staff Email </label>
+    //                     <div className="row">
+    //                       <div className="col-md-6">
+    //                         <div className="form-group">
+    //                         <label htmlFor="exampleInputEmail1">Staff Email </label>
                               
-                              <input type="email" className="form-control" disabled placeholder="Email" value={staffData?.email ?? ''} />
-                            </div>
-                          </div>
-                          <div className="col-md-6">
-                            <div className="form-group">
-                            <label>Staff Name </label>
-                            <input type="text" className="form-control" disabled placeholder="Staff Name" value={staffData?.name ?? ''} />
-                            </div>
-                          </div>
-                        </div>
+    //                           <input type="email" className="form-control" disabled placeholder="Email" value={staffData?.email ?? ''} />
+    //                         </div>
+    //                       </div>
+    //                       <div className="col-md-6">
+    //                         <div className="form-group">
+    //                         <label>Staff Name </label>
+    //                         <input type="text" className="form-control" disabled placeholder="Staff Name" value={staffData?.name ?? ''} />
+    //                         </div>
+    //                       </div>
+    //                     </div>
         
-                        <div className="row">
-                          <div className="col-md-6">
-                          <div className="form-group">
-                  <label>Address</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="address"
-                    placeholder="Home Address"
-                    value={formData.address}
-                    onChange={handleChange}
-                  />
-                </div>
-                          </div>
-                          <div className="col-md-6">
-                <div className="form-group">
-                  <label>Phone</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="phone"
-                    placeholder="Phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-                        </div>
+    //                     <div className="row">
+    //                       <div className="col-md-6">
+    //                       <div className="form-group">
+    //               <label>Address</label>
+    //               <input
+    //                 type="text"
+    //                 className="form-control"
+    //                 name="address"
+    //                 placeholder="Home Address"
+    //                 value={formData.address}
+    //                 onChange={handleChange}
+    //               />
+    //             </div>
+    //                       </div>
+    //                       <div className="col-md-6">
+    //             <div className="form-group">
+    //               <label>Phone</label>
+    //               <input
+    //                 type="number"
+    //                 className="form-control"
+    //                 name="phone"
+    //                 placeholder="Phone"
+    //                 value={formData.phone}
+    //                 onChange={handleChange}
+    //               />
+    //             </div>
+    //           </div>
+    //                     </div>
         
-                        <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <label>Gender</label>
-                      <select 
-                         value={formData.gender}
-                         onChange={handleChange}
-                         name='gender'
-                      className="form-control">
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
+    //                     <div className="row">
+    //               <div className="col-md-6">
+    //                 <div className="form-group">
+    //                   <label>Gender</label>
+    //                   <select 
+    //                      value={formData.gender}
+    //                      onChange={handleChange}
+    //                      name='gender'
+    //                   className="form-control">
+    //                     <option value="">Select Gender</option>
+    //                     <option value="male">Male</option>
+    //                     <option value="female">Female</option>
+    //                     <option value="other">Other</option>
+    //                   </select>
+    //                 </div>
 
-                  </div>
-                  <div className="col-md-6">
-                  <div className="form-group">
-                  <label>Age</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="age"
-                    placeholder="Age"
-                    value={formData.age}
-                    onChange={handleChange}
-                  />
-                </div>
-                  </div>
+    //               </div>
+    //               <div className="col-md-6">
+    //               <div className="form-group">
+    //               <label>Age</label>
+    //               <input
+    //                 type="number"
+    //                 className="form-control"
+    //                 name="age"
+    //                 placeholder="Age"
+    //                 value={formData.age}
+    //                 onChange={handleChange}
+    //               />
+    //             </div>
+    //               </div>
                 
-                </div>
+    //             </div>
                 
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <label>Profile Image</label>
-                      <input
-                        type="file"
-                        className="form-control"
-                        onChange={handleImageChange}
-                      />
-                    </div>
-                  </div>
-                </div>
-                        <button type="submit" className="btn mt-3 btn-dark btn-fill pull-right">Update Profile</button>
-                        <div className="clearfix"></div>
-                      </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className={`card card-user ${darkmode ? 'card-mode' : ''} loading-skeleton`}>
-                            <div className="image">
-                                <img src={img1} alt="..." />
-                            </div>
-                            <div className="content">
-                                <div className="author">
-                                    <img className="avatar border-gray img-fluid rounded-circle" alt="..." />
-                                    <h4 className="title">staff</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    //             <div className="row">
+    //               <div className="col-md-12">
+    //                 <div className="form-group">
+    //                   <label>Profile Image</label>
+    //                   <input
+    //                     type="file"
+    //                     className="form-control"
+    //                     onChange={handleImageChange}
+    //                   />
+    //                 </div>
+    //               </div>
+    //             </div>
+    //                     <button type="submit" className="btn mt-3 btn-dark btn-fill pull-right">Update Profile</button>
+    //                     <div className="clearfix"></div>
+    //                   </form>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //                 <div className="col-md-4">
+    //                     <div className={`card card-user ${darkmode ? 'card-mode' : ''} loading-skeleton`}>
+    //                         <div className="image">
+    //                             <img src={img1} alt="..." />
+    //                         </div>
+    //                         <div className="content">
+    //                             <div className="author">
+    //                                 <img className="avatar border-gray img-fluid rounded-circle" alt="..." />
+    //                                 <h4 className="title">staff</h4>
+    //                             </div>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     );
+    // }
 
     return(
     

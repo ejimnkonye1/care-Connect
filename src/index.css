@@ -115,3 +115,15 @@ body, html {
 body{
   scrollbar-width: none !important;
 }
+
+@media (max-width: 992px) {
+  .at-but{
+    font-size: 10px ;
+    text-wrap: nowrap;
+    width: 100%;
+  }
+  .na{
+    text-wrap: nowrap;
+  }
+  
+}

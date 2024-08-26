@@ -6,7 +6,7 @@ import {  firestore } from '../firebase';
 import ColorAlerts from '../alert';
 import { useDispatch, useSelector} from 'react-redux';
 import {  setAlert, setMark } from '../action';
-import { Table, TableHead, TableRow, TableCell, TableBody, Button } from '@mui/material';
+import { Table, TableHead, TableRow, TableCell, TableBody, Button, TableContainer } from '@mui/material';
 export const MarkAttendance = () => {
   const [users, setUsers] = useState([]); // Store all users data
   // eslint-disable-next-line no-unused-vars
@@ -78,10 +78,11 @@ export const MarkAttendance = () => {
         <div className='content'>
         {users.length > 0 ? (
   <div className={`${darkmode ? ' card-mode ' : ''}`}>
+    <TableContainer >
     <Table className={`${darkmode ? 'card-mode ' : ''}`}>
       <TableHead className={`${darkmode ? 'card-mode ' : ''}`}>
         <TableRow className={`${darkmode ? 'card-mode ' : ''}`}>
-          <TableCell className={`${darkmode ? 'card-color ' : ''}`}>Child Name</TableCell>
+          <TableCell className={`na ${darkmode ? 'card-color ' : ''}`}>Child Name</TableCell>
           <TableCell className={`${darkmode ? 'card-color ' : ''}`}>Mark Present</TableCell>
           <TableCell className={`${darkmode ? 'card-color ' : ''}`}>Mark Absent</TableCell>
         </TableRow>
@@ -91,11 +92,13 @@ export const MarkAttendance = () => {
           user.children ? (
             user.children.map((child, childIndex) => (
               <TableRow key={`${index}-${childIndex}`}>
-                <TableCell className={`${darkmode ? 'card-color ' : ''}`}>{child.name}</TableCell>
+                <TableCell className={` ${darkmode ? 'card-color ' : ''}`}>{child.name}</TableCell>
                 <TableCell>
                   <Button
                     variant="contained"
                     color="primary"
+                    style={{fontSize:'11px'}}
+                    className='at-but'
                     onClick={() => handleAttendanceChange(user.uid, child.name, 'present')}
                   >
                     Mark Present
@@ -105,6 +108,8 @@ export const MarkAttendance = () => {
                   <Button
                     variant="contained"
                     color="secondary"
+                        className='at-but'
+                    style={{fontSize:'11px'}}
                     onClick={() => handleAttendanceChange(user.uid, child.name, 'absent')}
                   >
                     Mark Absent
@@ -122,6 +127,8 @@ export const MarkAttendance = () => {
         ))}
       </TableBody>
     </Table>
+    </TableContainer>
+  
   </div>
 ) : (
   <p className={darkmode ? 'card-color ' : ''}>No users data available.</p>

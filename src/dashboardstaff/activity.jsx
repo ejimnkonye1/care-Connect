@@ -92,14 +92,22 @@ export const StaffActivityUpdates = () => {
     }
   }
   useEffect(() => {
-    const activityRef = collection(firestore, 'activities');
-    const unsubscribe = onSnapshot(activityRef, (snapshot) => {
-      const activityData = snapshot.docs.map((doc) => doc.data());
-      setActivityUpdates(activityData);
-    });
+    const fetchUpdates = async () => {
 
-    // Cleanup the subscription on unmount
-    return unsubscribe;
+    
+    const activityRef = collection(firestore, 'activities');
+    // const unsubscribe = onSnapshot(activityRef, (snapshot) => {
+    //   const activityData = snapshot.docs.map((doc) => doc.data());
+    //   setActivityUpdates(activityData);
+    // });
+
+    // // Cleanup the subscription on unmount
+    // return unsubscribe;
+    const activitysnap = await getDocs(activityRef)
+    const activityData = activitysnap.docs.map((doc) => doc.data());
+      setActivityUpdates(activityData);
+    }
+    fetchUpdates()
   }, []);
 
   const darkmode = useSelector((state)=> state.darkMode)

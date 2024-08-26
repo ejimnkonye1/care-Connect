@@ -17,7 +17,7 @@ export const Dash = ({showToast,setShowToast}) => {
 
   const [activityUpdates, setActivityUpdates] = useState([]);
   const user = auth.currentUser
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(null);
   useEffect(() => {
     
     if (user) {
@@ -49,90 +49,90 @@ export const Dash = ({showToast,setShowToast}) => {
     setLoading(false)
   },[7000])
 
-  if (loading) {
-    return (
-      <div className="container-fluid loading-skeleton">
-        <div className="row">
-          <div className="col-md-4">
-            <div className={`card ${darkmode ? 'card-mode' : ''}`}>
-              <div className="header">
-                <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Child Attendance</h4>
-                <p className="category">Today's Attendance</p>
-              </div>
-              <div className="content">
-                <div id="chartAttendance" className="ct-chart ct-perfect-fourth"></div>
-                <div className="footer">
-                  <div className="legend"></div>
-                  <hr className='hr' />
-                  <div className="stats"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-8">
-            <div className={`card ${darkmode ? 'card-mode' : ''}`}>
-              <div className="header">
-                <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Attendance Chart</h4>
-                <p className="category">Weekly Attendance</p>
-              </div>
-              <div className="content">
-                <div id="chartAttendance" className="ct-chart ct-perfect-fourth"></div>
-                <div className="footer">
-                  <div className="legend"></div>
-                  <hr className='hr' />
-                  <div className="stats"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-        <div className="col-md-6">
-          <div className={`card ${darkmode ? 'card-mode':''}`}>
-            <div className="header">
-              <h4 className={`title ${darkmode? 'card-color':''}`} >Daily Activities</h4>
-              <p className="category">Events and Activities</p>
-            </div>
-            <div className="content">
-              <div className='act-content'>
+  // if (loading) {
+  //   return (
+  //     <div className="container-fluid loading-skeleton">
+  //       <div className="row">
+  //         <div className="col-md-4">
+  //           <div className={`card ${darkmode ? 'card-mode' : ''}`}>
+  //             <div className="header">
+  //               <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Child Attendance</h4>
+  //               <p className="category">Today's Attendance</p>
+  //             </div>
+  //             <div className="content">
+  //               <div id="chartAttendance" className="ct-chart ct-perfect-fourth"></div>
+  //               <div className="footer">
+  //                 <div className="legend"></div>
+  //                 <hr className='hr' />
+  //                 <div className="stats"></div>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //         <div className="col-md-8">
+  //           <div className={`card ${darkmode ? 'card-mode' : ''}`}>
+  //             <div className="header">
+  //               <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Attendance Chart</h4>
+  //               <p className="category">Weekly Attendance</p>
+  //             </div>
+  //             <div className="content">
+  //               <div id="chartAttendance" className="ct-chart ct-perfect-fourth"></div>
+  //               <div className="footer">
+  //                 <div className="legend"></div>
+  //                 <hr className='hr' />
+  //                 <div className="stats"></div>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //       <div className="row">
+  //       <div className="col-md-6">
+  //         <div className={`card ${darkmode ? 'card-mode':''}`}>
+  //           <div className="header">
+  //             <h4 className={`title ${darkmode? 'card-color':''}`} >Daily Activities</h4>
+  //             <p className="category">Events and Activities</p>
+  //           </div>
+  //           <div className="content">
+  //             <div className='act-content'>
               
-              </div>
+  //             </div>
       
-              <div className="footer">
-                <hr className='hr' />
-                <div className="stats">
-                  <i className="fa fa-clock-o"></i> Updated just now
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  //             <div className="footer">
+  //               <hr className='hr' />
+  //               <div className="stats">
+  //                 <i className="fa fa-clock-o"></i> Updated just now
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
 
-        <div className="col-md-6">
-        <div className={`card ${darkmode ? 'card-mode':''}`}>
-            <div className="header">
-              <h4 className={`title ${darkmode? 'card-color':''}`}>Staff Communication</h4>
-              <p className="category">Messages from Staff</p>
-            </div>
-            <div className="content">
-              <ul className="communication-list">
+  //       <div className="col-md-6">
+  //       <div className={`card ${darkmode ? 'card-mode':''}`}>
+  //           <div className="header">
+  //             <h4 className={`title ${darkmode? 'card-color':''}`}>Staff Communication</h4>
+  //             <p className="category">Messages from Staff</p>
+  //           </div>
+  //           <div className="content">
+  //             <ul className="communication-list">
               
           
 
-              </ul>
-              <div className="footer">
-                <hr className='hr' />
-                <div className="stats">
-                  <i className="fa fa-history"></i> Updated just now
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    );
-  }
+  //             </ul>
+  //             <div className="footer">
+  //               <hr className='hr' />
+  //               <div className="stats">
+  //                 <i className="fa fa-history"></i> Updated just now
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //     </div>
+  //   );
+  // }
 
 
   return (
