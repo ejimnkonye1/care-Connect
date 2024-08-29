@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import { LoginForm } from './profile/login'
@@ -26,9 +27,6 @@ const Loader = () => (
   
   );
   
-  
-  // Layout component that includes the loader logic
-  // eslint-disable-next-line react/prop-types
   const Layout = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
   
@@ -44,7 +42,7 @@ const Loader = () => (
   };
 function App() {
   const [showToast, setShowToast] = useState(false);
-
+  const [btnloading, setbtnLoading] = useState(false);
   return (
     <>
     <Provider store={store} >
@@ -58,9 +56,9 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/login' element={<LoginForm />} />
-          <Route path='/reset' element={<ResetPassword  />} />
-          <Route path='/resetstaff' element={<ResetStaff  />} />
-          <Route path='/resetpar' element={<ResetParent  />} />
+          <Route path='/reset' element={<ResetPassword btnloading={btnloading} setbtnLoading={setbtnLoading} />} />
+          <Route path='/resetstaff' element={<ResetStaff btnloading={btnloading} setbtnLoading={setbtnLoading}  />} />
+          <Route path='/resetpar' element={<ResetParent btnloading={btnloading} setbtnLoading={setbtnLoading}  />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/staff' element={<StaffDashboard showToast={showToast} setShowToast={setShowToast} />} />

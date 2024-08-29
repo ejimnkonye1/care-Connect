@@ -36,7 +36,7 @@ const navigate = useNavigate()
 
       const admindoc = await getDoc(doc(firestore, 'Admin', user.uid))
       // console.log("User logged in: ", userCredential.user);
-      // Redirect to Parent Dashboard
+      
 
       if (admindoc.exists()) {
         setbtnloading(true)
