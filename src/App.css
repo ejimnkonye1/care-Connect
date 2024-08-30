@@ -192,6 +192,32 @@ h6 {
   border-radius: 5px;
   color: #333;
 }
+.anouce-item {
+  max-height: 400px;
+  overflow-y: auto;
+  width: 400px !important;
+  scrollbar-width: none;
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: #333;
+}
+
+/* For small screens */
+@media (max-width: 600px) {
+  .anouce-item {
+    width: 100% !important; /* Make the item take up full width */
+    padding: 8px;           /* Adjust padding for smaller screens */
+    font-size: 14px;        /* Adjust font size if needed */
+  }
+
+  .annouce-list {
+    padding: 0 10px;        /* Add padding to the list to provide spacing on the sides */
+  }
+}
+
 .communication-content{
   max-height: 200px;
   overflow-y: auto;

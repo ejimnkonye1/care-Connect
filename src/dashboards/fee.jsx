@@ -36,23 +36,12 @@ const FeesList = () => {
     if (user) {
       const fetchFees = async () => {
         try {
-          const feeRef = collection(firestore, `users/${auth.currentUser.uid}/fees`);
-          const feeSnapshot = await getDocs(feeRef);
-          const fees = [];
-
-          feeSnapshot.forEach((feeDoc) => {
-            const feeData = feeDoc.data();
-            if (feeData.status === 'Unpaid') {
-              fees.push({
-                id: feeDoc.id,
-                ...feeData,
-              });
-            }
-          });
-
-          setFeesAdding(fees);
+          const feesRef = collection(firestore, 'fees');
+          const querySnapshot = await getDocs(feesRef);
+          const fees = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          setFeesAdding(fees); // assuming you have a state variable `fees` to store the fetched fees
         } catch (error) {
-          console.error('Error fetching fees:', error);
+          console.error("Error fetching fees", error);
         }
       };
 
@@ -87,23 +76,32 @@ const FeesList = () => {
     }
   };
   
-  const updateFeeStatus = async (feeId, reference) => {
-    try {
-      const feeRef = doc(firestore, `users/${auth.currentUser.uid}/fees`, feeId);
-      await updateDoc(feeRef, { status: 'Paid' });
-  
-      setFeesAdding((prevFees) =>
-        prevFees.map((fee) =>
-          fee.id === feeId ? { ...fee, status: 'Paid' } : fee
-        )
-      );
-  
-      alert(`Payment complete! Reference: ${reference}`);
-    } catch (error) {
-      console.error('Error updating fee status:', error);
-    }
-  };
-  
+ 
+const updateFeeStatus = async (feeId, reference) => {
+  try {
+    const feeRef = doc(firestore, 'fees', feeId);
+    await updateDoc(feeRef, {
+      status: 'paid',
+      paymentReference: reference,
+    });
+    console.log('Fee status updated successfully');
+    
+    // Fetch fees again to update the component state
+    const fetchFeesAgain = async () => {
+      try {
+        const feesRef = collection(firestore, 'fees');
+        const querySnapshot = await getDocs(feesRef);
+        const fees = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setFeesAdding(fees);
+      } catch (error) {
+        console.error("Error fetching fees again", error);
+      }
+    };
+    fetchFeesAgain();
+  } catch (error) {
+    console.error('Error updating fee status:', error);
+  }
+};
   const darkmode = useSelector((state)=> state.darkMode)
   return (
     <div className='row'>
@@ -124,28 +122,35 @@ const FeesList = () => {
               <TableCell className= {` ${darkmode ? 'card-color':''}`}>Pay</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {feesadding.length > 0 ? (
-              feesadding.map((fee) => (
-                <TableRow key={fee.id}>
-                  <TableCell className= {` ${darkmode ? 'card-color':''}`}>{fee.fee_Name}</TableCell>
-                  <TableCell className= {` ${darkmode ? 'card-color':''}`}>₦{fee.amount}</TableCell>
-                  <TableCell className= {` ${darkmode ? 'card-color':''}`}>{fee.status}</TableCell>
-                  <TableCell>
-                    {fee.status === 'Paid' ? (
-                      <span>Paid</span>
-                    ) : (
-                      <button className= {`btn btn-sm btn-dark ${darkmode ? 'card-color':''}`} onClick={() => handlePay(fee.id, fee.amount)}>Pay</button>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={4}>No unpaid fees available</TableCell>
-              </TableRow>
-            )}
-          </TableBody>
+         <TableBody>
+  {feesadding.length > 0 ? (
+    feesadding.map((fee) => (
+      <TableRow key={fee.id}>
+        <TableCell className={`${darkmode ? 'card-color' : ''}`}>{fee.fee_Name}</TableCell>
+        <TableCell className={`${darkmode ? 'card-color' : ''}`}>₦{fee.amount}</TableCell>
+        <TableCell className={`${darkmode ? 'card-color' : ''}`}>{fee.status}</TableCell>
+        <TableCell>
+          {fee.status === 'Paid' ? (
+            <span>Paid</span>
+          ) : (
+            <button
+              className={`btn btn-sm btn-dark ${darkmode ? 'card-color' : ''}`}
+              disabled={fee.status = 'Paid'}
+              onClick={() => handlePay(fee.id, fee.amount)}
+            >
+              Pay
+            </button>
+          )}
+        </TableCell>
+      </TableRow>
+    ))
+  ) : (
+    <TableRow>
+      <TableCell colSpan={4}>No unpaid fees available</TableCell>
+    </TableRow>
+  )}
+</TableBody>
+
         </Table>
       </TableContainer>
          </div>

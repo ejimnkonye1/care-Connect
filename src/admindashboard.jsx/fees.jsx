@@ -14,6 +14,33 @@ export const FeesAdding = () => {
     status: 'Unpaid',
   });
 
+  // const handleFeesAdder = async (e) => {
+  //   e.preventDefault();
+  //   if (!newfeesadding.fee_Name || !newfeesadding.amount || !newfeesadding.status) {
+  //     alert("Please fill in all required fields");
+  //     return;
+  //   }
+  //   try {
+  //       const usersRef = collection(firestore, 'users');
+  //   //   const feesRef = collection(firestore, 'Fees');
+  //   const querysnapshot = await getDocs(usersRef)
+  //   querysnapshot.forEach( async (userdoc) => {
+  //  const usersfeesRef = collection(firestore, `users/${userdoc.id}/fees`)
+  //  await addDoc(usersfeesRef, newfeesadding);
+  //   })
+      
+  //     setFeesAdding((prevUpdates) => [...prevUpdates, newfeesadding]);
+
+  //     setNewFeesAdding({
+  //       fee_Name: '',
+  //       amount: '',
+  //       status: ''
+  //     });
+  //     alert("Fee added to all parents successfully!");
+  //   } catch (error) {
+  //     console.error("Error adding fees", error);
+  //   }
+  // };
   const handleFeesAdder = async (e) => {
     e.preventDefault();
     if (!newfeesadding.fee_Name || !newfeesadding.amount || !newfeesadding.status) {
@@ -21,22 +48,17 @@ export const FeesAdding = () => {
       return;
     }
     try {
-        const usersRef = collection(firestore, 'users');
-    //   const feesRef = collection(firestore, 'Fees');
-    const querysnapshot = await getDocs(usersRef)
-    querysnapshot.forEach( async (userdoc) => {
-   const usersfeesRef = collection(firestore, `users/${userdoc.id}/fees`)
-   await addDoc(usersfeesRef, newfeesadding);
-    })
+      const feesRef = collection(firestore, 'fees');
+      await addDoc(feesRef, newfeesadding);
       
       setFeesAdding((prevUpdates) => [...prevUpdates, newfeesadding]);
-
+  
       setNewFeesAdding({
         fee_Name: '',
         amount: '',
         status: ''
       });
-      alert("Fee added to all parents successfully!");
+      alert("Fee added successfully!");
     } catch (error) {
       console.error("Error adding fees", error);
     }
@@ -44,22 +66,30 @@ export const FeesAdding = () => {
   const darkmode = useSelector((state)=> state.darkMode)
   useEffect(() => {
     const fetchFees = async () => {
+      // try {
+      //   const usersRef = collection(firestore, 'users');
+      //   const usersSnapshot = await getDocs(usersRef);
+      //   const fees = [];
+  
+      //   usersSnapshot.forEach(async (userDoc) => {
+      //     const userFeesRef = collection(firestore, `users/${'slG595vQe6UHqhPOuX4rdnWdXSG3'}/fees`);
+      //     const userFeesSnapshot = await getDocs(userFeesRef);
+      //     userFeesSnapshot.forEach((feeDoc) => {
+      //       fees.push(feeDoc.data());
+      //     });
+      //   });
+  
+      //   setFeesAdding(fees);
+      // } catch (error) {
+      //   console.error('Error fetching fees:', error);
+      // }
       try {
-        const usersRef = collection(firestore, 'users');
-        const usersSnapshot = await getDocs(usersRef);
-        const fees = [];
-  
-        usersSnapshot.forEach(async (userDoc) => {
-          const userFeesRef = collection(firestore, `users/${'slG595vQe6UHqhPOuX4rdnWdXSG3'}/fees`);
-          const userFeesSnapshot = await getDocs(userFeesRef);
-          userFeesSnapshot.forEach((feeDoc) => {
-            fees.push(feeDoc.data());
-          });
-        });
-  
-        setFeesAdding(fees);
+        const feesRef = collection(firestore, 'fees');
+        const querySnapshot = await getDocs(feesRef);
+        const fees = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setFeesAdding(fees); // assuming you have a state variable `fees` to store the fetched fees
       } catch (error) {
-        console.error('Error fetching fees:', error);
+        console.error("Error fetching fees", error);
       }
     };
     fetchFees();

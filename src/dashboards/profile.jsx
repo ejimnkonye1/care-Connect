@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 export const Profilenn = () => {
   const [userData, setUserData] = useState(null);
   const [image, setImage] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -114,181 +114,181 @@ export const Profilenn = () => {
    fetchUserData();
  }, [auth, firestore]);
  const darkmode = useSelector((state)=> state.darkMode)
- if (loading) {
-  return (
-      <div className="container-fluid">
-          <div className="row">
-              <div className="col-md-8">
-                  <div className={`card ${darkmode ? 'card-mode' : ''} loading-skeleton`}>
-                      <div className="header">
-                          <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Edit Profile</h4>
-                      </div>
-                      <div className="content">
-                          {/* Form skeleton */}
-                          <form onSubmit={handleSubmit}>
-            <div className="row">
-              <div className="col-md-5">
-                <div className="form-group">
-                  <label>Company</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    disabled
-                    placeholder="Company"
-                    value="Crech Connect."
-                  />
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="form-group">
-                  <label>Child Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    disabled
-                    placeholder="Child's Name"
-                    value={userData?.children[0]?.name ?? ''}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12">
-                <div className="form-group">
-                  <label>Parent Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    disabled
-                    placeholder="Email"
-                    value={userData?.email ?? ''}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Parent First Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Parent Last Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Address</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="address"
-                    placeholder="Home Address"
-                    value={formData.address}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Phone</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="phone"
-                    placeholder="Phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Gender</label>
-                  <select
-                    className="form-control"
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleChange}
-                  >
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label>Age</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="age"
-                    placeholder="Age"
-                    value={formData.age}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-                  <div className="col-md-12">
-                    <div className="form-group">
-                      <label>Profile Image</label>
-                      <input
-                        type="file"
-                        className="form-control"
-                        onChange={handleImageChange}
-                      />
-                    </div>
-                  </div>
-                </div>
-            <button type="submit" className="btn mt-3 btn-dark btn-fill pull-right">
-              Update Profile
-            </button>
-            <div className="clearfix"></div>
-          </form>
-                      </div>
-                  </div>
-              </div>
-              <div className="col-md-4">
-                  <div className={`card card-user ${darkmode ? 'card-mode' : ''} loading-skeleton`}>
-                      <div className="image">
-                          <img src={img1} alt="..." />
-                      </div>
-                      <div className="content">
-                          <div className="author">
-                              <img className="avatar border-gray img-fluid rounded-circle" alt="..." />
-                              <h4 className="title">Child</h4>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  );
-}
+//  if (loading) {
+//   return (
+//       <div className="container-fluid">
+//           <div className="row">
+//               <div className="col-md-8">
+//                   <div className={`card ${darkmode ? 'card-mode' : ''} loading-skeleton`}>
+//                       <div className="header">
+//                           <h4 className={`title ${darkmode ? 'card-color' : ''}`}>Edit Profile</h4>
+//                       </div>
+//                       <div className="content">
+//                           {/* Form skeleton */}
+//                           <form onSubmit={handleSubmit}>
+//             <div className="row">
+//               <div className="col-md-5">
+//                 <div className="form-group">
+//                   <label>Company</label>
+//                   <input
+//                     type="text"
+//                     className="form-control"
+//                     disabled
+//                     placeholder="Company"
+//                     value="Crech Connect."
+//                   />
+//                 </div>
+//               </div>
+//               <div className="col-md-3">
+//                 <div className="form-group">
+//                   <label>Child Name</label>
+//                   <input
+//                     type="text"
+//                     className="form-control"
+//                     disabled
+//                     placeholder="Child's Name"
+//                     value={userData?.children[0]?.name ?? ''}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="row">
+//               <div className="col-md-12">
+//                 <div className="form-group">
+//                   <label>Parent Email address</label>
+//                   <input
+//                     type="email"
+//                     className="form-control"
+//                     disabled
+//                     placeholder="Email"
+//                     value={userData?.email ?? ''}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="row">
+//               <div className="col-md-6">
+//                 <div className="form-group">
+//                   <label>Parent First Name</label>
+//                   <input
+//                     type="text"
+//                     className="form-control"
+//                     name="firstName"
+//                     placeholder="First Name"
+//                     value={formData.firstName}
+//                     onChange={handleChange}
+//                   />
+//                 </div>
+//               </div>
+//               <div className="col-md-6">
+//                 <div className="form-group">
+//                   <label>Parent Last Name</label>
+//                   <input
+//                     type="text"
+//                     className="form-control"
+//                     name="lastName"
+//                     placeholder="Last Name"
+//                     value={formData.lastName}
+//                     onChange={handleChange}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="row">
+//               <div className="col-md-6">
+//                 <div className="form-group">
+//                   <label>Address</label>
+//                   <input
+//                     type="text"
+//                     className="form-control"
+//                     name="address"
+//                     placeholder="Home Address"
+//                     value={formData.address}
+//                     onChange={handleChange}
+//                   />
+//                 </div>
+//               </div>
+//               <div className="col-md-6">
+//                 <div className="form-group">
+//                   <label>Phone</label>
+//                   <input
+//                     type="number"
+//                     className="form-control"
+//                     name="phone"
+//                     placeholder="Phone"
+//                     value={formData.phone}
+//                     onChange={handleChange}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="row">
+//               <div className="col-md-6">
+//                 <div className="form-group">
+//                   <label>Gender</label>
+//                   <select
+//                     className="form-control"
+//                     name="gender"
+//                     value={formData.gender}
+//                     onChange={handleChange}
+//                   >
+//                     <option value="">Select Gender</option>
+//                     <option value="male">Male</option>
+//                     <option value="female">Female</option>
+//                   </select>
+//                 </div>
+//               </div>
+//               <div className="col-md-6">
+//                 <div className="form-group">
+//                   <label>Age</label>
+//                   <input
+//                     type="number"
+//                     className="form-control"
+//                     name="age"
+//                     placeholder="Age"
+//                     value={formData.age}
+//                     onChange={handleChange}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="row">
+//                   <div className="col-md-12">
+//                     <div className="form-group">
+//                       <label>Profile Image</label>
+//                       <input
+//                         type="file"
+//                         className="form-control"
+//                         onChange={handleImageChange}
+//                       />
+//                     </div>
+//                   </div>
+//                 </div>
+//             <button type="submit" className="btn mt-3 btn-dark btn-fill pull-right">
+//               Update Profile
+//             </button>
+//             <div className="clearfix"></div>
+//           </form>
+//                       </div>
+//                   </div>
+//               </div>
+//               <div className="col-md-4">
+//                   <div className={`card card-user ${darkmode ? 'card-mode' : ''} loading-skeleton`}>
+//                       <div className="image">
+//                           <img src={img1} alt="..." />
+//                       </div>
+//                       <div className="content">
+//                           <div className="author">
+//                               <img className="avatar border-gray img-fluid rounded-circle" alt="..." />
+//                               <h4 className="title">Child</h4>
+//                           </div>
+//                       </div>
+//                   </div>
+//               </div>
+//           </div>
+//       </div>
+//   );
+// }
     return(
     
             <div className="container-fluid">

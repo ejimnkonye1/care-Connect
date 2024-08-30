@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import { useSelector } from 'react-redux';
+import { TableContainer } from '@mui/material';
 
 const BroadChat= () => {
   const [messages, setMessages] = useState([]);
@@ -33,7 +34,8 @@ const BroadChat= () => {
     <div className='row'>
         <div className='col-md-6'>
         <div className="anouce-item">
-  <ul className="annouce-list">
+          <TableContainer>
+          <ul className="annouce-list">
     {messages.map((message, index) => (
       <li key={index} className={`annouce-item ${darkmode? 'card-mode card-color':''}`}>
         {message.message}
@@ -42,6 +44,8 @@ const BroadChat= () => {
       
     ))}
   </ul>
+          </TableContainer>
+ 
 </div>
         </div>
 
