@@ -41,28 +41,66 @@ export const FeesAdding = () => {
   //     console.error("Error adding fees", error);
   //   }
   // };
+
+  // const handleFeesAdder = async (e) => {
+  //   e.preventDefault();
+  //   if (!newfeesadding.fee_Name || !newfeesadding.amount || !newfeesadding.status) {
+  //     alert("Please fill in all required fields");
+  //     return;
+  //   }
+  //   try {
+  //     const feesRef = collection(firestore, 'fees');
+  //     await addDoc(feesRef, newfeesadding);
+      
+  //     setFeesAdding((prevUpdates) => [...prevUpdates, newfeesadding]);
+  
+  //     setNewFeesAdding({
+  //       fee_Name: '',
+  //       amount: '',
+  //       status: ''
+  //     });
+  //     alert("Fee added successfully!");
+  //   } catch (error) {
+  //     console.error("Error adding fees", error);
+  //   }
+  // };
   const handleFeesAdder = async (e) => {
     e.preventDefault();
+    
+    // Ensure all required fields are filled
     if (!newfeesadding.fee_Name || !newfeesadding.amount || !newfeesadding.status) {
       alert("Please fill in all required fields");
       return;
     }
+    
     try {
-      const feesRef = collection(firestore, 'fees');
-      await addDoc(feesRef, newfeesadding);
+      // Fetch all users
+      const usersRef = collection(firestore, 'users');
+      const usersSnapshot = await getDocs(usersRef);
       
-      setFeesAdding((prevUpdates) => [...prevUpdates, newfeesadding]);
-  
+      const feePromises = usersSnapshot.docs.map(async (userDoc) => {
+        const userId = userDoc.id;
+        const userFeesRef = collection(firestore, 'users', userId, 'fees'); // Assuming each user has a sub-collection for fees
+        await addDoc(userFeesRef, newfeesadding);
+      });
+      
+      // Wait for all fees to be added
+      await Promise.all(feePromises);
+      
+      alert("Fee added successfully for all users!");
+      
+      // Clear the form
       setNewFeesAdding({
         fee_Name: '',
         amount: '',
         status: ''
       });
-      alert("Fee added successfully!");
+      
     } catch (error) {
-      console.error("Error adding fees", error);
+      console.error("Error adding fees for all users:", error);
     }
   };
+  
   const darkmode = useSelector((state)=> state.darkMode)
   useEffect(() => {
     const fetchFees = async () => {
@@ -181,9 +219,6 @@ export const FeesAdding = () => {
         </div>
       </div>
 </div>
-    </div>
-  
-    
-    
+    </div> 
   );
 };

@@ -13,6 +13,7 @@ import {  SignUp } from './profile/SignUp'
 import { Provider } from 'react-redux'
 import store from './store'
 import { AdminDashboard } from './admindashboard.jsx/admin'
+import Test from './test'
 
 
 const Loader = () => (
@@ -56,6 +57,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/login' element={<LoginForm />} />
+
           <Route path='/reset' element={<ResetPassword btnloading={btnloading} setbtnLoading={setbtnLoading} />} />
           <Route path='/resetstaff' element={<ResetStaff btnloading={btnloading} setbtnLoading={setbtnLoading}  />} />
           <Route path='/resetpar' element={<ResetParent btnloading={btnloading} setbtnLoading={setbtnLoading}  />} />
@@ -63,6 +65,7 @@ function App() {
           <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/staff' element={<StaffDashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/admin' element={<AdminDashboard showToast={showToast} setShowToast={setShowToast} />} />
+          <Route path='/test' element={<Test />} />
         </Routes>
       </Router>
       </Layout>

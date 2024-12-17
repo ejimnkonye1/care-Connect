@@ -5,7 +5,7 @@ import '../css/login.css'
 import { sendPasswordResetEmail} from 'firebase/auth';
 import { auth, firestore } from "../firebase";
 import { useState } from "react";
-import { doc, getDoc, getDocs, where, query , collection } from 'firebase/firestore';
+import {  getDocs, where, query , collection } from 'firebase/firestore';
 export const ResetParent = ({btnloading, setbtnLoading}) => {
   const [email, setEmail] = useState('');
   const [success, setsuccess] = useState('')

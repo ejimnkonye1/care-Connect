@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
 .chat-container {
   max-width: 800px;
   margin: 0 auto;
@@ -7,7 +11,7 @@
   background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
-  height: 75vh; /* Set the height of the container to the full viewport height */
+  height: 75vh; 
 }
 
 .chat-header {
@@ -16,11 +20,11 @@
 }
 
 .chat-messages {
-  flex-grow: 1; /* Allow this section to grow and fill available space */
+  flex-grow: 1;
   max-height: calc(70vh - 150px); 
   overflow-y: auto;
   margin-bottom: 20px;
-  /* background-color: #dc3545; */
+
 }
 
 .message-list {
@@ -33,26 +37,26 @@
   padding: 10px;
   border-radius: 10px;
   position: relative;
-  width: fit-content; /* Adjust width based on content */
-  min-width: 10%; /* Minimum width for short messages */
-  max-width: 60%; /* Maximum width for longer messages */
+  width: fit-content; 
+  min-width: 10%; 
+  max-width: 60%; 
   display: flex;
   flex-direction: column;
-  word-wrap: break-word; /* Ensure long words break into a new line */
+  word-wrap: break-word; 
 }
 
 .received {
-  align-self: flex-start; /* Align sent messages to the start */
+  align-self: flex-start; 
   background-color: #dc3545;
   color: white;
   text-align: left;
 }
 .sent{
-  align-self: flex-end; /* Align received messages to the end */
+  align-self: flex-end; 
   background-color: #28a745;
   color: white;
   text-align: right;
-  margin-left: auto; /* Add this to push the message to the right edge */
+  margin-left: auto; 
 }
 
 
@@ -77,7 +81,7 @@ small {
   padding-bottom: 10px;
   background-color: #f9f9f9;
   position: sticky;
-  bottom: 0; /* Fix the input area at the bottom */
+  bottom: 0; 
   background-color: #fff;
   border-top: 1px solid #ddd;
 }
@@ -126,4 +130,4 @@ body{
     text-wrap: nowrap;
   }
   
-}
+} */

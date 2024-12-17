@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { IoPersonOutline } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa";
 import '../css/login.css'
