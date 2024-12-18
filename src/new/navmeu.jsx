@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import {
-    ArrowDown2,
+    
     Calendar,
-    Notification,
+   
     Logout,
+    Sun1
   } from "iconsax-react";
-  import Avatar from "../assets/child2.jpeg";
+
   
   const NavMenu = ({ currentPage }) => {
     const formatDate = () => {
@@ -35,7 +36,7 @@ import {
             </div>
   
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 text-slate-900 dark:border-neutral-700 dark:text-neutral-100 md:h-10 md:w-10">
-              <Notification size="20" />
+              <Sun1 size="20" />
             </span>
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 text-slate-900 dark:border-neutral-700 dark:text-neutral-100 md:h-10 md:w-10">
               <Logout size="20" />

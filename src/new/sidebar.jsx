@@ -1,9 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import { AiOutlineDashboard, AiOutlineInbox, AiOutlineAppstore } from "react-icons/ai";
+
 import { FiMenu } from "react-icons/fi";
 import  { useState } from "react";
 import logo from '../assets/image.png'
-import { Dash } from "iconsax-react";
+import { Dash,Logout, UserOctagon,Messages,MoneySend,DocumentLike,CalendarTick,Reserve,Sun1,Moon
+} from "iconsax-react";
 const Sidebar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -14,6 +15,7 @@ const Sidebar = () => {
   const closeSidebar = () => {
     setSidebarOpen(false); // Close the sidebar
   };
+  const theme = ''
   return (
     <div className='' >
  
@@ -53,9 +55,9 @@ const Sidebar = () => {
     </li>
   </ul>
   
-          <ul className="space-y-2 font-medium  px-3 py-5">
+          <ul className="space-y-2 font-medium  px-3 py-3">
             
-          <span className="dark:text-white">Menu</span>
+          <span className="dark:text-white text-sm">Menu</span>
             <li onClick={closeSidebar}>
               <a
                 href="#"
@@ -65,35 +67,89 @@ const Sidebar = () => {
                 <span className="ms-3">Dashboard</span>
               </a>
             </li>
-
-            {/* Kanban */}
             <li>
               <a
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                <AiOutlineAppstore className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Kanban</span>
-                <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                  Pro
-                </span>
+                <DocumentLike
+ className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Reports</span>
+              
               </a>
             </li>
-
-            {/* Inbox */}
             <li>
               <a
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                <AiOutlineInbox className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Inbox</span>
-                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                  3
-                </span>
+                <CalendarTick className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Events</span>
+              
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <MoneySend className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Fees</span>
+              
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <Reserve className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Meals</span>
+              
               </a>
             </li>
           </ul>
+          
+
+        
+          <ul className="space-y-2 font-medium  px-3 ">
+            
+            <span className="dark:text-white text-sm">Communication</span>
+              <li onClick={closeSidebar}>
+                <a
+                  href="#"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                >
+                  <Messages size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="ms-3">Chat</span>
+                </a>
+              </li>
+             
+             
+            </ul>
+            <ul className="space-y-2 font-medium  px-3 ">
+            
+            <span className="dark:text-white text-sm">Profile</span>
+              <li onClick={closeSidebar}>
+                <a
+                  href="#"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                >
+                  <UserOctagon size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="ms-3">Profile</span>
+                </a>
+              </li>
+              <li onClick={closeSidebar}>
+                <a
+                  href="#"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                >
+                  <Logout size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="ms-3">Logout</span>
+                </a>
+              </li>
+             
+            </ul>
         </div>
       </aside>
 

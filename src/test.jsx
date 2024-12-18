@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 
+import Layout from "./new/Layout";
 import NavMenu from "./new/navmeu";
 import Sidebar from "./new/sidebar";
 
@@ -15,7 +16,7 @@ const Test = () => {
 
     <section className="lg:w-[80%] flex-grow "> {/* Set NavMenu width to 70% */}
       <NavMenu currentPage="Dashboard" />
-      {/* <Layout theme={theme} /> */}
+      <Layout />
     </section>
   </section>
 

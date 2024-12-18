@@ -131,3 +131,17 @@ body{
   }
   
 } */
+/* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: none; /* Hide scrollbar */
+}
+
+/* For Internet Explorer and Edge */
+body {
+  -ms-overflow-style: none; /* Hide scrollbar */
+}
