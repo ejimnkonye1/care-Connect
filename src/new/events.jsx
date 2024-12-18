@@ -31,15 +31,15 @@ const events = [
 const Events = () => {
  
 
-  const statusColor = (status) => {
-    switch (status) {
-      case "Nov 15, 2023":
-        return "text-emerald-400";
-      case "Nov 14, 2023":
-        return "text-red-500";
-      default:
-    }
-  };
+//   const statusColor = (status) => {
+//     switch (status) {
+//       case "Nov 15, 2023":
+//         return "text-emerald-400";
+//       case "Nov 14, 2023":
+//         return "text-red-500";
+//       default:
+//     }
+//   };
 
   return (
     <div className="inline-flex w-full flex-col items-start justify-start rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">

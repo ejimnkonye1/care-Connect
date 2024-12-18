@@ -5,24 +5,33 @@ export default {
   ],
   theme: {
     extend: {
-    
-      fontFamily:{
-        sans : ['Segoe UI', 'Helvetica'],
-        poppins: ['Poppins', 'sans-serif'],
-        paci: ['Pacifico ', 'cursive'],
-         nun: [ "Nunito", "sans-serif"]
+      animation: {
+        fadeInLeft: 'fadeInLeft 1s ease-out forwards',
+        fadeUp: 'fadeUp 1s ease-out forwards',
+        fadeDown: 'fadeDown 1s ease-out forwards',
+          fadeRight: 'fadeRight 1s ease-out forwards'
       },
-      fontSize: {
-        'h4': 'calc(1.275rem + 0.3vw)', 
-        'h5': '1.25rem',
-        'h1': 'calc(1.525rem + 3.3vw)',
-        'query': 'calc(1.375rem + 1.5vw)',
-         'hero': 'calc(1.525rem + 3.3vw)'
+      keyframes: {
+        fadeInLeft: {
+          '0%': { opacity: 0, transform: 'translateX(-100%)' },
+          '100%': { opacity: 1, transform: 'translateX(0)' },
+        },
+        fadeUp: {
+          '0%': { opacity: 0, transform: 'translateY(50px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        fadeDown: {
+          '0%': { opacity: 0, transform: 'translateY(-50px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        fadeLeft: {
+          '0%': { opacity: 0, transform: 'translateX(50px)' },
+          '100%': { opacity: 1, transform: 'translateX(0)' },
+        },
+        
       },
-     
-
     },
   },
   plugins: [],
-}
+};
 
