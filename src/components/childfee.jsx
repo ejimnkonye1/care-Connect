@@ -1,46 +1,40 @@
-const orders = [
-  {
-    name: "Tuition Fee",
-    date: "Nov 15, 2023",
-    amount: 80000,
-    status: "Paid",
-  },
-  {
-    name: "Feeding Fee",
-    date: "Nov 15, 2023",
-    amount: 150000,
-    status: "Refund",
-  },
-  {
-    name: "Late Pickup Fee",
-    date: "Nov 14, 2023",
-    amount: 87000,
-    status: "Paid",
-  },
-  {
-    name: "Stationery Fee",
-    date: "Nov 14, 2023",
-    amount: 100000,
-    status: "Refund",
-  },
-  {
-    name: "Medical Fee",
-    date: "Nov 13, 2023",
-    amount: 78000,
-    status: "Paid",
-  },
-];
 
+const Fee = [
+    {
+      name: "Tuition Fee",
+      date: "Nov 15, 2023",
+      amount: 80000,
+      status: "Paid",
+    },
+    {
+      name: "Feeding Fee",
+      date: "Nov 15, 2023",
+      amount: 150000,
+      status: "Ongoing",
+    },
+    {
+      name: "Late Pickup Fee",
+      date: "Nov 14, 2023",
+      amount: 87000,
+      status: "Paid",
+    },
+    {
+      name: "Stationery Fee",
+      date: "Nov 14, 2023",
+      amount: 100000,
+      status: "Ongoing",
+    },
+    {
+      name: "Medical Fee",
+      date: "Nov 13, 2023",
+      amount: 78000,
+      status: "Paid",
+    },
+  ];
 const Fees = () => {
-  const statusColor = (status) => {
-    switch (status) {
-      case "Paid":
-        return "text-emerald-400";
-      case "Refund":
-        return "text-red-500";
-      default:
-        return "text-gray-500";
-    }
+  const handlePayClick = (name, amount) => {
+    alert(`You selected to pay for: ${name} - $${amount}`);
+    // Add payment logic here
   };
 
   return (
@@ -70,29 +64,42 @@ const Fees = () => {
               <th className="px-4 pb-3 text-left text-base font-medium text-gray-400 dark:text-neutral-200">
                 Date
               </th>
+              <th className="px-4 pb-3 text-left text-base font-medium text-gray-400 dark:text-neutral-200">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order, index) => (
+            {Fee.map((fee, index) => (
               <tr
                 key={index}
                 className="border-b border-gray-200 dark:border-neutral-800"
               >
-                <td className="w-[100px] px-4 py-3 text-sm font-medium text-gray-700 dark:text-neutral-300">
-                  {order.name}
+                <td className="px-4 py-3 text-sm font-medium text-gray-700 dark:text-neutral-300">
+                  {fee.name}
                 </td>
                 <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-neutral-200">
-                  ${order.amount.toLocaleString()}
+                  ${fee.amount.toLocaleString()}
                 </td>
                 <td
-                  className={`px-4 py-3 text-sm font-medium ${statusColor(
-                    order.status
-                  )}`}
+                  className={`px-4 py-3 text-sm font-medium ${
+                    fee.status === "Paid"
+                      ? "text-emerald-400"
+                      : "text-red-500"
+                  }`}
                 >
-                  {order.status}
+                  {fee.status}
                 </td>
                 <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-neutral-400">
-                  {order.date}
+                  {fee.date}
+                </td>
+                <td className="px-4 py-3">
+                <button
+        className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 dark:focus:ring-emerald-600"
+        onClick={() => handlePayClick(fee.name,fee.amount)}
+      >
+        Pay Now
+      </button>
                 </td>
               </tr>
             ))}

@@ -16,6 +16,9 @@ import { AdminDashboard } from './admindashboard.jsx/admin'
 import Dashboards from './pages/Dashboard'
 import Report from './pages/Reports'
 import Event from './pages/Events'
+import Meal from './pages/meal'
+import Fee from './pages/fee'
+import Profile from './pages/profile'
 
 
 const Loader = () => (
@@ -70,6 +73,9 @@ function App() {
           <Route path='/test' element={<Dashboards />} />
           <Route path='/re' element={<Report />} />
           <Route path='/ev' element={<Event />} />
+          <Route path='/meal' element={<Meal />} />
+          <Route path='/fee' element={<Fee />} />
+          <Route path='/pro' element={<Profile />} />
         </Routes>
       </Router>
       </Layout>

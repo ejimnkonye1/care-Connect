@@ -83,7 +83,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
             </li>
             <li>
               <NavLink
-                to="#"
+                to="/fee"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <MoneySend className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -93,7 +93,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
             </li>
             <li>
               <NavLink
-                to="#"
+                to="/meal"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <Reserve className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -110,7 +110,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
             <span className="dark:text-white text-sm">Communication</span>
               <li onClick={closeSidebar}>
                 <NavLink
-                  to="#"
+                  to="/chat"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 >
                   <Messages size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -125,7 +125,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
             <span className="dark:text-white text-sm">Profile</span>
               <li onClick={closeSidebar}>
                 <NavLink
-                  to="#"
+                  to="/pro"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 >
                   <UserOctagon size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
