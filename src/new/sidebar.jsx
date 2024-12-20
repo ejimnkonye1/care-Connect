@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 
 import { FiMenu } from "react-icons/fi";
@@ -5,12 +7,9 @@ import  { useState } from "react";
 import logo from '../assets/image.png'
 import { Dash,Logout, UserOctagon,Messages,MoneySend,DocumentLike,CalendarTick,Reserve,Sun1,Moon
 } from "iconsax-react";
-const Sidebar = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
+
   
   const closeSidebar = () => {
     setSidebarOpen(false); // Close the sidebar
@@ -19,26 +18,21 @@ const Sidebar = () => {
   return (
     <div className='' >
  
- <button
-        onClick={toggleSidebar}
-        aria-controls="separator-sidebar"
-        type="button"
-        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden md:block hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-      >
-        <span className="sr-only">Open sidebar</span>
-        <FiMenu className="w-6 h-6" />
-      </button>
+
 
       {/* Sidebar */}
       <aside
-        id="separator-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform  ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } sm:translate-x-0`}
-        aria-label="Sidebar"
-      >
-        <div className="h-full py-4 overflow-y-auto bg-[#111313] ">
-        <ul className="p-0 m-0 border-b border-gray-700"> 
+  id="separator-sidebar"
+  className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 ${
+    isSidebarOpen ? "translate-x-0 block" : "-translate-x-full"
+  } md:${isSidebarOpen ? "block" : "hidden"} lg:translate-x-0 lg:block`}
+>
+
+
+ 
+
+        <div className="h-full py-4 overflow-y-auto bg-neutral-50 dark:bg-[#111313] border-r border-slate-200 dark:border-neutral-800">
+        <ul className="p-0 m-0 border-b border-slate-200 dark:border-neutral-800"> 
     <li className="">
       <a
         href="#"

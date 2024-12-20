@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class", // Enables class-based dark mode
+
   content: [
      "./src/**/*.{html,js,jsx,ts,tsx}"
   ],
@@ -9,7 +11,7 @@ export default {
         fadeInLeft: 'fadeInLeft 1s ease-out forwards',
         fadeUp: 'fadeUp 1s ease-out forwards',
         fadeDown: 'fadeDown 1s ease-out forwards',
-          fadeRight: 'fadeRight 1s ease-out forwards'
+        fadeLeft: 'fadeRight 1s ease-out forwards',
       },
       keyframes: {
         fadeInLeft: {
@@ -28,7 +30,6 @@ export default {
           '0%': { opacity: 0, transform: 'translateX(50px)' },
           '100%': { opacity: 1, transform: 'translateX(0)' },
         },
-        
       },
     },
   },
