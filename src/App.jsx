@@ -19,6 +19,7 @@ import Event from './pages/Events'
 import Meal from './pages/meal'
 import Fee from './pages/fee'
 import Profile from './pages/profile'
+import Chats from './pages/chat'
 
 
 const Loader = () => (
@@ -76,6 +77,7 @@ function App() {
           <Route path='/meal' element={<Meal />} />
           <Route path='/fee' element={<Fee />} />
           <Route path='/pro' element={<Profile />} />
+          <Route path='/chat' element={<Chats />} />
         </Routes>
       </Router>
       </Layout>

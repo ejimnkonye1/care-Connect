@@ -11,7 +11,7 @@ const Layout = () => {
         <ChildActivityReport  />
       </div>
 
-      <div className="h-min w-full lg:w-[calc(50%_-_10px)] animate-fadeInLeft">
+      <div className="h-min w-full lg:w-[calc(50%_-_10px)] animate-fadeInRight">
         <ChildIncidentReport  />
       </div>
       

@@ -11,7 +11,7 @@ export default {
         fadeInLeft: 'fadeInLeft 1s ease-out forwards',
         fadeUp: 'fadeUp 1s ease-out forwards',
         fadeDown: 'fadeDown 1s ease-out forwards',
-        fadeLeft: 'fadeRight 1s ease-out forwards',
+        fadeInRight: 'fadeInRight 1s ease-out forwards',
       },
       keyframes: {
         fadeInLeft: {
@@ -26,8 +26,8 @@ export default {
           '0%': { opacity: 0, transform: 'translateY(-50px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
-        fadeLeft: {
-          '0%': { opacity: 0, transform: 'translateX(50px)' },
+        fadeInRight: {
+          '0%': { opacity: 0, transform: 'translateX(-100px)' },
           '100%': { opacity: 1, transform: 'translateX(0)' },
         },
       },
