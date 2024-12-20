@@ -30,7 +30,7 @@ const Profile = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Meal" />
+      currentPage="Edit profile" />
     <Layout />
     </section>
   </section>
