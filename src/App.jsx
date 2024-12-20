@@ -13,7 +13,9 @@ import {  SignUp } from './profile/SignUp'
 import { Provider } from 'react-redux'
 import store from './store'
 import { AdminDashboard } from './admindashboard.jsx/admin'
-import Test from './test'
+import Dashboards from './pages/Dashboard'
+import Report from './pages/Reports'
+import Event from './pages/Events'
 
 
 const Loader = () => (
@@ -65,7 +67,9 @@ function App() {
           <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/staff' element={<StaffDashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/admin' element={<AdminDashboard showToast={showToast} setShowToast={setShowToast} />} />
-          <Route path='/test' element={<Test />} />
+          <Route path='/test' element={<Dashboards />} />
+          <Route path='/re' element={<Report />} />
+          <Route path='/ev' element={<Event />} />
         </Routes>
       </Router>
       </Layout>

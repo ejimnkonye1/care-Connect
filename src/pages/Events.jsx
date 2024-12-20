@@ -1,23 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import { useState } from "react";
-import Layout from "./new/Layout";
-import NavMenu from "./new/navmeu";
-import Sidebar from "./new/sidebar";
-import { useDispatch, useSelector } from "react-redux";
-import { setMode } from "./action";
 
-const Test = () => {
+import NavMenu from "../components/navmeu";
+import Sidebar from "../components/sidebar";
+import Layout from "../layouts/Eventlayout";
+
+
+
+const Event = () => {
   
    const [isSidebarOpen, setSidebarOpen] = useState(false);
-   const dispatch = useDispatch();
 
-   const darkmode = useSelector((state)=> state.darkMode)
-  
- 
-  const toggledark = () => {
-    dispatch(setMode(!darkmode))
-  }
  
 
   return (
@@ -36,8 +30,8 @@ const Test = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Dashboard" />
-      <Layout />
+      currentPage="Events" />
+    <Layout />
     </section>
   </section>
 
@@ -47,4 +41,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default Event;

@@ -9,7 +9,7 @@ const childDetails = {
     allergies: ["Peanuts", "Dairy"],
   };
 
-const Add = () => {
+const Childdetails = () => {
 
 
   return (
@@ -54,4 +54,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default Childdetails;

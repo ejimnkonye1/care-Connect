@@ -43,7 +43,7 @@ import { setMode } from "../action";
 
     return (
       <>
-        <section className="flex w-full items-center justify-between bg-neutral-50  dark:bg-[#111313] px-4 py-2  border-b border-slate-200 dark:border-neutral-800  lg:py-4 ">
+        <section className="flex  lg:w-[100%] items-center justify-between bg-neutral-50  dark:bg-[#111313] px-4 py-2  border-b border-slate-200 dark:border-neutral-800  lg:py-4 ">
           <span className="text-base font-semibold text-zinc-800 dark:text-neutral-100 md:text-xl hidden lg:block">
             {currentPage}
           </span>
