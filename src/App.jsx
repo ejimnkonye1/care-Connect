@@ -20,6 +20,13 @@ import Meal from './pages/meal'
 import Fee from './pages/fee'
 import Profile from './pages/profile'
 import Chats from './pages/chat'
+import Staffdashboards from './staffpages/dashboard'
+import Staffreports from './staffpages/staffreport'
+import Staffevent from './staffpages/staffevents'
+import Staffattandance from './staffpages/Attandace'
+import Staffmeals from './staffpages/staffmealupdates'
+import Staffchat from './staffpages/staffchat'
+import Staffprofile from './staffpages/staffprofile'
 
 
 const Loader = () => (
@@ -78,6 +85,13 @@ function App() {
           <Route path='/fee' element={<Fee />} />
           <Route path='/pro' element={<Profile />} />
           <Route path='/chat' element={<Chats />} />
+          <Route path='/st' element={<Staffdashboards />} />
+          <Route path='/reups' element={<Staffreports />} />
+          <Route path='/evups' element={<Staffevent />} />
+          <Route path='/at' element={<Staffattandance />} />
+          <Route path='/mealupdates' element={<Staffmeals />} />
+          <Route path='/schat' element={<Staffchat />} />
+          <Route path='/spro' element={<Staffprofile />} />
         </Routes>
       </Router>
       </Layout>
