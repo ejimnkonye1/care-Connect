@@ -5,7 +5,7 @@ import { useState } from "react";
 import NavMenu from "../components/navmeu";
 import Sidebar from "../staff/sidebar";
 
-import StaffLayout from "../stafflayouts/dashboard";
+import StaffLayout from "../stafflayouts/staffprofilelayout";
 
 const Staffprofile = () => {
   
@@ -29,7 +29,7 @@ const Staffprofile = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Staff dashboard" />
+      currentPage="Staff Profile" />
       <StaffLayout />
     </section>
   </section>

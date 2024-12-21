@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import NavMenu from "../components/navmeu";
 import Sidebar from "../staff/sidebar";
-import StaffLayout from "../stafflayouts/dashboard";
+import StaffLayout from "../stafflayouts/staffeventslayout";
 
 
 const Staffevent = () => {
@@ -30,7 +30,7 @@ const Staffevent = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Staff dashboard" />
+      currentPage="Events" />
       <StaffLayout />
     </section>
   </section>

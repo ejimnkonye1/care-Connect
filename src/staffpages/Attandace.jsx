@@ -6,7 +6,7 @@ import { useState } from "react";
 import NavMenu from "../components/navmeu";
 import Sidebar from "../staff/sidebar";
 
-import StaffLayout from "../stafflayouts/dashboard";
+import StaffLayout from "../stafflayouts/Attandancelayout";
 
 
 const Staffattandance = () => {
@@ -31,7 +31,7 @@ const Staffattandance = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Staff dashboard" />
+      currentPage="Mark Attandance" />
       <StaffLayout />
     </section>
   </section>
