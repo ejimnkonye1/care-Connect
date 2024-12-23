@@ -207,7 +207,7 @@ const SetMealForm = () => {
             fullWidth
             InputLabelProps={{
                 className:"dark:text-neutral-100",
-                
+                shrink: true, 
                 }}
 
           />

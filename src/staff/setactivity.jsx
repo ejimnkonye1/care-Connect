@@ -202,7 +202,7 @@ const Setactivity = () => {
           sx={{ padding: '10px' }}
           InputLabelProps={{
             className:"dark:text-neutral-100",
-            
+            shrink: true, 
             }}
         />
         <TextField
@@ -217,7 +217,7 @@ const Setactivity = () => {
           sx={{ padding: '10px' }}
           InputLabelProps={{
             className:"dark:text-neutral-100",
-            
+            shrink: true, 
             }}
         />
         <TextField
@@ -230,6 +230,7 @@ const Setactivity = () => {
           sx={{ padding: '10px' }}
           InputLabelProps={{
             className:"dark:text-neutral-100",
+            shrink: true, 
             
             }}
         />
