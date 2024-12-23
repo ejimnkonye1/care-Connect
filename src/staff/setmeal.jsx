@@ -209,6 +209,9 @@ const SetMealForm = () => {
                 className:"dark:text-neutral-100",
                 shrink: true, 
                 }}
+                InputProps={{
+                    className:"dark:text-neutral-100",
+                  }}
 
           />
           

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { collection, addDoc, Timestamp, onSnapshot, query, where, getDocs } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import aud from '../audio/mixkit.wav';
+import { MenuItem,Select,FormControl,InputLabel, TextField, Button } from '@mui/material';
 
 const ParentChat = () => {
    const [message, setMessage] = useState('');
@@ -96,25 +97,29 @@ const ParentChat = () => {
         <h6 className="text-lg font-semibold text-gray-700 dark:text-neutral-200">Chat with Staff</h6>
   
         {/* Staff Selector */}
-        <div className="w-64">
-          <label className="block text-sm font-medium text-gray-700 dark:text-neutral-200">
-            Select Staff
-          </label>
-          <select
-            className="mt-1 w-full p-2 border rounded-lg bg-white text-gray-700 dark:bg-neutral-900 dark:text-neutral-200 border-gray-300 dark:border-neutral-800"
+       
+        <div className="">
+        <FormControl fullWidth>
+        <InputLabel className='dark:text-neutral-100'>   Select Staff</InputLabel>
+      
+          <Select
+       label="Select Staff"
+            className='dark:text-neutral-100 w-64'
             value={staffId}
             onChange={(e) => setStaffId(e.target.value)}
           >
-            <option value="" disabled>
+            <MenuItem value="" disabled>
               Select Staff
-            </option>
+            </MenuItem>
             {staffList.map((staff) => (
-              <option key={staff.id} value={staff.id}>
+              <MenuItem key={staff.id} value={staff.id}>
                 {staff.name} ({staff.email})
-              </option>
+              </MenuItem>
             ))}
-          </select>
+          </Select>
+          </FormControl>
         </div>
+        
       </div>
   
       {/* Chat Messages */}
@@ -152,26 +157,31 @@ const ParentChat = () => {
   
       {/* Chat Input */}
       <div className="p-4 border-t flex items-center space-x-2 bg-white text-gray-700 dark:bg-neutral-900 dark:border-neutral-800">
-        <input
+        <TextField
+            InputLabelProps={{
+              className:"dark:text-neutral-100",
+              shrink: true, 
+              
+              }}
+              InputProps={{
+                  className:"dark:text-neutral-100",
+                }}
           type="text"
-          placeholder="Type your message..."
-          className="flex-grow p-2 rounded-lg border bg-gray-50 text-gray-700 dark:bg-neutral-900 dark:text-neutral-200 border-gray-300 dark:border-neutral-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+           label="Type your message..."
+className="flex-grow"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
           disabled={!staffId}
         />
-        <button
-          className={`px-4 py-2 rounded-lg font-semibold ${
-            loading || !staffId
-              ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
+        <Button
+            variant="contained"
+          color="primary"
           onClick={handleSendMessage}
           disabled={loading || !staffId}
         >
           {loading ? "Sending..." : "Send"}
-        </button>
+        </Button>
       </div>
     </div>
   </div>

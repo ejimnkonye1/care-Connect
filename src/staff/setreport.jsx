@@ -113,6 +113,9 @@ fetchUsers();
                   value={newIncidentReport.date}
                   onChange={(e) => setNewIncidentReport({ ...newIncidentReport, date: e.target.value })}
                   InputLabelProps={{ shrink: true, className:"dark:text-neutral-100", }}
+                  InputProps={{
+                    className:"dark:text-neutral-100",
+                  }}
                 />
               </div>
               <div className="mb-4">
@@ -124,6 +127,9 @@ fetchUsers();
                   value={newIncidentReport.time}
                   onChange={(e) => setNewIncidentReport({ ...newIncidentReport, time: e.target.value })}
                   InputLabelProps={{ shrink: true ,className:"dark:text-neutral-100",}}
+                  InputProps={{
+                    className:"dark:text-neutral-100",
+                  }}
                   
                 />
               </div>

@@ -204,13 +204,18 @@ const Setactivity = () => {
             className:"dark:text-neutral-100",
             shrink: true, 
             }}
+            InputProps={{
+                className:"dark:text-neutral-100",
+              }}
         />
         <TextField
           label="Date"
           type="date"
           fullWidth
           margin="normal"
-
+          InputProps={{
+            className:"dark:text-neutral-100",
+          }}
           value={newactivityUpdates.date}
           onChange={(e) => setNewActivityUpdates({ ...newactivityUpdates, date: e.target.value })}
           required
