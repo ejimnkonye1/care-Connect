@@ -27,6 +27,7 @@ import Staffattandance from './staffpages/Attandace'
 import Staffmeals from './staffpages/staffmealupdates'
 import Staffchat from './staffpages/staffchat'
 import Staffprofile from './staffpages/staffprofile'
+import Staffactivity from './staffpages/staffactivity'
 
 
 const Loader = () => (
@@ -87,6 +88,7 @@ function App() {
           <Route path='/chat' element={<Chats />} />
           <Route path='/st' element={<Staffdashboards />} />
           <Route path='/reups' element={<Staffreports />} />
+          <Route path='/act' element={<Staffactivity />} />
           <Route path='/evups' element={<Staffevent />} />
           <Route path='/at' element={<Staffattandance />} />
           <Route path='/mealupdates' element={<Staffmeals />} />

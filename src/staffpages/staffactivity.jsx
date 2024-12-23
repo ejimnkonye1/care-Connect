@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 
-
 import NavMenu from "../components/navmeu";
 import Sidebar from "../staff/sidebar";
 
-import StaffLayout from "../stafflayouts/staffmeallayout";
+import StaffLayout from "../stafflayouts/staffactivity";
 
-const Staffmeals = () => {
+
+const Staffactivity = () => {
   
    const [isSidebarOpen, setSidebarOpen] = useState(false);
  
@@ -30,7 +30,7 @@ const Staffmeals = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Set Meals" />
+      currentPage="Staff dashboard" />
       <StaffLayout />
     </section>
   </section>
@@ -41,4 +41,4 @@ const Staffmeals = () => {
   );
 };
 
-export default Staffmeals;
+export default Staffactivity;

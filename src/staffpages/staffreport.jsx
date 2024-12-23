@@ -5,7 +5,7 @@ import { useState } from "react";
 import NavMenu from "../components/navmeu";
 import Sidebar from "../staff/sidebar";
 
-import StaffLayout from "../stafflayouts/dashboard";
+import StaffLayout from "../stafflayouts/staffrepotslayout";
 
 
 const Staffreports = () => {
