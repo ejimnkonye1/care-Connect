@@ -1,4 +1,8 @@
 
+import Events from "../components/events";
+import Childlist from "../staff/childlist";
+import Childlschdule from "../staff/childschedule";
+import Childlupdates from "../staff/childup";
 import { WelcomeStaff } from "../staff/welcome";
 
 // eslint-disable-next-line react/prop-types
@@ -8,20 +12,20 @@ const StaffLayout = () => {
       <div className="h-min w-full lg:w-[calc(35%_-_10px)] animate-fadeInLeft">
         <WelcomeStaff  />
       </div>
-{/* 
+
       <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeUp delay-100">
-        <Childdetails />
+        <Childlupdates />
       </div>
       
       <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeDown delay-200">
-        <WeeklyAttendance />
+        <Childlschdule />
       </div>
 
       <div
         className="h-min w-full lg:w-[calc(35%_-_10px)] animate-fadeUp delay-300"
         onClick={() => console.log("clicked")}
       >
-        <Fees />
+        <Childlist />
       </div>
 
       <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeUp delay-400">
@@ -29,8 +33,8 @@ const StaffLayout = () => {
       </div>
 
       <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeLeft delay-500">
-        <DailyUpdates />
-      </div> */}
+        <Events />
+      </div>
     </section>
   );
 };

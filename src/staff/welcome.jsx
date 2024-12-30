@@ -1,12 +1,11 @@
 import pa from '../assets/pa.jpg';
 
 const childDetails = {
-    name: "Ella Johnson",
-    dob: "January 15, 2020",
-    age: "3 years",
+    name: "Luke jonhson",
+   
     gender: "Female",
     Number:'07062487335',
-    allergies: ["Peanuts", "Dairy"],
+   
   };
 export const WelcomeStaff = () => {
   return (
@@ -21,7 +20,7 @@ export const WelcomeStaff = () => {
             </div>
           </div>
           <div className="ml-4">
-            <h2 className="text-sm font-semibold dark:text-white">Welcome Back!</h2>
+            <h2 className="text-sm font-semibold dark:text-white">Good Morning!</h2>
             <p className="text-gray-600 dark:text-white text-sm">billie@example.com</p>
           </div>
         </div>
@@ -32,7 +31,7 @@ export const WelcomeStaff = () => {
     <section className="mt-2 inline-flex w-full flex-col items-start justify-start rounded-[14px] border border-slate-100 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900 shadow-md">
     <div className="flex w-full items-center justify-between">
         <h6 className="text-base text-sm font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
-          Parent details
+          Staff details
         </h6>
      
       </div>
