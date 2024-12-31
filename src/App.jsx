@@ -28,6 +28,7 @@ import Staffmeals from './staffpages/staffmealupdates'
 import Staffchat from './staffpages/staffchat'
 import Staffprofile from './staffpages/staffprofile'
 import Staffactivity from './staffpages/staffactivity'
+import Adminsdashboards from './adminpages/dashboard'
 
 
 const Loader = () => (
@@ -94,6 +95,7 @@ function App() {
           <Route path='/mealupdates' element={<Staffmeals />} />
           <Route path='/schat' element={<Staffchat />} />
           <Route path='/spro' element={<Staffprofile />} />
+          <Route path='/ad' element={<Adminsdashboards />} />
         </Routes>
       </Router>
       </Layout>
