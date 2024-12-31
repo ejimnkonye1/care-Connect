@@ -131,3 +131,20 @@ body{
   }
   
 } */
+<<<<<<< HEAD
+=======
+/* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: none; /* Hide scrollbar */
+}
+
+/* For Internet Explorer and Edge */
+body {
+  -ms-overflow-style: none; /* Hide scrollbar */
+}
+>>>>>>> 350318ecbf0181d8cf37857b1bbcbeb41eb15a39

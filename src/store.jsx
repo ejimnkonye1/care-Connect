@@ -10,6 +10,8 @@ switch (action.type) {
               return {
             ...state,
             darkMode: action.payload
+        
+            
         }
         case "SET_ALERT":
             return {

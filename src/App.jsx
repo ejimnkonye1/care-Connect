@@ -13,7 +13,22 @@ import {  SignUp } from './profile/SignUp'
 import { Provider } from 'react-redux'
 import store from './store'
 import { AdminDashboard } from './admindashboard.jsx/admin'
-import Test from './test'
+import Dashboards from './pages/Dashboard'
+import Report from './pages/Reports'
+import Event from './pages/Events'
+import Meal from './pages/meal'
+import Fee from './pages/fee'
+import Profile from './pages/profile'
+import Chats from './pages/chat'
+import Staffdashboards from './staffpages/dashboard'
+import Staffreports from './staffpages/staffreport'
+import Staffevent from './staffpages/staffevents'
+import Staffattandance from './staffpages/Attandace'
+import Staffmeals from './staffpages/staffmealupdates'
+import Staffchat from './staffpages/staffchat'
+import Staffprofile from './staffpages/staffprofile'
+import Staffactivity from './staffpages/staffactivity'
+import Adminsdashboards from './adminpages/dashboard'
 
 
 const Loader = () => (
@@ -65,7 +80,22 @@ function App() {
           <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/staff' element={<StaffDashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/admin' element={<AdminDashboard showToast={showToast} setShowToast={setShowToast} />} />
-          <Route path='/test' element={<Test />} />
+          <Route path='/test' element={<Dashboards />} />
+          <Route path='/re' element={<Report />} />
+          <Route path='/ev' element={<Event />} />
+          <Route path='/meal' element={<Meal />} />
+          <Route path='/fee' element={<Fee />} />
+          <Route path='/pro' element={<Profile />} />
+          <Route path='/chat' element={<Chats />} />
+          <Route path='/st' element={<Staffdashboards />} />
+          <Route path='/reups' element={<Staffreports />} />
+          <Route path='/act' element={<Staffactivity />} />
+          <Route path='/evups' element={<Staffevent />} />
+          <Route path='/at' element={<Staffattandance />} />
+          <Route path='/mealupdates' element={<Staffmeals />} />
+          <Route path='/schat' element={<Staffchat />} />
+          <Route path='/spro' element={<Staffprofile />} />
+          <Route path='/ad' element={<Adminsdashboards />} />
         </Routes>
       </Router>
       </Layout>
