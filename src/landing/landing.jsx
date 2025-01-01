@@ -150,45 +150,50 @@ export const LandingPage = () => {
 
 
 
-<section id="testimonials" className='mb-4 py-3'>
-    <h2 className='text-center mb-3 text-white'>Testimonials</h2>
-    <div className='row'>
-        <div className='col-md-4'>
-            <div className='testimonial-card card'>
-                <img src={c1} alt='stories1' />
-                <div className='testimonial-body'>
-                    <blockquote>
-                        <p>CareConnect has been a game-changer for our family. We can finally stay connected with our child's caregivers and receive updates in real-time.</p>
-                        <cite>— Sarah P., Happy Parent</cite>
-                    </blockquote>
-                </div>
-            </div>
+<section id="testimonials" className="mb-4 py-3 bg-gray-800">
+  <h2 className="text-center mb-3 text-white text-3xl font-semibold">Testimonials</h2>
+  <div className="flex flex-wrap justify-center">
+    <div className="w-full md:w-1/3 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img src={c1} alt="stories1" className="w-full h-48 object-cover rounded-t-lg" />
+        <div className="testimonial-body mt-4">
+          <blockquote>
+            <p className="text-gray-700">
+              CareConnect has been a game-changer for our family. We can finally stay connected with our child's caregivers and receive updates in real-time.
+            </p>
+            <cite className="block mt-2 text-gray-500">— Sarah P., Happy Parent</cite>
+          </blockquote>
         </div>
-        <div className='col-md-4'>
-            <div className='testimonial-card card'>
-                <img src={c2} alt='stories2' />
-                <div className='testimonial-body'>
-                    <blockquote>
-                        <p>CareConnect has streamlined our communication with parents and made it easier to provide high-quality care for our children.</p>
-                        <cite>— John D., Caregiver</cite>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
-        <div className='col-md-4'>
-            <div className='testimonial-card card'>
-                <img src={c3} alt='stories3' />
-                <div className='testimonial-body'>
-                    <blockquote>
-                        <p>CareConnect has streamlined our communication with parents and made it easier to provide high-quality care for our children.</p>
-                        <cite>— John D., Caregiver</cite>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div className="w-full md:w-1/3 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img src={c2} alt="stories2" className="w-full h-48 object-cover rounded-t-lg" />
+        <div className="testimonial-body mt-4">
+          <blockquote>
+            <p className="text-gray-700">
+              CareConnect has streamlined our communication with parents and made it easier to provide high-quality care for our children.
+            </p>
+            <cite className="block mt-2 text-gray-500">— John D., Caregiver</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <div className="w-full md:w-1/3 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <img src={c3} alt="stories3" className="w-full h-48 object-cover rounded-t-lg" />
+        <div className="testimonial-body mt-4">
+          <blockquote>
+            <p className="text-gray-700">
+              CareConnect has streamlined our communication with parents and made it easier to provide high-quality care for our children.
+            </p>
+            <cite className="block mt-2 text-gray-500">— John D., Caregiver</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
 
 
 
