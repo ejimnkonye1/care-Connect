@@ -15,11 +15,13 @@ import feat7 from '../images/a1.jpeg'
 import c1 from '../assets/c1.jpg'
 import c2 from '../assets/c2.jpg'
 import c3 from '../assets/c3.jpg'
-
-import { useState } from 'react'
+import { RxHamburgerMenu } from "react-icons/rx";
+import { MdOutlineCancel } from "react-icons/md";
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 export const LandingPage = () => {
     const [active, setActive] = useState(null)
+    const [isOpen, setIsOpen] = useState(false)
     const features = [
         { name: 'Manage Your Child Care Center' },
         { name: 'Engage Parent and Families' },
@@ -40,69 +42,67 @@ export const LandingPage = () => {
     const handleDemo = () => {
       alert('coming soon')
     }
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const toggleMenu = () => {
+     setMenuOpen(prevState => !prevState);
+      console.log('Menu is open:', menuOpen);
+    };
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 0);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     return (
         <div className='child'>
-             <nav className="navbar navbar-expand-lg navbar-light  nav-bg">
-  <div className="container-fluid">
-    <button className="navbar-toggler to-color" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <a className="navbar-brand p-2" href="#">
-  <span className="care">𝓒𝓪𝓻𝓮</span>
-  <span className="connect">𝓬𝓸𝓷𝓷𝓮𝓬𝓽</span>
-</a>
-    <div className="nav lg-nav">
-        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li className="nav-item ">
-            <a className="nav-link land-link" href="#">Home</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link land-link" href="#features">Features</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link land-link" href="#testimonials">Testimonials</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link land-link" href="#pricing">Pricing</a>
-          </li>
-          <li className="nav-item">
-            <button onClick={HandleLogin} className='btns sign-in-nav'>Sign In</button>
-          </li>
-          <li className="nav-item mx-lg-4 mx-sm-0">
-            <button onClick={HandleSignUp} className='btns sign-up-nav'>Sign Up Free</button>
-          </li>
-        </ul>
-      </div>
-    <div className="offcanvas offcanvas-start" tabIndex={'-1'} id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div className="offcanvas-header">
-        <h5 className="offcanvas-title care-5" id="offcanvasNavbarLabel">CareConnect</h5>
-        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div className="offcanvas-body">
-        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li className="nav-item ">
-            <a className="nav-link land-link" href="#">Home</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link land-link" href="#features">Features</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link land-link" href="#testimonials">Testimonials</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link land-link" href="#pricing">Pricing</a>
-          </li>
-          <li className="nav-item">
-            <button onClick={HandleLogin} className='btns sign-in-nav'>Sign In</button>
-          </li>
-          <li className="nav-item mx-lg-4 mx-sm-0">
-            <button onClick={HandleSignUp} className='btns sign-up-nav'>Sign Up Free</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
+
+<header className={`flex justify-between items-center fixed top-0 p-4 z-10  w-full ${scrolled? 'bg-gray-700 ':''}`}>
+<a className="text-2xl font-bold p-2" href="#">
+          <span className="text-yellow-500">𝓒𝓪𝓻𝓮</span>
+          <span className="text-blue-700">𝓬𝓸𝓷𝓷𝓮𝓬𝓽</span>
+        </a>
+        <nav className="flex items-center z-10">
+            <button 
+                className="block lg:hidden bg-transparent border-none cursor-pointer z-30" 
+                onClick={toggleMenu}
+            >
+                {menuOpen ? (
+                    <MdOutlineCancel className="text-white text-2xl" />
+                ) : (
+                    <RxHamburgerMenu className="text-white text-2xl" />
+                )}
+            </button>
+    
+            <ul 
+                className={`flex-col lg:flex-row items-center m-2 p-2 transition-all duration-300 
+                    ${menuOpen ? 'flex absolute top-0 left-0 w-full bg-[#457AD4] p-4 flex-col items-center z-20' : 'hidden lg:flex'} 
+                    lg:static lg:bg-transparent`}
+            >
+                <li className={`${menuOpen? 'mb-2':''}`}>
+                    <a href="#stack" className="text-white text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Home</a>
+                </li>
+                <li className={`${menuOpen? 'mb-2':''}`}>
+                    <a href="#projects" className="text-white text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Features</a>
+                </li>
+                <li className={`${menuOpen? 'mb-3':''}`}>
+                    <a href="#about" className="text-white text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Testimonials</a>
+                </li>
+                <li className={`${menuOpen? 'mb-3':''}`}>
+                    <a href="#contact" className="text-white text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Pricing</a>
+                </li>
+                <li className={`${menuOpen? 'mb-3':''}`}>
+                    <a 
+                     onClick={HandleLogin}
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-white text-base font-semibold px-8 py-2 border-2 border-[#5494FF] transition-colors duration-200 hover:bg-[#5494FF] hover:text-white"
+                    >
+                       Sign In
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
             <div className="hero container-fluid">
               
 <div className='row'>
