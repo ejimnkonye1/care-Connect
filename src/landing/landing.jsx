@@ -15,6 +15,7 @@ import feat7 from '../images/a1.jpeg'
 import c1 from '../assets/c1.jpg'
 import c2 from '../assets/c2.jpg'
 import c3 from '../assets/c3.jpg'
+import ba from '../images/ba.png'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdOutlineCancel } from "react-icons/md";
 import { useState, useEffect } from 'react'
@@ -103,7 +104,7 @@ export const LandingPage = () => {
             </ul>
         </nav>
     </header>
-            <div className="hero container-fluid">
+            {/* <div className="hero container-fluid">
               
 <div className='row'>
     <div className='col-md-12 py-5 align-items-center flex-column'>
@@ -121,7 +122,29 @@ export const LandingPage = () => {
     
 
 </div>
-            </div>
+            </div> */}
+
+
+
+
+            <div className="hero container-fluid ">
+  <div className="flex-col items-start   h-full py-5">
+    <div className="w-full">
+      <h1 className="text-white items-start text-4xl font-bold">
+        Care <span className="connect">Connect</span>
+      </h1>
+      <p className="text-white mt-2">
+        From infancy to preschool,
+      </p>
+      <p className="text-white mt-1">
+        we make early education and daycare joyful, engaging, and fun so children are happy to learn, play, and grow.
+      </p>
+      <button className="btn btn-primary mt-4" onClick={HandleLogin}>
+        Get Started
+      </button>
+    </div>
+  </div>
+</div>
   <div className="container">
         
 
