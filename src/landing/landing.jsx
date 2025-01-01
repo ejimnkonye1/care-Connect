@@ -128,7 +128,7 @@ export const LandingPage = () => {
 
           
 
-  <section className='py-5 mb-3 feat'>
+  {/* <section className='py-5 mb-3 feat'>
   <h5 className='text-center mb-4 text-white'>CareConnect is packed with all the features you need</h5>
   <div className='row'>
     {features.map((feature, index) => (
@@ -146,10 +146,23 @@ export const LandingPage = () => {
       </div>
     ))}
   </div>
+</section> */}
+
+
+<section className="py-5 mb-3 feat bg-gray-800">
+  <h5 className="text-center mb-4 text-white text-2xl font-semibold">CareConnect is packed with all the features you need</h5>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {features.map((feature, index) => (
+      <div className={`mb-4 p-4 bg-gray-700 rounded-lg cursor-pointer ${active === index ? 'bg-blue-500' : ''}`} key={index} onClick={() => handlefeatures(index)}>
+        <div className="feature-icon mb-2">
+          {/* You can add an icon here */}
+        </div>
+        <p className="text-center mt-3 text-white text-lg font-semibold">{feature.name}</p>
+        <p className="text-center mt-1 feature-description text-white">{feature.description}</p>
+      </div>
+    ))}
+  </div>
 </section>
-
-
-
 <section id="testimonials" className="mb-4 py-3 bg-gray-800">
   <h2 className="text-center mb-3 text-white text-3xl font-semibold">Testimonials</h2>
   <div className="flex flex-wrap justify-center">
@@ -197,146 +210,122 @@ export const LandingPage = () => {
 
 
 
-            <section id="features" className='mb-4 py-3'>
-                <h5 className='text-center mb-3 text-white'>Top features</h5>
-             <div className='row'>
-                <div className=' col-6 col-md-2'>
-                    <div className='card feat-card'>
-                        <img src={feat1} className='feat-img' />
-                    </div>
-                    <p>Childcare attendance</p>
-                </div>
-                <div className=' col-6 col-md-2'>
-                    <div className='card  feat-card'>
-                        <img src={feat2} className='feat-img' />
-                    </div>
-                    <p>Parent communication</p>
-                </div>
-                <div className='col-6 col-md-2'>
-                    <div className='card  feat-card'>
-                        <img src={feat3} className='feat-img'/>
-                    </div>
-                    <p>Classroom Updates</p>
-                </div>
-                <div className='col-6 col-md-2'>
-                    <div className='card  feat-card'>
-                        <img src={feat4} className='feat-img'/>
-                    </div>
-                    <p>Analytics and reports</p>
-                </div>
-                <div className='col-6 col-md-2'>
-                    <div className='card  feat-card'>
-                        <img src={feat5} className='feat-img' />
-                    </div>
-                    <p>Communication filters</p>
-                </div>
-                <div className='col-6 col-md-2'>
-                    <div className='card  feat-card'>
-                        <img src={feat6} className='feat-img'/>
-                    </div>
-                    <p>Admin management</p>
-                </div>
+<section id="features" className="mb-4 py-3 bg-gray-800">
+  <h5 className="text-center mb-3 text-white text-2xl font-semibold">Top Features</h5>
+  <div className="flex flex-wrap justify-center">
+    <div className="w-1/2 md:w-1/6 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-4 text-center feat-card">
+        <img src={feat1} alt="Childcare attendance" className="feat-img mx-auto mb-2" />
+        <p className="text-gray-700">Childcare attendance</p>
+      </div>
+    </div>
+    <div className="w-1/2 md:w-1/6 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-4 text-center feat-card">
+        <img src={feat2} alt="Parent communication" className="feat-img mx-auto mb-2" />
+        <p className="text-gray-700">Parent communication</p>
+      </div>
+    </div>
+    <div className="w-1/2 md:w-1/6 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-4 text-center feat-card">
+        <img src={feat3} alt="Classroom Updates" className="feat-img mx-auto mb-2" />
+        <p className="text-gray-700">Classroom Updates</p>
+      </div>
+    </div>
+    <div className="w-1/2 md:w-1/6 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-4 text-center feat-card">
+        <img src={feat4} alt="Analytics and reports" className="feat-img mx-auto mb-2" />
+        <p className="text-gray-700">Analytics and reports</p>
+      </div>
+    </div>
+    <div className="w-1/2 md:w-1/6 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-4 text-center feat-card">
+        <img src={feat5} alt="Communication filters" className="feat-img mx-auto mb-2" />
+        <p className="text-gray-700">Communication filters</p>
+      </div>
+    </div>
+    <div className="w-1/2 md:w-1/6 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-4 text-center feat-card">
+        <img src={feat6} alt="Admin management" className="feat-img mx-auto mb-2" />
+        <p className="text-gray-700">Admin management</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-             </div>
-       
-           
-            </section>
-
-
-            <section id="pricing" className="mb-3 py-3">
-  <h2 className="text-center mb-3 text-white">Pricing</h2>
-  <div className="row">
-    <div className="col-md-4 mb-3">
-      <div className="pricing-card card-height">
-        <div className="pricing-header text-white" style={{ backgroundColor: '#007bff' }}>
-          <h3 className="text-center">Basic</h3>
-          <p className="text-center">$0.00/month</p>
-          <div className="pricing-top-features border-top border-bottom mb-3 text-center" style={{ backgroundColor: '#009bfa', borderColor: '#ffb850' }}>
+<section id="pricing" className="mb-3 py-3 bg-gray-800">
+  <h2 className="text-center mb-3 text-white text-3xl font-semibold">Pricing</h2>
+  <div className="flex flex-wrap justify-center">
+    {/* Basic Plan */}
+    <div className="w-full md:w-1/3 mb-3">
+      <div className="bg-white rounded-lg shadow-lg p-4">
+        <div className="bg-blue-600 text-white p-4 rounded-t-lg">
+          <h3 className="text-center text-xl">Basic</h3>
+          <p className="text-center text-lg">$0.00/month</p>
+          <div className="border-t border-b border-yellow-400 bg-blue-500 text-center py-2 mb-3">
             Top features include
           </div>
         </div>
-        <ul className="tick-list cancel-list">
-          <li className="border-bottom p-2">Real-time updates</li>
-          <li className="border-bottom p-2">Secure messaging</li>
-          <li className="border-bottom p-2">Personalized insights</li>
+        <ul className="list-disc list-inside p-4">
+          <li className="border-b p-2">Real-time updates</li>
+          <li className="border-b p-2">Secure messaging</li>
+          <li className="border-b p-2">Personalized insights</li>
         </ul>
-        <div className="d-flex justify-content-center mb-3">
-          <button className="btns book-demo-sign" onClick={HandleSignUp}>Sign Up</button>
+        <div className="flex justify-center mb-3">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded" onClick={HandleSignUp}>Sign Up</button>
         </div>
       </div>
     </div>
 
-    <div className="col-md-4 mb-3">
-      <div className="pricing-card card-height">
-        <div className="coming-soon-badge">Coming Soon</div>
-        <div className="pricing-header text-white" style={{ backgroundColor: '#94a3b8' }}>
-          <h3 className="text-center">Premium</h3>
-          <p className="text-center">$19.99/month</p>
-          <div className="pricing-top-features border-top border-bottom mb-3 text-center" style={{ backgroundColor: '#94a3b0', borderColor: '#94a3b0' }}>
+    {/* Premium Plan */}
+    <div className="w-full md:w-1/3 mb-3">
+      <div className="bg-white rounded-lg shadow-lg p-4 relative">
+        <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 text-xs rounded-bl">Coming Soon</div>
+        <div className="bg-gray-400 text-white p-4 rounded-t-lg">
+          <h3 className="text-center text-xl">Premium</h3>
+          <p className="text-center text-lg">$19.99/month</p>
+          <div className="border-t border-b border-gray-400 bg-gray-300 text-center py-2 mb-3">
             Top features include
           </div>
         </div>
-        <ul className="tick-list">
-          <li className="border-bottom p-2">Real-time updates</li>
-          <li className="border-bottom p-2">Secure messaging</li>
-          <li className="border-bottom p-2">Personalized insights</li>
+        <ul className="list-disc list-inside p-4">
+          <li className="border-b p-2">Real-time updates</li>
+          <li className="border-b p-2">Secure messaging</li>
+          <li className="border-b p-2">Personalized insights</li>
         </ul>
-        <div className="d-flex justify-content-center mb-3">
-          <button className="btns book-demo-btn" onClick={handleDemo}>Book A Demo</button>
+        <div className="flex justify-center mb-3">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded" onClick={handleDemo}>Book A Demo</button>
         </div>
       </div>
     </div>
 
-    <div className="col-md-4 mb-3">
-      <div className="pricing-card card-height">
-        <div className="coming-soon-badge">Coming Soon</div>
-        <div className="pricing-header text-white" style={{ backgroundColor: '#ffb850' }}>
-          <h3 className="text-center">Enterprise</h3>
-          <p className="text-center">$19.99/month</p>
-          <div className="pricing-top-features border-top border-bottom mb-3 text-center" style={{ backgroundColor: '#ffb254', borderColor: '#ffb850' }}>
+    {/* Enterprise Plan */}
+    <div className="w-full md:w-1/3 mb-3">
+      <div className="bg-white rounded-lg shadow-lg p-4 relative">
+        <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 text-xs rounded-bl">Coming Soon</div>
+        <div className="bg-yellow-400 text-white p-4 rounded-t-lg">
+          <h3 className="text-center text-xl">Enterprise</h3>
+          <p className="text-center text-lg">$19.99/month</p>
+          <div className="border-t border-b border-yellow-500 bg-yellow-300 text-center py-2 mb-3">
             Top features include
           </div>
         </div>
-        <ul className="tick-list">
-          <li className="border-bottom p-2">Real-time updates</li>
-          <li className="border-bottom p-2">Secure messaging</li>
-          <li className="border-bottom p-2">Personalized insights</li>
+        <ul className="list-disc list-inside p-4">
+          <li className="border-b p-2">Real-time updates</li>
+          <li className="border-b p-2">Secure messaging</li>
+          <li className="border-b p-2">Personalized insights</li>
         </ul>
-        <div className="d-flex justify-content-center mb-3">
-          <button className="btns book-demo-btn-second" onClick={()=> alert('coming soon')}>Book A Demo</button>
+        <div className="flex justify-center mb-3">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded" onClick={() => alert('coming soon')}>Book A Demo</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-
-        {/* <section className='mb-3 py-lg-3 '>
-            <div className='row'>
-
-<div className='col-md-6 py-lg-5 align-items-center flex-column'>
-<h3>Get started with CareConnect</h3>
-<div>
-<p>
-The comprehensive childcare management platform that 
-connects everyone so you can spend less time on
- administrative tasks and more time with each child
-</p>
-</div>
-<div>
-    <button className='btns book-demo-get'>Book A Demo</button>
-</div>
-
-
-</div>
-<div className='col-md-6'>
-<img src={Get} alt='' className='get-started' />
-</div>
-            </div>
-        </section> */}
+     
 <footer className="footer">
   <div className="container text-center text-white">
-    <p>&copy; 2024 CareConnect. All rights reserved.</p>
+    <p>&copy; 2025 CareConnect. All rights reserved.</p>
   </div>
 </footer>    
         </div>
