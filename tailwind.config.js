@@ -7,6 +7,7 @@ export default {
   ],
   theme: {
     extend: {
+      
       animation: {
         fadeInLeft: 'fadeInLeft 1s ease-out forwards',
         fadeUp: 'fadeUp 1s ease-out forwards',

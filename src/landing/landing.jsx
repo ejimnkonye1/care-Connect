@@ -55,9 +55,9 @@ export const LandingPage = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
     return (
-        <div className='child'>
+        <div className='chil'>
 
-<header className={`flex justify-between items-center fixed top-0 p-4 z-10  w-full ${scrolled? 'bg-gray-700 ':''}`}>
+<header className={`flex justify-between items-center fixed top-0 p-4 z-10  w-full ${scrolled? 'bg-gray-700 ':'bg-gray-300'}`}>
 <a className="text-2xl font-bold p-2" href="#">
           <span className="text-yellow-500">𝓒𝓪𝓻𝓮</span>
           <span className="text-blue-700">𝓬𝓸𝓷𝓷𝓮𝓬𝓽</span>
@@ -127,8 +127,14 @@ export const LandingPage = () => {
 
 
 
-            <div className="hero container-fluid ">
-  <div className="flex-col items-start   h-full py-5">
+<div
+      className="h-screen p-8 text-center bg-cover bg-center bg-no-repeat text-white mt-12"
+      style={{
+        backgroundImage:  ` url(${ba})`,
+      }}
+    >
+
+  <div className="left side w-[30%] flex-col items-start   h-full py-5">
     <div className="w-full">
       <h1 className="text-white items-start text-4xl font-bold">
         Care <span className="connect">Connect</span>
