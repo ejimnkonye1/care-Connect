@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import './landing.css'
+
 import img1 from '../images/stories-1.svg'
 import img2 from '../images/stories-2.svg'
 import img3 from '../images/stories-3.svg'
@@ -57,12 +57,12 @@ export const LandingPage = () => {
     return (
         <div className='chil'>
 
-<header className={`flex justify-between items-center fixed top-0 p-4 z-10  w-full ${scrolled? 'bg-gray-700 ':'bg-gray-300'}`}>
+<header className={`flex justify-between items-center fixed top-0 p-4 z-10  w-full ${scrolled? 'bg-gray-700 ':'bg-white'}`}>
 <a className="text-2xl font-bold p-2" href="#">
           <span className="text-yellow-500">𝓒𝓪𝓻𝓮</span>
-          <span className="text-blue-700">𝓬𝓸𝓷𝓷𝓮𝓬𝓽</span>
+          <span className="text-[#00adef]">𝓬𝓸𝓷𝓷𝓮𝓬𝓽</span>
         </a>
-        <nav className="flex items-center z-10">
+        <nav className="flex items-center z-10 text-black">
             <button 
                 className="block lg:hidden bg-transparent border-none cursor-pointer z-30" 
                 onClick={toggleMenu}
@@ -80,23 +80,23 @@ export const LandingPage = () => {
                     lg:static lg:bg-transparent`}
             >
                 <li className={`${menuOpen? 'mb-2':''}`}>
-                    <a href="#stack" className="text-white text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Home</a>
+                    <a href="#stack" className="text-black text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Home</a>
                 </li>
-                <li className={`${menuOpen? 'mb-2':''}`}>
-                    <a href="#projects" className="text-white text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Features</a>
-                </li>
-                <li className={`${menuOpen? 'mb-3':''}`}>
-                    <a href="#about" className="text-white text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Testimonials</a>
+                <li className={`${menuOpen? 'mb-2':''} `} >
+                    <a href="#projects" className=" text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Features</a>
                 </li>
                 <li className={`${menuOpen? 'mb-3':''}`}>
-                    <a href="#contact" className="text-white text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Pricing</a>
+                    <a href="#about" className=" text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Testimonials</a>
+                </li>
+                <li className={`${menuOpen? 'mb-3':''}`}>
+                    <a href="#contact" className="text-base font-semibold px-8 py-2 transition-colors duration-200 hover:text-gray-300">Pricing</a>
                 </li>
                 <li className={`${menuOpen? 'mb-3':''}`}>
                     <a 
                      onClick={HandleLogin}
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="text-white text-base font-semibold px-8 py-2 border-2 border-[#5494FF] transition-colors duration-200 hover:bg-[#5494FF] hover:text-white"
+                        className="text-white text-base font-semibold px-8 py-2 rounded-full transition-colors duration-200 hover:bg-[#5494FF] bg-[#00adef] hover:text-white"
                     >
                        Sign In
                     </a>
@@ -104,95 +104,70 @@ export const LandingPage = () => {
             </ul>
         </nav>
     </header>
-            {/* <div className="hero container-fluid">
-              
-<div className='row'>
-    <div className='col-md-12 py-5 align-items-center flex-column'>
-<div className=''>
-<h1 className='care'>Care <span className='connect'>Connect
-  </span></h1>
-                <p className='text-white'>Connecting Caregivers and Families</p>
-                <p className='text-white'>The Careconnect platform simplifies day-to-day operations for childcare centers,<br /> 
-                so you can focus on what matters: providing an ideal learning environment that sparks growth,<br/> creativity and happiness in children.
 
-</p>
-                <button className="btn btn-primary" onClick={HandleLogin}>Get Started</button>
-</div>
-    </div>
-    
-
-</div>
-            </div> */}
 
 
 
 
 <div
-      className="h-screen p-8 text-center bg-cover bg-center bg-no-repeat text-white mt-12"
+      className="h-auto p-8 text-center bg-cover bg-center bg-no-repeat text-white mt-12"
       style={{
         backgroundImage:  ` url(${ba})`,
       }}
     >
 
-  <div className="left side w-[30%] flex-col items-start   h-full py-5">
+  <div className="left side lg:w-[35%] w-full flex-col items-start   h-full py-5">
     <div className="w-full">
-      <h1 className="text-white items-start text-4xl font-bold">
-        Care <span className="connect">Connect</span>
-      </h1>
-      <p className="text-white mt-2">
-        From infancy to preschool,
+    
+<div className='title relative '>
+<h6 className='text-[4.9rem] font-[800] font-sans relative text-start'>
+  <span className='text-[#943885]'>happy</span> 
+  {/* <span className='text-[#a5cc44] inline-block -mt-[400px]'>happens</span> <br />
+  <span className='text-[#f7b45d]'>here.</span> */}
+
+</h6>
+<h6 className='text-[4.9rem] font-[800] font-sans relative  top-[-30px] text-start'>
+<span className='text-[#a5cc44] inline-block -mt-10'>happens</span></h6>
+<h6 className='text-[4.9rem] font-[800] font-sans relative  text-start  top-[-50px]'> <span className='text-[#f7b45d]'>here.</span></h6>
+</div>
+<div className='relative text-start top-[-40px] '>
+<p className="text-black mt-2 text-[1.5rem] ">
+      From <span className='text-[#00adef]'>infancy to preschool,</span> 
       </p>
-      <p className="text-white mt-1">
-        we make early education and daycare joyful, engaging, and fun so children are happy to learn, play, and grow.
+      <p className="text-black mt-1 text-[1.5rem]">
+        we make early education and daycare joyful, engaging, and fun so children are happy to <span className='text-[#00adef]'>learn</span>,<span className='text-[#a5cc55]'> play</span>, and <span className='text-[#943885] font-bold'>grow.</span>
       </p>
-      <button className="btn btn-primary mt-4" onClick={HandleLogin}>
+</div>
+   
+      {/* <button className="btn btn-primary mt-4" onClick={HandleLogin}>
         Get Started
-      </button>
+      </button> */}
     </div>
   </div>
 </div>
+
+
   <div className="container">
         
 
 
           
-
-  {/* <section className='py-5 mb-3 feat'>
-  <h5 className='text-center mb-4 text-white'>CareConnect is packed with all the features you need</h5>
-  <div className='row'>
-    {features.map((feature, index) => (
-      <div className='col-md-4 mb-4' key={index}>
-        <div
-          className={`feature-card ${active === index ? 'active' : ''}`}
-          onClick={() => handlefeatures(index)}
-        >
-          <div className='feature-icon'>
-   
-          </div>
-          <p className='text-center mt-3 text-white'>{feature.name}</p>
-          <p className='text-center mt-1 feature-description text-white'>{feature.description}</p>
-        </div>
-      </div>
-    ))}
+  <section id="Our mission" className="mb-4 py-3 ">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div className="col-span-2 flex flex-col justify-center">
+    <h2 className="text-4xl font-bold mb-4">Our Mission</h2>
+    <p className="text-lg">
+      Our mission is to provide exceptional service and quality products that enhance the lives of our customers.
+    </p>
   </div>
-</section> */}
-
-
-<section className="py-5 mb-3 feat bg-gray-800">
-  <h5 className="text-center mb-4 text-white text-2xl font-semibold">CareConnect is packed with all the features you need</h5>
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    {features.map((feature, index) => (
-      <div className={`mb-4 p-4 bg-gray-700 rounded-lg cursor-pointer ${active === index ? 'bg-blue-500' : ''}`} key={index} onClick={() => handlefeatures(index)}>
-        <div className="feature-icon mb-2">
-          {/* You can add an icon here */}
-        </div>
-        <p className="text-center mt-3 text-white text-lg font-semibold">{feature.name}</p>
-        <p className="text-center mt-1 feature-description text-white">{feature.description}</p>
-      </div>
-    ))}
+  <div className="col-span-1">
+    <img src="your-image-url.jpg" alt="Mission Image" className="w-full h-auto object-cover" />
   </div>
+</div>
+
 </section>
-<section id="testimonials" className="mb-4 py-3 bg-gray-800">
+
+<section id="testimonials" className="mb-4 py-3 ">
   <h2 className="text-center mb-3 text-white text-3xl font-semibold">Testimonials</h2>
   <div className="flex flex-wrap justify-center">
     <div className="w-full md:w-1/3 p-4">
@@ -239,7 +214,7 @@ export const LandingPage = () => {
 
 
 
-<section id="features" className="mb-4 py-3 bg-gray-800">
+<section id="features" className="mb-4 py-3 ">
   <h5 className="text-center mb-3 text-white text-2xl font-semibold">Top Features</h5>
   <div className="flex flex-wrap justify-center">
     <div className="w-1/2 md:w-1/6 p-4">

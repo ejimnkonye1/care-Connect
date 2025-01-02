@@ -5,6 +5,7 @@ import { auth, firestore } from '../firebase';
 import { useSelector } from 'react-redux';
 
 const StaffChat = () => {
+  
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);

@@ -7,7 +7,12 @@ export default {
   ],
   theme: {
     extend: {
-      
+      fontFamily:{
+        sans : ['Segoe UI', 'Helvetica'],
+        Gotham: ['Gotham Rounded', 'sans-serif'],
+        paci: ['Pacifico ', 'cursive'],
+         nun: [ "Nunito", "sans-serif"]
+      },
       animation: {
         fadeInLeft: 'fadeInLeft 1s ease-out forwards',
         fadeUp: 'fadeUp 1s ease-out forwards',
