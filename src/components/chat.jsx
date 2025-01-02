@@ -125,7 +125,7 @@ const ParentChat = () => {
       {/* Chat Messages */}
       <div
         className="flex-grow overflow-y-auto p-4 space-y-4 bg-gray-50 text-gray-700 dark:bg-neutral-900 dark:text-neutral-200"
-        style={{ height: '330px' }}
+        style={{ height: '280px' }}
       >
         {messages.map((msg, index) => {
           const messageDate = formatDate(msg.timestamp);
@@ -178,7 +178,7 @@ className="flex-grow"
             variant="contained"
           color="primary"
           onClick={handleSendMessage}
-          disabled={loading || !staffId}
+          // disabled={loading || !staffId}
         >
           {loading ? "Sending..." : "Send"}
         </Button>
