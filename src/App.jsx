@@ -80,7 +80,7 @@ function App() {
           <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/staff' element={<StaffDashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/admin' element={<AdminDashboard showToast={showToast} setShowToast={setShowToast} />} />
-          <Route path='/test' element={<Dashboards />} />
+          <Route path='/parentdashboard' element={<Dashboards />} />
           <Route path='/re' element={<Report />} />
           <Route path='/ev' element={<Event />} />
           <Route path='/meal' element={<Meal />} />

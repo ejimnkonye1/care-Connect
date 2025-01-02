@@ -2,33 +2,34 @@
 const Fee = [
     {
       name: "Tuition Fee",
-      date: "Nov 15, 2023",
+      date: "Dec 15, 2024",
       amount: 80000,
       status: "Paid",
     },
     {
       name: "Feeding Fee",
-      date: "Nov 15, 2023",
+      date: "Dec 15, 2024",
       amount: 150000,
       status: "Ongoing",
     },
     {
       name: "Late Pickup Fee",
-      date: "Nov 14, 2023",
+      date: "Dec 14, 2024",
       amount: 87000,
       status: "Paid",
     },
     {
       name: "Stationery Fee",
-      date: "Nov 14, 2023",
+      date: "Dec 14, 2024",
       amount: 100000,
       status: "Ongoing",
     },
     {
       name: "Medical Fee",
-      date: "Nov 13, 2023",
+      date: "Dec 13, 2024",
       amount: 78000,
       status: "Paid",
+      button: ''
     },
   ];
 const Fees = () => {
@@ -79,7 +80,7 @@ const Fees = () => {
                   {fee.name}
                 </td>
                 <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-neutral-200">
-                  ${fee.amount.toLocaleString()}
+                ₦{fee.amount.toLocaleString()}
                 </td>
                 <td
                   className={`px-4 py-3 text-sm font-medium ${
@@ -94,13 +95,18 @@ const Fees = () => {
                   {fee.date}
                 </td>
                 <td className="px-4 py-3">
-                <button
-        className="rounded-lg bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 dark:focus:ring-emerald-600"
-        onClick={() => handlePayClick(fee.name,fee.amount)}
-      >
-        Pay Now
-      </button>
-                </td>
+  <button
+    className={`rounded-lg px-4 py-2 text-sm font-medium text-white 
+      ${fee.status === 'Paid' 
+        ? 'bg-gray-400 cursor-not-allowed' // Style for disabled button
+        : 'bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-400 dark:focus:ring-emerald-600'
+      }`}
+    onClick={() => handlePayClick(fee.name, fee.amount)}
+    disabled={fee.status === 'Paid'}
+  >
+    Pay Now
+  </button>
+</td>
               </tr>
             ))}
           </tbody>

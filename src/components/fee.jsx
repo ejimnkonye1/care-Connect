@@ -78,22 +78,23 @@ const Fees = () => {
                 key={index}
                 className="border-b border-gray-200 dark:border-neutral-800"
               >
-                <td className="w-[100px] px-4 py-3 text-sm font-medium text-gray-700 dark:text-neutral-300">
+                <td className="w-[100px] px-2 py-3 text-sm font-medium text-gray-700 dark:text-neutral-300">
                   {order.name}
                 </td>
-                <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-neutral-200">
+                <td className="px-3 py-3 text-sm font-medium text-slate-900 dark:text-neutral-200">
                   ${order.amount.toLocaleString()}
                 </td>
+                <td className="px-3 py-3 text-sm font-medium text-slate-900 dark:text-neutral-400">
+                  {order.date}
+                </td>
                 <td
-                  className={`px-4 py-3 text-sm font-medium ${statusColor(
+                  className={`px-2 py-3 text-sm font-medium ${statusColor(
                     order.status
                   )}`}
                 >
                   {order.status}
                 </td>
-                <td className="px-4 py-3 text-sm font-medium text-slate-900 dark:text-neutral-400">
-                  {order.date}
-                </td>
+              
               </tr>
             ))}
           </tbody>
