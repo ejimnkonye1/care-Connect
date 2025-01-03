@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { AiOutlineDashboard, AiOutlineInbox, AiOutlineAppstore } from "react-icons/ai";
+import {  AiOutlineInbox, AiOutlineAppstore } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
 import  { useState } from "react";
 import logo from '../assets/image.png'
