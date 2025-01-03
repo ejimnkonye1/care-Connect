@@ -1,14 +1,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
-export const AdminLoginForm = ({setIsParentLogin, isParentLogin}) => {
+import logo from '../assets/image.png'
+export const AdminLoginForm = ({setIsAdminLogin, isAdminLogin,  setIsStaffLogin}) => {
     const handleParentLogin = () => {
-      setIsParentLogin(!isParentLogin);
+      setIsAdminLogin(!isAdminLogin);
     };
+    const handleStaffLogin = () => {
+      setIsAdminLogin(!isAdminLogin);
+      setIsStaffLogin(true)
+
+    }
     return(
       <div className="grid md:grid-cols-2 items-center gap-8">
       <div className="max-md:order-1 lg:min-w-[450px] hidden lg:block md:block ">
         <img
-          src="https://readymadeui.com/signin-image.webp"
+          // src="https://readymadeui.com/signin-image.webp"
+          src={logo}
           className="lg:w-11/12 w-full object-cover"
           alt="login-image"
         />
@@ -32,6 +39,7 @@ export const AdminLoginForm = ({setIsParentLogin, isParentLogin}) => {
             <button
               type="button"
               className="w-full shadow-xl py-2.5 px-5 text-sm font-semibold rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none ml-2"
+              onClick={handleStaffLogin}
             >
               Staff Login
             </button>

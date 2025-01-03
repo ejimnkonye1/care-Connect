@@ -30,6 +30,7 @@ import Staffprofile from './staffpages/staffprofile'
 import Staffactivity from './staffpages/staffactivity'
 import Adminsdashboards from './adminpages/dashboard'
 import { SignUps } from './pro/Signup'
+import MainLogin from './Login/main'
 
 
 const Loader = () => (
@@ -98,6 +99,7 @@ function App() {
           <Route path='/spro' element={<Staffprofile />} />
           <Route path='/ad' element={<Adminsdashboards />} />
           <Route path='/signups' element={<SignUps />} />
+          <Route path='/log' element={<MainLogin />} />
         </Routes>
       </Router>
       </Layout>
