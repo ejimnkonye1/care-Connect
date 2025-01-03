@@ -64,92 +64,112 @@ export const StaffSign = ({btnloading, setbtnloading}) => {
     }
   };
     return(
-        <form id="staff-signup-form" onSubmit={handleRegister}>
-             {error && (
-    <div className="error-container" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>
-      <span className="text-center text-danger" style={{ position: 'absolute', top: 0, left: 0, right: 0, textAlign: 'center', zIndex: 1, backgroundColor: 'rgba(yellow)', padding: '10px' }}>{error}</span>
-    </div>
-  )}
-          <h2 className="text-center">Staff Sign Up</h2>
-        <div className="row">
-          <div className="col-md-12">
-            <div className="form-group">
-              <label htmlFor="staff-name">Staff Name:</label>
-              <input 
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
-              required
-              className="form-control" />
+      <div className="relative">
+      {error && (
+        <div className="absolute top-0 left-0 right-0 text-center z-10 bg-yellow-200 p-2">
+          <span className="text-red-600">{error}</span>
+        </div>
+      )}
+
+      <div className="flex flex-col items-start  justify-start ">
+        {/* Profile Picture Section */}
+        <div className="flex w-full items-center justify-between">
+          <button className="cursor-pointer text-base font-medium text-emerald-400">
+            Staff Profile
+          </button>
+        </div>
+        <form className="w-full space-y-6" onSubmit={handleRegister}>
+          <div className="mt-2">
+            <div className="image-upload">
+              <label htmlFor="file-input">
+                <div className="circular-image">
+                  {image && <img src={image} alt="Upload" id="preview" className="rounded-full w-24 h-24 object-cover" />}
+                  <MdAddCircleOutline className="add-icon text-2xl" />
+                </div>
+              </label>
+              <input id="file-input" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageChange} />
             </div>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="col-md-12">
-            <div className="form-group">
-              <label htmlFor="email">Email:</label>
-              <input 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Staff Name *</label>
+              <input
+                type="text"
+                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+                placeholder="Obi"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Staff Email *</label>
+              <input
                 type="email"
+                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+                placeholder="example@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-              className="form-control" />
+              />
             </div>
           </div>
-        </div>
 
-        <div className="row">
-          <div className="col-md-12">
-            <div className="form-group">
-              <label htmlFor="password">Password:</label>
-              <input 
-             type="password"
-             value={password}
-             onChange={(e) => setPassword(e.target.value)}
-             placeholder="Password"
-             required
-   
-               className="form-control" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+              <label className="block text-sm font-medium text-gray-700">Address *</label>
+              <input
+                type="text"
+                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+                placeholder="Enter Home Address"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Gender *</label>
+              <input
+                type="text"
+                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+                placeholder="Enter Gender"
+              />
             </div>
           </div>
-        </div>
-        <div className="row">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+              <label className="block text-sm font-medium text-gray- 700">Age *</label>
+              <input
+                type="text"
+                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+                placeholder="Enter Age"
+              />
+            </div>
            
-           
-            <div className="col-md-6 mt-2">
-            <div className="form-group">
-            <div className="image-upload">
-                        <label htmlFor="file-input">
-                          <div className="circular-image">
-                          {image && <img src={image} alt="Upload" id="preview" />}
-                            <MdAddCircleOutline className="add-icon" />
-                          </div>
-                        </label>
-                        <input id="file-input" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageChange} />
-                      </div>
-                      </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Password *</label>
+              <input
+                type="password"
+                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+                placeholder="Enter Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
           </div>
-<div className='d-flex justify-content-end'>
-<button type="submit" className="btns btn-primary up-btn btn-block mt-2">
-  
-{btnloading ? (
-             <div>
-                 
-             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="false"></span>
-             <span className="pl-3"> Sign Up</span>
-          </div>
-          ):(
-            '  Sign Up'
-          )}
-    
-  
+
+
+         
+
+       
+         
+          <div className="flex justify-end">
+  <button
+    type="submit"
+    className="mt-4 rounded-lg bg-emerald-400 text-white py-3 px-4  focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  >
+    Register
   </button>
 </div>
-
         
-      </form>
+        </form>
+      </div>
+    </div>
     )
 }
