@@ -31,6 +31,7 @@ import Staffactivity from './staffpages/staffactivity'
 import Adminsdashboards from './adminpages/dashboard'
 import { SignUps } from './pro/Signup'
 import MainLogin from './Login/main'
+import { Resetparent } from './pro/resetparent'
 
 
 const Loader = () => (
@@ -100,6 +101,7 @@ function App() {
           <Route path='/ad' element={<Adminsdashboards />} />
           <Route path='/signups' element={<SignUps />} />
           <Route path='/log' element={<MainLogin />} />
+          <Route path='/res' element={<Resetparent />} />
         </Routes>
       </Router>
       </Layout>
