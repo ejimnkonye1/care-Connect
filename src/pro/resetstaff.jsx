@@ -1,14 +1,56 @@
 /* eslint-disable react/no-unescaped-entities */
-
+import { sendPasswordResetEmail} from 'firebase/auth';
+import { auth, firestore } from "../firebase";
+import { useState } from "react";
+import {  getDocs, where, query , collection } from 'firebase/firestore';
 
 export const Resetstaff = () => {
+    const [email, setEmail] = useState('');
+    const [success, setsuccess] = useState('')
+    const [error, setError] = useState('');
+    const [btnloading, setbtnLoading] = useState(false);
+    const handleReset = async (e) => {
+      e.preventDefault();
+      try {
+        const usersRef = collection(firestore, 'staff');
+        const q = query(usersRef, where('email', '==', email));
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.docs.length > 0) {
+          await sendPasswordResetEmail(auth, email);
+          setbtnLoading(true);
+          setTimeout(() => {
+            setbtnLoading(false);
+            setsuccess(`An email has been sent to ${email}`);
+          }, 9000);
+        } else {
+          setError("User not found");
+          setTimeout(() => {
+            setError(false);
+          }, 5000);
+        }
+      } catch (err) {
+        console.error("Error resetting password: ", err);
+        setError("Error resetting password");
+        setTimeout(() => {
+          setError(false);
+        }, 5000);
+      }
+    };
     return(
         
   <div className="flex mt-20 justify-center items-center gap-8 transition delay-150 duration-300 ease-in-out p-10">
          
-    <form className="md:max-w-md w-full mx-auto">
-           
-     
+    <form className="md:max-w-md w-full mx-auto" onSubmit={handleReset}>
+    {error && (
+          <div className="bg-yellow-300 text-center p-2 rounded mb-4">
+            <span className="text-danger">{error}</span>
+          </div>
+        )}
+         {success && (
+          <div className="bg-yellow-300 text-center p-2 rounded mb-4">
+            <span className="text-danger">{success}</span>
+          </div>
+        )}
            <div className="">
              <h3 className="text-4xl font-extrabold text-blue-600">Reset Password</h3>
            </div>
@@ -18,6 +60,8 @@ export const Resetstaff = () => {
                <input
                  name="email"
                  type="text"
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}
                  required
                  className="w-full text-sm border-b border-gray-300 focus:border-blue-600 px-2 py-3 outline-none"
                  placeholder="Enter email"
@@ -54,13 +98,38 @@ export const Resetstaff = () => {
 
        
            <div className="mt-12">
+           
              <button
-               type="button"
-               className="w-full shadow-xl py-2.5 px-5 text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-             >
-             Reset Password
-             </button>
-       
+            type="submit"
+            className="w-full shadow-xl py-2.5 px-5 text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+          >
+            {btnloading ? (
+              <svg
+                className="animate-spin h-5 w-5 text-white mx-auto"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                role="status"
+                aria-hidden="true"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v2a6 6 0 100 12v2a8 8 0 01-8-8z"
+                ></path>
+              </svg>
+            ) : (
+              " Reset Password"
+            )}
+          </button>
+  
         
        
              <p className="text-gray-800 text-sm text-center mt-6">
