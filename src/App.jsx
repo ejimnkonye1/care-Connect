@@ -32,6 +32,8 @@ import Adminsdashboards from './adminpages/dashboard'
 import { SignUps } from './pro/Signup'
 import MainLogin from './Login/main'
 import { Resetparent } from './pro/resetparent'
+import { Resetstaff } from './pro/resetstaff'
+import { Resetadmin } from './pro/resetadmin'
 
 
 const Loader = () => (
@@ -102,6 +104,8 @@ function App() {
           <Route path='/signups' element={<SignUps />} />
           <Route path='/log' element={<MainLogin />} />
           <Route path='/res' element={<Resetparent />} />
+          <Route path='/rest' element={<Resetstaff />} />
+          <Route path='/resa' element={<Resetadmin />} />
         </Routes>
       </Router>
       </Layout>

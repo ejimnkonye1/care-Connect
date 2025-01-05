@@ -9,7 +9,11 @@ import { StaffLoginForm } from "./staff";
 const MainLogin = () => {
     const [isAdminLogin, setIsAdminLogin] = useState(false);
     const [isStaffLogin, setIsStaffLogin] = useState(false);
-  
+    const [btnloading, setbtnLoading] = useState(false);
+    const [PasswordVisible, setPasswordVisible] = useState(false);
+    const togglePasswordvisible = () => {
+      setPasswordVisible(!PasswordVisible);
+  };
     return (
     <div className="font-[sans-serif] bg-white flex items-center justify-center md:h-auto h-auto p-4">
       <div className="shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)] max-w-6xl max-md:max-w-lg w-full rounded-md p-6">
@@ -31,6 +35,8 @@ const MainLogin = () => {
        setIsAdminLogin={setIsAdminLogin}
        setIsStaffLogin={setIsStaffLogin}
        isAdminLogin={isAdminLogin}
+       btnloading={btnloading}
+       setbtnloading={setbtnLoading}
        
         />
       
@@ -40,12 +46,18 @@ const MainLogin = () => {
        setIsAdminLogin={setIsAdminLogin}
        setIsStaffLogin={setIsStaffLogin}
        isAdminLogin={isAdminLogin}
+       btnloading={btnloading}
+       setbtnloading={setbtnLoading}
        
         />
             ) :(
               <ParentLoginForm
               setIsAdminLogin={setIsAdminLogin}
               setIsStaffLogin={setIsStaffLogin}
+              btnloading={btnloading}
+              setbtnloading={setbtnLoading}
+              PasswordVisible={PasswordVisible}
+              togglePasswordvisible={togglePasswordvisible}
              />
     
     )}
