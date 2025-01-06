@@ -1,5 +1,6 @@
 
 import Events from "../components/events";
+import Childatt from "../staff/childatt";
 import Childlist from "../staff/childlist";
 import Childlschdule from "../staff/childschedule";
 import Childlupdates from "../staff/childup";
@@ -14,11 +15,12 @@ const StaffLayout = () => {
       </div>
 
       <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeUp delay-100">
-        <Childlupdates />
+       <Childlschdule />
       </div>
       
       <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeDown delay-200">
-        <Childlschdule />
+       
+        <Childlupdates />
       </div>
 
       <div
@@ -33,7 +35,8 @@ const StaffLayout = () => {
       </div>
 
       <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeLeft delay-500">
-        <Events />
+        {/* <Events /> */}
+        <Childatt />
       </div>
     </section>
   );

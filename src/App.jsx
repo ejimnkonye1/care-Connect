@@ -6,7 +6,6 @@ import { useState , useEffect} from 'react'
 
 import { LandingPage } from './landing/landing'
 import { Dashboard } from './dashboards/parentdashboard'
-import { StaffDashboard } from './dashboardstaff/Stasffdashboard'
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -61,7 +60,7 @@ const Loader = () => (
   };
 function App() {
   const [showToast, setShowToast] = useState(false);
-  const [btnloading, setbtnLoading] = useState(false);
+  
   return (
     <>
     <Provider store={store} >
@@ -75,7 +74,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
-          <Route path='/staff' element={<StaffDashboard showToast={showToast} setShowToast={setShowToast} />} />
+
           <Route path='/admin' element={<AdminDashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/parentdashboard' element={<Dashboards />} />
           <Route path='/re' element={<Report />} />
@@ -84,7 +83,7 @@ function App() {
           <Route path='/fee' element={<Fee />} />
           <Route path='/pro' element={<Profile />} />
           <Route path='/chat' element={<Chats />} />
-          <Route path='/st' element={<Staffdashboards />} />
+          <Route path='/staff' element={<Staffdashboards />} />
           <Route path='/reups' element={<Staffreports />} />
           <Route path='/act' element={<Staffactivity />} />
           <Route path='/evups' element={<Staffevent />} />

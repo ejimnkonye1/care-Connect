@@ -1,13 +1,34 @@
 import pa from '../assets/pa.jpg';
+import { doc, getDoc } from 'firebase/firestore';
+import  { useState, useEffect } from 'react';
 
-const childDetails = {
-    name: "Luke jonhson",
+import { auth, firestore } from '../firebase'
+// const childDetails = {
+//     name: "Luke jonhson",
    
-    gender: "Female",
-    Number:'07062487335',
+//     gender: "Female",
+//     Number:'07062487335',
    
-  };
+//   };
 export const WelcomeStaff = () => {
+  const [staffData, setStaffData] = useState(null);
+  
+
+  useEffect(() => {
+    const fetchStaffData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        console.log(user.uid)
+        const staffDoc = await getDoc(doc(firestore, 'staff', user.uid));
+        if (staffDoc.exists()) {
+          setStaffData(staffDoc.data());
+        }
+      }
+    };
+
+    fetchStaffData();
+  }, []);
+
   return (
     <div>
 
@@ -21,7 +42,7 @@ export const WelcomeStaff = () => {
           </div>
           <div className="ml-4">
             <h2 className="text-sm font-semibold dark:text-white">Good Morning!</h2>
-            <p className="text-gray-600 dark:text-white text-sm">billie@example.com</p>
+            <p className="text-gray-600 dark:text-white text-sm">{staffData?.name ?? ''}</p>
           </div>
         </div>
 
@@ -40,15 +61,15 @@ export const WelcomeStaff = () => {
         </div>
       </div>
 
-      {/* Child Details */}
+      
       <div className="w-full space-y-4">
         <div className="flex justify-between text-sm text-gray-700 dark:text-neutral-300">
           <span className="font-medium">Name</span>
-          <span>{childDetails.name}</span>
+          <span>{staffData?.name ?? ''}</span>
         </div>
         <div className="flex justify-between text-sm text-gray-700 dark:text-neutral-300">
           <span className="font-medium">Phone:</span>
-          <span>{childDetails.Number}</span>
+          <span>{staffData?.phone ?? ''}</span>
         </div>
      
       </div>

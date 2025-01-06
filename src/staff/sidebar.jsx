@@ -53,7 +53,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
           <span className="dark:text-white text-sm">Menu</span>
             <li onClick={closeSidebar}>
               <NavLink
-                to="/st"
+                to="/staff"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <Dash size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />

@@ -49,7 +49,7 @@ const Childlist = () => {
 
       {/* Child Details */}
     
-      <TableContainer component={''} className="mt-7">
+      <TableContainer component={''} className="mt-1">
         <Table aria-label="meal updates table">
           <TableHead>
             <TableRow>
