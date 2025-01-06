@@ -1,15 +1,13 @@
 /* eslint-disable react/prop-types */
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
-import { LoginForm } from './profile/login'
-import { ResetPassword} from './profile/resetPassword'
+
 import { useState , useEffect} from 'react'
-import {  ResetStaff } from './profile/resetstaff'
-import { ResetParent } from './profile/resetparent'
+
 import { LandingPage } from './landing/landing'
 import { Dashboard } from './dashboards/parentdashboard'
 import { StaffDashboard } from './dashboardstaff/Stasffdashboard'
-import {  SignUp } from './profile/SignUp'
+
 import { Provider } from 'react-redux'
 import store from './store'
 import { AdminDashboard } from './admindashboard.jsx/admin'
@@ -76,12 +74,6 @@ function App() {
         
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          <Route path='/login' element={<LoginForm />} />
-
-          <Route path='/reset' element={<ResetPassword btnloading={btnloading} setbtnLoading={setbtnLoading} />} />
-          <Route path='/resetstaff' element={<ResetStaff btnloading={btnloading} setbtnLoading={setbtnLoading}  />} />
-          <Route path='/resetpar' element={<ResetParent btnloading={btnloading} setbtnLoading={setbtnLoading}  />} />
-          <Route path='/signup' element={<SignUp />} />
           <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/staff' element={<StaffDashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/admin' element={<AdminDashboard showToast={showToast} setShowToast={setShowToast} />} />
@@ -101,11 +93,11 @@ function App() {
           <Route path='/schat' element={<Staffchat />} />
           <Route path='/spro' element={<Staffprofile />} />
           <Route path='/ad' element={<Adminsdashboards />} />
-          <Route path='/signups' element={<SignUps />} />
-          <Route path='/log' element={<MainLogin />} />
-          <Route path='/res' element={<Resetparent />} />
-          <Route path='/rest' element={<Resetstaff />} />
-          <Route path='/resa' element={<Resetadmin />} />
+          <Route path='/signup' element={<SignUps />} />
+          <Route path='/login' element={<MainLogin />} />
+          <Route path='/resetpar' element={<Resetparent />} />
+          <Route path='/resetstaff' element={<Resetstaff />} />
+          <Route path='/reset' element={<Resetadmin />} />
         </Routes>
       </Router>
       </Layout>

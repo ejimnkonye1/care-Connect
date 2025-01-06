@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import {
   Table,
@@ -9,14 +10,49 @@ import {
 
   Button,
 } from "@mui/material";
-
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+import {  setAlert, setMark } from '../action';
+import {  collection, getDocs, setDoc, doc } from 'firebase/firestore';
+import {  firestore } from '../firebase';
 const AttendanceTable = () => {
-  const childname = [
-    { name: "Emma Johnson", status: "Present" },
-    { name: "Noah Brown", status: "Absent" },
-    { name: "Liam Smith", status: "Present" },
-    { name: "Sophia Davis", status: "Absent" },
-  ];
+
+    const [showToast, setShowToast] = useState(false);
+   const [users, setUsers] = useState([]);
+     const [attendance, setAttendance] = useState({}); 
+     useEffect(() => {
+      const fetchUsers = async () => {
+        const usersRef = collection(firestore, 'users');
+        const usersSnapshot = await getDocs(usersRef);
+        const usersData = usersSnapshot.docs.map((doc) => doc.data());
+        setUsers(usersData);
+      };
+  
+      fetchUsers();
+    }, [firestore, users]);
+  
+    const handleAttendanceChange = async (userId, childName, status) => {
+      const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+      await setDoc(doc(firestore, 'attendance', `${childName}_${date}`), {
+        childName,
+        status,
+        date,
+        userId: users // pass users here
+      });
+    //  dispatch(setMark(!true))
+    //  dispatch(setAlert(!alertmode))
+      console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
+      setAttendance((prev) => ({ ...prev, [childName]: status }));
+      setShowToast(true);
+      
+      // Hide the toast after a delay (adjust as needed)
+      setTimeout(() => {
+        setShowToast(false);
+      }, 2000);
+  
+      
+     
+    };
   const statusColor = (status) => {
     switch (status) {
       case "Present":
@@ -38,6 +74,7 @@ const AttendanceTable = () => {
           See All
         </button>
       </div>
+      {users.length > 0 ? (
  <TableContainer component={''}>
       <Table>
         <TableHead>
@@ -49,16 +86,22 @@ const AttendanceTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {childname.map((child, index) => (
-            <TableRow key={index}>
+        {users.map((user, index) => (
+          user.children ? (
+            user.children.map((child, childIndex) => (
+              <TableRow key={`${index}-${childIndex}`}>
               <TableCell  className="dark:text-neutral-100">{child.name}</TableCell>
               <TableCell align="center">
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary"
+                                    onClick={() => handleAttendanceChange(user.uid, child.name, 'present')}
+                >
                   Mark Present
                 </Button>
               </TableCell>
               <TableCell align="center">
-                <Button variant="contained" color="secondary">
+                <Button variant="contained" color="secondary"
+                                    onClick={() => handleAttendanceChange(user.uid, child.name, 'absent')}
+                >
                   Mark Absent
                 </Button>
               </TableCell>
@@ -73,10 +116,21 @@ const AttendanceTable = () => {
                 
 </TableCell>
             </TableRow>
-          ))}
+          ))
+        ) : (
+          <TableRow key={index}>
+            <TableCell colSpan={4} className=''>
+              No children data available.
+            </TableCell>
+          </TableRow>
+        )
+      ))}
         </TableBody>
       </Table>
     </TableContainer>
+    ) : (
+      <p className=''>No users data available.</p>
+    )}
     </div>
    
   );
