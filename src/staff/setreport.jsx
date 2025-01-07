@@ -14,6 +14,7 @@ const Setreports = () =>{
   const [newIncidentReport, setNewIncidentReport] = useState({
     date: '',
     time: '',
+    name:'',
     status: '',
     description: '',
     childName:'',
@@ -39,7 +40,7 @@ fetchUsers();
     if (!newIncidentReport.date || !newIncidentReport.status ||
         !newIncidentReport.time || !newIncidentReport.description 
         ||
-        !newIncidentReport.userId || !newIncidentReport.childName
+        !newIncidentReport.userId || !newIncidentReport.childName || !newIncidentReport.status || !newIncidentReport.name
     ){
         alert('Please fill in all required fields')
         return;
@@ -57,6 +58,7 @@ fetchUsers();
         setNewIncidentReport({
         date: '',
         time: '',
+        name:'',
         status: '',
         description: '',
         childName:'',
@@ -104,6 +106,22 @@ fetchUsers();
 
       </div>
             <form className="w-full">
+            <div className="mb-4">
+                <TextField
+                  className="dark:text-neutral-100"
+                  label="name"
+                  fullWidth
+                  variant="outlined"
+                  multiline
+                 
+                  value={newIncidentReport.name}
+                  onChange={(e) => setNewIncidentReport({ ...newIncidentReport, name: e.target.value })}
+                  InputLabelProps={{
+                    className:"dark:text-neutral-100",
+                    
+                    }}
+                />
+              </div>
               <div className="mb-4">
                 <TextField
                   label="Date"

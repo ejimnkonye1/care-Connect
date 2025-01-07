@@ -11,6 +11,12 @@ import {
   Paper,
   Button,
   TextField,
+  FormGroup,
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel
+  
   
 } from "@mui/material";
 import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
@@ -27,6 +33,7 @@ const Setactivity = () => {
     date:'',
     time:'',
     activity:'',
+    status:'',
     childName:'',
     userId :''
   });
@@ -45,7 +52,7 @@ const Setactivity = () => {
     e.preventDefault();
     if (!newactivityUpdates.date || !newactivityUpdates.time || 
         !newactivityUpdates.activity || !newactivityUpdates 
-        || !newactivityUpdates.childName
+        || !newactivityUpdates.childName || !newactivityUpdates.status
 
     ) {
       alert("Please fill in all required fields");
@@ -65,6 +72,7 @@ const Setactivity = () => {
         date:'',
         time:'',
         activity:'',
+        status:'',
         childName:'',
         userId:'',
         
@@ -164,6 +172,7 @@ const Setactivity = () => {
                 <TableCell className="text-zinc-800 dark:text-neutral-100">Child Name</TableCell>
                 <TableCell className="text-zinc-800 dark:text-neutral-100">Activity</TableCell>
                 <TableCell className="text-zinc-800 dark:text-neutral-100">Time</TableCell>
+                <TableCell className="text-zinc-800 dark:text-neutral-100">status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -172,6 +181,7 @@ const Setactivity = () => {
                   <TableCell className="text-zinc-800 dark:text-neutral-100">{update.childName}</TableCell>
                   <TableCell className="text-zinc-800 dark:text-neutral-100">{update.activity}</TableCell>
                   <TableCell className="text-zinc-800 dark:text-neutral-100">{update.time}</TableCell>
+                  <TableCell className="text-zinc-800 dark:text-neutral-100">{update.status}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -239,6 +249,19 @@ const Setactivity = () => {
             
             }}
         />
+           <FormControl fullWidth>
+            <InputLabel className="dark:text-neutral-100">Status</InputLabel>
+            <Select
+              value={newactivityUpdates.status}
+              onChange={((e) => setNewActivityUpdates({...newactivityUpdates, status:e.target.value}))}
+              label="Status"
+              name="status"
+              className="dark:text-neutral-100"
+            >
+              <MenuItem value="Cancelled">Cancelled</MenuItem>
+              <MenuItem value="Completed">Completed</MenuItem>
+            </Select>
+          </FormControl>
         <div className="flex justify-end">
           <Button
             type="submit"
