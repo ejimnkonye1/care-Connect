@@ -42,7 +42,7 @@ export const ParentLoginForm = ({
         setbtnloading(true);
         setTimeout(() => {
           setbtnloading(false);
-          navigate("/dash");
+          navigate("/parentdashboard");
         }, 9000);
       } else {
         setError("You are not authorized as a parent.");

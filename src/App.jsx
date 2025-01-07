@@ -73,8 +73,7 @@ function App() {
         
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          <Route path='/dash' element={<Dashboard showToast={showToast} setShowToast={setShowToast} />} />
-
+        
           <Route path='/admin' element={<AdminDashboard showToast={showToast} setShowToast={setShowToast} />} />
           <Route path='/parentdashboard' element={<Dashboards />} />
           <Route path='/re' element={<Report />} />

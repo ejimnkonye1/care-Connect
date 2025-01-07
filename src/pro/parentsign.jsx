@@ -45,7 +45,7 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
       setbtnloading(true);
       setTimeout(() => {
         setbtnloading(false);
-        navigate('/dash');
+        navigate('/parentdashboard');
       }, 9000);
     } catch (error) {
       setbtnloading(true);
