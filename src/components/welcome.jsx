@@ -1,14 +1,26 @@
-import pa from '../assets/pa.jpg';
 
-const childDetails = {
-    name: "Ella Johnson",
-    dob: "January 15, 2020",
-    age: "3 years",
-    gender: "Female",
-    Number:'07062487335',
-    allergies: ["Peanuts", "Dairy"],
-  };
+import { useState, useEffect } from "react";
+import {  doc, getDoc,  } from 'firebase/firestore';
+import { auth, firestore } from '../firebase'
+
 export const Welcome = () => {
+    const [userData, setUserData] = useState(null);
+    const user = auth.currentUser
+    useEffect(() => {
+      const fetchUserData = async () => {
+        if (user) {
+          const userDocRef = doc(firestore, 'users', user.uid);
+          const userDoc = await getDoc(userDocRef);
+          if (userDoc.exists()) {
+            setUserData(userDoc.data());
+       
+          }
+    
+        }
+      };
+  
+      fetchUserData();
+    }, [user]);
   return (
     <div>
 
@@ -17,12 +29,12 @@ export const Welcome = () => {
         <div className="p-2 rounded-lg shadow-md flex items-center flex-grow">
           <div className="relative">
             <div className="w-12 h-12 border-4 border-gray-400 rounded-full overflow-hidden">
-              <img src={pa} alt="Profile" className="w-full h-full object-cover" />
+              <img src={userData?.image ??''} alt="Profile" className="w-full h-full object-cover" />
             </div>
           </div>
           <div className="ml-4">
             <h2 className="text-sm font-semibold dark:text-white">Welcome Back!</h2>
-            <p className="text-gray-600 dark:text-white text-sm">billie@example.com</p>
+          <p className="text-gray-600 dark:text-white text-sm">{userData?.email??''}</p>
           </div>
         </div>
 
@@ -41,15 +53,14 @@ export const Welcome = () => {
         </div>
       </div>
 
-      {/* Child Details */}
       <div className="w-full space-y-4">
         <div className="flex justify-between text-sm text-gray-700 dark:text-neutral-300">
           <span className="font-medium">Name</span>
-          <span>{childDetails.name}</span>
+          <span>{userData?.lastName}</span>
         </div>
         <div className="flex justify-between text-sm text-gray-700 dark:text-neutral-300">
           <span className="font-medium">Phone:</span>
-          <span>{childDetails.Number}</span>
+          <span>{userData?.phone}</span>
         </div>
      
       </div>

@@ -8,33 +8,59 @@ import {
   TableRow,
 
 } from "@mui/material";
+import { useState, useEffect } from 'react';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { auth, firestore } from '../firebase';
 
 
-const mealUpdates = [
-  {
-    childName: "Ella Johnson",
-    meal: "Scrambled eggs and toast",
-    type: "Breakfast",
-    date: "Dec 18, 2023",
-    status: "Completed",
-  },
-  {
-    childName: "Ella Johnson",
-    meal: "Grilled chicken with rice",
-    type: "Lunch",
-    date: "Dec 17, 2023",
-    status: "Ongoing",
-  },
-  {
-    childName: "Ella Johnson",
-    meal: "Apple slices with peanut butter",
-    type: "Snack",
-    date: "Dec 16, 2023",
-    status: "Completed",
-  },
-];
+// const mealUpdates = [
+//   {
+//     childName: "Ella Johnson",
+//     meal: "Scrambled eggs and toast",
+//     type: "Breakfast",
+//     date: "Dec 18, 2023",
+//     status: "Completed",
+//   },
+//   {
+//     childName: "Ella Johnson",
+//     meal: "Grilled chicken with rice",
+//     type: "Lunch",
+//     date: "Dec 17, 2023",
+//     status: "Ongoing",
+//   },
+//   {
+//     childName: "Ella Johnson",
+//     meal: "Apple slices with peanut butter",
+//     type: "Snack",
+//     date: "Dec 16, 2023",
+//     status: "Completed",
+//   },
+// ];
 
 const MealUpdates = () => {
+  const [mealUpdates, setMealUpdates] = useState([]);
+  const [childNames, setChildNames] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(auth.currentUser);
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      const mealUpdatesRef = collection(firestore, 'mealUpdates');
+      const q = query(mealUpdatesRef, where('userId', '==', user.uid));
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const mealUpdatesData = snapshot.docs.map((doc) => doc.data());
+        setMealUpdates(mealUpdatesData);
+        const uniqueChildNames = [...new Set(mealUpdatesData.map(update => update.childName))];
+        setChildNames(uniqueChildNames);
+      });
+
+      return () => unsubscribe();
+    }
+  }, [user, ]);
+
   const childName = mealUpdates[0]?.childName || "No Name"; // Show the first child's name or fallback to "No Name."
 
   const statusColor = (status) => {
@@ -70,10 +96,12 @@ const MealUpdates = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {mealUpdates.map((update, index) => (
+
+            {mealUpdates.length > 0 ? (
+            mealUpdates.map((update, index) => (
               <TableRow key={index}>
-                <TableCell className="dark:text-neutral-100">{update.type}</TableCell>
-                <TableCell className="dark:text-neutral-100">{update.meal}</TableCell>
+                <TableCell className="dark:text-neutral-100">{update.mealType}</TableCell>
+                <TableCell className="dark:text-neutral-100">{update.food}</TableCell>
                 <TableCell>
                   <div className="dark:text-neutral-100">
                  
@@ -93,7 +121,14 @@ const MealUpdates = () => {
                   </span>
                 </TableCell>
               </TableRow>
-            ))}
+            ))
+            ):(
+              <TableRow>
+              <TableCell className="dark:text-neutral-100 text-center">
+                No meal updates available.
+              </TableCell>
+            </TableRow>
+         ) }
           </TableBody>
         </Table>
       </TableContainer>
