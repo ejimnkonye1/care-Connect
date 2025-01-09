@@ -64,12 +64,12 @@ return unsubscribe;
 
 }, [user])
 
-const formatTime = (timeString) => {
-  const [hours, minutes] = timeString.split(':').map(Number);
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const formattedHours = hours % 12 || 12; // Converts 0 (midnight) to 12
-  return `${formattedHours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
-};
+// const formatTime = (timeString) => {
+//   const [hours, minutes] = timeString.split(':').map(Number);
+//   const ampm = hours >= 12 ? 'PM' : 'AM';
+//   const formattedHours = hours % 12 || 12; // Converts 0 (midnight) to 12
+//   return `${formattedHours}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+// };
   const statusColor = (status) => {
     switch (status) {
       case "Resolved":

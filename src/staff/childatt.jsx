@@ -9,28 +9,51 @@ import {
     TableRow,
   
   } from "@mui/material";
+  import { useState, useEffect } from 'react';
+  import {  collection, getDocs,  } from 'firebase/firestore';
+  import {  firestore } from '../firebase';
   const Childatt = () => {
+       const [users, setUsers] = useState([]);
+    useEffect(() => {
+      const fetchUsers = async () => {
+        const usersRef = collection(firestore, 'users');
+        const usersSnapshot = await getDocs(usersRef);
+        const usersData = usersSnapshot.docs.map((doc) => doc.data());
+    
+        // Fetch attendance data for each child
+        const attendanceRef = collection(firestore, 'attendance');
+        const attendanceSnapshot = await getDocs(attendanceRef);
+        const attendanceData = attendanceSnapshot.docs.reduce((acc, doc) => {
+          const data = doc.data();
+          acc[`${data.childName}_${data.date}`] = data.status; // Use date and child name as unique identifier
+          return acc;
+        }, {});
+    
+        // Update users' children with the attendance data
+        const usersWithAttendance = usersData.map((user) => ({
+          ...user,
+          children: user.children.map((child) => ({
+            ...child,
+            status: attendanceData[`${child.name}_${new Date().toISOString().split('T')[0]}`] || undefined,
+          })),
+        }));
+    
+        setUsers(usersWithAttendance);
+      };
+    
+      fetchUsers();
+    }, [firestore]);
+    const statusColor = (status) => {
+      switch (status) {
+        case "present":
+          return "green";
+        case "absent":
+          return "Red";
+        default:
+          return "gray";
+      }
+    };
   
-    const List = [
-      {
-        childName: "Ella Johnson",
-        Attandnace: "Present",
-        Allergies: " Peanuts",
-        
-      },
-      {
-        childName: "Ella Johnson",
-        Attandnace: "Absent",
-        Allergies: " Peanuts",
-        
-      },
-      {
-        childName: "Ella Johnson",
-        Attandnace: "Absent",
-  
-        
-      },
-    ];
     return (
       
    <div className="inline-flex w-full flex-col items-start justify-start rounded-[14px] border border-slate-100 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900 shadow-md">
@@ -48,7 +71,7 @@ import {
         </div>
   
         {/* Child Details */}
-      
+        {users.length > 0 ? (
         <TableContainer component={''} className="mt-1">
           <Table aria-label="meal updates table">
             <TableHead>
@@ -60,18 +83,33 @@ import {
               </TableRow>
             </TableHead>
             <TableBody>
-              {List.map((list, index) => (
-                <TableRow key={index}>
-                  <TableCell className="dark:text-neutral-100">{list.childName}</TableCell>
-                  <TableCell className="dark:text-neutral-100">{list.Attandnace}</TableCell>
+            {users.map((user, index) => (
+          user.children ? (
+            user.children.map((child, childIndex) => (
+                <TableRow key={`${index}-${childIndex}`}>
+                  <TableCell className="dark:text-neutral-100">{child.name}</TableCell>
+                  <TableCell className="dark:text-neutral-100"
+                     style={{
+                      color: statusColor(child.status),
+                   
+                      
+                    }}
+                  >{child.status}</TableCell>
                 
                  
                 </TableRow>
-              ))}
+              ))
+            ) : (
+              ''
+            )
+            ))}
+         
             </TableBody>
           </Table>
         </TableContainer>
-     
+        ):(
+          ''
+        )}
       </div>
   
   

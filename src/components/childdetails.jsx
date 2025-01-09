@@ -50,7 +50,7 @@ const Childdetails = () => {
         </div>
         <div className="flex justify-between text-sm text-gray-700 dark:text-neutral-300">
           <span className="font-medium">Age:</span>
-          <span>{userData?.age}</span>
+          <span>{userData?.age} Years</span>
         </div>
         <div className="flex justify-between text-sm text-gray-700 dark:text-neutral-300">
           <span className="font-medium">Gender:</span>

@@ -37,10 +37,9 @@ fetchUsers();
 
   const handleAddIncidentReport =  async (e) => {
     e.preventDefault(); // Prevent form submission from refreshing the page
-    if (!newIncidentReport.date || !newIncidentReport.status ||
-        !newIncidentReport.time || !newIncidentReport.description 
+    if (!newIncidentReport.date || !newIncidentReport.status || !newIncidentReport.description 
         ||
-        !newIncidentReport.userId || !newIncidentReport.childName || !newIncidentReport.status || !newIncidentReport.name
+        !newIncidentReport.userId || !newIncidentReport.childName  || !newIncidentReport.name
     ){
         alert('Please fill in all required fields')
         return;
@@ -136,21 +135,7 @@ fetchUsers();
                   }}
                 />
               </div>
-              <div className="mb-4">
-                <TextField
-                  label="Time"
-                  type="time"
-                  fullWidth
-                  variant="outlined"
-                  value={newIncidentReport.time}
-                  onChange={(e) => setNewIncidentReport({ ...newIncidentReport, time: e.target.value })}
-                  InputLabelProps={{ shrink: true ,className:"dark:text-neutral-100",}}
-                  InputProps={{
-                    className:"dark:text-neutral-100",
-                  }}
-                  
-                />
-              </div>
+            
               <div className="mb-4">
                  <FormControl fullWidth>
             <InputLabel className="dark:text-neutral-100">Status</InputLabel>
@@ -214,7 +199,7 @@ Select Child
     {users.map((user, index) =>
       user.children ? (
         user.children.map((child, childIndex) => (
-          <MenuItem  key={`${index}-${childIndex}`} value={child.id}>
+          <MenuItem  key={`${index}-${childIndex}`} value={child.name}>
             {child.name}
           </MenuItem>
         ))
@@ -244,7 +229,7 @@ Incident Update History
       <TableHead>
         <TableRow>
           <TableCell   className="dark:text-neutral-100">Date</TableCell>
-          <TableCell   className="dark:text-neutral-100">Time</TableCell>
+          <TableCell   className="dark:text-neutral-100">Name</TableCell>
           <TableCell   className="dark:text-neutral-100">Status</TableCell>
           <TableCell   className="dark:text-neutral-100">Description</TableCell>
         </TableRow>
@@ -253,7 +238,7 @@ Incident Update History
         {incidentReports.filter((incidentReport) => incidentReport.childName === selectedChildName).map((report, index) => (
           <TableRow key={index}>
             <TableCell   className="dark:text-neutral-100">{report.date}</TableCell>
-            <TableCell   className="dark:text-neutral-100">{report.time}</TableCell>
+            <TableCell   className="dark:text-neutral-100">{report.name}</TableCell>
             <TableCell   className="dark:text-neutral-100">{report.status}</TableCell>
             <TableCell   className="dark:text-neutral-100">{report.description}</TableCell>
           </TableRow>

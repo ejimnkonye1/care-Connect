@@ -25,39 +25,103 @@ const AttendanceTable = () => {
         const usersRef = collection(firestore, 'users');
         const usersSnapshot = await getDocs(usersRef);
         const usersData = usersSnapshot.docs.map((doc) => doc.data());
-        setUsers(usersData);
+    
+        // Fetch attendance data for each child
+        const attendanceRef = collection(firestore, 'attendance');
+        const attendanceSnapshot = await getDocs(attendanceRef);
+        const attendanceData = attendanceSnapshot.docs.reduce((acc, doc) => {
+          const data = doc.data();
+          acc[`${data.childName}_${data.date}`] = data.status; // Use date and child name as unique identifier
+          return acc;
+        }, {});
+    
+        // Update users' children with the attendance data
+        const usersWithAttendance = usersData.map((user) => ({
+          ...user,
+          children: user.children.map((child) => ({
+            ...child,
+            status: attendanceData[`${child.name}_${new Date().toISOString().split('T')[0]}`] || undefined,
+          })),
+        }));
+    
+        setUsers(usersWithAttendance);
       };
-  
+    
       fetchUsers();
-    }, [firestore, users]);
-  
+    }, [firestore]);
+    
     const handleAttendanceChange = async (userId, childName, status) => {
       const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
-      await setDoc(doc(firestore, 'attendance', `${childName}_${date}`), {
-        childName,
-        status,
-        date,
-        userId: users // pass users here
-      });
-    //  dispatch(setMark(!true))
-    //  dispatch(setAlert(!alertmode))
-      console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
-      setAttendance((prev) => ({ ...prev, [childName]: status }));
-      setShowToast(true);
+    
+      // Optimistically update the state
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.uid === userId
+            ? {
+                ...user,
+                children: user.children.map((child) =>
+                  child.name === childName ? { ...child, status } : child
+                ),
+              }
+            : user
+        )
+      );
+    
+      try {
+        // Save the attendance status in Firestore
+        await setDoc(doc(firestore, 'attendance', `${childName}_${date}`), {
+          childName,
+          status,
+          date,
+        });
+        console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
+      } catch (error) {
+        console.error('Error updating attendance:', error);
+    
+        // If Firestore fails, revert the optimistically updated status
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user.uid === userId
+              ? {
+                  ...user,
+                  children: user.children.map((child) =>
+                    child.name === childName ? { ...child, status: undefined } : child
+                  ),
+                }
+              : user
+          )
+        );
+      }
+    };
+    
+    
+  
+    // const handleAttendanceChange = async (userId, childName, status) => {
+    //   const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    //   await setDoc(doc(firestore, 'attendance', `${childName}_${date}`), {
+    //     childName,
+    //     status,
+    //     date,
+    //     userId: ''
+    //   });
+
+    //   console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
+    //   setAttendance((prev) => ({ ...prev, [childName]: status }));
+    //   setShowToast(true);
       
-      // Hide the toast after a delay (adjust as needed)
-      setTimeout(() => {
-        setShowToast(false);
-      }, 2000);
+    //   // Hide the toast after a delay (adjust as needed)
+    //   setTimeout(() => {
+    //     setShowToast(false);
+    //   }, 2000);
   
       
      
-    };
+    // };
   const statusColor = (status) => {
     switch (status) {
-      case "Present":
+      case "present":
         return "green";
-      case "Absent":
+      case "absent":
         return "Red";
       default:
         return "gray";
@@ -111,7 +175,8 @@ const AttendanceTable = () => {
                    
                       
                     }}>
-                {child.status}
+               {child.status || "Not Marked"}
+
               </span>
                 
 </TableCell>

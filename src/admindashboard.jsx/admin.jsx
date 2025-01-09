@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-mixed-spaces-and-tabs */
 
-import '../css/light.css'
+
 import 'animate.css';
 import { useState } from 'react';
 import { AiOutlineDashboard } from "react-icons/ai";

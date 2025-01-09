@@ -52,7 +52,7 @@ const SetMealForm = () => {
   };
 
   const handleSendUpdate = async () => {
-    if (!newMealUpdate.date || !newMealUpdate.mealType || !newMealUpdate.food || !newMealUpdate.quantity || !newMealUpdate.childName || !newMealUpdate.userId) {
+    if (!newMealUpdate.date || !newMealUpdate.mealType || !newMealUpdate.food || !newMealUpdate.childName || !newMealUpdate.userId) {
       alert('Please fill in all required fields');
       return;
     }
@@ -79,20 +79,32 @@ const SetMealForm = () => {
       console.error('Error sending meal update:', error);
     }
   };
-
   const handleChildChange = (e) => {
-    const childName = e.target.value;
+    const childName = e.target.value; // Get the selected child's name
     const user = users.find(user => user.children.some(child => child.name === childName));
     if (user) {
-      setSelectedChildName(childName);
-      setSelectedUserId(user.id);
+      setSelectedChildName(childName); // Update the selected child name
+      setSelectedUserId(user.id); // Update the selected user's ID
       setNewMealUpdate((prevUpdate) => ({
         ...prevUpdate,
-        childName,
-        userId: user.id
+        childName, // Update the newMealUpdate with the selected child's name
+        userId: user.id // Update the userId in newMealUpdate
       }));
     }
   };
+  // const handleChildChange = (e) => {
+  //   const childName = e.target.value;
+  //   const user = users.find(user => user.children.some(child => child.name === childName));
+  //   if (user) {
+  //     setSelectedChildName(childName);
+  //     setSelectedUserId(user.id);
+  //     setNewMealUpdate((prevUpdate) => ({
+  //       ...prevUpdate,
+  //       childName,
+  //       userId: user.id
+  //     }));
+  //   }
+  // };
   useEffect(() => {
     const fetchMealUpdates = async () => {
       const mealUpdatesRef = collection(firestore, 'mealUpdates');
@@ -158,15 +170,16 @@ const SetMealForm = () => {
             <FormControl fullWidth>
               <InputLabel className="dark:text-neutral-100">Select a child</InputLabel>
               <Select
-                name="childId"
-                value={newMealUpdate.childId}
+                name="childName"
+                value={selectedChildName}
+                // value={newMealUpdate.childId}
                 onChange={handleChildChange}
                 label="Select a child"
               >
                 {users.map((user, index) =>
                   user.children ? (
                     user.children.map((child, childIndex) => (
-                      <MenuItem key={`${index}-${childIndex}`} value={child.id}>
+                      <MenuItem key={`${index}-${childIndex}`} value={child.name}>
                         {child.name}
                       </MenuItem>
                     ))

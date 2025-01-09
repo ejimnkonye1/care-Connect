@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import pa from '../assets/pa.jpg';
 import { useState, useEffect } from "react";
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
@@ -14,7 +15,7 @@ const ProfileInfo = () => {
     phone: '',
     gender: '',
     age: '',
-    image: ''
+    image: '',
   });
 
   const user = auth.currentUser ;
@@ -136,6 +137,34 @@ const ProfileInfo = () => {
             />
           </div>
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block disabled:bg-gray-100 text-sm font-medium text-gray-700">
+              Gender
+            </label>
+            <input
+              type="text"
+              className="mt-1 disabled:bg-gray-100 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+              name="gender"
+              placeholder="Enter Gender"
+              disabled
+              value={formData.gender}
+            />
+          </div>
+          <div>
+            <label className="block disabled:bg-gray-100 text-sm font-medium text-gray-700">
+              Age
+            </label>
+            <input
+              type="number"
+              className="mt-1 disabled:bg-gray-100 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+              name="age"
+              placeholder="Enter Age"
+              value={formData.age}
+              disabled
+            />
+          </div>
+        </div>
         <div>
           <label className="block disabled:bg-gray-100 text-sm font-medium text-gray-700">
             Parent Email address
@@ -205,34 +234,7 @@ const ProfileInfo = () => {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block disabled:bg-gray-100 text-sm font-medium text-gray-700">
-              Gender
-            </label>
-            <input
-              type="text"
-              className="mt-1 disabled:bg-gray-100 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
-              name="gender"
-              placeholder="Enter Gender"
-              disabled
-              value={formData.gender}
-            />
-          </div>
-          <div>
-            <label className="block disabled:bg-gray-100 text-sm font-medium text-gray-700">
-              Age
-            </label>
-            <input
-              type="number"
-              className="mt-1 disabled:bg-gray-100 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
-              name="age"
-              placeholder="Enter Age"
-              value={formData.age}
-              disabled
-            />
-          </div>
-        </div>
+        
       </form>
     </div>
   );

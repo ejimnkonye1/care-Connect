@@ -16,7 +16,11 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
   const [lastName, setLastName] = useState('');
   const [error, setError] = useState(null);
   const [image, setImage] = useState(null);
-
+  const [age, setAge] = useState('');
+  const [ address, setAddress] = useState('')
+  const [ gender, setGender] = useState('')
+  const [allergic, setAllergic] = useState('')
+  const [loading, setLoading] = useState('')
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -38,7 +42,10 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
         phone,
         firstName,
         lastName,
-        image
+        image,
+        age,
+        gender,
+        address,
       });
       console.log(userId);
       console.log("User  data saved to Firestore");
@@ -108,6 +115,7 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
                 placeholder="Obi"
                 value={childName}
                 onChange={(e) => setChildName(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -116,6 +124,9 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
                 type="text"
                 className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="Enter Age"
+                onChange={(e) =>setAge(e.target.value)}
+                value={age}
+                required
               />
             </div>
           </div>
@@ -127,16 +138,25 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
                 type="text"
                 className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="Enter Allergies"
+                onChange={(e) => setAllergic(e.target.value)}
+                value={allergic}
+                required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Gender *</label>
-              <input
-                type="text"
-                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
-                placeholder="Enter Gender"
-              />
-            </div>
+  <label className="block text-sm font-medium text-gray-700">Gender *</label>
+  <select
+    className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+    name="gender"
+    value={gender} 
+    onChange={(e) => setGender( e.target.value )} 
+    required
+  >
+    <option value="" disabled>Select Gender</option> {/* Placeholder option */}
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+</div>
           </div>
 
           <div className="flex w-full items-center justify-between">
@@ -154,29 +174,35 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
                 placeholder="example@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Parent Name *</label>
+              <label className="block text-sm font-medium text-gray-700">Parent  Firstname *</label>
               <input
                 type="text"
                 className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
-                placeholder="Enter Parent Name"
+                placeholder="Enter FirstName"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                required
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Address *</label>
+          <div>
+              <label className="block text-sm font-medium text-gray-700">Parent Lastname *</label>
               <input
                 type="text"
                 className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
-                placeholder="Enter Home Address"
+                placeholder="Enter lastname"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
               />
             </div>
+           
             <div>
               <label className="block text-sm font-medium text-gray-700">Phone *</label>
               <input
@@ -185,17 +211,21 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
                 placeholder="Enter Phone Number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                required
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Gender *</label>
+          <div>
+              <label className="block text-sm font-medium text-gray-700">Address *</label>
               <input
                 type="text"
                 className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
-                placeholder="Enter Gender"
+                placeholder="Enter Home Address"
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+                required
               />
             </div>
             <div>
@@ -206,6 +236,7 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
                 placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -213,9 +244,33 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
           <div className="flex justify-end">
   <button
     type="submit"
-    className="mt-4 rounded-lg bg-emerald-400 text-white py-3 px-4  focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    className={`mt-4 rounded-lg bg-emerald-400 text-white py-3 px-4  focus:outline-none focus:ring-2 focus:ring-indigo-500
+            ${btnloading ? 'bg-gray-400 cursor-not-allowed' : 'bg-emerald-400 hover:bg-emerald-600'}`}
+    disabled={btnloading}
+    
   >
-    Register
+     {loading ? (
+        <>
+          <svg
+            className="animate-spin h-5 w-5 mr-3"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <circle className="opacity-25" cx="12" cy="12" r="10" strokeWidth="4" />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8H4z"
+            />
+          </svg>
+          Loading...
+        </>
+      ) : (
+        '  Register'
+      )}
+ 
   </button>
 </div>
         
