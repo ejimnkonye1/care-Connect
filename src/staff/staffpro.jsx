@@ -89,26 +89,32 @@ const handleSubmit = async (event) => {
   return (
     <div className="inline-flex w-full flex-col items-start border-b justify-start rounded-[14px] border border-slate-100 bg-white p-6 space-y-6 dark:border-neutral-800 dark:bg-neutral-900">
       {/* Profile Picture Section */}
-      <div className="flex flex-start items-center flex-row mb-4 border-slate-200 dark:border-neutral-800 border-b w-full">
-        <img
-          src={pa}
-          // src={staffData?.image ?? formData.image}
-          alt="Profile"
-          className="h-32 w-32 rounded-full object-cover mb-4"
-        />
-        <div className="flex flex-col pl-3">
-          <button  onChange={handleImageChange} className ="px-4 py-2 w-40 bg-emerald-500 text-white text-sm font-medium rounded hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 dark:bg-neutral-800 dark:hover:bg-neutral-700">
-            Upload new photo
-          </button>
-          <p className="text-xs text-gray-500 mt-1">
-            At least 800x800 px recommended. JPG or PNG is allowed.
-          </p>
-        </div>
-      </div>
+       <div className="flex flex-start items-center flex-row mb-4 border-slate-200 dark:border-neutral-800 border-b w-full">
+             <img
+               src={image || staffData?.image || pa} // Use the uploaded image or fallback to default
+               alt="Profile"
+               className="h-32 w-32 rounded-full object-cover mb-4"
+             />
+             <div className="flex flex-col pl-3">
+               <input
+                 type="file"
+                 accept="image/*"
+                 onChange={handleImageChange}
+                 className="hidden" // Hide the default file input
+                 id="file-upload"
+               />
+               <label htmlFor="file-upload"  className="px-4 py-2 w-40 bg-emerald-500 text-white text-sm font-medium rounded cursor-pointer hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 dark:bg-neutral-800 dark:hover:bg-neutral-700">
+                 Upload new photo
+               </label>
+               <p className="text-xs text-gray-500 mt-1">
+                 At least 800x800 px recommended. JPG or PNG is allowed.
+               </p>
+             </div>
+           </div>
       <div className="flex w-full items-center justify-between">
        
-        <button className="cursor-pointer text-underline text-base font-medium text-emerald-400">
-          Edit Profile
+      <button type='submit' onClick={handleSubmit} className="cursor-pointer text-underline text-base font-medium text-emerald-400">
+          Save Changes
         </button>
       </div>
       <form className="w-full space-y-6" onSubmit={handleSubmit}>

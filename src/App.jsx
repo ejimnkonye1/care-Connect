@@ -5,7 +5,6 @@ import './App.css'
 import { useState , useEffect} from 'react'
 
 import { LandingPage } from './landing/landing'
-import { Dashboard } from './dashboards/parentdashboard'
 
 import { Provider } from 'react-redux'
 import store from './store'
