@@ -72,8 +72,11 @@ function App() {
         
         <Routes>
           <Route path='/' element={<LandingPage />} />
-        
-          <Route path='/admin' element={<AdminDashboard showToast={showToast} setShowToast={setShowToast} />} />
+          <Route path='/signup' element={<SignUps />} />
+          <Route path='/login' element={<MainLogin />} />
+          <Route path='/resetpar' element={<Resetparent />} />
+          <Route path='/resetstaff' element={<Resetstaff />} />
+          <Route path='/reset' element={<Resetadmin />} />
           <Route path='/parentdashboard' element={<Dashboards />} />
           <Route path='/re' element={<Report />} />
           <Route path='/ev' element={<Event />} />
@@ -89,12 +92,8 @@ function App() {
           <Route path='/mealupdates' element={<Staffmeals />} />
           <Route path='/schat' element={<Staffchat />} />
           <Route path='/spro' element={<Staffprofile />} />
-          <Route path='/ad' element={<Adminsdashboards />} />
-          <Route path='/signup' element={<SignUps />} />
-          <Route path='/login' element={<MainLogin />} />
-          <Route path='/resetpar' element={<Resetparent />} />
-          <Route path='/resetstaff' element={<Resetstaff />} />
-          <Route path='/reset' element={<Resetadmin />} />
+          <Route path='/admin' element={<Adminsdashboards />} />
+          
         </Routes>
       </Router>
       </Layout>

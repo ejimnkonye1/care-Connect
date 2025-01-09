@@ -53,13 +53,15 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
           <span className="dark:text-white text-sm">Menu</span>
             <li onClick={closeSidebar}>
               <NavLink
-                to="/ad"
+                to="/admin"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <Dash size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
                 <span className="ms-3">Dashboard</span>
               </NavLink>
             </li>
+               
+          <span className="dark:text-white text-sm">Mangements</span>
             <li>
               <NavLink
                 to="/re"
@@ -67,7 +69,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
               >
                 <DocumentLike
  className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">parent dashboard</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Childrens</span>
               
               </NavLink>
             </li>
@@ -77,7 +79,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <CalendarTick className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">staff dashboard</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Parent</span>
               
               </NavLink>
             </li>
@@ -88,7 +90,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <Reserve className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Childrens</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Staffs</span>
               
               </NavLink>
             </li>
@@ -98,7 +100,17 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <MoneySend className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Fees</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Finance</span>
+              
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/fee"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <MoneySend className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="flex-1 ms-3 whitespace-nowrap">Events</span>
               
               </NavLink>
             </li>
@@ -122,17 +134,6 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
              
             </ul>
             <ul className="space-y-2 font-medium  px-3 ">
-            
-            <span className="dark:text-white text-sm">Profile</span>
-              <li onClick={closeSidebar}>
-                <NavLink
-                  to="/pro"
-                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
-                  <UserOctagon size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
-                  <span className="ms-3">Profile</span>
-                </NavLink>
-              </li>
               <li onClick={closeSidebar}>
                 <NavLink
                   to="#"
