@@ -19,30 +19,21 @@ const StaffList = () => {
 
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-bold mb-4">Staff List</h1>
+      <h1 className="text-2xl font-bold mb-8 text-center">Staff List</h1>
       {staffData.length === 0 ? (
-        <p>No staff found.</p>
+        <p className="text-center text-gray-500">No staff found.</p>
       ) : (
-        <table className="min-w-full bg-white border border-gray-300">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="py-2 px-4 border-b">ID</th>
-              <th className="py-2 px-4 border-b">Name</th>
-              <th className="py-2 px-4 border-b">Email</th>
-              <th className="py-2 px-4 border-b">Position</th>
-            </tr>
-          </thead>
-          <tbody>
-            {staffData.map((staff) => (
-              <tr key={staff.id} className="hover:bg-gray-100">
-                <td className="py-2 px-4 border-b">{staff.id}</td>
-                <td className="py-2 px-4 border-b">{staff.name}</td>
-                <td className="py-2 px-4 border-b">{staff.email}</td>
-                <td className="py-2 px-4 border-b">{staff.position}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {staffData.map((staff) => (
+            <div key={staff.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <div className="text-center">
+                <h2 className="text-lg font-semibold text-gray-800">{staff.name}</h2>
+                <p className="text-gray-500">{staff.email}</p>
+                <p className="text-sm text-gray-600">Position: {staff.position}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

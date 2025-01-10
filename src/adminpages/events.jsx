@@ -31,7 +31,7 @@ const Events = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="setevents" />
+      currentPage="Add events" />
       <AdminLayout />
     </section>
   </section>

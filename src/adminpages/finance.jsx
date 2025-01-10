@@ -31,7 +31,7 @@ const Finance = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="setfee" />
+      currentPage="Add fee" />
       <AdminLayout />
     </section>
   </section>
