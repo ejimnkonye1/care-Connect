@@ -8,7 +8,7 @@ import { LandingPage } from './landing/landing'
 
 import { Provider } from 'react-redux'
 import store from './store'
-import { AdminDashboard } from './admindashboard.jsx/admin'
+
 import Dashboards from './pages/Dashboard'
 import Report from './pages/Reports'
 import Event from './pages/Events'
@@ -30,6 +30,12 @@ import MainLogin from './Login/main'
 import { Resetparent } from './pro/resetparent'
 import { Resetstaff } from './pro/resetstaff'
 import { Resetadmin } from './pro/resetadmin'
+import ChildrenList from './adminpages/children'
+import ParentList from './adminpages/parent'
+import StaffList from './adminpages/staff'
+import Finance from './adminpages/finance'
+import Events from './adminpages/events'
+import Adminchat from './adminpages/adminchat'
 
 
 const Loader = () => (
@@ -58,7 +64,7 @@ const Loader = () => (
     return isLoading ? <Loader /> : children;
   };
 function App() {
-  const [showToast, setShowToast] = useState(false);
+
   
   return (
     <>
@@ -93,7 +99,12 @@ function App() {
           <Route path='/schat' element={<Staffchat />} />
           <Route path='/spro' element={<Staffprofile />} />
           <Route path='/admin' element={<Adminsdashboards />} />
-          
+          <Route path='/childrenlist' element={<ChildrenList />} />
+          <Route path='/parentlist' element={<ParentList />} />
+          <Route path='/stafflist' element={<StaffList />} />
+          <Route path='/finance' element={<Finance />} />
+          <Route path='/setevent' element={<Events />} />
+          <Route path='/adminchat' element={<Adminchat />} />
         </Routes>
       </Router>
       </Layout>

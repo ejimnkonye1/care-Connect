@@ -64,7 +64,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
           <span className="dark:text-white text-sm">Mangements</span>
             <li>
               <NavLink
-                to="/re"
+                to="/childrenlist"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <DocumentLike
@@ -75,7 +75,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
             </li>
             <li>
               <NavLink
-                to="/ev"
+                to="/parentlist"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <CalendarTick className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -86,7 +86,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
           
             <li>
               <NavLink
-                to="/meal"
+                to="/stafflist"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <Reserve className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -96,7 +96,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
             </li>
             <li>
               <NavLink
-                to="/fee"
+                to="/finance"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <MoneySend className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -106,7 +106,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
             </li>
             <li>
               <NavLink
-                to="/fee"
+                to="/setevent"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <MoneySend className="w-5 h-5 text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -123,7 +123,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
             <span className="dark:text-white text-sm">Communication</span>
               <li onClick={closeSidebar}>
                 <NavLink
-                  to="/chat"
+                  to="/adminchat"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 >
                   <Messages size='25' className=" text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white" />

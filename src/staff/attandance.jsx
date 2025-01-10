@@ -11,8 +11,6 @@ import {
   Button,
 } from "@mui/material";
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector} from 'react-redux';
-import {  setAlert, setMark } from '../action';
 import {  collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import {  firestore } from '../firebase';
 const AttendanceTable = () => {
