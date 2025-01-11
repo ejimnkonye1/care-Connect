@@ -39,13 +39,13 @@ const ChildrenList = () => {
 
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-bold mb-8 text-center">Children List</h1>
+      <h1 className="text-2xl font-bold mb-8 text-center dark:text-neutral-100">Children List</h1>
       {childrenData.length === 0 ? (
-        <p className="text-center text-gray-500">No children found.</p>
+        <p className="text-center text-gray-500 dark:text-neutral-100">No children found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {childrenData.map((child) => (
-            <div key={child.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+            <div key={child.id} className="bg-white p-6 rounded-lg rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 hover:shadow-xl transition-shadow">
               <div className="text-center">
                 {/* Display child's image if available */}
                 {child.parentImage ? (
@@ -58,11 +58,11 @@ const ChildrenList = () => {
                   <div className="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-4"></div>
                 )}
 
-                <h2 className="text-lg font-semibold text-gray-800">{child.name}</h2>
-                <p className="text-gray-500">Age: {child.age}</p>
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-100">{child.name}</h2>
+                <p className="text-gray-500 dark:text-neutral-100">Age: {child.age} years</p>
               </div>
               <div className="mt-4">
-                <p className="text-sm text-gray-600">Parent: {child.parentFirstName} {child.parentLastName}</p> {/* Display parent's full name */}
+                <p className="text-sm text-gray-600 dark:text-neutral-100">Parent: {child.parentFirstName} {child.parentLastName}</p> {/* Display parent's full name */}
            
               </div>
             </div>
