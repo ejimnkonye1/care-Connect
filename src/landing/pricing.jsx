@@ -1,21 +1,18 @@
 
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import { FaXmark } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom'
+
 export const Pricing = () => {
-    const navigate = useNavigate()
-    const HandleSignUp = () => {
-        navigate ('/signup')
-    }
+
     const handleDemo = () => {
         alert('coming soon')
       }
     return(
-<section id="pricing" className="mb-3 py-3 p-10">
+<section id="pricing" className="mb-3 py-3  p-5 lg:p-10">
   <h2 className="text-center mb-10 mt-10 text-[2.5rem] font-[700] text-[#00adef]">Pricing</h2>
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:p-10">
     {/* Basic Plan */}
-    <div className="bg-white rounded-lg shadow-lg p-4">
+    <div className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow">
       <div className="bg-[#00adef] text-white p-4 rounded-t-lg">
         <h3 className="text-center text-xl">Basic</h3>
         <p className="text-center text-lg">$0.00/month</p>
@@ -23,14 +20,14 @@ export const Pricing = () => {
           Top features include
         </div>
       </div>
-      <ul className="p-4 space-y-2">
-        <li className="flex items-center border-b p-2">
-          <IoCheckmarkDoneOutline className="text-blue-600 mr-2" />
+      <ul className="p-4 space-y-2  cursor-poniter">
+        <li className="flex items-center border-b p-2 cursor-poniter">
+          <IoCheckmarkDoneOutline className="text-blue-600 mr-2 cursor-pointer" />
           Real-time updates
         </li>
         <li className="flex items-center border-b p-2">
           <IoCheckmarkDoneOutline className="text-blue-600 mr-2" />
-          Secure messaging
+           <span className=" cursor-poniter">Secure messaging</span>
         </li>
         <li className="flex items-center border-b p-2">
           <FaXmark className="text-red-500 mr-2" />
@@ -42,14 +39,14 @@ export const Pricing = () => {
         </li>
       </ul>
       <div className="flex justify-center mb-3">
-        <button className="bg-[#00adef] text-white px-4 py-2 rounded" onClick={HandleSignUp}>
+        <a className="bg-[#00adef] text-white px-4 py-2 rounded" href='/signup' >
           Sign Up
-        </button>
+        </a>
       </div>
     </div>
 
     {/* Premium Plan */}
-    <div className="bg-white rounded-lg shadow-lg p-4 relative">
+    <div className="bg-white rounded-lg shadow-lg p-4 relative hover:shadow-xl transition-shadow">
       <div className="absolute top-[60px] left-[4px] bg-[#1DC7EA] text-white px-[10px] py-[5px] rounded text-xs font-bold transform -rotate-45 origin-top-left">
         Coming Soon
       </div>
@@ -86,7 +83,7 @@ export const Pricing = () => {
     </div>
 
     {/* Enterprise Plan */}
-    <div className="bg-white rounded-lg shadow-lg p-4 relative">
+    <div className="bg-white rounded-lg shadow-lg p-4 relative hover:shadow-xl transition-shadow">
       <div className="absolute top-[60px] left-[4px] bg-[#1DC7EA] text-white px-[10px] py-[5px] rounded text-xs font-bold transform -rotate-45 origin-top-left">
         Coming Soon
       </div>
