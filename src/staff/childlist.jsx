@@ -43,7 +43,7 @@ const Childlist = () => {
       </div>
 
       {/* Children Table */}
-    
+      <div className="scrollbar mx-auto mt-7 w-full overflow-x-auto h-[200px]">
         <Table aria-label="children list table">
           <TableHead>
             <TableRow className="bg-slate-100 dark:bg-neutral-800">
@@ -101,7 +101,7 @@ const Childlist = () => {
             )}
           </TableBody>
         </Table>
-      
+      </div>
     </div>
   );
 };

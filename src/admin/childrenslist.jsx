@@ -21,6 +21,7 @@ const ChildrenList = () => {
           const childWithParentData = {
             ...child, // Spread child data
             age:userData.age,
+            totalchildren:userData.length,
             parentFirstName: userData.firstName, // Assuming `firstName` field in `users`
             parentLastName: userData.lastName, // Assuming `lastName` field in `users`
             parentImage: userData.image || '', // Assuming `image` field in `users`
@@ -39,8 +40,9 @@ const ChildrenList = () => {
 
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-bold mb-8 text-center dark:text-neutral-100">Children List</h1>
+      <h1 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100 text-center mb-10">Children List <span className=" text-blue-600" >({childrenData.length}) </span></h1>
       {childrenData.length === 0 ? (
+        
         <p className="text-center text-gray-500 dark:text-neutral-100">No children found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

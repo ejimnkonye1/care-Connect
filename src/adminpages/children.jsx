@@ -31,7 +31,7 @@ const ChildrenList = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="childrens" />
+      currentPage="Children" />
       <AdminLayout />
     </section>
   </section>

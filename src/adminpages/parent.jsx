@@ -31,7 +31,7 @@ const ParentList = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="parentList" />
+      currentPage="Parents" />
       <AdminLayout />
     </section>
   </section>

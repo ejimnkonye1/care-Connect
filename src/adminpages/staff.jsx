@@ -31,7 +31,7 @@ const StaffList = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="staffList" />
+      currentPage="Staffs" />
       <AdminLayout />
     </section>
   </section>

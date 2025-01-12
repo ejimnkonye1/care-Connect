@@ -19,10 +19,6 @@ const StaffList = () => {
     fetchStaff();
   }, []);
 
-  const handleEdit = (id) => {
-    console.log(`Edit staff with ID: ${id}`);
-    // Implement edit functionality here
-  };
 
   const handleDelete = (id) => {
     console.log(`Delete staff with ID: ${id}`);
@@ -30,14 +26,14 @@ const StaffList = () => {
   };
 
   return (
-    <div className="p-5 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
-        Staff Directory
+    <div className="p-5 ">
+      <h1 className="text-base font-semibold text-center leading-relaxed text-zinc-800 dark:text-neutral-100 mb-10">
+        Staffs <span className="text-blue-600">({staffData.length})</span>
       </h1>
       {staffData.length === 0 ? (
         <p className="text-center text-gray-500">No staff found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
           {staffData.map((staff) => (
             <div
               key={staff.id}
@@ -53,19 +49,15 @@ const StaffList = () => {
               </div>
               {/* Staff Details */}
               <div className="text-center">
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-neutral-100">
                   {staff.name}
                 </h2>
-                <p className="text-gray-500 text-sm">{staff.email}</p>
+                <p className="text-gray-500 text-sm dark:text-neutral-100">{staff.email}</p>
+                <p className="text-gray-500 text-sm dark:text-neutral-100">{staff.phone}</p>
               </div>
               {/* Action Buttons */}
-              <div className="mt-4 flex justify-between">
-                <button
-                  onClick={() => handleEdit(staff.id)}
-                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                >
-                  Edit
-                </button>
+              <div className="mt-4 flex justify-end">
+            
                 <button
                   onClick={() => handleDelete(staff.id)}
                   className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"

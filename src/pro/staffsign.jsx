@@ -11,8 +11,13 @@ export const StaffSign = ({btnloading, setbtnloading}) => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState('');
+  const [phone, setPhone] = useState('')
+  const [age, setAge] = useState('')
+  const [ address, setAddress] = useState('')
+  const [ gender, setGender] = useState('')
   const navigate = useNavigate()
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState('')
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!image) {
@@ -30,7 +35,11 @@ export const StaffSign = ({btnloading, setbtnloading}) => {
         email,
         name,
         role: 'staff',
-        image
+        image,
+        phone,
+        age,
+        address,
+        gender
       });
       console.log("Staff data saved to Firestore");
       // Redirect to staff dashboard or show success message
@@ -121,16 +130,21 @@ export const StaffSign = ({btnloading, setbtnloading}) => {
                 type="text"
                 className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="Enter Home Address"
+                onChange={((e) => setAddress(e.target.value))}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Gender *</label>
-              <input
-                type="text"
-                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
-                placeholder="Enter Gender"
-              />
-            </div>
+  <label className="block text-sm font-medium text-gray-700">Gender *</label>
+  <select
+    className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+    onChange={(e) => setGender(e.target.value)}
+    defaultValue="" // Optional: to show a placeholder option
+  >
+    <option value="" disabled>Select Gender</option> {/* Placeholder option */}
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+</div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -139,8 +153,23 @@ export const StaffSign = ({btnloading, setbtnloading}) => {
                 type="text"
                 className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="Enter Age"
+                onChange={((e) => setAge(e.target.value))}
               />
             </div>
+           
+            <div>
+              <label className="block text-sm font-medium text-gray- 700">Phone *</label>
+              <input
+                type="text"
+                className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500"
+                placeholder="Phone Number"
+                onChange={((e)=>  setPhone(e.target.value))}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
            
             <div>
               <label className="block text-sm font-medium text-gray-700">Password *</label>
@@ -153,18 +182,40 @@ export const StaffSign = ({btnloading, setbtnloading}) => {
               />
             </div>
           </div>
-
-
          
 
        
          
           <div className="flex justify-end">
-  <button
+          <button
     type="submit"
-    className="mt-4 rounded-lg bg-emerald-400 text-white py-3 px-4  focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    className={`mt-4 rounded-lg bg-emerald-400 text-white py-3 px-4  focus:outline-none focus:ring-2 focus:ring-indigo-500
+            ${btnloading ? 'bg-gray-400 cursor-not-allowed' : 'bg-emerald-400 hover:bg-emerald-600'}`}
+    disabled={btnloading}
+    
   >
-    Register
+     {loading ? (
+        <>
+          <svg
+            className="animate-spin h-5 w-5 mr-3"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <circle className="opacity-25" cx="12" cy="12" r="10" strokeWidth="4" />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8H4z"
+            />
+          </svg>
+          Loading...
+        </>
+      ) : (
+        '  Register'
+      )}
+ 
   </button>
 </div>
         

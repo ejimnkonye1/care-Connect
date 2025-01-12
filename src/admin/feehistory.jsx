@@ -105,7 +105,7 @@ return(
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={4} className="text-center text-gray-500">
+              <TableCell colSpan={4} className="text-center text-gray-500  dark:text-neutral-100">
                 No fees available
               </TableCell>
             </TableRow>
