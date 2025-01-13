@@ -93,28 +93,7 @@ const AttendanceTable = () => {
     };
     
     
-  
-    // const handleAttendanceChange = async (userId, childName, status) => {
-    //   const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
-    //   await setDoc(doc(firestore, 'attendance', `${childName}_${date}`), {
-    //     childName,
-    //     status,
-    //     date,
-    //     userId: ''
-    //   });
 
-    //   console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
-    //   setAttendance((prev) => ({ ...prev, [childName]: status }));
-    //   setShowToast(true);
-      
-    //   // Hide the toast after a delay (adjust as needed)
-    //   setTimeout(() => {
-    //     setShowToast(false);
-    //   }, 2000);
-  
-      
-     
-    // };
   const statusColor = (status) => {
     switch (status) {
       case "present":

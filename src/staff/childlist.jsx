@@ -95,7 +95,7 @@ const Childlist = () => {
                   colSpan={3}
                   className="text-center text-sm text-gray-500 dark:text-neutral-300"
                 >
-                  No users available.
+                  No children found.
                 </TableCell>
               </TableRow>
             )}

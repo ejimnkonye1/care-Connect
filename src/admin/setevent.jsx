@@ -3,7 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Badge, styled, Modal, Button } from "@mui/material";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { firestore } from "../firebase"; // Import firestore instance
+import { firestore } from "../firebase"; 
 
 const StyledCalendar = styled(Calendar)(({ theme }) => ({
   width: '100%',

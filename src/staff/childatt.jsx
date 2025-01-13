@@ -71,6 +71,7 @@ import {
         </div>
   
         {/* Child Details */}
+        <div className="scrollbar mx-auto mt-7 w-full overflow-x-auto h-[200px]">
         {users.length > 0 ? (
         <TableContainer component={''} className="mt-1">
           <Table aria-label="meal updates table">
@@ -94,7 +95,7 @@ import {
                    
                       
                     }}
-                  >{child.status}</TableCell>
+                  >{child.status || 'Not Marked'}</TableCell>
                 
                  
                 </TableRow>
@@ -110,6 +111,7 @@ import {
         ):(
           ''
         )}
+        </div>
       </div>
   
   

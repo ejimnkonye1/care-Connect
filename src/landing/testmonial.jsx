@@ -6,7 +6,7 @@ import c3 from '../assets/c3.jpg'
 export const Testimonial = () => {
     return(
 <section id="testimonials" className="mb-4 py-3 p-5 lg:p-10">
-  <h2 className="text-center mb-10 mt-10 text-[2.5rem] font-[700] text-[#00adef]">Testimonials</h2>
+  <h2 className="text-center mb-10 mt-10 text-[1.9rem] font-[700] text-[#00adef]">Testimonials</h2>
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {/* Testimonial 1 */}
     <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
