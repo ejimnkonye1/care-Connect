@@ -46,6 +46,7 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
         age,
         gender,
         address,
+        allergic,
       });
       console.log(userId);
       console.log("User  data saved to Firestore");

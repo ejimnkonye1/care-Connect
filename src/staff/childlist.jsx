@@ -9,12 +9,14 @@ import {
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
+import SkeletonLoader from "../reuseable/skelenton";
 
 const Childlist = () => {
   const [allUsers, setAllUsers] = useState([]);
-
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
     const fetchAllUsers = async () => {
+      setLoading(true)
       try {
         const usersRef = collection(firestore, "users");
         const snapshot = await getDocs(usersRef);
@@ -26,6 +28,7 @@ const Childlist = () => {
       } catch (error) {
         console.error("Error fetching users:", error);
       }
+      setLoading(false)
     };
 
     fetchAllUsers();
@@ -44,64 +47,70 @@ const Childlist = () => {
 
       {/* Children Table */}
       <div className="scrollbar mx-auto mt-7 w-full overflow-x-auto h-[200px]">
-        <Table aria-label="children list table">
-          <TableHead>
-            <TableRow className="bg-slate-100 dark:bg-neutral-800">
-              <TableCell className="text-sm font-medium dark:text-neutral-100">
-                Name
-              </TableCell>
-              <TableCell className="text-sm font-medium dark:text-neutral-100">
-                Age
-              </TableCell>
-              <TableCell className="text-sm font-medium dark:text-neutral-100">
-                Allergies
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {allUsers.length > 0 ? (
-              allUsers.map((user) =>
-                user.children && user.children.length > 0 ? (
-                  user.children.map((child, index) => (
-                    <TableRow
-                      key={`${user.id}-${index}`}
-                      className="hover:bg-slate-50 dark:hover:bg-neutral-800"
-                    >
-                      <TableCell className="dark:text-neutral-100">
-                        {child.name ?? "N/A"}
-                      </TableCell>
-                      <TableCell className="dark:text-neutral-100">
-                        {user.age  ?? "N/A"}
-                      </TableCell>
-                      <TableCell className="dark:text-neutral-100">
-                        {child.allergies ?? "NONE"}
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow key={user.id}>
-                    <TableCell
-                      colSpan={3}
-                      className="text-center text-sm text-gray-500 dark:text-neutral-300"
-                    >
-                      No children data available for this user.
+  <Table aria-label="Children List Table">
+    {loading ? (
+      // Show skeleton loaders while data is loading
+      <>
+        <SkeletonLoader height={20}  count={4} />
+        <SkeletonLoader height={20} count={4} />
+      </>
+    ) : (
+      <>
+        <TableHead>
+          <TableRow className="bg-slate-100 dark:bg-neutral-800">
+            <TableCell className="text-sm font-medium dark:text-neutral-100">
+              Name
+            </TableCell>
+            <TableCell className="text-sm font-medium dark:text-neutral-100">
+              Age
+            </TableCell>
+            <TableCell className="text-sm font-medium dark:text-neutral-100">
+              Allergies
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {allUsers.length > 0 ? (
+            allUsers.map((user) =>
+              user.children && user.children.length > 0 ? (
+                user.children.map((child, index) => (
+                  <TableRow
+                    key={`${user.id}-${index}`}
+                    className="hover:bg-slate-50 dark:hover:bg-neutral-800"
+                  >
+                    <TableCell className="dark:text-neutral-100">
+                      {child.name ?? "N/A"}
+                    </TableCell>
+                    <TableCell className="dark:text-neutral-100">
+                      {user.age ?? "N/A"}
+                    </TableCell>
+                    <TableCell className="dark:text-neutral-100">
+                      {user.allergic ?? "NONE"}
                     </TableCell>
                   </TableRow>
-                )
+                ))
+              ) : (
+                // If the user has no children, render a message
+                <TableRow key={user.id}>
+                  <TableCell colSpan={3} className="dark:text-neutral-100 text-center">
+                    No children available
+                  </TableCell>
+                </TableRow>
               )
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={3}
-                  className="text-center text-sm text-gray-500 dark:text-neutral-300"
-                >
-                  No children found.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+            )
+          ) : (
+            // If there are no users, render a message
+            <TableRow>
+              <TableCell colSpan={3} className="dark:text-neutral-100 text-center">
+                No users available
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </>
+    )}
+  </Table>
+</div>
     </div>
   );
 };

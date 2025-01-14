@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import { firestore } from '../firebase';
 
-const Childlupdates = () => {
+import SkeletonLoader from "../reuseable/skelenton";
+
+const ChildUpdates = () => {
   const [mealUpdates, setMealUpdates] = useState([]);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
+    setLoading(true);
     const mealUpdatesRef = collection(firestore, 'mealUpdates');
     const q = query(mealUpdatesRef);
 
@@ -25,6 +29,7 @@ const Childlupdates = () => {
       // Convert the grouped updates into an array for rendering
       const latestMealUpdates = Object.values(groupedUpdates);
       setMealUpdates(latestMealUpdates);
+      setLoading(false); // Set loading to false after fetching data
     });
 
     return () => unsubscribe();
@@ -45,8 +50,14 @@ const Childlupdates = () => {
       </div>
 
       <div className="scrollbar mx-auto mt-7 block w-full overflow-x-auto text-left">
-        {limitedMealUpdates.length > 0 ? (
-          limitedMealUpdates.map((mealUpdate, index) => (
+        {loading ? (
+          // Show skeleton loader while loading
+          <>
+            <SkeletonLoader height={40} count={2} />
+            <SkeletonLoader height={20} count={2} />
+          </>
+        ) : (
+          limitedMealUpdates.length > 0 && limitedMealUpdates.map((mealUpdate, index) => (
             <div
               key={index}
               className="grid grid-cols-2 w-full py-4 border-b border-gray-200 dark:border-neutral-700"
@@ -64,12 +75,10 @@ const Childlupdates = () => {
               </div>
             </div>
           ))
-        ) : (
-          <p>No meal updates available for any children.</p>
         )}
       </div>
     </div>
   );
 };
 
-export default Childlupdates;
+export default ChildUpdates;

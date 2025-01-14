@@ -12,10 +12,14 @@ import {
   import { useState, useEffect } from 'react';
   import {  collection, getDocs,  } from 'firebase/firestore';
   import {  firestore } from '../firebase';
+import SkeletonLoader from "../reuseable/skelenton";
+
   const Childatt = () => {
        const [users, setUsers] = useState([]);
+       const [loading, setLoading] = useState(true); 
     useEffect(() => {
       const fetchUsers = async () => {
+        setLoading(true)
         const usersRef = collection(firestore, 'users');
         const usersSnapshot = await getDocs(usersRef);
         const usersData = usersSnapshot.docs.map((doc) => doc.data());
@@ -39,6 +43,7 @@ import {
         }));
     
         setUsers(usersWithAttendance);
+        setLoading(false)
       };
     
       fetchUsers();
@@ -72,6 +77,14 @@ import {
   
         {/* Child Details */}
         <div className="scrollbar mx-auto mt-7 w-full overflow-x-auto h-[200px]">
+        {loading ? (
+      // Show skeleton loaders while data is loading
+      <>
+        <SkeletonLoader height={20}  count={4} />
+        <SkeletonLoader height={20} count={4} />
+      </>
+    ) : (
+      <>
         {users.length > 0 ? (
         <TableContainer component={''} className="mt-1">
           <Table aria-label="meal updates table">
@@ -111,6 +124,8 @@ import {
         ):(
           ''
         )}
+            </>
+    )}
         </div>
       </div>
   
