@@ -118,18 +118,25 @@ const StaffProfile = () => {
           <label className="block text-sm font-medium text-gray-700">
             Company
           </label>
+          {loading ? (
+              <SkeletonLoader height={40} width="100%" /> 
+            ) : (
           <input
             type="text"
             className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100"
             disabled
             placeholder="CareConnect."
           />
+             )}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block disabled:bg-gray-100 text-sm font-medium text-gray-700">
               Staff Email
             </label>
+            {loading ? (
+              <SkeletonLoader height={40} width="100%" /> 
+            ) : (
             <input
               type="email"
               className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100"
@@ -137,11 +144,15 @@ const StaffProfile = () => {
               placeholder="example@email.com"
               value={staffData?.email ?? ''}
             />
+          )}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Staff Name
             </label>
+            {loading ? (
+              <SkeletonLoader height={40} width="100%" /> 
+            ) : (
             <input
               type="text"
               className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100"
@@ -149,6 +160,7 @@ const StaffProfile = () => {
               placeholder="Child's Name"
               value={staffData?.name ?? ''}
             />
+          )}
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

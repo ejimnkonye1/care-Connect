@@ -105,7 +105,7 @@ const Setevents = () => {
               onChange={setDate} 
               value={date} 
               tileContent={tileContent}
-              className={`w-full bg-white dark:bg-gray-700`} 
+              className={`w-full bg-white dark:bg-gray-700 dark:text-neutral-100`} 
             />
             
           <button 

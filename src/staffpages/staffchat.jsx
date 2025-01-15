@@ -29,7 +29,7 @@ const Staffchat = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Staff dashboard" />
+      currentPage="Staff Chat" />
       <StaffLayout />
     </section>
   </section>

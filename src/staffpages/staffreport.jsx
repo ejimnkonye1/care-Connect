@@ -30,7 +30,7 @@ const Staffreports = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Staff dashboard" />
+      currentPage="Add Reports" />
       <StaffLayout />
     </section>
   </section>

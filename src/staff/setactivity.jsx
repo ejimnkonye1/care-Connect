@@ -160,6 +160,7 @@ const Setactivity = () => {
       </div>
       <div className="overflow-x-auto">
         <TableContainer className="mb-3" component={''}>
+        <div className="scrollbar mx-auto mt-1 w-full overflow-x-auto h-[200px]">
           <Table>
             <TableHead>
               <TableRow>
@@ -180,6 +181,7 @@ const Setactivity = () => {
               ))}
             </TableBody>
           </Table>
+          </div>
         </TableContainer>
       </div>
     </div>

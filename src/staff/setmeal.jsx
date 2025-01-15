@@ -18,9 +18,12 @@ import {
     FormControl,
   
   } from '@mui/material';
+import { MessageAlert } from '../alert';
   
 const SetMealForm = () => {
-    const [showToast, setShowToast] = useState(false);
+    
+     
+    const [successMessage, setSuccessMessage] = useState("");
     const [mealUpdates, setMealUpdates] = useState([]);
   const [users, setUsers] = useState([]); // Store all users
   const [selectedChildName, setSelectedChildName] = useState(''); // Store the selected child name
@@ -61,19 +64,14 @@ const SetMealForm = () => {
       const mealUpdatesRef = collection(firestore, 'mealUpdates');
       await addDoc(mealUpdatesRef, newMealUpdate);
       setMealUpdates((prevUpdates) => [...prevUpdates, newMealUpdate]);
-      setShowToast(true);
-
-      // Hide the toast after a delay (adjust as needed)
-      setTimeout(() => {
-        setShowToast(false);
-      }, 2000);
+      setSuccessMessage(`mealupdates sent for ${selectedChildName}`)
       setNewMealUpdate({
         date: '',
         mealType: '',
         food: '',
         status: '',
-        childName: '',
-        userId: ''
+        childName: selectedChildName,
+        userId: selectedUserId
       });
     } catch (error) {
       console.error('Error sending meal update:', error);
@@ -92,19 +90,7 @@ const SetMealForm = () => {
       }));
     }
   };
-  // const handleChildChange = (e) => {
-  //   const childName = e.target.value;
-  //   const user = users.find(user => user.children.some(child => child.name === childName));
-  //   if (user) {
-  //     setSelectedChildName(childName);
-  //     setSelectedUserId(user.id);
-  //     setNewMealUpdate((prevUpdate) => ({
-  //       ...prevUpdate,
-  //       childName,
-  //       userId: user.id
-  //     }));
-  //   }
-  // };
+ 
   useEffect(() => {
     const fetchMealUpdates = async () => {
       const mealUpdatesRef = collection(firestore, 'mealUpdates');
@@ -114,58 +100,25 @@ const SetMealForm = () => {
     };
 
     fetchMealUpdates();
-  }, [firestore]);
+  }, []);
   return (
     <div className="">
-    
+    <>
+             <MessageAlert
+            open={!!successMessage}
+            message={successMessage}
+            onClose={() => setSuccessMessage("")}
+          />
+    </>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Meal Update History */}
-        <div className="inline-flex w-full flex-col items-start border-b justify-start rounded-[14px] border border-slate-100 bg-white p-6 space-y-6 dark:border-neutral-800 dark:bg-neutral-900">
-        <div className="flex w-full items-center justify-between">
-        <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
-          Meal Updates for 
-        </h3>
-        <button className="cursor-pointer text-base font-medium text-emerald-400">
-          See All
-        </button>
-      </div>
-          
-            <TableContainer component={''}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="dark:text-neutral-100">Date</TableCell>
-                    <TableCell className="dark:text-neutral-100">Meal Type</TableCell>
-                    <TableCell className="dark:text-neutral-100">Food</TableCell>
-                    <TableCell className="dark:text-neutral-100">Status</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {mealUpdates
-                    .filter((mealUpdate) => mealUpdate.childName === selectedChildName)
-                    .map((mealUpdate, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="dark:text-neutral-100">{mealUpdate.date}</TableCell>
-                        <TableCell className="dark:text-neutral-100">{mealUpdate.mealType}</TableCell>
-                        <TableCell className="dark:text-neutral-100">{mealUpdate.food}</TableCell>
-                        <TableCell className="dark:text-neutral-100">{mealUpdate.status}</TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-      
-        </div>
-  
-        {/* Select Child */}
-         <div className="inline-flex w-full flex-col items-start border-b justify-start rounded-[14px] border border-slate-100 bg-white p-6 space-y-6 dark:border-neutral-800 dark:bg-neutral-900">
+        <div>
+        <div className="inline-flex w-full flex-col items-start border-b justify-start rounded-[14px] border border-slate-100 bg-white p-6 space-y-6 dark:border-neutral-800 dark:bg-neutral-900 mt-3">
         <div className="flex w-full items-center justify-between">
         <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
           Select A Child 
         </h3>
-        <button className="cursor-pointer text-base font-medium text-emerald-400">
-          See All
-        </button>
+     
       </div>
             <FormControl fullWidth>
               <InputLabel className="dark:text-neutral-100">Select a child</InputLabel>
@@ -192,40 +145,76 @@ const SetMealForm = () => {
               </Select>
             </FormControl>
       </div>
-
+        
+        <div className="inline-flex w-full flex-col items-start border-b justify-start rounded-[14px] border border-slate-100 bg-white p-6 space-y-6 dark:border-neutral-800 dark:bg-neutral-900 mt-3">
+        <div className="flex w-full items-center justify-between">
+        <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
+          Meal Updates for  {selectedChildName}
+        </h3>
+     
       </div>
-    
+          
+            <TableContainer component={''}>
+            <div className="scrollbar mx-auto mt-1 w-full overflow-x-auto h-[200px]">
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="dark:text-neutral-100">Date</TableCell>
+                    <TableCell className="dark:text-neutral-100 text-nowrap">Meal Type</TableCell>
+                    <TableCell className="dark:text-neutral-100">Food</TableCell>
+                    <TableCell className="dark:text-neutral-100">Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {mealUpdates
+                    .filter((mealUpdate) => mealUpdate.childName === selectedChildName)
+                    .map((mealUpdate, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="dark:text-neutral-100 text-nowrap">{mealUpdate.date}</TableCell>
+                        <TableCell className="dark:text-neutral-100">{mealUpdate.mealType}</TableCell>
+                        <TableCell className="dark:text-neutral-100">{mealUpdate.food}</TableCell>
+                        <TableCell className="dark:text-neutral-100">{mealUpdate.status}</TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+              </div>
+            </TableContainer>
+      
+        </div>
   
-    <div className='pt-10' >
+    
+      </div>
 
-    </div>
-    <div className="inline-flex w-full flex-col items-start justify-start rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 mt-3 py-5">
+
+      <div className="inline-flex w-full flex-col items-start justify-start rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 mt-3 py-5">
   <div className="flex w-full items-center justify-between">
     <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100 mb-5">
-      Send Meal Updates for
+      Send Meal Updates 
     </h3>
   </div>
   <TableContainer component={''}>
+
     <Table>
       <TableBody className="mb-3">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 w-full">
           
-          {/* Date Picker with className styling */}
+        
           <TextField
             label="Date"
-            name="date"
+            name='date'
             type="date"
             value={newMealUpdate.date}
             onChange={handleInputChange}
             fullWidth
+              margin="normal"
             InputLabelProps={{
+              className:"dark:text-neutral-100",
+              shrink: true, 
+              }}
+              InputProps={{
                 className:"dark:text-neutral-100",
-                shrink: true, 
-                }}
-                InputProps={{
-                    className:"dark:text-neutral-100",
-                  }}
-
+              }}
           />
           
           {/* Meal Type Select */}
@@ -285,8 +274,13 @@ const SetMealForm = () => {
         </Button>
       </TableBody>
     </Table>
+    
   </TableContainer>
 </div>
+      </div>
+    
+  
+
 
 
 

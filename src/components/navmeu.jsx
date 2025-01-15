@@ -38,8 +38,7 @@ import { setMode } from "../action";
      }
    
    }
-   console.log(darkmode);
-   console.log("Dark mode state:", darkmode);
+
 
     return (
       <>

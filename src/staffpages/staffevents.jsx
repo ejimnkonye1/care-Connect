@@ -30,7 +30,7 @@ const Staffevent = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Events" />
+      currentPage=" Events" />
       <StaffLayout />
     </section>
   </section>

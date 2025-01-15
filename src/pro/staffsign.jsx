@@ -46,7 +46,7 @@ export const StaffSign = ({btnloading, setbtnloading}) => {
       setbtnloading(true)
       setTimeout(() => {
         setbtnloading(false)
-        navigate('/staff')
+        navigate('/staffdashboard')
       }, 9000);
      
     } catch (error) {

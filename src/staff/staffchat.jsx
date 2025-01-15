@@ -128,7 +128,7 @@ const Chatstaff = () => {
       </div>
 
       {/* Chat Messages */}
-      <div className="chat-messages flex-grow overflow-y-auto p-4 space-y-4 bg-gray-50 text-gray-700 dark:bg-neutral-900 dark:text-neutral-200" style={{ height: '330px' }}>
+      <div className="chat-messages flex-grow overflow-y-auto p-4 space-y-4 bg-gray-50 text-gray-700 dark:bg-neutral-900 dark:text-neutral-200" style={{ height: '290px' }}>
         <ul className="message-list">
           {messages.map((msg, index) => {
             const messageDate = formatDate(msg.timestamp);
@@ -137,7 +137,7 @@ const Chatstaff = () => {
             return (
               <div key={index}>
                 {showDate && <div className="text-center my-2 font-medium text-gray-500 dark:text-neutral-400">{messageDate}</div>}
-                <li className={`message-item ${msg.senderId === staffId ? 'sent' : 'received'}`}>
+                <li className={`message-item mb-2.5 p-2.5 rounded-lg relative w-fit min-w-[10%] max-w-[60%] flex flex-col break-words ${msg.senderId === staffId ? 'sent flex justify-end ml-auto bg-[#28a745] text-right text-white' : 'received flex justify-start bg-[#dc3545] text-left text-white'}`}>
                   <span>{msg.content}</span>
                   <small className="block mt-1 text-xs text-gray-300">{formatTime(msg.timestamp)}</small>
                 </li>

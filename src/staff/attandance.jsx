@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Table,
   TableBody,
@@ -75,7 +76,7 @@ const AttendanceTable = () => {
         status,
         date,
       });
-       setSuccessMessage( `Attendance marked as ${status} for child ${childName}`)
+       setSuccessMessage( `Attendance marked as ${status} for ${childName}`)
       console.log(`Attendance marked as ${status} for child ${childName} on ${date}`);
     } catch (error) {
       console.error('Error updating attendance:', error);

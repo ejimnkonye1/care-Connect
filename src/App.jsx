@@ -90,14 +90,14 @@ function App() {
           <Route path='/fee' element={<Fee />} />
           <Route path='/pro' element={<Profile />} />
           <Route path='/chat' element={<Chats />} />
-          <Route path='/staff' element={<Staffdashboards />} />
-          <Route path='/reups' element={<Staffreports />} />
-          <Route path='/act' element={<Staffactivity />} />
-          <Route path='/evups' element={<Staffevent />} />
-          <Route path='/at' element={<Staffattandance />} />
-          <Route path='/mealupdates' element={<Staffmeals />} />
-          <Route path='/schat' element={<Staffchat />} />
-          <Route path='/spro' element={<Staffprofile />} />
+          <Route path='/staffdashboard' element={<Staffdashboards />} />
+          <Route path='/addreports' element={<Staffreports />} />
+          <Route path='/addactivity' element={<Staffactivity />} />
+          <Route path='/staffevents' element={<Staffevent />} />
+          <Route path='/addattandance' element={<Staffattandance />} />
+          <Route path='/addmealupdates' element={<Staffmeals />} />
+          <Route path='/staffchat' element={<Staffchat />} />
+          <Route path='/staffprofile' element={<Staffprofile />} />
           <Route path='/admin' element={<Adminsdashboards />} />
           <Route path='/childrenlist' element={<ChildrenList />} />
           <Route path='/parentlist' element={<ParentList />} />

@@ -30,7 +30,7 @@ const Staffmeals = () => {
       setSidebarOpen={setSidebarOpen}
       isSidebarOpen={isSidebarOpen}
       
-      currentPage="Set Meals" />
+      currentPage="Add Meals" />
       <StaffLayout />
     </section>
   </section>

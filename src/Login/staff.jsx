@@ -35,7 +35,7 @@ export const StaffLoginForm = ({setIsAdminLogin, setIsStaffLogin,btnloading,
         setbtnloading(true)
         setTimeout(() => {
           setbtnloading(false)
-          navigate('/staff')
+          navigate('/staffdashboard')
         }, 9000);
       }else{
         setError("You are not an authorized Staff.");

@@ -3,10 +3,9 @@ import { addDoc, collection,  getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, TableContainer, Paper,FormControl,Typography,InputLabel } from '@mui/material';
-
-import { useSelector } from "react-redux";
+import { MessageAlert } from "../alert";
 const Setreports = () =>{
-    const [showToast, setShowToast] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
     const [users, setUser] = useState([])
     const [selectedChildName, setSelectedChildName] = useState('')
     const [selectedUserId, setSelectedUserId] = useState(''); 
@@ -48,12 +47,8 @@ fetchUsers();
         const incidentReportRef = collection(firestore, 'incidentReport')
         await addDoc(incidentReportRef, newIncidentReport)
         setIncidentReports((prevUpdates) => [...prevUpdates, newIncidentReport])    
-        setShowToast(true);
-
-        // Hide the toast after a delay (adjust as needed)
-        setTimeout(() => {
-          setShowToast(false);
-        }, 2000);
+       
+          setSuccessMessage(`inicidentReport added for ${newIncidentReport.childName}`)
         setNewIncidentReport({
         date: '',
         time: '',
@@ -95,7 +90,14 @@ fetchUsers();
     return(
   
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* Incident Reporting Form */}
+        
+        <>
+                 <MessageAlert
+                open={!!successMessage}
+                message={successMessage}
+                onClose={() => setSuccessMessage("")}
+              />
+        </>
           <div className="inline-flex w-full flex-col items-start border-b justify-start rounded-[14px] border border-slate-100 bg-white p-6 space-y-6 dark:border-neutral-800 dark:bg-neutral-900">
 
             <div className="flex w-full items-center justify-between">
@@ -225,6 +227,7 @@ Incident Update History
 
 </div>
   <TableContainer component={''}>
+  <div className="scrollbar mx-auto mt-1 w-full overflow-x-auto h-[200px]">
     <Table>
       <TableHead>
         <TableRow>
@@ -237,7 +240,7 @@ Incident Update History
       <TableBody>
         {incidentReports.filter((incidentReport) => incidentReport.childName === selectedChildName).map((report, index) => (
           <TableRow key={index}>
-            <TableCell   className="dark:text-neutral-100">{report.date}</TableCell>
+            <TableCell   className="dark:text-neutral-100 text-nowrap">{report.date}</TableCell>
             <TableCell   className="dark:text-neutral-100">{report.name}</TableCell>
             <TableCell   className="dark:text-neutral-100">{report.status}</TableCell>
             <TableCell   className="dark:text-neutral-100">{report.description}</TableCell>
@@ -245,6 +248,7 @@ Incident Update History
         ))}
       </TableBody>
     </Table>
+    </div>
   </TableContainer>
 </div>
           </div>
