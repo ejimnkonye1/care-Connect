@@ -21,10 +21,11 @@ import {
 } from "@mui/material";
 import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase";
-import ColorAlerts from "../alert";
-import { useSelector } from "react-redux";
+import { MessageAlert } from "../alert";
+
 const Setactivity = () => {
-    const [showToast, setShowToast] = useState(false);
+  
+    const [successMessage, setSuccessMessage] = useState("");
     const [users, setUser] = useState([])
     const [selectedChildName, setSelectedChildName] = useState('')
     const [selectedUserId, setSelectedUserId] = useState(''); 
@@ -62,19 +63,15 @@ const Setactivity = () => {
     const activityRef = collection(firestore, 'activities')
     await addDoc(activityRef, newactivityUpdates)
     setActivityUpdates((prevUpdates) => [...prevUpdates, newactivityUpdates])
-    setShowToast(true);
+    setSuccessMessage(`Activity added for ${newactivityUpdates.childName}`)
 
-    // Hide the toast after a delay (adjust as needed)
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2000);
     setNewActivityUpdates({
         date:'',
         time:'',
         activity:'',
         status:'',
-        childName:'',
-        userId:'',
+        childName:selectedChildName,
+        userId:selectedUserId,
         
     })
   
@@ -101,16 +98,7 @@ const Setactivity = () => {
   }
   useEffect(() => {
     const fetchUpdates = async () => {
-
-    
     const activityRef = collection(firestore, 'activities');
-    // const unsubscribe = onSnapshot(activityRef, (snapshot) => {
-    //   const activityData = snapshot.docs.map((doc) => doc.data());
-    //   setActivityUpdates(activityData);
-    // });
-
-    // // Cleanup the subscription on unmount
-    // return unsubscribe;
     const activitysnap = await getDocs(activityRef)
     const activityData = activitysnap.docs.map((doc) => doc.data());
       setActivityUpdates(activityData);
@@ -119,7 +107,13 @@ const Setactivity = () => {
   }, []);
     return(
         <form onSubmit={handleActivitySubmit}>
-
+<>
+         <MessageAlert
+        open={!!successMessage}
+        message={successMessage}
+        onClose={() => setSuccessMessage("")}
+      />
+</>
     
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
@@ -133,7 +127,7 @@ const Setactivity = () => {
       </div>
       <select
         name="childId"
-        value={newactivityUpdates.childId}
+        value={selectedChildName}
         onChange={handleChildChange}
         className="mb-4 mt-1 p-3 m-2 w-full border border-slate-200 rounded-lg dark:bg-neutral-800 dark:text-white"
       >
@@ -249,14 +243,19 @@ const Setactivity = () => {
             
             }}
         />
-           <FormControl fullWidth>
-            <InputLabel className="dark:text-neutral-100">Status</InputLabel>
+           <FormControl fullWidth   sx={{ padding: '10px' }}>
+            <InputLabel  className="dark:text-neutral-100">Status</InputLabel>
             <Select
               value={newactivityUpdates.status}
               onChange={((e) => setNewActivityUpdates({...newactivityUpdates, status:e.target.value}))}
               label="Status"
               name="status"
               className="dark:text-neutral-100"
+              InputLabelProps={{
+                className:"dark:text-neutral-100",
+                shrink: true, 
+                
+                }}
             >
               <MenuItem value="Cancelled">Cancelled</MenuItem>
               <MenuItem value="Completed">Completed</MenuItem>

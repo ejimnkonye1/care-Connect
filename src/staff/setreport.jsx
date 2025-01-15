@@ -3,7 +3,7 @@ import { addDoc, collection,  getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "../firebase";
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, TableContainer, Paper,FormControl,Typography,InputLabel } from '@mui/material';
-import ColorAlerts from "../alert";
+
 import { useSelector } from "react-redux";
 const Setreports = () =>{
     const [showToast, setShowToast] = useState(false);
@@ -60,8 +60,8 @@ fetchUsers();
         name:'',
         status: '',
         description: '',
-        childName:'',
-        userId:''
+        childName:selectedChildName,
+        userId:selectedUserId
       });
     } catch (error){
         console.error("Error sending incident Report", error)
