@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { Badge, styled, Modal, Button } from "@mui/material";
+import { Badge, styled, Button,Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, FormControl, InputLabel  } from "@mui/material";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase"; 
+import { MessageAlert } from "../alert";
 
 const StyledCalendar = styled(Calendar)(({ theme }) => ({
   width: '100%',
@@ -27,7 +28,8 @@ const Setevents = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [eventDetails, setEventDetails] = useState('');
   const [status, setStatus] = useState('');
-
+  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -66,7 +68,7 @@ const Setevents = () => {
 
   const handleAddEvent = async () => {
     if (!eventDetails || !status) return; // Don't proceed if no details or status are entered
-
+   setLoading(true)
     try {
       const schoolEventsRef = collection(firestore, 'schoolEvents');
       await addDoc(schoolEventsRef, {
@@ -76,7 +78,9 @@ const Setevents = () => {
       });
       addEvent(date, { event: eventDetails, status: status });
       console.log('Event added to Firestore');
-      setModalOpen(false); // Close modal after adding event
+      setModalOpen(false);
+      setLoading(false) // Close modal after adding event
+      setSuccessMessage(`Event added`)
     } catch (error) {
       console.error('Error adding event:', error);
     }
@@ -121,37 +125,46 @@ const Setevents = () => {
      
       </div>
 
-      {/* Modal for selecting event status */}
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-  <div className="flex items-center justify-center h-full">
-    <div className="bg-white p-6 rounded shadow-lg">
-      <h2 className="text-lg font-semibold mb-4">Add Event</h2>
-      <input 
-        type="text" 
-        placeholder="Enter event details" 
-        value={eventDetails} 
-        onChange={(e) => setEventDetails(e.target.value)} 
-        className="border border-gray-300 p-2 rounded w-full mb-4"
-      />
-      <div className="mb-4">
-        <label className="block text-md font-medium mb-2">Select Event Status:</label>
-        <select 
-          value={status} 
-          onChange={(e) => setStatus(e.target.value)} 
-          className="border border-gray-300 p-2 rounded w-full"
-        >
-          <option value="">Select duration</option>
-          <option value="Full Day">Full Day</option>
-          <option value="Half Day">Half Day</option>
-        </select>
-      </div>
-      <div className="flex justify-end">
-        <Button onClick={handleAddEvent} color="primary">Add Event</Button>
+      
+      <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
+      <DialogTitle>Add Event</DialogTitle>
+      <DialogContent>
+        <TextField
+          autoFocus
+          margin="dense"
+          label="Event Details"
+          type="text"
+          fullWidth
+          variant="outlined"
+          value={eventDetails}
+          onChange={(e) => setEventDetails(e.target.value)}
+        />
+        <FormControl fullWidth margin="dense">
+          <InputLabel>Select Event Status</InputLabel>
+          <Select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            label="Select Event Status"
+          >
+            <MenuItem value=""><em>Select duration</em></MenuItem>
+            <MenuItem value="Full Day">Full Day</MenuItem>
+            <MenuItem value="Half Day">Half Day</MenuItem>
+          </Select>
+        </FormControl>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleAddEvent} disabled={loading} color="primary">Add Event</Button>
         <Button onClick={() => setModalOpen(false)} color="secondary">Cancel</Button>
-      </div>
-    </div>
-  </div>
-</Modal>
+      </DialogActions>
+    </Dialog>
+
+
+        <MessageAlert
+            open={!!successMessage}
+            message={successMessage}
+            
+            onClose={() => setSuccessMessage("")}
+          />
     </div>
   );
 };

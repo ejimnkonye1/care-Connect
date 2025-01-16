@@ -1,7 +1,8 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
-import { TextField, Button, MenuItem, Snackbar, Alert } from "@mui/material";
+import { TextField, Button, MenuItem,  } from "@mui/material";
 import {  useState } from "react";
+import { MessageAlert } from "../alert";
 
 
 export const SetFees = () => {
@@ -150,20 +151,11 @@ export const SetFees = () => {
 
       
 
-      {/* Success Snackbar */}
-      <Snackbar
-        open={!!successMessage}
-        autoHideDuration={3000}
-        onClose={() => setSuccessMessage("")}
-      >
-        <Alert
-          onClose={() => setSuccessMessage("")}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          {successMessage}
-        </Alert>
-      </Snackbar>
+           <MessageAlert
+            open={!!successMessage}
+            message={successMessage}
+            onClose={() => setSuccessMessage("")}
+          />
     </div>
   );
 };

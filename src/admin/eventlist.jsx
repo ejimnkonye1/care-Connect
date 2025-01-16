@@ -3,10 +3,13 @@ import { collection, getDocs } from "firebase/firestore";
 import { Calendar2 } from "iconsax-react";
 import { useState, useEffect } from "react";
 import { firestore } from "../firebase"; 
+import SkeletonLoader from "../reuseable/skelenton";
 export const EventList = () => {
      const [events, setEvents] = useState({});
+     const [loading, setLoading] = useState(true); 
     useEffect(() => {
         const fetchEvents = async () => {
+          setLoading(true)
           try {
             const querySnapshot = await getDocs(collection(firestore, 'schoolEvents'));
             const eventsData = {};
@@ -23,6 +26,7 @@ export const EventList = () => {
           } catch (error) {
             console.error("Error fetching events: ", error);
           }
+          setLoading(false)
         };
     
         fetchEvents();
@@ -45,7 +49,15 @@ export const EventList = () => {
           </h3>
        
         </div>
-        <div className="scrollbar mx-auto mt-7 block w-full overflow-x-auto text-left">
+        <div className="scrollbar mx-auto mt-7 block w-full overflow-x-auto text-left h-[300px]">
+        {loading ? (
+      // Show skeleton loaders while data is loading
+      <>
+        <SkeletonLoader height={20}  count={4} />
+        <SkeletonLoader height={20} count={4} />
+      </>
+    ) : (
+      <>
           {Object.keys(events).length > 0 ? (
             Object.entries(events).map(([eventDate, eventList], index) => (
               eventList.map((event, idx) => (
@@ -74,6 +86,8 @@ export const EventList = () => {
               No events for this date.
             </p>
           )}
+                    </>
+    )}
         </div>
       </div>
     )

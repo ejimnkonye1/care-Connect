@@ -11,11 +11,26 @@ import {
   import { FiMenu } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { setMode } from "../action";
+import LogoutModal from "../reuseable/logout";
+import { useState } from "react";
   
   const NavMenu = ({ currentPage ,setSidebarOpen,isSidebarOpen }) => {
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
       };
+        const [open, setOpen] = useState(false);
+      
+        const handleLogout = () => {
+          // Add your logout logic here
+          console.log('User  logged out');
+          setOpen(false);
+        };
+        const handleClose = () => {
+          setOpen(false);
+        };
+        const handleOpen = () => {
+          setOpen(true);
+        };
     const formatDate = () => {
       const options = { month: "long", day: "numeric", year: "numeric" };
       const formattedDate = new Date().toLocaleDateString(undefined, options);
@@ -71,12 +86,22 @@ import { setMode } from "../action";
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 text-slate-900 dark:border-neutral-700 dark:text-neutral-100 md:h-10 md:w-10" onClick={toggledark}>
          {darkmode ? <Sun1 size='20'/> : <Moon  size='20'/>}
             </span>
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 text-slate-900 dark:border-neutral-700 dark:text-neutral-100 md:h-10 md:w-10">
-              <Logout size="20" />
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300 text-slate-900 dark:border-neutral-700 dark:text-neutral-100 md:h-10 md:w-10 cursor-pointer">
+              <Logout onClick={handleOpen} size="20" />
             </span>
            
           </div>
+        
         </section>
+        <>
+        <LogoutModal
+           
+           
+           open={open}
+           onClose={handleClose}
+           onLogout={handleLogout}
+           />
+        </>
       </>
     );
   };

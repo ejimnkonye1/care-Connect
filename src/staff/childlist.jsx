@@ -40,13 +40,11 @@ const Childlist = () => {
         <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
           Children List
         </h3>
-        <button className="cursor-pointer text-base font-medium text-emerald-400">
-          See All
-        </button>
+    
       </div>
 
       {/* Children Table */}
-      <div className="scrollbar mx-auto mt-7 w-full overflow-x-auto h-[200px]">
+      <div className="scrollbar mx-auto mt-1 w-full overflow-x-auto h-[269px]">
   <Table aria-label="Children List Table">
     {loading ? (
       // Show skeleton loaders while data is loading

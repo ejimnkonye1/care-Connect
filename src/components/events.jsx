@@ -71,11 +71,9 @@ const Events = () => {
       <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
         Events List
       </h3>
-      <button className="cursor-pointer text-base font-medium text-emerald-400">
-        See All
-      </button>
+
     </div>
-    <div className="scrollbar mx-auto mt-7 block w-full overflow-x-auto text-left">
+    <div className="scrollbar mx-auto mt-1 block w-full overflow-x-auto text-left h-[300px]">
     {loading ? (
       // Show skeleton loaders while data is loading
       <>

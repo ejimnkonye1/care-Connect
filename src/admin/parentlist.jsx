@@ -3,16 +3,18 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
+import SkeletonLoader from "../reuseable/skelenton";
 
 const ParentLists = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const usersPerPage = 3;
+  const [loading, setLoading] = useState(true); // Initialize loading state
+
 
   useEffect(() => {
     const fetchAllUserData = async () => {
+      setLoading(true)
       const usersRef = collection(firestore, "users");
       const usersSnapshot = await getDocs(usersRef);
       const usersData = usersSnapshot.docs.map((doc) => ({
@@ -21,12 +23,13 @@ const ParentLists = () => {
       }));
       setUsers(usersData);
       setFilteredUsers(usersData);
+      setLoading(false)
     };
 
     fetchAllUserData();
   }, []);
 
-  // Handle search functionality
+  
   useEffect(() => {
     const filtered = users.filter(
       (user) =>
@@ -37,19 +40,7 @@ const ParentLists = () => {
     setFilteredUsers(filtered);
   }, [searchTerm, users]);
 
-  // Pagination calculations
-  // const indexOfLastUser = currentPage * usersPerPage;
-  // const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  // const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
-  // const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
-  // const handleNextPage = () => {
-  //   if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
-  // };
-
-  // const handlePrevPage = () => {
-  //   if (currentPage > 1) setCurrentPage((prev) => prev - 1);
-  // };
 
 
 
@@ -70,12 +61,22 @@ const ParentLists = () => {
 
       </div>
 
-      {/* Parent Cards */}
-      {filteredUsers.length === 0 ? (
-        <p className="text-center text-gray-500 text-lg">No parents found.</p>
-      ) : (
+  
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredUsers.map((user) => (
+        {loading ? (
+          // Render skeleton loaders for each child while loading
+          Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg border border-slate-100 dark:border-neutral-800 dark:bg-neutral-900">
+
+                  <SkeletonLoader height={20} width={100} />
+                  <SkeletonLoader height={20} width={150} />
+                  <SkeletonLoader height={20} width={100} />
+                  <SkeletonLoader height={20} width={150} />
+        
+            </div>
+          ))
+        ) : (
+          filteredUsers.map((user) => (
             <div
               key={user.id}
               className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900"
@@ -88,7 +89,7 @@ const ParentLists = () => {
               {user.children && user.children.length > 0 ? (
                 <div className="mt-3">
                   <h3 className="text-sm font-semibold text-gray-700 mb-1  dark:text-neutral-100">
-                    Children:
+                    Child:
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {user.children.map((child, index) => (
@@ -113,29 +114,12 @@ const ParentLists = () => {
                 </button>
               </div>
             </div>
-          ))}
+              ))
+          )}
         </div>
-      )}
+    
 
-      {/* Pagination */}
-      {/* {filteredUsers.length > usersPerPage && (
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={handlePrevPage}
-            className="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300"
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <button
-            onClick={handleNextPage}
-            className="px-3 py-1 bg-gray-200 text-gray-600 rounded hover:bg-gray-300 ml-2"
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      )} */}
+  
     </div>
   );
 };

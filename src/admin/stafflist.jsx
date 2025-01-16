@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../firebase";
+import SkeletonLoader from "../reuseable/skelenton";
 
 const StaffList = () => {
   const [staffData, setStaffs] = useState([]);
+  const [loading, setLoading] = useState(true); // Initialize loading state
 
   useEffect(() => {
     const fetchStaff = async () => {
+      setLoading(true)
       const staffRef = collection(firestore, "staff");
       const staffSnapshot = await getDocs(staffRef);
       const staffData = staffSnapshot.docs.map((doc) => ({
@@ -14,6 +17,7 @@ const StaffList = () => {
         ...doc.data(),
       }));
       setStaffs(staffData);
+      setLoading(false)
     };
 
     fetchStaff();
@@ -30,11 +34,23 @@ const StaffList = () => {
       <h1 className="text-base font-semibold text-center leading-relaxed text-zinc-800 dark:text-neutral-100 mb-10">
         Staffs <span className="text-blue-600">({staffData.length})</span>
       </h1>
-      {staffData.length === 0 ? (
-        <p className="text-center text-gray-500">No staff found.</p>
-      ) : (
+   
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-          {staffData.map((staff) => (
+        {loading ? (
+          // Render skeleton loaders for each child while loading
+          Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg border border-slate-100 dark:border-neutral-800 dark:bg-neutral-900">
+              <div className="text-center">
+                <SkeletonLoader circle={true} height={48} width={48} />
+                <div className="ml-4">
+                  <SkeletonLoader height={20} width={100} />
+                  <SkeletonLoader height={16} width={150} />
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          staffData.map((staff) => (
             <div
               key={staff.id}
               className="rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900 hover:shadow-xl transition-shadow flex flex-col justify-between"
@@ -66,9 +82,10 @@ const StaffList = () => {
                 </button>
               </div>
             </div>
-          ))}
+          ))
+          )}
         </div>
-      )}
+     
     </div>
   );
 };

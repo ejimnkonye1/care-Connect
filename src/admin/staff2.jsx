@@ -9,11 +9,14 @@ import {
     TableRow,
   
   } from "@mui/material";
+import SkeletonLoader from "../reuseable/skelenton";
+
 const StaffList2 = () => {
   const [staffData, setStaffs] = useState([]);
-
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
     const fetchStaff = async () => {
+      setLoading(true)
       const staffRef = collection(firestore, "staff");
       const staffSnapshot = await getDocs(staffRef);
       const staffData = staffSnapshot.docs.map((doc) => ({
@@ -21,6 +24,7 @@ const StaffList2 = () => {
         ...doc.data(),
       }));
       setStaffs(staffData);
+      setLoading(false)
     };
 
     fetchStaff();
@@ -35,13 +39,19 @@ const StaffList2 = () => {
       <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
         Staff List
       </h3>
-      <button className="cursor-pointer text-base font-medium text-emerald-400">
-        See All
-      </button>
+   
     </div>
 
-    <div className="scrollbar mx-auto mt-7 w-full overflow-x-auto h-[140px]">
+    <div className="scrollbar mx-auto mt-1 w-full overflow-x-auto h-[140px]">
     <Table aria-label="children list table">
+    {loading ? (
+      // Show skeleton loaders while data is loading
+      <>
+        <SkeletonLoader height={20}  count={4} />
+        <SkeletonLoader height={20} count={4} />
+      </>
+    ) : (
+      <>
       <TableHead>
         <TableRow className="bg-slate-100 dark:bg-neutral-800">
           <TableCell className="text-sm font-medium dark:text-neutral-100">Name</TableCell>
@@ -66,6 +76,8 @@ const StaffList2 = () => {
           </TableRow>
         )}
       </TableBody>
+      </>
+    )}
     </Table>
     </div>
   </div>
