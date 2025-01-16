@@ -117,15 +117,14 @@ const AttendanceTable = () => {
         <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
           List of Children
         </h3>
-        <button className="cursor-pointer text-base font-medium text-emerald-400">
-          See All
-        </button>
+      
       </div>
 
  
       
 
         <TableContainer component={''}>
+        <div className="scrollbar mx-auto  w-full overflow-x-auto">
           <Table>
           {loading ? (
       // Show skeleton loaders while data is loading
@@ -152,6 +151,7 @@ const AttendanceTable = () => {
                       <TableCell align="center">
                         <Button variant="contained" color="primary"
                           onClick={() => handleAttendanceChange(user.uid, child.name, 'present')}
+                          className="text-nowrap"
                         >
                           Mark Present
                         </Button>
@@ -159,6 +159,7 @@ const AttendanceTable = () => {
                       <TableCell align="center">
                         <Button variant="contained" color="secondary"
                           onClick={() => handleAttendanceChange(user.uid, child.name, 'absent')}
+                          className="text-nowrap"
                         >
                           Mark Absent
                         </Button>
@@ -182,6 +183,7 @@ const AttendanceTable = () => {
             </>
     )}
           </Table>
+          </div>
         </TableContainer>
    
            <MessageAlert
