@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, } fro
 import { useEffect, useState } from 'react';
 import { auth, firestore } from '../firebase';
 import { collection,  query, where, onSnapshot } from 'firebase/firestore';
+import SkeletonLoader from '../reuseable/skelenton';
 // const activities = [
 //   {
 //     name: "Nap Time",
@@ -49,8 +50,9 @@ const ChildActivityReport = () => {
   };
   const [activityUpdates, setActivityUpdates] = useState([]);
   const user = auth.currentUser
-
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
+    setLoading(true)
     if (user) {
       const activityRef = collection(firestore, 'activities');
       const q = query(activityRef, where('userId', '==', user.uid));
@@ -63,6 +65,7 @@ const ChildActivityReport = () => {
           return new Date(a.date) - new Date(b.date);
         });
         setActivityUpdates(sortedActivityData);
+        setLoading(false)
       });
 
       // Cleanup the subscription on unmount
@@ -84,17 +87,23 @@ const ChildActivityReport = () => {
         <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
           Child Activity Report
         </h3>
-        <button className="cursor-pointer text-base font-medium text-emerald-400">
-          See All
-        </button>
+   
       </div>
 
       <TableContainer component={''} className="mt-7">
         <Table aria-label="child activity report table">
+        {loading ? (
+      
+      <>
+        <SkeletonLoader height={20}  count={4} />
+        <SkeletonLoader height={20} count={4} />
+      </>
+    ) : (
+      <>
           <TableHead>
             <TableRow>
               <TableCell className='dark:text-neutral-100'>Name</TableCell>
-              <TableCell className='dark:text-neutral-100'>Duration</TableCell>
+              <TableCell className='dark:text-neutral-100'>Time</TableCell>
               <TableCell className='dark:text-neutral-100'>Status</TableCell>
               <TableCell className='dark:text-neutral-100'>Date</TableCell>
             </TableRow>
@@ -111,6 +120,8 @@ const ChildActivityReport = () => {
               </TableRow>
             ))}
           </TableBody>
+          </>
+    )}
         </Table>
       </TableContainer>
     </div>

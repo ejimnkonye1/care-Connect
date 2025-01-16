@@ -8,11 +8,24 @@ import logo from '../assets/image.png';
 import { Dash,Logout, UserOctagon,Messages,MoneySend,DocumentLike,CalendarTick,Reserve,Sun1,Moon
 } from "iconsax-react";
 import { NavLink } from "react-router-dom";
+import LogoutModal from "../reuseable/logout";
 
 const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
 
   const closeSidebar = () => {
     setSidebarOpen(false); // Close the sidebar
+  };
+  const [open, setOpen] = useState(false);
+  const handleLogout = () => {
+    // Add your logout logic here
+    console.log('User  logged out');
+    setOpen(false);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
   };
  
   return (
@@ -132,7 +145,7 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
                   <span className="ms-3">Profile</span>
                 </NavLink>
               </li>
-              <li onClick={closeSidebar}>
+              <li onClick={(e) => {closeSidebar(); handleOpen();}}>
                 <NavLink
                   to="#"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -141,7 +154,13 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
                   <span className="ms-3">Logout</span>
                 </NavLink>
               </li>
-             
+              <LogoutModal
+           
+           
+           open={open}
+           onClose={handleClose}
+           onLogout={handleLogout}
+           />
             </ul>
         </div>
       </aside>

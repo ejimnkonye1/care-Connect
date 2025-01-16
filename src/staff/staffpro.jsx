@@ -1,4 +1,4 @@
-import pa from '../assets/pa.jpg';
+
 import { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
@@ -87,12 +87,16 @@ const StaffProfile = () => {
           <SkeletonLoader height={128} width={128} circle={true} /> // Skeleton for profile picture
         ) : (
           <img
-            src={image || staffData?.image || pa} // Use the uploaded image or fallback to default
+            src={image || staffData?.image } // Use the uploaded image or fallback to default
             alt="Profile"
             className="h-32 w-32 rounded-full object-cover mb-4"
           />
         )}
         <div className="flex flex-col pl-3">
+        {loading ? (
+              <SkeletonLoader height={20}  /> 
+            ) : (
+              <>
           <input
             type="file"
             accept="image/*"
@@ -103,6 +107,8 @@ const StaffProfile = () => {
           <label htmlFor="file-upload" className="px-4 py-2 w-40 bg-emerald-500 text-white text-sm font-medium rounded cursor-pointer hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emer ald-400 focus:ring-offset-2 dark:bg-neutral-800 dark:hover:bg-neutral-700">
             Upload new photo
           </label>
+          </>
+           )}
           <p className="text-xs text-gray-500 mt-1">
             At least 800x800 px recommended. JPG or PNG is allowed.
           </p>

@@ -1,6 +1,5 @@
 
 import WeeklyAttendance from "../components/attendace";
-import DailyUpdates from "../components/dailyupdates";
 import Events from "../components/events";
 import Fees from "../components/fee";
 import { Welcome } from "../components/welcome";
@@ -23,19 +22,17 @@ const Layout = () => {
       </div>
 
       <div
-        className="h-min w-full lg:w-[calc(35%_-_10px)] animate-fadeUp delay-300"
+        className="h-min w-full lg:w-[calc(50%_-_10px)] animate-fadeUp delay-300"
         onClick={() => console.log("clicked")}
       >
         <Fees />
       </div>
 
-      <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeUp delay-400">
+      <div className="h-min w-full flex-grow lg:w-[calc(50%_-_10px)] animate-fadeUp delay-400">
         <Events />
       </div>
 
-      <div className="h-min w-full flex-grow lg:w-[calc(30%_-_10px)] animate-fadeLeft delay-500">
-        <DailyUpdates />
-      </div>
+    
     </section>
   );
 };

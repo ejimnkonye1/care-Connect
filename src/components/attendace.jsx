@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import { collection, doc, getDoc, onSnapshot, query, where } from 'firebase/firestore';
 import { auth, firestore } from '../firebase';
 import { subDays, formatISO, format } from 'date-fns';
+import SkeletonLoader from "../reuseable/skelenton";
 
 // Register chart.js components
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
@@ -19,6 +20,7 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip,
 const WeeklyAttendance = () => {
     const [user, setUser ] = useState(null); // Store user data
     const [attendance, setAttendance] = useState([]); 
+    const [loading, setLoading] = useState(true); 
 
     const getLast7Days = () => {
         const today = new Date();
@@ -45,6 +47,7 @@ const WeeklyAttendance = () => {
     }, []);
 
     useEffect(() => {
+        setLoading(true)
         if (user) {
             const dates = getLast7Days();
             const attendanceRef = collection(firestore, 'attendance');
@@ -60,6 +63,7 @@ const WeeklyAttendance = () => {
 
                 // Set attendance data
                 setAttendance(filteredAttendance);
+                setLoading(false)
             });
 
             return unsubscribe;
@@ -150,9 +154,18 @@ const WeeklyAttendance = () => {
                 </h3>
             </div>
 
-            {/* Line Graph */}
+       
             <div style={{ width: "100%", height: "120px" }}>
+            {loading ? (
+            <>
+              <SkeletonLoader height={20} width={`100%`} />
+              <SkeletonLoader height={20} width={`100%`} />
+            </>
+          ) : (
+            <>
                 <Line data={data} options={options} />
+                </>
+          )}
             </div>
         </div>
     );

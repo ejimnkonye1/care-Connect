@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow,  } fr
 import { useEffect, useState } from 'react';
 import { auth, firestore } from '../firebase';
 import { collection,  onSnapshot, query, where } from 'firebase/firestore';
+import SkeletonLoader from '../reuseable/skelenton';
 
 
 // const incidents = [
@@ -40,10 +41,11 @@ import { collection,  onSnapshot, query, where } from 'firebase/firestore';
 
 const ChildIncidentReport = () => {
   const [incidentReports, setincidentReports] = useState([])
+  const [loading, setLoading] = useState(true); 
 const user = auth.currentUser
 
 useEffect(() => {
-
+setLoading(true)
 if (user) {
   const incidentReportRef = collection(firestore, 'incidentReport')
   const q = query(incidentReportRef, where('userId', '==', user.uid))
@@ -56,6 +58,7 @@ if (user) {
         return new Date(a.date) - new Date(b.date);
       });
   setincidentReports(sortedReports)
+  setLoading(false)
   })
   
 return unsubscribe;
@@ -89,13 +92,19 @@ return unsubscribe;
         <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
           Child Incident Report
         </h3>
-        <button className="cursor-pointer text-base font-medium text-emerald-400">
-          See All
-        </button>
+   
       </div>
 
       <TableContainer component={''} className="mt-7">
         <Table aria-label="child incident report table">
+        {loading ? (
+      
+      <>
+        <SkeletonLoader height={20}  count={4} />
+        <SkeletonLoader height={20} count={4} />
+      </>
+    ) : (
+      <>
           <TableHead>
             <TableRow>
               <TableCell  className='dark:text-neutral-100'>Incident Name</TableCell>
@@ -116,6 +125,8 @@ return unsubscribe;
               </TableRow>
             ))}
           </TableBody>
+          </>
+    )}
         </Table>
       </TableContainer>
     </div>

@@ -5,34 +5,36 @@ import { auth, firestore } from '../firebase';
 import aud from '../audio/mixkit.wav';
 import { MenuItem,Select,FormControl,InputLabel, TextField, Button } from '@mui/material';
 
-const ParentChat = () => {
+const ParentChat2 = () => {
    const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [staffId, setStaffId] = useState(''); // Set this to the specific staff member's ID you want to chat with
-    const [staffList, setStaffList] = useState([]); // Store the list of staff members
-  
+    const [selectedAdminId, setSelectedAdminId] = useState('');
+    const [admin, setAdmin] = useState([]);
+    const [previousMessagesCount, setPreviousMessagesCount] = useState(0);
     const parentId = auth.currentUser?.uid; // Using Firebase auth UID as parentId
     
     // Fetch staff members from Firestore
     useEffect(() => {
-      const fetchStaff = async () => {
-        const staffRef = collection(firestore, 'staff');
-        const staffSnapshot = await getDocs(staffRef);
-        const staffData = staffSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setStaffList(staffData);
-      };
-  
-      fetchStaff();
-    }, []);
+        const fetchAdmin = async () => {
+          const adminRef = collection(firestore, 'Admin');
+          const adminSnapshot = await getDocs(adminRef);
+          const adminData = adminSnapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+            .filter(user => user.role === 'admin');
+          setAdmin(adminData);
+        };
+    
+        fetchAdmin();
+      }, []);
   
     // Fetch messages between parent and selected staff member
     useEffect(() => {
-      if (parentId && staffId) {
+      if (parentId && selectedAdminId) {
         const messagesQuery = query(
-          collection(firestore, 'messages'),
-          where('receiverId', 'in', [parentId, staffId]),
-          where('senderId', 'in', [parentId, staffId])
+          collection(firestore, 'adminmessages'),
+          where('receiverId', 'in', [parentId, selectedAdminId]),
+          where('senderId', 'in', [parentId, selectedAdminId])
         );
   
         const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
@@ -40,29 +42,30 @@ const ParentChat = () => {
           const sortedMessages = newMessages.sort((a, b) => a.timestamp - b.timestamp);
   
           // Check if there are new messages
-          if (messages.length < sortedMessages.length) {
+          if (sortedMessages.length < previousMessagesCount) {
             // Play sound for new messages
-            const audio = new Audio(aud); // Adjust the path as needed
+            const audio = new Audio(aud); 
             audio.play();
           }
   
           setMessages(sortedMessages);
+          setPreviousMessagesCount(sortedMessages.length);
         });
   
         return unsubscribe;
       }
-    }, [parentId, staffId, messages]);
+    }, [parentId, selectedAdminId, previousMessagesCount]);
   
     // Handle sending a message
     const handleSendMessage = async () => {
-      if (!message.trim() || !staffId) return;
+      if (!message.trim() || !selectedAdminId) return;
   
       setLoading(true);
   
       try {
-        await addDoc(collection(firestore, 'messages'), {
+        await addDoc(collection(firestore, 'adminmessages'), {
           senderId: parentId,
-          receiverId: staffId,
+          receiverId: selectedAdminId,
           content: message,
           timestamp: Timestamp.now(),
           read: false,
@@ -94,26 +97,26 @@ const ParentChat = () => {
       {/* Chat Header */}
       <div className="p-4 border-b flex justify-between items-center text-gray-700 dark:text-neutral-200 border-gray-200 dark:border-neutral-800 bg-gray-100 dark:bg-neutral-900">
         {/* Chat Title */}
-        <h6 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">Chat with Staff</h6>
+        <h6 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">Chat with Admin</h6>
   
         {/* Staff Selector */}
        
         <div className="">
         <FormControl fullWidth>
-        <InputLabel className='dark:text-neutral-100'>   Select Staff</InputLabel>
+        <InputLabel className='dark:text-neutral-100'>   Select Admin</InputLabel>
       
           <Select
        label="Select Staff"
             className='dark:text-neutral-100 w-64'
-            value={staffId}
-            onChange={(e) => setStaffId(e.target.value)}
+            value={selectedAdminId}
+            onChange={(e) => setSelectedAdminId(e.target.value)}
           >
             <MenuItem value="" disabled>
               Select Staff
             </MenuItem>
-            {staffList.map((staff) => (
-              <MenuItem key={staff.id} value={staff.id}>
-                {staff.name} ({staff.email})
+            {admin.map((admin) => (
+              <MenuItem key={admin.id} value={admin.id}>
+                {admin.name} ({admin.email})
               </MenuItem>
             ))}
           </Select>
@@ -172,13 +175,13 @@ className="flex-grow"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
-          disabled={!staffId}
+          disabled={!selectedAdminId}
         />
         <Button
             variant="contained"
           color="primary"
           onClick={handleSendMessage}
-          disabled={loading || !staffId}
+          disabled={loading || !selectedAdminId}
         >
           {loading ? "Sending..." : "Send"}
         </Button>
@@ -189,4 +192,4 @@ className="flex-grow"
   );
 };
 
-export default ParentChat;
+export default ParentChat2;
