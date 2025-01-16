@@ -154,6 +154,7 @@ export const SetFees = () => {
            <MessageAlert
             open={!!successMessage}
             message={successMessage}
+            
             onClose={() => setSuccessMessage("")}
           />
     </div>

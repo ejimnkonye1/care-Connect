@@ -66,9 +66,7 @@ import SkeletonLoader from "../reuseable/skelenton";
           <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
           Attandance today
           </h3>
-          <button className="cursor-pointer text-base font-medium text-emerald-400">
-            See All
-          </button>
+       
         </div>
         <div className="mb-4 flex w-full items-center justify-between">
           <div className="flex items-center space-x-3">

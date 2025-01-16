@@ -122,12 +122,19 @@ const AttendanceTable = () => {
         </button>
       </div>
 
-      {loading ? (
-        // Show skeleton loaders while data is loading
-        <SkeletonLoader height={40} count={5} />
-      ) : users.length > 0 ? (
+ 
+      
+
         <TableContainer component={''}>
           <Table>
+          {loading ? (
+      // Show skeleton loaders while data is loading
+      <>
+        <SkeletonLoader height={20}  count={4} />
+        <SkeletonLoader height={20} count={4} />
+      </>
+    ) : (
+      <>
             <TableHead>
               <TableRow>
                 <TableCell className="dark:text-neutral-100">Child Name</TableCell>
@@ -172,11 +179,11 @@ const AttendanceTable = () => {
                 )
               ))}
             </TableBody>
+            </>
+    )}
           </Table>
         </TableContainer>
-      ) : (
-        <p>No users data available.</p>
-      )}
+   
            <MessageAlert
         open={!!successMessage}
         message={successMessage}

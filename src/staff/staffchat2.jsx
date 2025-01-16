@@ -4,13 +4,13 @@ import { collection, addDoc, Timestamp, onSnapshot, query, where, getDocs } from
 import { auth, firestore } from '../firebase';
 
 
-const Chatstaff = () => {
+const Chatstaff2 = () => {
     
       const [message, setMessage] = useState('');
       const [messages, setMessages] = useState([]);
       const [loading, setLoading] = useState(false);
-      const [selectedParentId, setSelectedParentId] = useState('');
-      const [parents, setParents] = useState([]);
+      const [selectedAdminId, setSelectedAdminId] = useState('');
+      const [admin, setAdmin] = useState([]);
       const [lastMessageTimestamp, setLastMessageTimestamp] = useState(null);
     
       const staffId = auth.currentUser?.uid;
@@ -19,12 +19,12 @@ const Chatstaff = () => {
       // Fetch parents from Firestore
       useEffect(() => {
         const fetchParents = async () => {
-          const parentsRef = collection(firestore, 'users');
-          const parentsSnapshot = await getDocs(parentsRef);
-          const parentsData = parentsSnapshot.docs
+          const adminRef = collection(firestore, 'Admin');
+          const adminSnapshot = await getDocs(adminRef);
+          const adminData = adminSnapshot.docs
             .map(doc => ({ id: doc.id, ...doc.data() }))
-            .filter(user => user.role === 'parent');
-          setParents(parentsData);
+            .filter(user => user.role === 'admin');
+          setAdmin(adminData);
         };
     
         fetchParents();
@@ -32,11 +32,11 @@ const Chatstaff = () => {
     
       // Handle message fetching and sound notification
       useEffect(() => {
-        if (staffId && selectedParentId) {
+        if (staffId && selectedAdminId) {
           const messagesQuery = query(
-            collection(firestore, 'messages'),
-            where('receiverId', 'in', [staffId, selectedParentId]),
-            where('senderId', 'in', [staffId, selectedParentId])
+            collection(firestore, 'adminmessages'),
+            where('receiverId', 'in', [staffId, selectedAdminId]),
+            where('senderId', 'in', [staffId, selectedAdminId])
           );
     
           const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
@@ -60,7 +60,7 @@ const Chatstaff = () => {
             setLastMessageTimestamp(null);
           };
         }
-      }, [staffId, selectedParentId]);
+      }, [staffId, selectedAdminId]);
     
       // Handle sending a message
       const handleSendMessage = async () => {
@@ -69,9 +69,9 @@ const Chatstaff = () => {
         setLoading(true);
     
         try {
-          await addDoc(collection(firestore, 'messages'), {
+          await addDoc(collection(firestore, 'adminmessages'), {
             senderId: staffId,
-            receiverId: selectedParentId,
+            receiverId: selectedAdminId,
             content: message,
             timestamp: Timestamp.now(),
             read: false,
@@ -102,23 +102,23 @@ const Chatstaff = () => {
 <div className="chat-container">
 
       <div className="p-4 border-b flex justify-between items-center text-gray-700 dark:text-neutral-200 border-gray-200 dark:border-neutral-800 bg-gray-100 dark:bg-neutral-900">
-        <h6 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100"> Chat with Parents</h6>
+        <h6 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100"> Chat with Admin</h6>
 
       <div>
       <FormControl fullWidth>
-          <InputLabel className='dark:text-neutral-100'>Select Parent</InputLabel>
+          <InputLabel className='dark:text-neutral-100'>Select Admin</InputLabel>
           <Select
           
-            value={selectedParentId}
-            onChange={(e) => setSelectedParentId(e.target.value)}
+            value={selectedAdminId}
+            onChange={(e) => setSelectedAdminId(e.target.value)}
             label="Select Parent"
           
             className='dark:text-neutral-100 w-64'
           >
-            <MenuItem value='' disabled>Select a Parent</MenuItem>
-            {parents.map((parent) => (
-              <MenuItem key={parent.id} value={parent.id}>
-                {parent.name} ({parent.email})
+            <MenuItem value='' disabled>Select Admin</MenuItem>
+            {admin.map((admin) => (
+              <MenuItem key={admin.id} value={admin.id}>
+                {admin.name} ({admin.email})
               </MenuItem>
             ))}
           </Select>
@@ -163,14 +163,14 @@ const Chatstaff = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-          disabled={!selectedParentId}
+          disabled={!selectedAdminId}
           className="flex-grow"
         />
         <Button
           variant="contained"
           color="primary"
           onClick={handleSendMessage}
-          disabled={loading || !selectedParentId}
+          disabled={loading || !selectedAdminId}
         >
           {loading ? 'Sending...' : 'Send'}
         </Button>
@@ -182,4 +182,4 @@ const Chatstaff = () => {
 
 }
 
-export default Chatstaff;
+export default Chatstaff2;

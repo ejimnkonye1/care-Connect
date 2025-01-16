@@ -1,4 +1,4 @@
-import pa from '../assets/pa.jpg';
+
 import { doc, getDoc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { auth, firestore } from '../firebase';
@@ -7,7 +7,16 @@ import SkeletonLoader from '../reuseable/skelenton';
 export const WelcomeStaff = () => {
   const [staffData, setStaffData] = useState(null);
   const [loading, setLoading] = useState(true); // Add loading state
+  const currentHour = new Date().getHours();
+  let greeting;
 
+  if (currentHour < 12) {
+    greeting = "Good Morning!";
+  } else if (currentHour < 18) {
+    greeting = "Good Afternoon!";
+  } else {
+    greeting = "Good Evening!";
+  }
   useEffect(() => {
     const fetchStaffData = async () => {
       const user = auth.currentUser ;
@@ -45,11 +54,11 @@ export const WelcomeStaff = () => {
             <div className="p-2 rounded-lg shadow-md flex items-center flex-grow">
               <div className="relative">
                 <div className="w-12 h-12 border-4 border-gray-400 rounded-full overflow-hidden">
-                  <img src={pa} alt="Profile" className="w-full h-full object-cover" />
+                  <img src={staffData?.image} alt="Profile" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div className="ml-4">
-                <h2 className="text-sm font-semibold dark:text-white">Good Morning!</h2>
+                <h2 className="text-sm font-semibold dark:text-white">{greeting}</h2>
                 <p className="text-gray-600 dark:text-white text-sm">{staffData?.name ?? ''}</p>
               </div>
             </div>
