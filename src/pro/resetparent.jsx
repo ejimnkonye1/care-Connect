@@ -53,10 +53,10 @@ export const Resetparent = () => {
         )}   
      
            <div className="">
-             <h3 className="text-4xl font-extrabold text-blue-600">Reset Password</h3>
+             <h3 className="lg:text-3xl text-2xl font-extrabold text-blue-600">Reset Parent Password</h3>
            </div>
      
-           <div>
+           <div className='py-5'>
              <div className="relative flex items-center">
                <input
                  name="email"
@@ -132,7 +132,7 @@ export const Resetparent = () => {
         
        
              <p className="text-gray-800 text-sm text-center mt-6">
-                <a href="javascript:void(0);" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Back to login</a>
+                <a href="/login" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Back to login</a>
              </p>
            </div>
          </form>

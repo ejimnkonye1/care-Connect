@@ -92,11 +92,13 @@ const ParentChat = () => {
     {/* Chat Area */}
     <div className="col-span-12 flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Chat Header */}
-      <div className="p-4 border-b flex justify-between items-center text-gray-700 dark:text-neutral-200 border-gray-200 dark:border-neutral-800 bg-gray-100 dark:bg-neutral-900">
+      <div className="p-4 border-b flex flex-col lg:flex-row justify-between items-center text-gray-700 dark:text-neutral-200 border-gray-200 dark:border-neutral-800 bg-gray-100 dark:bg-neutral-900">
+
+
         {/* Chat Title */}
-        <h6 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">Chat with Staff</h6>
+        <h6 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100 text-nowrap">Chat with Staff</h6>
   
-        {/* Staff Selector */}
+       
        
         <div className="">
         <FormControl fullWidth>

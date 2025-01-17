@@ -1,5 +1,5 @@
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, } from '@mui/material';
+import { Hidden, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { auth, firestore } from '../firebase';
 import { collection,  query, where, onSnapshot } from 'firebase/firestore';
@@ -82,6 +82,7 @@ const ChildActivityReport = () => {
   };
 
   return (
+    <div className=''>
     <div className="inline-flex w-full flex-col items-start justify-start rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
       <div className="flex w-full items-center justify-between">
         <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
@@ -91,6 +92,7 @@ const ChildActivityReport = () => {
       </div>
 
       <TableContainer component={''} className="mt-7">
+      <div className="scrollbar mx-auto mt-7 block lg:w-full  overflow-x-auto text-left ">
         <Table aria-label="child activity report table">
         {loading ? (
       
@@ -105,25 +107,31 @@ const ChildActivityReport = () => {
               <TableCell className='dark:text-neutral-100'>Name</TableCell>
               <TableCell className='dark:text-neutral-100'>Time</TableCell>
               <TableCell className='dark:text-neutral-100'>Status</TableCell>
+              <Hidden smDown>
               <TableCell className='dark:text-neutral-100'>Date</TableCell>
+              </Hidden>
             </TableRow>
           </TableHead>
           <TableBody>
             {activityUpdates.map((activity, index) => (
               <TableRow key={index}>
-                <TableCell className='dark:text-neutral-100'>{activity.activity}</TableCell>
-                <TableCell className='dark:text-neutral-100'>{formatTime(activity.time)}</TableCell>
+                <TableCell className='dark:text-neutral-100 text-nowrap'>{activity.activity}</TableCell>
+                <TableCell className='dark:text-neutral-100 text-nowrap'>{formatTime(activity.time)}</TableCell>
                 <TableCell  style={{ color: statusColor(activity.status) }}>
                   {activity.status}
                 </TableCell>
+                <Hidden smDown>
                 <TableCell className='dark:text-neutral-100'>{activity.date}</TableCell>
+                </Hidden>
               </TableRow>
             ))}
           </TableBody>
           </>
     )}
         </Table>
+        </div>
       </TableContainer>
+    </div>
     </div>
   );
 };

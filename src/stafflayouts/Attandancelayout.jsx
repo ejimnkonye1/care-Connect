@@ -2,8 +2,6 @@
 import AttendanceTable from "../staff/attandance";
 
 
-
-
 // eslint-disable-next-line react/prop-types
 const StaffLayout = () => {
   return (
@@ -11,6 +9,7 @@ const StaffLayout = () => {
       <div className="h-min w-full lg:w-[calc(100%_-_10px)] animate-fadeDown">
         <AttendanceTable />
       </div>
+     
 
    
       

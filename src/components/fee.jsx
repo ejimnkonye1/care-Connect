@@ -1,7 +1,7 @@
 import { collection, getDocs, } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { firestore, auth } from '../firebase';
-import { Table, TableBody, TableCell,  TableHead, TableRow,  } from "@mui/material";
+import {  Table, TableBody, TableCell,  TableHead, TableRow,  } from "@mui/material";
 import SkeletonLoader from '../reuseable/skelenton';
 
 // const orders = [
@@ -41,10 +41,10 @@ const Fees = () => {
 
   const statusColor = (status) => {
     switch (status) {
+      case "Ongoing":
+        return "green";
       case "Paid":
-        return "text-emerald-400";
-      case "Refund":
-        return "text-red-500";
+        return "gray";
       default:
         return "text-gray-500";
     }
@@ -97,7 +97,7 @@ const Fees = () => {
       </div>
 
       <div className="scrollbar mx-auto mt-7 w-full overflow-x-auto">
-        <Table className="w-full text-left">
+        <Table className="  ">
         {loading ? (
              <>
              <SkeletonLoader height={20}  count={4} />
@@ -108,18 +108,21 @@ const Fees = () => {
        
           <TableHead>
             <TableRow>
-              <TableCell className="px-4 pb-3 text-left text-base font-medium text-gray-400 dark:text-neutral-200">
+              <TableCell className="   text-base font-medium text-gray-400 dark:text-neutral-200">
                 Name
               </TableCell>
-              <TableCell className="px-4 pb-3 text-left text-base font-medium text-gray-400 dark:text-neutral-200">
+              <TableCell className="   text-base font-medium text-gray-400 dark:text-neutral-200">
                 Amount
               </TableCell>
-              <TableCell className="px-4 pb-3 text-left text-base font-medium text-gray-400 dark:text-neutral-200">
+              
+              <TableCell className="   text-base font-medium text-gray-400 dark:text-neutral-200">
                 Status
               </TableCell>
+              {/* <Hidden smDown>
               <TableCell className="px-4 pb-3 text-left text-base font-medium text-gray-400 dark:text-neutral-200">
                 Date
               </TableCell>
+              </Hidden> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -128,22 +131,23 @@ const Fees = () => {
                 key={index}
                 className="border-b border-gray-200 dark:border-neutral-800"
               >
-                <TableCell className="w-[100px] px-2 py-3 text-sm font-medium text-gray-700 dark:text-neutral-300 text-nowrap">
+                <TableCell className="w-[100px]  text-sm font-medium text-gray-700 dark:text-neutral-300 text-nowrap">
                   {Fee.fee_Name}
                 </TableCell>
-                <TableCell className="px-3 py-3 text-sm font-medium text-slate-900 dark:text-neutral-200">
+                <TableCell className=" text-sm font-medium text-slate-900 dark:text-neutral-200">
                 ₦{Fee.amount.toLocaleString()}
                 </TableCell>
                 <TableCell
-                  className={`px-2 py-3 text-sm font-medium ${statusColor(
-                    Fee.status
-                  )}`}
+                style={{ color: statusColor(Fee.status) }}
+                  className={` text-sm font-medium  `}
                 >
                   {Fee.status}
                 </TableCell>
+                {/* <Hidden smDown>
                 <TableCell className="px-3 py-3 text-sm font-medium text-slate-900 dark:text-neutral-200">
                 {Fee.date}
                 </TableCell>
+                </Hidden> */}
              
             
               

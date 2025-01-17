@@ -93,7 +93,7 @@ const ProfileInfo = () => {
         <img
           src={image || userData?.image } // Use the uploaded image or fallback to default
           alt="Profile"
-          className="h-32 w-32 rounded-full object-cover mb-4"
+          className="lg:h-32 lg:w-32 h-[80px] w-32 rounded-full object-cover mb-4 "
         />
       )}
         <div className="flex flex-col pl-3">

@@ -1,5 +1,5 @@
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow,  } from '@mui/material';
+import { Hidden, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,  } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { auth, firestore } from '../firebase';
 import { collection,  onSnapshot, query, where } from 'firebase/firestore';
@@ -87,8 +87,11 @@ return unsubscribe;
   };
 
   return (
-    <div className="inline-flex w-full flex-col items-start justify-start rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
-      <div className="flex w-full items-center justify-between">
+    <section>
+
+    
+    <div className="inline-flex  flex-col items-start justify-start rounded-[14px] border border-slate-100 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
+      <div className="flex  items-center justify-between">
         <h3 className="text-base font-semibold leading-relaxed text-zinc-800 dark:text-neutral-100">
           Child Incident Report
         </h3>
@@ -96,7 +99,8 @@ return unsubscribe;
       </div>
 
       <TableContainer component={''} className="mt-7">
-        <Table aria-label="child incident report table">
+      <div className="scrollbar mx-auto mt-7 block lg:w-full  overflow-x-auto text-left  ">
+        <Table aria-label="child incident report table w-[70%]" >
         {loading ? (
       
       <>
@@ -107,10 +111,12 @@ return unsubscribe;
       <>
           <TableHead>
             <TableRow>
-              <TableCell  className='dark:text-neutral-100'>Incident Name</TableCell>
+              <TableCell  className='dark:text-neutral-100'>Incident</TableCell>
               <TableCell className='dark:text-neutral-100'>Description</TableCell>
               <TableCell className='dark:text-neutral-100'>Status</TableCell>
+              <Hidden smDown>
               <TableCell className='dark:text-neutral-100'>Date</TableCell>
+              </Hidden>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -121,15 +127,20 @@ return unsubscribe;
                 <TableCell style={{ color: statusColor(incident.status) }}>
                   {incident.status}
                 </TableCell>
-                <TableCell  className='dark:text-neutral-100'>{incident.date}</TableCell>
+                <Hidden smDown>
+                <TableCell  className='dark:text-neutral-100 md:hidden lg:block"'>{incident.date}</TableCell>
+                </Hidden>
+
               </TableRow>
             ))}
           </TableBody>
           </>
     )}
         </Table>
+        </div>
       </TableContainer>
     </div>
+      </section>
   );
 };
 

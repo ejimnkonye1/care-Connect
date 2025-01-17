@@ -70,7 +70,7 @@ export const StaffLoginForm = ({setIsAdminLogin, setIsStaffLogin,btnloading,
            
      
       <div className="py-5">
-        <h3 className="text-4xl font-extrabold text-blue-600">Sign in </h3>
+        <h3 className="lg:text-4xl text-2xl text-center lg:text-start font-extrabold text-blue-600">Sign in </h3>
       </div>
       <div className="flex justify-between mt-4 mb-12">
           <button

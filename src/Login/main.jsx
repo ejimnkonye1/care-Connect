@@ -15,17 +15,14 @@ const MainLogin = () => {
       setPasswordVisible(!PasswordVisible);
   };
     return (
-    <div className="font-[sans-serif] bg-white flex items-center justify-center md:h-auto h-auto p-4">
+    <div className="font-[sans-serif] bg-white flex items-center justify-center md:h-auto h-auto p-4  pt-20 lg:pt-5">
       <div className="shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)] max-w-6xl max-md:max-w-lg w-full rounded-md p-6">
-        <a className="text-2xl font-bold p-2  " >
-          {/* <img
-            // src="https://readymadeui.com/readymadeui.svg"
-            src=""
-            alt="logo"
-            className='w-40 md:mb-4 mb-12'
-          /> */}
-      <span className="text-[#f7b45d]">𝓒𝓪𝓻𝓮</span>
-      <span className="text-[#00adef]">𝓬𝓸𝓷𝓷𝓮𝓬𝓽</span>
+        <a className="text-2xl font-bold lg:p-2  " >
+    
+      {/* <span className="text-[#f7b45d]">𝓒𝓪𝓻𝓮</span>
+      <span className="text-[#00adef]">𝓬𝓸𝓷𝓷𝓮𝓬𝓽</span> */}
+        <span className="text-[#f7b45d]">Care</span>
+        <span className="text-[#00adef]">Connect</span>
         </a>
 
 

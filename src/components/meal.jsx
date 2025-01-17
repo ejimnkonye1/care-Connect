@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import {
+  Hidden,
   Table,
   TableBody,
   TableCell,
@@ -98,9 +99,11 @@ const MealUpdates = () => {
           <>
           <TableHead>
             <TableRow>
-              <TableCell className="dark:text-neutral-100" >Meal Type</TableCell>
+              <TableCell className="dark:text-neutral-100 text-nowrap" >Meal Type</TableCell>
               <TableCell className="dark:text-neutral-100">Meal</TableCell>
+              <Hidden smDown>
               <TableCell className="dark:text-neutral-100">Date</TableCell>
+              </Hidden>
               <TableCell className="dark:text-neutral-100">Status</TableCell>
             </TableRow>
           </TableHead>
@@ -111,12 +114,14 @@ const MealUpdates = () => {
               <TableRow key={index}>
                 <TableCell className="dark:text-neutral-100">{update.mealType}</TableCell>
                 <TableCell className="dark:text-neutral-100">{update.food}</TableCell>
+                <Hidden smDown>
                 <TableCell>
                   <div className="dark:text-neutral-100">
                  
                     {update.date}
                   </div>
                 </TableCell>
+                </Hidden>
                 <TableCell>
                   <span
                     style={{

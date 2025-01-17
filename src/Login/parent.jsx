@@ -68,8 +68,8 @@ export const ParentLoginForm = ({
         <img src={pa} className="lg:w-11/12 w-full object-cover" alt="login-image" />
       </div>
       <form className="md:max-w-md w-full mx-auto" onSubmit={handleLogin}>
-        <div className="">
-          <h3 className="text-4xl font-extrabold text-blue-600">Sign in</h3>
+        <div className="py-5">
+          <h3 className="lg:text-4xl text-2xl text-center lg:text-start font-extrabold text-blue-600">Sign in</h3>
         </div>
         <div className="flex justify-between mt-4 mb-12">
           <button
