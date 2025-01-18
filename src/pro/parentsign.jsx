@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from 'firebase/firestore';
 import { MdAddCircleOutline } from "react-icons/md";
+import {  ErrorAlert} from "../alert";
 
 export const ParentSign = ({ btnloading, setbtnloading }) => {
   const [email, setEmail] = useState('');
@@ -82,9 +83,13 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
   return (
     <div className="relative">
       {error && (
-        <div className="absolute top-0 left-0 right-0 text-center z-10 bg-yellow-200 p-2">
-          <span className="text-red-600">{error}</span>
-        </div>
+         <>
+                    <ErrorAlert
+                   open={!!error}
+                   message={error}
+                   onClose={() => setError("")}
+                 />
+           </>
       )}
 
       <div className="flex flex-col items-start  justify-start ">
@@ -96,15 +101,32 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
         </div>
         <form className="w-full space-y-6" onSubmit={handleRegister}>
           <div className="mt-2">
-            <div className="image-upload">
-              <label htmlFor="file-input">
-                <div className="circular-image">
-                  {image && <img src={image} alt="Upload" id="preview" className="rounded-full w-24 h-24 object-cover" />}
-                  <MdAddCircleOutline className="add-icon text-2xl" />
-                </div>
-              </label>
-              <input id="file-input" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleImageChange} />
+          <div className="image-upload flex flex-col items-start">
+      <label htmlFor="file-input" className="cursor-pointer">
+        <div className="circular-image relative">
+          {image ? (
+            <img
+              src={image}
+              alt="Upload"
+              id="preview"
+              className="rounded-full w-24 h-24 object-cover border-2 border-gray-300"
+            />
+          ) : (
+            <div className="flex items-center justify-center w-24 h-24 rounded-full border-2 border-gray-300">
+              <MdAddCircleOutline className="add-icon text-2xl text-gray-400" />
             </div>
+          )}
+        </div>
+      </label>
+      <input
+        id="file-input"
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleImageChange}
+      />
+      <span className="mt-2 text-gray-600">Add child picture</span>
+    </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -245,15 +267,15 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
           <div className="flex justify-end">
   <button
     type="submit"
-    className={`mt-4 rounded-lg bg-emerald-400 text-white py-3 px-4  focus:outline-none focus:ring-2 focus:ring-indigo-500
-            ${btnloading ? 'bg-gray-400 cursor-not-allowed' : 'bg-emerald-400 hover:bg-emerald-600'}`}
+    className={`mt-4 rounded-lg bg-emerald-400 text-white py-3 px-4  
+            ${btnloading ? ' cursor-not-allowed' : 'bg-emerald-400 hover:bg-emerald-600'}`}
     disabled={btnloading}
     
   >
-     {loading ? (
+     {btnloading? (
         <>
           <svg
-            className="animate-spin h-5 w-5 mr-3"
+            className="animate-spin h-5 w-5  mx-auto"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -266,8 +288,9 @@ export const ParentSign = ({ btnloading, setbtnloading }) => {
               d="M4 12a8 8 0 018-8v8H4z"
             />
           </svg>
-          Loading...
+        
         </>
+        
       ) : (
         '  Register'
       )}
