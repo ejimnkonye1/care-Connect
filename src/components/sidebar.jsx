@@ -7,20 +7,41 @@ import  { useState } from "react";
 import logo from '../assets/image.png';
 import { Dash,Logout, UserOctagon,Messages,MoneySend,DocumentLike,CalendarTick,Reserve,Sun1,Moon
 } from "iconsax-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import LogoutModal from "../reuseable/logout";
-
+import { signOut } from 'firebase/auth';
+import { auth } from "../firebase";
+import { ErrorAlert } from "../alert";
 const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
 
   const closeSidebar = () => {
     setSidebarOpen(false); // Close the sidebar
   };
+
   const [open, setOpen] = useState(false);
-  const handleLogout = () => {
-    // Add your logout logic here
-    console.log('User  logged out');
-    setOpen(false);
-  };
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+  
+
+  const handleLogout = async () => {
+    try {
+      
+      setLoading(true);
+      await signOut(auth);
+      setTimeout(() => {
+        setOpen(false); // Close the modal
+        navigate('/login'); // Redirect to login page
+        setLoading(false); // Reset loading state
+      }, 5000);
+    } catch (error) {
+      console.error("Error logging out: ", error);
+     
+  }
+}
+
+
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -160,7 +181,17 @@ const Sidebar = ({isSidebarOpen,setSidebarOpen}) => {
            open={open}
            onClose={handleClose}
            onLogout={handleLogout}
+           loading={loading}
            />
+              {error && (
+                         <>
+                                                <ErrorAlert
+                                               open={!!error}
+                                               message={error}
+                                               onClose={() => setError("")}
+                                             />
+                                       </>
+                       )}
             </ul>
         </div>
       </aside>

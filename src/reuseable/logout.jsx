@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
 
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, CircularProgress } from '@mui/material';
 
-const LogoutModal = ({open, onClose, onLogout }) => {
+const LogoutModal = ({open, onClose, onLogout,loading }) => {
 
 
   return (
@@ -18,8 +18,8 @@ const LogoutModal = ({open, onClose, onLogout }) => {
           <Button onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={onLogout} color="primary">
-            Logout
+          <Button onClick={onLogout} color="primary" disabled={loading}>
+          {loading ? <CircularProgress size={24} color="inherit" /> : 'Logout'}
           </Button>
         </DialogActions>
       </Dialog>

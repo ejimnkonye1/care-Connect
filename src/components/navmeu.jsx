@@ -13,18 +13,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode } from "../action";
 import LogoutModal from "../reuseable/logout";
 import { useState } from "react";
-  
+import { signOut } from 'firebase/auth';
+import { auth } from "../firebase";
+import { ErrorAlert } from "../alert";
+import { useNavigate } from "react-router-dom";
   const NavMenu = ({ currentPage ,setSidebarOpen,isSidebarOpen }) => {
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
       };
         const [open, setOpen] = useState(false);
-      
-        const handleLogout = () => {
-          // Add your logout logic here
-          console.log('User  logged out');
-          setOpen(false);
-        };
+        const [error, setError] = useState('');
+        const [loading, setLoading] = useState(false);
+        const navigate = useNavigate()
+        const handleLogout = async () => {
+          try {
+            
+            setLoading(true);
+            await signOut(auth);
+            setTimeout(() => {
+              setOpen(false); // Close the modal
+              navigate('/login'); // Redirect to login page
+              setLoading(false); // Reset loading state
+            }, 5000);
+          } catch (error) {
+            console.error("Error logging out: ", error);
+           
+        }
+      }
         const handleClose = () => {
           setOpen(false);
         };
@@ -100,7 +115,17 @@ import { useState } from "react";
            open={open}
            onClose={handleClose}
            onLogout={handleLogout}
+           loading={loading}
            />
+                 {error && (
+                         <>
+                                                <ErrorAlert
+                                               open={!!error}
+                                               message={error}
+                                               onClose={() => setError("")}
+                                             />
+                                       </>
+                       )}
         </>
       </>
     );
