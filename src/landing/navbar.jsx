@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdOutlineCancel } from "react-icons/md";
-import { useNavigate } from 'react-router-dom'
 export const Navbar = () => {
       const [menuOpen, setMenuOpen] = useState(false);
       const [scrolled, setScrolled] = useState(false);
-      const navigate = useNavigate()
-        const HandleLogin = () => {
-            navigate ('/login')
-        }
+ 
         const toggleMenu = () => {
          setMenuOpen(prevState => !prevState);
           console.log('Menu is open:', menuOpen);
@@ -20,7 +16,7 @@ export const Navbar = () => {
         }, []);
     return(
 <header className={`flex justify-between items-center fixed top-0 p-4 z-10  w-full ${scrolled? 'bg-gray-700 ':'bg-white'}`}>
-<a className="text-2xl font-bold p-2" href="#">
+<a className="text-2xl font-bold p-2" href="/">
           <span className="text-[#f7b45d]">𝓒𝓪𝓻𝓮</span>
           <span className="text-[#00adef]">𝓬𝓸𝓷𝓷𝓮𝓬𝓽</span>
         </a>
@@ -55,7 +51,7 @@ export const Navbar = () => {
                 </li>
                 <li className={`${menuOpen? 'mb-3':''}`}>
                     <a 
-                     onClick={HandleLogin}
+                     href='/login'
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="text-white text-base font-semibold px-8 py-2 rounded-full transition-colors duration-200 hover:bg-[#5494FF] bg-[#00adef] hover:text-white cursor-pointer"

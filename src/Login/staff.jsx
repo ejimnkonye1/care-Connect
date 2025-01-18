@@ -6,7 +6,7 @@ import {  signInWithEmailAndPassword } from 'firebase/auth';
 import { auth,firestore } from "../firebase"
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc,  } from 'firebase/firestore';
-import pa from '../assets/h.png'
+import pa from '../assets/sta2.jpg'
 export const StaffLoginForm = ({setIsAdminLogin, setIsStaffLogin,btnloading,
   setbtnloading,}) => {
   const handleParentLogin = () => {
@@ -195,8 +195,9 @@ export const StaffLoginForm = ({setIsAdminLogin, setIsStaffLogin,btnloading,
     <div className="max-md:order-1 lg:min-w-[450px] hidden lg:block md:block ">
       <img
         src={pa}
-        className="lg:w-11/12 w-full object-cover"
+        className="lg:w-11/12 w-full h-[550px] object-cover"
         alt="login-image"
+        
       />
     </div>
   </div>

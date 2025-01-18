@@ -39,13 +39,17 @@ import Adminchat from './adminpages/adminchat'
 
 
 const Loader = () => (
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-    <div className="text-center">
-    <div className="spinner-grow text-warning" role="status">
-  <span className="visually-hidden">Loading...</span>
-</div>
-    </div>
+/* From Uiverse.io by devAaus */ 
+<div className="flex-col gap-4 w-full flex items-center justify-center h-screen">
+  <div
+    className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full"
+  >
+    <div
+      className="w-16 h-16 border-4 border-transparent text-[#f7b45d]-400 text-2xl animate-spin flex items-center justify-center border-t-[#f7b45d] rounded-full"
+    ></div>
   </div>
+</div>
+
   
   
   );

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {  signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc,  } from 'firebase/firestore';
-import logo from '../assets/image.png'
+import logo from '../assets/ad2.jpg'
 export const AdminLoginForm = ({setIsAdminLogin, isAdminLogin,  setIsStaffLogin,btnloading, setbtnloading}) => {
     const handleParentLogin = () => {
       setIsAdminLogin(!isAdminLogin);
@@ -68,7 +68,7 @@ export const AdminLoginForm = ({setIsAdminLogin, isAdminLogin,  setIsStaffLogin,
         <img
           // src="https://readymadeui.com/signin-image.webp"
           src={logo}
-          className="lg:w-11/12 w-full object-cover"
+          className="lg:w-11/12 w-full  object-cover"
           alt="login-image"
         />
       </div>

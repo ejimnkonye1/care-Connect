@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import pa from "../assets/h.png";
+import pa from "../assets/hap.jpg";
 
 export const ParentLoginForm = ({
   setIsAdminLogin,
@@ -65,9 +65,9 @@ export const ParentLoginForm = ({
   return (
     <div className="grid md:grid-cols-2 items-center gap-8 transition delay-150 duration-300 ease-in-out">
       <div className="max-md:order-1 lg:min-w-[450px] hidden lg:block md:block">
-        <img src={pa} className="lg:w-11/12 w-full object-cover" alt="login-image" />
+        <img src={pa} className="lg:w-11/12 w-full h-[550px] object-cover" alt="login-image" />
       </div>
-      <form className="md:max-w-md w-full mx-auto" onSubmit={handleLogin}>
+      <form className="md:max-w-md w-full mx-auto relative " onSubmit={handleLogin}>
         <div className="py-5">
           <h3 className="lg:text-4xl text-2xl text-center lg:text-start font-extrabold text-blue-600">Sign in</h3>
         </div>
